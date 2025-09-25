@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+@import "ng-zorro-antd/ng-zorro-antd.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1d1d1b;
+  --secondary: #1890ff;
+  --cyan: #006d75;
+}
+* {
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "InterRegular", "arial", sans-serif;
+}
+
+.ngx-smart-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  &.required::after {
+    content: " *";
+    color: #dc2626;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  input {
+    height: 42px;
+    border-radius: 8px;
+  }
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #dc2626;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+
+  i {
+    font-size: 0.875rem;
+  }
+}
+
+.clear-button {
+  position: absolute;
+  inset-inline-end: 2%;
+  top: 10%;
+}

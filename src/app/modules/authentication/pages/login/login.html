@@ -1,0 +1,48 @@
+<div class="flex login-container">
+  <div class="left w-7/12 flex justify-center items-center">
+    <div class="flex items-start flex-col gap-3">
+      <div class="flex gap-1 items-center">
+        <img
+          src="assets/paysky-logo-white.svg"
+          width="46px"
+          height="46px"
+          loading="lazy"
+          alt="'logo'"
+        />
+        <img src="assets/paysky-title-white.svg" />
+      </div>
+      <h1>Paysky Qr Switch</h1>
+    </div>
+  </div>
+  <div class="right w-5/12 flex justify-center items-center">
+    <form
+      class="form-container flex flex-col gap-4 w-3/4 h-fit p-4 rounded-md"
+      [formGroup]="loginForm"
+    >
+      <h1>Login</h1>
+
+      <app-qr-input
+        [label]="'Email'"
+        [placeholder]="'enter your email'"
+        formControlName="email"
+        [controlName]="'email'"
+        [parentGroup]="loginForm"
+      ></app-qr-input>
+      <app-qr-password
+        [label]="'Password'"
+        [placeholder]="'enter your password'"
+        formControlName="password"
+        [controlName]="'password'"
+        [parentGroup]="loginForm"
+      ></app-qr-password>
+
+      <span class="w-full flex justify-end forget">forget password</span>
+      <button
+        class="w-full submit-btn border-0 rounded-md outline-none"
+        (click)="submitLogin()"
+      >
+        Send OTP
+      </button>
+    </form>
+  </div>
+</div>

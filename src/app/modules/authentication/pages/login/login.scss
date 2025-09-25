@@ -1,0 +1,35 @@
+.login-container {
+  width: 100dvw;
+  height: 100dvh;
+  .left {
+    background-color: var(--primary);
+    h1 {
+      font-size: 30px;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+  .right {
+    .form-container {
+      background-color: #fff;
+      box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.09);
+      h1 {
+        font-size: 20px;
+        color: var(--primary);
+        font-weight: 700;
+      }
+      .forget {
+        color: var(--cyan);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+      .submit-btn {
+        background-color: var(--primary);
+        color: #fff;
+        height: 40px;
+      }
+    }
+  }
+}
