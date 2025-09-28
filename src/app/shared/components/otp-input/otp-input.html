@@ -1,0 +1,11 @@
+<div class="flex gap-2">
+  <input
+    *ngFor="let item of arr; let i = index"
+    type="text"
+    maxlength="1"
+    (input)="onOtpInput($event, i)"
+    #otpInput
+    (blur)="getValue()"
+    (paste)="onPaste($event)"
+  />
+</div>

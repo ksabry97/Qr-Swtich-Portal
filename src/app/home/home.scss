@@ -1,0 +1,9 @@
+main {
+  background-color: var(--primary);
+  section {
+    border-radius: 20px;
+    background-color: #f4f4f4;
+    height: calc(100dvh - 50px);
+    width: 100%;
+  }
+}

@@ -1,0 +1,19 @@
+.card {
+  box-shadow: 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  height: 150px;
+  //   border-bottom: 4px solid var(--primary);
+  transition: transform 0.2s ease-in-out;
+  background-color: #fff;
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+  }
+}

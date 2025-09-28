@@ -1,0 +1,9 @@
+<div class="flex justify-between gap-4">
+  <div
+    class="w-1/4 card rounded-md flex justify-center items-center flex-col gap-4"
+    *ngFor="let item of items"
+  >
+    <h1>{{ item.label }}</h1>
+    <p>{{ item.count }}</p>
+  </div>
+</div>

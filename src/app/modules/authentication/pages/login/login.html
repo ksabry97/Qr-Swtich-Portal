@@ -36,7 +36,9 @@
         [parentGroup]="loginForm"
       ></app-qr-password>
 
-      <span class="w-full flex justify-end forget">forget password</span>
+      <span class="w-full flex justify-end forget" (click)="forgetPassword()"
+        >forget password</span
+      >
       <button
         class="w-full submit-btn border-0 rounded-md outline-none"
         (click)="submitLogin()"
@@ -46,3 +48,7 @@
     </form>
   </div>
 </div>
+<app-qr-modal
+  [modalComponent]="otpModal"
+  [isVisible]="modalOpened"
+></app-qr-modal>

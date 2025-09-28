@@ -60,3 +60,11 @@
   inset-inline-end: 2%;
   top: 10%;
 }
+.submit-btn {
+  background-color: var(--primary);
+  color: #fff;
+  height: 40px;
+  &:disabled {
+    opacity: 0.4;
+  }
+}

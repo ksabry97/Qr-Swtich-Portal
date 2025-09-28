@@ -1,0 +1,20 @@
+aside {
+  width: 20dvw;
+  height: 100dvh;
+  background-color: var(--primary);
+  color: #fff;
+  h1 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  li {
+    font-size: 16px;
+    &:hover {
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      background-color: rgba(255, 255, 255, 0.12);
+      transform: translateX(2px);
+    }
+  }
+}
