@@ -1,1 +1,92 @@
-<p>qr-table works!</p>
+<div class="ngx-smart-table-container">
+  <nz-table
+    #basicTable
+    [nzData]="data"
+    [nzLoading]="loading"
+    [nzPageSize]="rows"
+    [nzShowPagination]="paginator"
+    [nzPageSizeOptions]="rowsPerPageOptions"
+    [nzShowSizeChanger]="true"
+    [nzShowQuickJumper]="true"
+    [nzScroll]="{ x: '50rem', y: '400px' }"
+    [nzSize]="'small'"
+    (nzCurrentPageDataChange)="onRowSelect.emit($event)"
+    (nzPageIndexChange)="onLazyLoad.emit($event)"
+  >
+    <!-- Dynamic columns -->
+    <thead>
+      <tr>
+        <ng-container *ngFor="let col of columns">
+          <th
+            [nzSortOrder]="null"
+            [nzSortFn]="col.sortable ? true : false"
+            *ngIf="col.sortable !== false"
+            [style.width]="col.width"
+          >
+            {{ col.header }}
+          </th>
+          <th *ngIf="col.sortable === false" [style.width]="col.width">
+            {{ col.header }}
+          </th>
+        </ng-container>
+        <th *ngIf="actions && actions.length > 0" style="width: 120px">
+          Actions
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let rowData of basicTable.data; let rowIndex = index">
+        <ng-container *ngFor="let col of columns">
+          <td *ngIf="col.template === 'date'">
+            {{ rowData[col.field] | date : "medium" }}
+          </td>
+          <td *ngIf="col.template === 'currency'">
+            {{ rowData[col.field] | currency }}
+          </td>
+          <td *ngIf="col.template === 'number'">
+            {{ rowData[col.field] | number }}
+          </td>
+          <td *ngIf="col.template === 'boolean'">
+            <span
+              class="status-badge"
+              [class.active]="rowData[col.field]"
+              [class.inactive]="!rowData[col.field]"
+            >
+              {{ rowData[col.field] ? "Active" : "Inactive" }}
+            </span>
+          </td>
+          <td *ngIf="!col.template">
+            {{ rowData[col.field] }}
+          </td>
+        </ng-container>
+        <td *ngIf="actions && actions.length > 0">
+          <div class="action-buttons">
+            <button
+              *ngFor="let action of actions"
+              class="action-btn"
+              [class]="action.severity || 'primary'"
+              [disabled]="action.disabled || false"
+              (click)="onActionClick.emit({ action, rowData, rowIndex })"
+              [title]="action.label"
+            >
+              <i nz-icon [nzType]="action.icon || ''" nzTheme="outline"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+
+    <ng-template #nzEmpty>
+      <div class="empty-state">
+        <i
+          nz-icon
+          nzType="inbox"
+          nzTheme="outline"
+          style="font-size: 3rem; color: #ccc"
+        ></i>
+        <p>No data available</p>
+      </div>
+    </ng-template>
+  </nz-table>
+</div>

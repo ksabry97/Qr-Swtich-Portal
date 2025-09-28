@@ -1,1 +1,10 @@
-<app-entity-header [title]="'Tenant Management'"></app-entity-header>
+<div class="flex flex-col gap-2">
+  <app-entity-header [title]="'Tenant Management'"></app-entity-header>
+  <app-qr-table
+    [columns]="columns"
+    [data]="banks"
+    [actions]="actions"
+    [paginator]="true"
+    [rows]="10"
+  ></app-qr-table>
+</div>
