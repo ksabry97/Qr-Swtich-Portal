@@ -1,0 +1,20 @@
+h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+span {
+  font-weight: 600;
+}
+.resend {
+  color: var(--secondary);
+  &:disabled {
+    opacity: 0.3;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 5%;
+  inset-inline-end: 4%;
+  cursor: pointer;
+}

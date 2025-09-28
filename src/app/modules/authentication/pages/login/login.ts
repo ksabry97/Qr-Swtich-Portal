@@ -22,7 +22,6 @@ import { GlobalService } from '../../../../shared/services/global.service';
 export class Login {
   loginForm!: FormGroup;
   otpModal = OtpModal;
-  modalOpened = false;
   globalServ = inject(GlobalService);
   constructor(private readonly fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
@@ -36,7 +35,7 @@ export class Login {
       this.globalServ.setLoading(true);
       setTimeout(() => {
         this.globalServ.setLoading(false);
-        this.modalOpened = true;
+        this.globalServ.setModal(true);
       }, 2000);
     } else {
       this.loginForm.markAllAsTouched();
