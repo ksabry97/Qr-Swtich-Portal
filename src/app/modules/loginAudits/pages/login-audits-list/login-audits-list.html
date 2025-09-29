@@ -1,4 +1,12 @@
-<app-entity-header
-  [title]="'Login Audits'"
-  [showButton]="false"
-></app-entity-header>
+<div class="flex flex-col gap-2">
+  <app-entity-header
+    [title]="'Login Audits'"
+    [showButton]="false"
+  ></app-entity-header>
+  <app-qr-table
+    [columns]="columns"
+    [data]="banks"
+    [paginator]="true"
+    [rows]="10"
+  ></app-qr-table>
+</div>

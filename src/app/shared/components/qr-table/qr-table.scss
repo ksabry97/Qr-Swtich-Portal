@@ -170,3 +170,12 @@
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   color: #d97706;
 }
+:host ::ng-deep .ant-table-thead > tr > th {
+  background-color: #e5e4e4;
+  height: 50px;
+  color: var(--primary);
+  font-weight: 600;
+}
+:host ::ng-deep .ant-table.ant-table-small .nz-table-hide-scrollbar {
+  scrollbar-color: #e5e4e4 #e5e4e4;
+}
