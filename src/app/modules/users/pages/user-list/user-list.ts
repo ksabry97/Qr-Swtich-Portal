@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
   TableAction,
   TableColumn,
 } from '../../../../shared/components/qr-table/qr-table';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { AddUser } from '../add-user/add-user';
 
 @Component({
   selector: 'app-user-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, QrModal],
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
 export class UserList {
+  globalServ = inject(GlobalService);
+  addUser = AddUser;
   columns: TableColumn[] = [
     { field: 'id', header: 'Name', width: '100px', sortable: false },
     { field: 'name', header: 'Email', sortable: false },
@@ -231,4 +236,7 @@ export class UserList {
       country: 'UAE',
     },
   ];
+  openModel() {
+    this.globalServ.setModal(true);
+  }
 }

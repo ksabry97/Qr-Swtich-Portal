@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
   TableAction,
   TableColumn,
 } from '../../../../shared/components/qr-table/qr-table';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { AddWallet } from '../add-wallet/add-wallet';
 @Component({
   selector: 'app-wallet-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, QrModal],
   templateUrl: './wallet-list.html',
   styleUrl: './wallet-list.scss',
 })
 export class WalletList {
+  globalServ = inject(GlobalService);
+  addWallet = AddWallet;
   columns: TableColumn[] = [
     { field: 'id', header: 'Wallet Name', width: '100px', sortable: false },
     { field: 'name', header: 'Type', sortable: false },
@@ -63,157 +68,8 @@ export class WalletList {
       terminals: 234,
       country: 'UAE',
     },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
   ];
+  openModel() {
+    this.globalServ.setModal(true);
+  }
 }

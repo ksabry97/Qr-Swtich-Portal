@@ -1,0 +1,44 @@
+.content {
+  padding: 0px 16px;
+  width: 760px;
+}
+form {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 0px;
+}
+
+label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+section {
+  border: 1px solid #f3f3f3;
+  padding-bottom: 24px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &.last-section {
+    border: none;
+    padding-bottom: 0;
+  }
+}
+textarea {
+  resize: none;
+  border-radius: 8px;
+  height: 80px;
+  border: 1px solid #e5e7eb;
+  &:hover {
+    border-color: #40a9ff;
+  }
+  &:focus,
+  :focus-visible {
+    border-color: #40a9ff;
+    outline: none;
+  }
+}
+
+.pbt-2 {
+  padding-bottom: 8px !important;
+}

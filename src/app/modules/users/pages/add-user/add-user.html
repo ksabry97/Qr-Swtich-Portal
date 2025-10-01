@@ -1,1 +1,70 @@
-<p>add-user works!</p>
+<app-modal-header
+  [description]="'configure a new ATM service endpoint and settings'"
+  [title]="'Add new user'"
+></app-modal-header>
+<div class="content">
+  <form [formGroup]="userForm" class="flex flex-col gap-3">
+    <section class="flex w-full flex-col gap-3 p-2 rounded-md">
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Email'"
+          [placeholder]="'enter email'"
+          formControlName="email"
+          [controlName]="'email'"
+          [parentGroup]="userForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'First Name'"
+          [placeholder]="'enter first name'"
+          formControlName="firstName"
+          [controlName]="'firstName'"
+          [parentGroup]="userForm"
+          [required]="true"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Last Name'"
+          [placeholder]="'enter last name'"
+          formControlName="lastName"
+          [controlName]="'lastName'"
+          [parentGroup]="userForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-select
+          formControlName="tenantId"
+          [controlName]="'tenantId'"
+          [parentGroup]="userForm"
+          [options]="types"
+          [label]="'Tenant'"
+          [placeholder]="'select tenant'"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-2 flex-col">
+        <app-qr-password
+          [label]="'Password'"
+          [placeholder]="'enter your password'"
+          formControlName="password"
+          [controlName]="'password'"
+          [parentGroup]="userForm"
+        ></app-qr-password>
+        <app-qr-password
+          [label]="'Confirm Password'"
+          [placeholder]="'enter your password'"
+          formControlName="confirmPassword"
+          [controlName]="'confirmPassword'"
+          [parentGroup]="userForm"
+        ></app-qr-password>
+      </div>
+    </section>
+  </form>
+</div>
+<app-modal-footer
+  [submitText]="'Save & Submit'"
+  (isSubmitted)="submit()"
+></app-modal-footer>

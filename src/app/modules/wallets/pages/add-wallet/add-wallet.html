@@ -1,1 +1,202 @@
-<p>add-wallet works!</p>
+<app-modal-header
+  [description]="'configure a new ATM service endpoint and settings'"
+  [title]="'Add new wallet'"
+></app-modal-header>
+<div class="content">
+  <form [formGroup]="walletForm" class="flex flex-col gap-3">
+    <section class="flex w-full flex-col gap-3 p-2 rounded-md">
+      <div class="flex items-center w-full justify-between">
+        <label>Basic Information</label>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Wallet Name'"
+          [placeholder]="'enter wallet name'"
+          formControlName="walletName"
+          [controlName]="'walletName'"
+          [parentGroup]="walletForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-select
+          formControlName="walletType"
+          [controlName]="'walletType'"
+          [parentGroup]="walletForm"
+          [options]="types"
+          [label]="'Wallet Type'"
+          [placeholder]="'select wallet type'"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="environmentId"
+          [controlName]="'environmentId'"
+          [parentGroup]="walletForm"
+          [options]="types"
+          [label]="'Environment'"
+          [placeholder]="'select environment'"
+          class="w-1/2"
+          [required]="true"
+        ></app-qr-select>
+        <div class="flex gap-2 flex-col w-1/2">
+          <label>Description</label>
+          <textarea
+            class="p-3"
+            placeholder="write here what services do..."
+            formControlName="description"
+          ></textarea>
+        </div>
+      </div>
+    </section>
+    <section
+      class="flex w-full flex-col gap-3 p-2 rounded-md"
+      [ngClass]="{ 'pbt-2': !isOpened[0] }"
+    >
+      <div
+        class="flex items-center w-full justify-between"
+        (click)="isOpened[0] = !isOpened[0]"
+      >
+        <label>Connection Settings</label>
+        <nz-icon
+          [nzType]="isOpened[0] ? 'minus' : 'plus'"
+          nzTheme="outline"
+          style="font-size: 10px"
+        ></nz-icon>
+      </div>
+      <div class="flex gap-3" *ngIf="isOpened[0]">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Base URL'"
+          [placeholder]="'https://api.example.com/'"
+          formControlName="baseUrl"
+          [controlName]="'baseUrl'"
+          [parentGroup]="walletForm"
+        ></app-qr-input>
+        <app-qr-input-number
+          formControlName="port"
+          [controlName]="'port'"
+          [parentGroup]="walletForm"
+          [label]="'Port'"
+          class="w-1/2"
+          [required]="true"
+        ></app-qr-input-number>
+      </div>
+      <div class="flex gap-3" *ngIf="isOpened[0]">
+        <app-qr-input-number
+          formControlName="maxConnections"
+          [controlName]="'maxConnections'"
+          [parentGroup]="walletForm"
+          [label]="'Max Connections'"
+          class="w-1/2"
+        ></app-qr-input-number>
+        <app-qr-input-number
+          formControlName="timeout"
+          [controlName]="'timeout'"
+          [parentGroup]="walletForm"
+          [label]="'Timeout (seconds)'"
+          class="w-1/2"
+        ></app-qr-input-number>
+      </div>
+    </section>
+    <section
+      class="flex w-full flex-col gap-3 p-2 rounded-md"
+      [ngClass]="{ 'pbt-2': !isOpened[1] }"
+    >
+      <div
+        class="flex items-center w-full justify-between"
+        (click)="isOpened[1] = !isOpened[1]"
+      >
+        <label>Security Settings</label>
+        <nz-icon
+          [nzType]="isOpened[1] ? 'minus' : 'plus'"
+          nzTheme="outline"
+          style="font-size: 10px"
+        ></nz-icon>
+      </div>
+      <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[1]">
+        <label>Use SSL/HTTPS </label>
+        <nz-switch formControlName="useSSL"></nz-switch>
+      </div>
+      <div class="flex gap-3" *ngIf="isOpened[1]">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'API Key'"
+          [placeholder]="'enter API Key'"
+          formControlName="apiKey"
+          [controlName]="'apiKey'"
+          [parentGroup]="walletForm"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Username'"
+          [placeholder]="'enter username'"
+          formControlName="userName"
+          [controlName]="'userName'"
+          [parentGroup]="walletForm"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3" *ngIf="isOpened[1]">
+        <app-qr-password
+          class="w-1/2"
+          [label]="'Password'"
+          [placeholder]="'enter your password'"
+          formControlName="password"
+          [controlName]="'password'"
+          [parentGroup]="walletForm"
+        ></app-qr-password>
+      </div>
+    </section>
+    <section
+      class="flex w-full flex-col gap-3 p-2 rounded-md"
+      [ngClass]="{ 'pbt-2': !isOpened[2] }"
+    >
+      <div
+        class="flex items-center w-full justify-between"
+        (click)="isOpened[2] = !isOpened[2]"
+      >
+        <label>Health Check Settings</label>
+        <nz-icon
+          [nzType]="isOpened[2] ? 'minus' : 'plus'"
+          nzTheme="outline"
+          style="font-size: 10px"
+        ></nz-icon>
+      </div>
+      <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[2]">
+        <label>Enable Health Checks</label>
+        <nz-switch formControlName="enable"></nz-switch>
+      </div>
+      <div class="flex gap-3" *ngIf="isOpened[2]">
+        <app-qr-input-number
+          formControlName="checkIntervals"
+          [controlName]="'checkIntervals'"
+          [parentGroup]="walletForm"
+          [label]="'Health Check Interval (minutes)'"
+          class="w-1/2"
+        ></app-qr-input-number>
+        <div
+          class="flex items-center justify-between w-1/2 mt-8"
+          *ngIf="isOpened[2]"
+        >
+          <label>active </label>
+          <nz-switch formControlName="active"></nz-switch>
+        </div>
+      </div>
+
+      <div class="flex gap-3" *ngIf="isOpened[2]">
+        <div class="flex gap-2 flex-col w-full">
+          <label>Notes</label>
+          <textarea
+            class="p-3"
+            placeholder="write here what services do..."
+            formControlName="notes"
+          ></textarea>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+<app-modal-footer
+  [submitText]="'Save & Submit'"
+  (isSubmitted)="submit()"
+></app-modal-footer>
