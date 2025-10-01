@@ -1,1 +1,104 @@
-<p>add-tenant works!</p>
+<app-modal-header
+  [description]="'configure a new ATM service endpoint and settings'"
+  [title]="'Add new tenant'"
+></app-modal-header>
+<div class="content">
+  <form [formGroup]="tenantForm" class="flex flex-col gap-3">
+    <section class="flex w-full flex-col gap-3 p-2 rounded-md">
+      <label>Basic Information</label>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Tenant Name'"
+          [placeholder]="'enter tenant name'"
+          formControlName="tenantName"
+          [controlName]="'tenantName'"
+          [parentGroup]="tenantForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Tenant Code'"
+          [placeholder]="'enter tenant code'"
+          formControlName="tenantCode"
+          [controlName]="'tenantCode'"
+          [parentGroup]="tenantForm"
+          [required]="true"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="countryId"
+          [controlName]="'countryId'"
+          [parentGroup]="tenantForm"
+          [options]="types"
+          [label]="'Country'"
+          [placeholder]="'select country'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+        <app-qr-select
+          formControlName="environmentId"
+          [controlName]="'environmentId'"
+          [parentGroup]="tenantForm"
+          [options]="types"
+          [label]="'Environment'"
+          [placeholder]="'select environment'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-2 flex-col">
+        <label>Description</label>
+        <textarea
+          class="p-3"
+          placeholder="write here what services do..."
+          formControlName="description"
+        ></textarea>
+      </div>
+    </section>
+    <section class="flex w-full flex-col gap-3 p-2 rounded-md">
+      <label>Basic Information</label>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Contact Email'"
+          [placeholder]="'enter contact email'"
+          formControlName="contactEmail"
+          [controlName]="'contactEmail'"
+          [parentGroup]="tenantForm"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Contact Phone'"
+          [placeholder]="'enter contact phone'"
+          formControlName="contactPhone"
+          [controlName]="'contactPhone'"
+          [parentGroup]="tenantForm"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Contact Person'"
+          [placeholder]="'enter contact person name'"
+          formControlName="contactName"
+          [controlName]="'contactName'"
+          [parentGroup]="tenantForm"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Address'"
+          [placeholder]="'enter address'"
+          formControlName="contactAddress"
+          [controlName]="'contactAddress'"
+          [parentGroup]="tenantForm"
+        ></app-qr-input>
+      </div>
+    </section>
+  </form>
+</div>
+<app-modal-footer
+  [submitText]="'Save & Submit'"
+  (isSubmitted)="submit()"
+></app-modal-footer>

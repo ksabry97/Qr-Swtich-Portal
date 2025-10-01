@@ -1,0 +1,27 @@
+<div class="ngx-smart-input-container">
+  <label *ngIf="label" class="input-label" [class.required]="required">
+    {{ label }}
+  </label>
+
+  <nz-select
+    [nzPlaceHolder]="placeholder"
+    [nzDisabled]="disabled"
+    [nzStatus]="control.touched && control.invalid ? 'error' : ''"
+    [nzMode]="mode"
+    [(ngModel)]="value"
+    [nzAllowClear]="allowClear"
+    (ngModelChange)="onChange($event)"
+    (nzBlur)="touched()"
+    class="mb-2"
+  >
+    @for (option of options; track $index) {
+    <nz-option [nzValue]="option.value" [nzLabel]="option.text"></nz-option>
+    }
+  </nz-select>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    {{ errorMessage }}
+  </div>
+</div>

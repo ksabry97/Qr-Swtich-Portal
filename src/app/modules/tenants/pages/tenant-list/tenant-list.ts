@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
   TableAction,
   TableColumn,
 } from '../../../../shared/components/qr-table/qr-table';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { AddTenant } from '../add-tenant/add-tenant';
 
 @Component({
   selector: 'app-tenant-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, QrModal],
   templateUrl: './tenant-list.html',
   styleUrl: './tenant-list.scss',
 })
 export class TenantList {
+  globalServ = inject(GlobalService);
+  createTenant = AddTenant;
   columns: TableColumn[] = [
     { field: 'id', header: 'Tenant ID', width: '100px', sortable: false },
     { field: 'name', header: 'Name', sortable: false },
@@ -214,4 +219,8 @@ export class TenantList {
       country: 'UAE',
     },
   ];
+
+  openModel() {
+    this.globalServ.setModal(true);
+  }
 }

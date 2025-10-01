@@ -1,0 +1,19 @@
+<footer class="p-4 w-full">
+  <div
+    class="flex items-center w-full"
+    [ngClass]="{ 'justify-end': !subText, 'justify-between': subText }"
+  >
+    <button
+      class="secondary-btn flex gap-2 rounded-md p-2"
+      *ngIf="subText"
+      (click)="submitSub()"
+      [disabled]="disabled"
+    >
+      <nz-icon nzType="plus" nzTheme="outline" />
+      {{ subText }}
+    </button>
+    <button class="submit-btn rounded-md p-2" (click)="submit()">
+      {{ submitText }}
+    </button>
+  </div>
+</footer>
