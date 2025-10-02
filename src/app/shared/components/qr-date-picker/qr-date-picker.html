@@ -1,0 +1,25 @@
+<div class="ngx-smart-input-container">
+  <label *ngIf="label" class="input-label" [class.required]="required">
+    {{ label }}
+  </label>
+
+  <form [formGroup]="parentGroup" class="input-wrapper">
+    <nz-date-picker
+      [formControlName]="controlName"
+      [nzPlaceHolder]="placeholder"
+      [nzDisabled]="disabled"
+      [nzStatus]="control.touched && control.invalid ? 'error' : ''"
+      [nzMode]="mode"
+      [nzAllowClear]="allowClear"
+      [nzInputReadOnly]="readonly"
+      [nzFormat]="dateFormat"
+      [nzShowTime]="showTime"
+    ></nz-date-picker>
+  </form>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    {{ errorMessage }}
+  </div>
+</div>

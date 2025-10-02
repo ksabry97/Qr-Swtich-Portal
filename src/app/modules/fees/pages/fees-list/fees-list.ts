@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   TableColumn,
   TableAction,
   QrTable,
 } from '../../../../shared/components/qr-table/qr-table';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { AddFee } from '../add-fee/add-fee';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 
 @Component({
   selector: 'app-fees-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, QrModal],
   templateUrl: './fees-list.html',
   styleUrl: './fees-list.scss',
 })
 export class FeesList {
+  globalServ = inject(GlobalService);
+  addFee = AddFee;
   columns: TableColumn[] = [
     { field: 'id', header: 'Name', width: '100px', sortable: false },
     { field: 'name', header: 'Type', sortable: false },
@@ -78,141 +83,8 @@ export class FeesList {
       terminals: 12,
       country: 'UAE',
     },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
   ];
+  openModel() {
+    this.globalServ.setModal(true);
+  }
 }

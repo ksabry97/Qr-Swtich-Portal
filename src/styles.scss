@@ -54,6 +54,13 @@
     font-size: 0.875rem;
   }
 }
+.input-number-icon {
+  position: absolute;
+  inset-inline-end: 6%;
+  top: 22%;
+  padding-inline-start: 8px;
+  border-inline-start: 1px solid grey;
+}
 
 .clear-button {
   position: absolute;
