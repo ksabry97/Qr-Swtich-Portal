@@ -1,1 +1,143 @@
-<p>add-merchant works!</p>
+<app-modal-header
+  [description]="'configure a new ATM service endpoint and settings'"
+  [title]="'Add new merchant'"
+></app-modal-header>
+<div class="content">
+  <form [formGroup]="merchantForm" class="flex flex-col gap-3">
+    <section class="flex w-full flex-col gap-3 p-2 rounded-md">
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Merchant Name'"
+          [placeholder]="'enter merchant name'"
+          formControlName="merchantName"
+          [controlName]="'merchantName'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-select
+          formControlName="countryId"
+          [controlName]="'countryId'"
+          [parentGroup]="merchantForm"
+          [options]="types"
+          [label]="'Country'"
+          [placeholder]="'select country'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="categoryId"
+          [controlName]="'categoryId'"
+          [parentGroup]="merchantForm"
+          [options]="types"
+          [label]="'Category'"
+          [placeholder]="'select category'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Address'"
+          [placeholder]="'enter tenant code'"
+          formControlName="address"
+          [controlName]="'address'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Contact Email'"
+          [placeholder]="'enter contact email'"
+          formControlName="contactEmail"
+          [controlName]="'contactEmail'"
+          [parentGroup]="merchantForm"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Contact Phone'"
+          [placeholder]="'enter contact phone'"
+          formControlName="contactPhone"
+          [controlName]="'contactPhone'"
+          [parentGroup]="merchantForm"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Tax ID'"
+          [placeholder]="'enter tenant name'"
+          formControlName="taxId"
+          [controlName]="'taxId'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-select
+          formControlName="businessType"
+          [controlName]="'businessType'"
+          [parentGroup]="merchantForm"
+          [options]="types"
+          [label]="'Business Type'"
+          [placeholder]="'select country'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Terminal ID'"
+          [placeholder]="'enter terminal id'"
+          formControlName="terminalId"
+          [controlName]="'terminalId'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-select
+          formControlName="feeProfile"
+          [controlName]="'feeProfile'"
+          [parentGroup]="merchantForm"
+          [options]="types"
+          [label]="'Fee Profile'"
+          [placeholder]="'select fee profile'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="host"
+          [controlName]="'host'"
+          [parentGroup]="merchantForm"
+          [options]="types"
+          [label]="'Host'"
+          [placeholder]="'select host'"
+          [required]="true"
+          class="w-full"
+        ></app-qr-select>
+      </div>
+      <label>QR Models </label>
+      <div class="flex items-center justify-between w-full">
+        <div class="flex gap-2">
+          <label>Static</label>
+          <nz-switch formControlName="static"></nz-switch>
+        </div>
+        <div class="flex gap-2">
+          <label>Dynamic</label>
+          <nz-switch formControlName="dynamic"></nz-switch>
+        </div>
+        <div class="flex gap-2">
+          <label>R2P</label>
+          <nz-switch formControlName="rp"></nz-switch>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+<app-modal-footer
+  [submitText]="'Save & Submit'"
+  (isSubmitted)="submit()"
+></app-modal-footer>

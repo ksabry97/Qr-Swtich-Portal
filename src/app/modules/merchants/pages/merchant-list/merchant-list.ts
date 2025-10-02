@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
   TableAction,
   TableColumn,
 } from '../../../../shared/components/qr-table/qr-table';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { AddMerchant } from '../add-merchant/add-merchant';
 
 @Component({
   selector: 'app-merchant-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, QrModal],
   templateUrl: './merchant-list.html',
   styleUrl: './merchant-list.scss',
 })
 export class MerchantList {
+  globalServ = inject(GlobalService);
+  addMerchant = AddMerchant;
   columns: TableColumn[] = [
     { field: 'id', header: 'Name', width: '100px', sortable: false },
     { field: 'name', header: 'Category', sortable: false },
@@ -217,4 +222,7 @@ export class MerchantList {
       country: 'UAE',
     },
   ];
+  openModel() {
+    this.globalServ.setModal(true);
+  }
 }
