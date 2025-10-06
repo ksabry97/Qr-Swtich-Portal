@@ -15,7 +15,7 @@ import {
   styleUrl: './otp-input.scss',
 })
 export class OTPInput {
-  @Input() length = 6;
+  @Input() length = 4;
   @ViewChildren('otpInput') inputs!: QueryList<ElementRef>;
   arr = new Array(this.length).fill(0);
   otpVal = '';

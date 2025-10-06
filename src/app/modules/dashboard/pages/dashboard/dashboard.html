@@ -7,3 +7,17 @@
     <p>{{ item.count }}</p>
   </div>
 </div>
+
+<div class="flex justify-center mt-4 w-full gap-4">
+  <button class="submit-btn rounded-md p-2" (click)="openModel(0)">
+    add Tenant
+  </button>
+  <button class="submit-btn rounded-md p-2" (click)="openModel(1)">
+    add User
+  </button>
+  <button class="submit-btn rounded-md p-2">add Role</button>
+</div>
+<app-qr-modal
+  [modalComponent]="createModal[isOpened]"
+  [isVisible]="globalServ.isModalOpened()"
+></app-qr-modal>
