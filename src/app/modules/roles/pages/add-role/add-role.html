@@ -1,1 +1,57 @@
-<p>add-role works!</p>
+<app-modal-header
+  [description]="'configure a new ATM service endpoint and settings'"
+  [title]="'Create new role'"
+></app-modal-header>
+<div class="content">
+  <form [formGroup]="roleGroup" class="flex flex-col gap-5">
+    <section
+      class="flex w-full items-end justify-between gap-3"
+      [ngClass]="{
+        'items-center':
+          roleGroup.get('roleName')?.invalid &&
+          roleGroup.get('roleName')?.touched
+      }"
+    >
+      <app-qr-input
+        class="w-1/2"
+        [label]="'Role name'"
+        [placeholder]="'ex. admin'"
+        formControlName="roleName"
+        [controlName]="'roleName'"
+        [parentGroup]="roleGroup"
+        [required]="true"
+      ></app-qr-input>
+      <div class="flex items-center justify-between w-1/2 mb-2">
+        <label>Enable Role </label>
+        <nz-switch formControlName="isActive"></nz-switch>
+      </div>
+    </section>
+    <section class="flex w-full gap-5 flex-col last-section">
+      <div class="flex flex-col gap-2">
+        <label>User Managment</label>
+        <div class="flex w-full justify-between">
+          <div
+            class="flex items-center gap-2 w-1/4"
+            *ngFor="let perm of permissions"
+          >
+            <label>{{ perm }}</label>
+            <nz-switch></nz-switch>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>Fees Managment</label>
+        <div class="flex w-full justify-between">
+          <div
+            class="flex items-center gap-2 w-1/4"
+            *ngFor="let perm of permissions"
+          >
+            <label>{{ perm }}</label>
+            <nz-switch></nz-switch>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+<app-modal-footer [submitText]="'Save & Submit'"></app-modal-footer>

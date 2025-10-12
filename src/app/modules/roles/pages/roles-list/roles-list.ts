@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
   TableAction,
   TableColumn,
 } from '../../../../shared/components/qr-table/qr-table';
+import { AddRole } from '../add-role/add-role';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 
 @Component({
   selector: 'app-roles-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, QrModal],
   templateUrl: './roles-list.html',
   styleUrl: './roles-list.scss',
 })
 export class RolesList {
+  addRole = AddRole;
+  globalServ = inject(GlobalService);
   columns: TableColumn[] = [
     { field: 'id', header: 'Role Name', width: '100px', sortable: false },
     { field: 'name', header: 'Description', sortable: false },
@@ -220,4 +225,7 @@ export class RolesList {
       country: 'UAE',
     },
   ];
+  openModel() {
+    this.globalServ.setModal(true);
+  }
 }
