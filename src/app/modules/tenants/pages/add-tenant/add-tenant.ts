@@ -10,6 +10,8 @@ import { ModalFooter } from '../../../../shared/components/modal-footer/modal-fo
 import { ModalHeader } from '../../../../shared/components/modal-header/modal-header';
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
+import { TenantService } from '../../services/tenants.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-add-tenant',
@@ -29,24 +31,28 @@ export class AddTenant {
   types = [
     {
       text: 'Development',
-      value: '1',
+      value: '0',
     },
     {
       text: 'Staging',
-      value: '2',
+      value: '1',
     },
     {
       text: 'Production',
-      value: '3',
+      value: '2',
     },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private readonly tenantServ: TenantService,
+    private message: NzMessageService
+  ) {
     this.tenantForm = this.fb.group({
       tenantName: ['', Validators.required],
       tenantCode: ['', Validators.required],
-      countryId: ['', Validators.required],
-      environmentId: ['', Validators.required],
+      country: ['', Validators.required],
+      environment: ['', Validators.required],
       description: [''],
       contactEmail: [''],
       contactPhone: [''],
@@ -55,6 +61,16 @@ export class AddTenant {
     });
   }
   submit() {
+    if (this.tenantForm.valid) {
+      this.tenantServ.createTenant(this.tenantForm.value).subscribe({
+        next: (data: any) => {},
+        error: (err) => {
+          this.message.error('endpoint failed');
+        },
+      });
+    } else {
+      this.tenantForm.markAllAsTouched();
+    }
     console.log(this.tenantForm.value);
   }
 }

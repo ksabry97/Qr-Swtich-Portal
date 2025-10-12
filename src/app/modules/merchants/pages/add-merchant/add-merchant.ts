@@ -11,6 +11,8 @@ import { ModalHeader } from '../../../../shared/components/modal-header/modal-he
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { MerchantService } from '../../services/merchants.service';
 
 @Component({
   selector: 'app-add-merchant',
@@ -43,25 +45,98 @@ export class AddMerchant {
     },
   ];
 
-  constructor(private fb: FormBuilder) {
+  merchantTypes = [
+    {
+      text: 'Merchant',
+      value: '0',
+    },
+    {
+      text: 'Agent',
+      value: '1',
+    },
+    {
+      text: 'Biller',
+      value: '2',
+    },
+    {
+      text: 'Aggregator',
+      value: '3',
+    },
+  ];
+
+  lang: number | null = null;
+  lat: number | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private message: NzMessageService,
+    private readonly merchantServ: MerchantService
+  ) {
+    this.getUserLocation();
     this.merchantForm = this.fb.group({
-      merchantName: ['', Validators.required],
-      categoryId: ['', Validators.required],
+      name: ['', Validators.required],
+      scheme: ['', Validators.required],
+      msisdn: [''],
+      merchantId: [''],
+      commercialRegNo: [''],
+      issuancePlaceCode: [''],
+      nationalId: [''],
+      soleProprietorshipLicense: [''],
+      serviceLicenseNumber: [''],
+      mcc: ['', Validators.required],
+      canPerformRegistration: [false],
+      parentId: [''],
       countryId: ['', Validators.required],
-      address: ['', Validators.required],
+      cityId: [''],
+      contactEmail: ['', Validators.email],
       contactPhone: [''],
-      contactEmail: [''],
-      taxId: [''],
-      terminalId: [''],
-      businessType: [''],
-      feeProfile: [''],
-      host: [''],
-      static: [false],
-      dynamic: [false],
-      rp: [false],
+      address: ['', Validators.required],
+      lang: [this.lang],
+      lat: [this.lat],
+      feeProfileId: [null],
+      merchantType: [],
     });
   }
   submit() {
     console.log(this.merchantForm.value);
+    if (this.merchantForm.valid) {
+      this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
+        next: (data: any) => {},
+        error: (err) => {
+          this.message.error('endpoint failed');
+        },
+      });
+    } else {
+      this.merchantForm.markAllAsTouched();
+    }
+  }
+
+  getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.lat = position.coords.latitude;
+          this.lang = position.coords.longitude;
+          this.merchantForm.patchValue({ lang: this.lang, lat: this.lat });
+          console.log(`Latitude: ${this.lat}, Longitude: ${this.lang}`);
+          // You can now use these coordinates in your application
+        },
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              this.message.error('User denied the request for Geolocation.');
+              break;
+            case error.POSITION_UNAVAILABLE:
+              this.message.error('Location information is unavailable.');
+              break;
+            case error.TIMEOUT:
+              this.message.error('The request to get user location timed out.');
+              break;
+          }
+        }
+      );
+    } else {
+      this.message.error('Geolocation is not supported by this browser.');
+    }
   }
 }

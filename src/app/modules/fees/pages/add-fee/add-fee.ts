@@ -9,7 +9,6 @@ import {
 import { ModalFooter } from '../../../../shared/components/modal-footer/modal-footer';
 import { ModalHeader } from '../../../../shared/components/modal-header/modal-header';
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
-import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { QrDatePicker } from '../../../../shared/components/qr-date-picker/qr-date-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { QrInputNumber } from '../../../../shared/components/qr-input-number/qr-input-number';
@@ -21,7 +20,6 @@ import { QrInputNumber } from '../../../../shared/components/qr-input-number/qr-
     ModalFooter,
     ReactiveFormsModule,
     QrInput,
-    QrSelect,
     QrDatePicker,
     NzIconModule,
     QrInputNumber,

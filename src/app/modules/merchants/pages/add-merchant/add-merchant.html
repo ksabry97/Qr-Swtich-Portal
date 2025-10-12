@@ -10,8 +10,8 @@
           class="w-1/2"
           [label]="'Merchant Name'"
           [placeholder]="'enter merchant name'"
-          formControlName="merchantName"
-          [controlName]="'merchantName'"
+          formControlName="name"
+          [controlName]="'name'"
           [parentGroup]="merchantForm"
           [required]="true"
         ></app-qr-input>
@@ -27,20 +27,61 @@
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Merchant ID'"
+          [placeholder]="'enter merchant id'"
+          formControlName="merchantId"
+          [controlName]="'merchantId'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
         <app-qr-select
-          formControlName="categoryId"
-          [controlName]="'categoryId'"
+          formControlName="cityId"
+          [controlName]="'cityId'"
           [parentGroup]="merchantForm"
           [options]="types"
-          [label]="'Category'"
-          [placeholder]="'select category'"
+          [label]="'City'"
+          [placeholder]="'select city'"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Scheme'"
+          [placeholder]="'enter Scheme'"
+          formControlName="scheme"
+          [controlName]="'scheme'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'MSISDN'"
+          [placeholder]="'enter msisdn'"
+          formControlName="msisdn"
+          [controlName]="'msisdn'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="mcc"
+          [controlName]="'mcc'"
+          [parentGroup]="merchantForm"
+          [options]="types"
+          [label]="'MCC'"
+          [placeholder]="'select mcc'"
           [required]="true"
           class="w-1/2"
         ></app-qr-select>
         <app-qr-input
           class="w-1/2"
           [label]="'Address'"
-          [placeholder]="'enter tenant code'"
+          [placeholder]="'enter address'"
           formControlName="address"
           [controlName]="'address'"
           [parentGroup]="merchantForm"
@@ -68,37 +109,51 @@
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Tax ID'"
-          [placeholder]="'enter tenant name'"
-          formControlName="taxId"
-          [controlName]="'taxId'"
+          [label]="'Commercial Registration No'"
+          [placeholder]="'enter Commercial Registration No'"
+          formControlName="commercialRegNo"
+          [controlName]="'commercialRegNo'"
           [parentGroup]="merchantForm"
-          [required]="true"
         ></app-qr-input>
-        <app-qr-select
-          formControlName="businessType"
-          [controlName]="'businessType'"
-          [parentGroup]="merchantForm"
-          [options]="types"
-          [label]="'Business Type'"
-          [placeholder]="'select country'"
-          [required]="true"
+        <app-qr-input
           class="w-1/2"
-        ></app-qr-select>
+          [label]="'Issuance Place Code'"
+          [placeholder]="'enter Issuance Place Code'"
+          formControlName="issuancePlaceCode"
+          [controlName]="'issuancePlaceCode'"
+          [parentGroup]="merchantForm"
+        ></app-qr-input>
       </div>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Terminal ID'"
-          [placeholder]="'enter terminal id'"
-          formControlName="terminalId"
-          [controlName]="'terminalId'"
+          [label]="'Sole Proprietorship License'"
+          [placeholder]="'enter sole proprietorship license'"
+          formControlName="soleProprietorshipLicense"
+          [controlName]="'soleProprietorshipLicense'"
           [parentGroup]="merchantForm"
-          [required]="true"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Service License Number'"
+          [placeholder]="'enter service license number'"
+          formControlName="serviceLicenseNumber"
+          [controlName]="'serviceLicenseNumber'"
+          [parentGroup]="merchantForm"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'National ID'"
+          [placeholder]="'enter national id'"
+          formControlName="nationalId"
+          [controlName]="'nationalId'"
+          [parentGroup]="merchantForm"
         ></app-qr-input>
         <app-qr-select
-          formControlName="feeProfile"
-          [controlName]="'feeProfile'"
+          formControlName="feeProfileId"
+          [controlName]="'feeProfileId'"
           [parentGroup]="merchantForm"
           [options]="types"
           [label]="'Fee Profile'"
@@ -107,31 +162,32 @@
           class="w-1/2"
         ></app-qr-select>
       </div>
+
       <div class="flex gap-3">
-        <app-qr-select
-          formControlName="host"
-          [controlName]="'host'"
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Parent Merchant'"
+          [placeholder]="''"
+          formControlName="parentId"
+          [controlName]="'parentId'"
           [parentGroup]="merchantForm"
-          [options]="types"
-          [label]="'Host'"
-          [placeholder]="'select host'"
           [required]="true"
-          class="w-full"
+        ></app-qr-input>
+        <app-qr-select
+          formControlName="merchantType"
+          [controlName]="'merchantType'"
+          [parentGroup]="merchantForm"
+          [options]="merchantTypes"
+          [label]="'Merchant Types'"
+          [placeholder]="'select merchant type'"
+          [required]="true"
+          class="w-1/2"
         ></app-qr-select>
       </div>
-      <label>QR Models </label>
-      <div class="flex items-center justify-between w-full">
-        <div class="flex gap-2">
-          <label>Static</label>
-          <nz-switch formControlName="static"></nz-switch>
-        </div>
-        <div class="flex gap-2">
-          <label>Dynamic</label>
-          <nz-switch formControlName="dynamic"></nz-switch>
-        </div>
-        <div class="flex gap-2">
-          <label>R2P</label>
-          <nz-switch formControlName="rp"></nz-switch>
+      <div class="flex gap-3">
+        <div class="flex items-center justify-between w-1/2">
+          <label> Can Perform Registration </label>
+          <nz-switch formControlName="canPerformRegistration"></nz-switch>
         </div>
       </div>
     </section>
