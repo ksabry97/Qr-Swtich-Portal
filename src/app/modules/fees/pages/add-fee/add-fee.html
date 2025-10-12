@@ -10,8 +10,8 @@
           class="w-1/2"
           [label]="'Fee Profile Name'"
           [placeholder]="'enter fee name'"
-          formControlName="feeName"
-          [controlName]="'feeName'"
+          formControlName="name"
+          [controlName]="'name'"
           [parentGroup]="feeForm"
           [required]="true"
         ></app-qr-input>
@@ -25,34 +25,22 @@
           [required]="true"
         ></app-qr-input>
       </div>
-      <div class="flex gap-3">
-        <app-qr-date-picker
-          [controlName]="'from'"
-          [parentGroup]="feeForm"
-          [label]="'Effective from'"
-          [placeholder]="'select date'"
-          [required]="true"
-          class="w-1/2"
-        ></app-qr-date-picker>
-        <app-qr-date-picker
-          [controlName]="'to'"
-          [parentGroup]="feeForm"
-          [label]="'Effective to'"
-          [placeholder]="'select date'"
-          class="w-1/2"
-        ></app-qr-date-picker>
-      </div>
-      <div class="flex gap-2 flex-col">
-        <label>Description</label>
-        <textarea
-          class="p-3"
-          placeholder="write here what services do..."
-          formControlName="description"
-        ></textarea>
-      </div>
+
       <label>Fee Type</label>
-      <div class="flex items-center gap-3 flex-wrap">
-        <div class="flex items-center gap-3 w-2/5">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 w-1/2">
+          <input type="radio" formControlName="feeType" [value]="0" />
+          <label>Fixed</label>
+          <app-qr-input-number
+            [placeholder]="'ex. pay bills'"
+            formControlName="fixed"
+            [controlName]="'fixed'"
+            [parentGroup]="feeForm"
+            [unit]="'XOF'"
+            [disabled]="feeForm.get('feeType')?.value !== 0"
+          ></app-qr-input-number>
+        </div>
+        <div class="flex items-center gap-3 w-1/2">
           <input type="radio" formControlName="feeType" [value]="1" />
           <label>Percentage</label>
           <app-qr-input-number
@@ -61,43 +49,8 @@
             [controlName]="'percentage'"
             [parentGroup]="feeForm"
             [unit]="'%'"
+            [disabled]="feeForm.get('feeType')?.value !== 1"
           ></app-qr-input-number>
-        </div>
-        <div class="flex items-center gap-3 w-2/5">
-          <input type="radio" formControlName="feeType" [value]="2" />
-          <label>Fixed</label>
-          <app-qr-input-number
-            [placeholder]="'ex. pay bills'"
-            formControlName="fixed"
-            [controlName]="'fixed'"
-            [parentGroup]="feeForm"
-            [unit]="'XOF'"
-          ></app-qr-input-number>
-        </div>
-        <div class="flex items-center gap-3 w-full">
-          <input type="radio" formControlName="feeType" [value]="3" />
-          <label>Range </label>
-          <div class="range flex">
-            <nz-icon
-              nzType="swap"
-              nzTheme="outline"
-              style="color: grey; font-size: 14px"
-              class="icon"
-            />
-            <input
-              type="number"
-              class="w-1/2 p-2"
-              formControlName="minValue"
-              placeholder="start"
-            />
-            <input
-              type="number"
-              class="w-1/2 p-2"
-              formControlName="maxValue"
-              placeholder="end"
-            />
-            <span class="input-number-icon">XOF</span>
-          </div>
         </div>
       </div>
     </section>

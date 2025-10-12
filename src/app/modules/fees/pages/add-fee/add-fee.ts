@@ -12,6 +12,8 @@ import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { QrDatePicker } from '../../../../shared/components/qr-date-picker/qr-date-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { QrInputNumber } from '../../../../shared/components/qr-input-number/qr-input-number';
+import { FeesService } from '../../services/fees.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-add-fee',
   imports: [
@@ -30,21 +32,30 @@ import { QrInputNumber } from '../../../../shared/components/qr-input-number/qr-
 export class AddFee {
   feeForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private readonly feeServ: FeesService,
+    private message: NzMessageService
+  ) {
     this.feeForm = this.fb.group({
-      feeName: ['', Validators.required],
+      name: ['', Validators.required],
       currency: ['', Validators.required],
-      from: ['', Validators.required],
-      to: [''],
-      description: [''],
-      feeType: [''],
+      feeType: [0],
       fixed: [null],
       percentage: [null],
-      minValue: [null],
-      maxValue: [null],
     });
   }
   submit() {
+    if (this.feeForm.valid) {
+      this.feeServ.createFee(this.feeForm.value).subscribe({
+        next: (data: any) => {},
+        error: (err) => {
+          this.message.error('endpoint failed');
+        },
+      });
+    } else {
+      this.feeForm.markAllAsTouched();
+    }
     console.log(this.feeForm.value);
   }
 }

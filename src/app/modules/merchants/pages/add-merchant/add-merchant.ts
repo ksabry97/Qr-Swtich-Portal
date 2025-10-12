@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -13,6 +13,7 @@ import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MerchantService } from '../../services/merchants.service';
+import { GlobalService } from '../../../../shared/services/global.service';
 
 @Component({
   selector: 'app-add-merchant',
@@ -29,6 +30,7 @@ import { MerchantService } from '../../services/merchants.service';
   styleUrl: './add-merchant.scss',
 })
 export class AddMerchant {
+  globalServ = inject(GlobalService);
   merchantForm!: FormGroup;
   types = [
     {
@@ -119,7 +121,6 @@ export class AddMerchant {
           this.lang = position.coords.longitude;
           this.merchantForm.patchValue({ lang: this.lang, lat: this.lat });
           console.log(`Latitude: ${this.lat}, Longitude: ${this.lang}`);
-          // You can now use these coordinates in your application
         },
         (error) => {
           switch (error.code) {
