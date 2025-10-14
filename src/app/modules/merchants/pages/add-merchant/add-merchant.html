@@ -19,11 +19,25 @@
           formControlName="countryId"
           [controlName]="'countryId'"
           [parentGroup]="merchantForm"
-          [options]="types"
+          [options]="countries"
           [label]="'Country'"
           [placeholder]="'select country'"
           [required]="true"
           class="w-1/2"
+          (ngModelChange)="getCity($event)"
+        ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="identificationType"
+          [controlName]="'identificationType'"
+          [parentGroup]="merchantForm"
+          [options]="identificationTypes"
+          [label]="'Identification Type'"
+          [placeholder]="'select identification type'"
+          [required]="true"
+          class="w-full"
+          (ngModelChange)="updateValidation($event)"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
@@ -40,7 +54,7 @@
           formControlName="cityId"
           [controlName]="'cityId'"
           [parentGroup]="merchantForm"
-          [options]="types"
+          [options]="cities"
           [label]="'City'"
           [placeholder]="'select city'"
           [required]="true"
@@ -72,7 +86,7 @@
           formControlName="mcc"
           [controlName]="'mcc'"
           [parentGroup]="merchantForm"
-          [options]="types"
+          [options]="mccs"
           [label]="'MCC'"
           [placeholder]="'select mcc'"
           [required]="true"

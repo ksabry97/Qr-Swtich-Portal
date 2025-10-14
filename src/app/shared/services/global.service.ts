@@ -18,11 +18,21 @@ export class GlobalService {
   }
 
   getAllCountries() {
-    let url = environment.baseApiUrl + '/countries';
+    let url = this.baseUrl + '/countries';
     return this.http.get(url);
   }
   getAllCurrencies() {
-    let url = environment.baseApiUrl + '/currencies';
+    let url = this.baseUrl + '/currencies';
     return this.http.get(url);
+  }
+  getMccs() {
+    let url = this.baseUrl + '/Mccs';
+    return this.http.get(url);
+  }
+
+  getCitiesByCountryId(id: number) {
+    let url = this.baseUrl + '/cities/getByCountryId';
+    let reqBody = { id };
+    return this.http.post(url, reqBody);
   }
 }
