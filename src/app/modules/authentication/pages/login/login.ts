@@ -36,7 +36,8 @@ export class Login {
     if (this.loginForm.valid) {
       this.globalServ.setLoading(true);
       this.loginServ.preLogin(this.loginForm.value).subscribe({
-        next: () => {
+        next: (data: any) => {
+          localStorage.setItem('sessiontoken', data.sessionToken);
           this.globalServ.setLoading(false);
           this.globalServ.setModal(true);
         },

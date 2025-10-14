@@ -4,6 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  Output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -18,8 +19,8 @@ export class OTPInput {
   @Input() length = 4;
   @ViewChildren('otpInput') inputs!: QueryList<ElementRef>;
   arr = new Array(this.length).fill(0);
-  otpVal = '';
-  otpOutput = new EventEmitter<string>();
+  otpVal: string = '';
+  @Output() otpOutput = new EventEmitter<string>();
 
   onOtpInput(event: Event, index: number) {
     const input = event.target as HTMLInputElement;

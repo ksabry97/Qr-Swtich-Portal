@@ -54,7 +54,10 @@ export class AddFee implements OnInit {
   submit() {
     if (this.feeForm.valid) {
       this.feeServ.createFee(this.feeForm.value).subscribe({
-        next: (data: any) => {},
+        next: (data: any) => {
+          this.message.success(data.Message);
+          this.globalServ.setModal(false);
+        },
         error: (err) => {
           this.message.error('endpoint failed');
         },
@@ -72,7 +75,6 @@ export class AddFee implements OnInit {
           text: item.name,
           value: String(item.id),
         }));
-        console.log(data.data, 'wwwwwwww');
         this.currencies = mappedData;
       },
     });

@@ -52,7 +52,6 @@ export class AddTenant implements OnInit {
   ) {
     this.tenantForm = this.fb.group({
       tenantName: ['', Validators.required],
-      tenantCode: ['', Validators.required],
       countryCode: ['', Validators.required],
       environment: ['', Validators.required],
       description: [''],
@@ -86,7 +85,13 @@ export class AddTenant implements OnInit {
   getAllCountries() {
     this.globalServ.getAllCountries().subscribe({
       next: (data: any) => {
-        this.countries = data.data;
+        const mappedCountries = data.data.map((value: any) => {
+          return {
+            text: value.text,
+            value: String(value.value),
+          };
+        });
+        this.countries = mappedCountries;
       },
     });
   }

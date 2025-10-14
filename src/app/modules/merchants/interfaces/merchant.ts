@@ -20,6 +20,7 @@ export interface Merchant {
   lat: number;
   feeProfileId: number;
   merchantType: MerchantType;
+  identificationType: IdentificationType;
 }
 
 enum MerchantType {
@@ -27,4 +28,10 @@ enum MerchantType {
   agent,
   biller,
   aggregator,
+}
+enum IdentificationType {
+  CommercialRegistration,
+  ServiceLicenseNumber,
+  SoleProprietorshipLicense,
+  NationalID,
 }

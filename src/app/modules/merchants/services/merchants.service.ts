@@ -15,4 +15,13 @@ export class MerchantService {
     let url = this.baseUrl + 'merchants/add';
     return this.http.post(url, merchant);
   }
+
+  getAllMerchants(pageNumber: number, pageSize: number) {
+    let url = this.baseUrl + '/merchants';
+    let reqBody = {
+      pageNumber,
+      pageSize,
+    };
+    return this.http.post(url, reqBody);
+  }
 }

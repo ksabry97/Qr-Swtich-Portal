@@ -2,6 +2,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { OTPInput } from '../../../../shared/components/otp-input/otp-input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { GlobalService } from '../../../../shared/services/global.service';
+import { LoginServ } from '../../services/login-serv.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-otp-modal',
   imports: [OTPInput, NzIconModule],
@@ -12,7 +14,10 @@ export class OtpModal implements OnInit, OnDestroy {
   resend = false;
   intervalId = 0;
   timer = 60;
+  otp: string = '';
   globalServ = inject(GlobalService);
+  loginServ = inject(LoginServ);
+  router = inject(Router);
   ngOnInit(): void {
     this.startTimer();
     this.clearInterval();
@@ -44,6 +49,15 @@ export class OtpModal implements OnInit, OnDestroy {
     this.globalServ.setModal(false);
   }
 
+  login() {
+    this.loginServ.sendOtp(this.otp).subscribe({
+      next: (data: any) => {
+        localStorage.setItem('token', data.accessToken);
+        this.router.navigateByUrl('/dashboard');
+        this.globalServ.setModal(false);
+      },
+    });
+  }
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
   }

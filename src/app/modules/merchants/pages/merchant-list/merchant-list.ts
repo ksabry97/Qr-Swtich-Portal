@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -8,6 +8,7 @@ import {
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddMerchant } from '../add-merchant/add-merchant';
+import { MerchantService } from '../../services/merchants.service';
 
 @Component({
   selector: 'app-merchant-list',
@@ -15,20 +16,26 @@ import { AddMerchant } from '../add-merchant/add-merchant';
   templateUrl: './merchant-list.html',
   styleUrl: './merchant-list.scss',
 })
-export class MerchantList {
+export class MerchantList implements OnInit {
   globalServ = inject(GlobalService);
+  merchantServ = inject(MerchantService);
   addMerchant = AddMerchant;
   columns: TableColumn[] = [
-    { field: 'id', header: 'Name', width: '100px', sortable: false },
-    { field: 'name', header: 'Category', sortable: false },
+    { field: 'name', header: 'Name', width: '100px', sortable: false },
+    { field: 'scheme', header: 'Scheme', sortable: false },
     {
-      field: 'status',
-      header: 'Country',
+      field: 'msisdn',
+      header: 'msisdn',
       sortable: false,
     },
-    { field: 'country', header: 'Email', sortable: false },
-    { field: 'country', header: 'Terminal', sortable: false },
-    { field: 'country', header: 'Created On', sortable: false },
+    { field: 'contactEmail', header: 'Email', sortable: false },
+    { field: 'commercialRegNo', header: 'Commercial RegNo', sortable: false },
+    {
+      field: 'createdAt',
+      header: 'Created On',
+      sortable: false,
+      template: 'date',
+    },
   ];
 
   actions: TableAction[] = [
@@ -44,185 +51,20 @@ export class MerchantList {
     },
   ];
 
-  banks = [
-    {
-      id: 280122,
-      name: 'WE Bank',
-      status: true,
-      scheme: 'Visa',
-      terminals: 145,
-      country: 'Egypt',
-    },
-    {
-      id: 280121,
-      name: 'VodaBank',
-      status: true,
-      scheme: 'Mastercard',
-      terminals: 89,
-      country: 'Egypt',
-    },
-    {
-      id: 280120,
-      name: 'ADCB',
-      status: true,
-      scheme: 'Visa',
-      terminals: 234,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-  ];
+  merchants = [];
+
+  ngOnInit(): void {
+    this.getAllMerchants(1, 10);
+  }
   openModel() {
     this.globalServ.setModal(true);
+  }
+
+  getAllMerchants(pageNumber: number, pageSize: number) {
+    this.merchantServ.getAllMerchants(pageNumber, pageSize).subscribe({
+      next: (data: any) => {
+        this.merchants = data.data;
+      },
+    });
   }
 }

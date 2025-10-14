@@ -45,12 +45,13 @@ export class AddUser {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
+      username: ['', Validators.required],
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       tenantId: [''],
       password: [''],
-      confirmPassword: [''],
+      assignRoleById: [[]],
     });
   }
   submit() {

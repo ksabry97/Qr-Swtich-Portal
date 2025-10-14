@@ -16,17 +16,6 @@
           [parentGroup]="tenantForm"
           [required]="true"
         ></app-qr-input>
-        <app-qr-input
-          class="w-1/2"
-          [label]="'Tenant Code'"
-          [placeholder]="'enter tenant code'"
-          formControlName="tenantCode"
-          [controlName]="'tenantCode'"
-          [parentGroup]="tenantForm"
-          [required]="true"
-        ></app-qr-input>
-      </div>
-      <div class="flex gap-3">
         <app-qr-select
           formControlName="countryCode"
           [controlName]="'countryCode'"
@@ -37,6 +26,8 @@
           [required]="true"
           class="w-1/2"
         ></app-qr-select>
+      </div>
+      <div class="flex gap-3">
         <app-qr-select
           formControlName="environment"
           [controlName]="'environment'"

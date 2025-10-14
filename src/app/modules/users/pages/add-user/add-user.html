@@ -17,6 +17,17 @@
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
+          [label]="'Username'"
+          [placeholder]="'enter user name'"
+          formControlName="username"
+          [controlName]="'username'"
+          [parentGroup]="userForm"
+          [required]="true"
+        ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
           [label]="'First Name'"
           [placeholder]="'enter first name'"
           formControlName="firstName"
@@ -24,8 +35,6 @@
           [parentGroup]="userForm"
           [required]="true"
         ></app-qr-input>
-      </div>
-      <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
           [label]="'Last Name'"
@@ -35,6 +44,8 @@
           [parentGroup]="userForm"
           [required]="true"
         ></app-qr-input>
+      </div>
+      <div class="flex gap-3">
         <app-qr-select
           formControlName="tenantId"
           [controlName]="'tenantId'"
@@ -44,22 +55,25 @@
           [placeholder]="'select tenant'"
           class="w-1/2"
         ></app-qr-select>
-      </div>
-      <div class="flex gap-2 flex-col">
         <app-qr-password
           [label]="'Password'"
           [placeholder]="'enter your password'"
           formControlName="password"
           [controlName]="'password'"
           [parentGroup]="userForm"
+          class="w-1/2"
         ></app-qr-password>
-        <app-qr-password
-          [label]="'Confirm Password'"
-          [placeholder]="'enter your password'"
-          formControlName="confirmPassword"
-          [controlName]="'confirmPassword'"
+      </div>
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="assignRoleById"
+          [controlName]="'assignRoleById'"
           [parentGroup]="userForm"
-        ></app-qr-password>
+          [options]="types"
+          [label]="'Assigned Roles'"
+          [placeholder]="'select role'"
+          class="w-1/2"
+        ></app-qr-select>
       </div>
     </section>
   </form>

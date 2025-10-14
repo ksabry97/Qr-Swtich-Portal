@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, map, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('auth_token');
+  const token = localStorage.getItem('token');
   const router = inject(Router);
   const authReq = token
     ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })

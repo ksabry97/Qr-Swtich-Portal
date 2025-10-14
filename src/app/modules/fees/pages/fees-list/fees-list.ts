@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   TableColumn,
@@ -8,6 +8,7 @@ import {
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddFee } from '../add-fee/add-fee';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { FeesService } from '../../services/fees.service';
 
 @Component({
   selector: 'app-fees-list',
@@ -15,18 +16,24 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
   templateUrl: './fees-list.html',
   styleUrl: './fees-list.scss',
 })
-export class FeesList {
+export class FeesList implements OnInit {
   globalServ = inject(GlobalService);
+  feeServ = inject(FeesService);
   addFee = AddFee;
   columns: TableColumn[] = [
-    { field: 'id', header: 'Name', width: '100px', sortable: false },
-    { field: 'name', header: 'Type', sortable: false },
+    { field: 'name', header: 'Name', width: '100px', sortable: false },
+    { field: 'feeType', header: 'Type', sortable: false },
     {
-      field: 'status',
+      field: 'currency',
       header: 'Currency',
       sortable: false,
     },
-    { field: 'country', header: 'Effective', sortable: false },
+    {
+      field: 'effectiveFrom',
+      header: 'Effective',
+      sortable: false,
+      template: 'date',
+    },
   ];
 
   actions: TableAction[] = [
@@ -42,49 +49,18 @@ export class FeesList {
     },
   ];
 
-  banks = [
-    {
-      id: 280122,
-      name: 'WE Bank',
-      status: true,
-      scheme: 'Visa',
-      terminals: 145,
-      country: 'Egypt',
-    },
-    {
-      id: 280121,
-      name: 'VodaBank',
-      status: true,
-      scheme: 'Mastercard',
-      terminals: 89,
-      country: 'Egypt',
-    },
-    {
-      id: 280120,
-      name: 'ADCB',
-      status: true,
-      scheme: 'Visa',
-      terminals: 234,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-  ];
+  fees = [];
   openModel() {
     this.globalServ.setModal(true);
+  }
+  ngOnInit(): void {
+    this.getAllFees(1, 10);
+  }
+  getAllFees(pageNumber: number, pageSize: number) {
+    this.feeServ.getAllFees(pageNumber, pageSize).subscribe({
+      next: (data: any) => {
+        this.fees = data.data;
+      },
+    });
   }
 }

@@ -12,4 +12,10 @@ export class LoginServ {
     let url = this.baseUrl + '/identity/pre-login';
     return this.http.post(url, user);
   }
+  sendOtp(otp: string) {
+    let sessionToken = localStorage.getItem('sessiontoken');
+    let reqBody = { sessionToken, otp };
+    let url = this.baseUrl + '/identity/verify-otp';
+    return this.http.post(url, reqBody);
+  }
 }

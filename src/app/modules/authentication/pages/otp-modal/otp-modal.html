@@ -10,10 +10,10 @@
     One time OTP has been sent your registered email, please enter the OTP to
     continue:
   </p>
-  <app-otp-input></app-otp-input>
+  <app-otp-input (otpOutput)="otp = $event"></app-otp-input>
   <span>{{ formatTime(timer) }}</span>
   <button class="resend" [disabled]="!resend" (click)="startTimer()">
     Resend
   </button>
-  <button class="rounded-md submit-btn p-2">Login</button>
+  <button class="rounded-md submit-btn p-2" (click)="login()">Login</button>
 </div>
