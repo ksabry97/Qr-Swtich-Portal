@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -8,6 +8,7 @@ import {
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddTenant } from '../add-tenant/add-tenant';
+import { TenantService } from '../../services/tenants.service';
 
 @Component({
   selector: 'app-tenant-list',
@@ -15,22 +16,27 @@ import { AddTenant } from '../add-tenant/add-tenant';
   templateUrl: './tenant-list.html',
   styleUrl: './tenant-list.scss',
 })
-export class TenantList {
+export class TenantList implements OnInit {
   globalServ = inject(GlobalService);
   createTenant = AddTenant;
   columns: TableColumn[] = [
     { field: 'id', header: 'Tenant ID', width: '100px', sortable: false },
-    { field: 'name', header: 'Name', sortable: false },
+    { field: 'tenantName', header: 'Name', sortable: false },
     {
-      field: 'status',
+      field: 'tenantCode',
       header: 'Code',
       sortable: false,
     },
-    { field: 'scheme', header: 'Country', sortable: false },
-    { field: 'terminals', header: 'Email', sortable: false },
-    { field: 'country', header: 'Environment', sortable: false },
-    { field: 'country', header: 'Status', sortable: false },
-    { field: 'country', header: 'Created On', sortable: false },
+    { field: 'country', header: 'Country', sortable: false },
+    { field: 'contactEmail', header: 'Email', sortable: false },
+    { field: 'environment', header: 'Environment', sortable: false },
+    { field: 'status', header: 'Status', sortable: false },
+    {
+      field: 'createdAt',
+      header: 'Created On',
+      sortable: false,
+      template: 'date',
+    },
   ];
 
   actions: TableAction[] = [
@@ -41,186 +47,23 @@ export class TenantList {
     },
   ];
 
-  banks = [
-    {
-      id: 280122,
-      name: 'WE Bank',
-      status: true,
-      scheme: 'Visa',
-      terminals: 145,
-      country: 'Egypt',
-    },
-    {
-      id: 280121,
-      name: 'VodaBank',
-      status: true,
-      scheme: 'Mastercard',
-      terminals: 89,
-      country: 'Egypt',
-    },
-    {
-      id: 280120,
-      name: 'ADCB',
-      status: true,
-      scheme: 'Visa',
-      terminals: 234,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-    {
-      id: 280119,
-      name: 'LightBoxV3Bank',
-      status: false,
-      scheme: 'Union Pay',
-      terminals: 12,
-      country: 'UAE',
-    },
-  ];
+  tenants = [];
 
   openModel() {
     this.globalServ.setModal(true);
+  }
+
+  constructor(private readonly tenantServ: TenantService) {}
+
+  ngOnInit(): void {
+    this.getAllTenants();
+  }
+
+  getAllTenants() {
+    this.tenantServ.getAllTenants().subscribe({
+      next: (data: any) => {
+        this.tenants = data.data;
+      },
+    });
   }
 }

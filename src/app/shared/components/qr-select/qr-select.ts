@@ -18,7 +18,7 @@ export interface ValidationRule {
 }
 interface SmartOption {
   text: string;
-  value: string;
+  value: string | number;
 }
 @Component({
   selector: 'app-qr-select',
@@ -54,7 +54,7 @@ export class QrSelect {
   @Input() icon: string = '';
   @Input() suffix: string = '';
   @Input() prefix: string = '';
-  @Input() options: SmartOption[] = [];
+  @Input() options: SmartOption[] | any = [];
   @Input() mode: 'multiple' | 'tags' | 'default' = 'default';
   @Input() allowClear: boolean = false;
   @Input() parentGroup!: FormGroup;

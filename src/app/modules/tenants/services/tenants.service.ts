@@ -13,4 +13,9 @@ export class TenantService {
     let url = this.baseUrl + '/api/tenant';
     return this.http.post(url, tenant);
   }
+
+  getAllTenants() {
+    let url = this.baseUrl + '/api/Tenant';
+    return this.http.get(url);
+  }
 }

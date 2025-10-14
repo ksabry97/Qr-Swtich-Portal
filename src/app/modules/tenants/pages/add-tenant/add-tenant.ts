@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,6 +12,7 @@ import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { TenantService } from '../../services/tenants.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { GlobalService } from '../../../../shared/services/global.service';
 
 @Component({
   selector: 'app-add-tenant',
@@ -26,23 +27,24 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './add-tenant.html',
   styleUrl: './add-tenant.scss',
 })
-export class AddTenant {
+export class AddTenant implements OnInit {
   tenantForm!: FormGroup;
-  types = [
+  globalServ = inject(GlobalService);
+  types: any = [
     {
       text: 'Development',
-      value: '0',
+      value: 0,
     },
     {
       text: 'Staging',
-      value: '1',
+      value: 1,
     },
     {
       text: 'Production',
-      value: '2',
+      value: 2,
     },
   ];
-
+  countries = [];
   constructor(
     private fb: FormBuilder,
     private readonly tenantServ: TenantService,
@@ -51,7 +53,7 @@ export class AddTenant {
     this.tenantForm = this.fb.group({
       tenantName: ['', Validators.required],
       tenantCode: ['', Validators.required],
-      country: ['', Validators.required],
+      countryCode: ['', Validators.required],
       environment: ['', Validators.required],
       description: [''],
       contactEmail: [''],
@@ -60,10 +62,17 @@ export class AddTenant {
       contactAddress: [''],
     });
   }
+
+  ngOnInit(): void {
+    this.getAllCountries();
+  }
   submit() {
     if (this.tenantForm.valid) {
       this.tenantServ.createTenant(this.tenantForm.value).subscribe({
-        next: (data: any) => {},
+        next: (data: any) => {
+          this.message.success(data.message);
+          this.globalServ.setModal(false);
+        },
         error: (err) => {
           this.message.error('endpoint failed');
         },
@@ -72,5 +81,13 @@ export class AddTenant {
       this.tenantForm.markAllAsTouched();
     }
     console.log(this.tenantForm.value);
+  }
+
+  getAllCountries() {
+    this.globalServ.getAllCountries().subscribe({
+      next: (data: any) => {
+        this.countries = data.data;
+      },
+    });
   }
 }

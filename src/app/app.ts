@@ -14,7 +14,6 @@ export class App implements OnInit {
   isLoading = signal(false);
   protected readonly title = signal('qr-swtich-portal');
   globalServ = inject(GlobalService);
-
   ngOnInit(): void {
     this.isLoading = this.globalServ.loading;
   }

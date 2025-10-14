@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { QrInputNumber } from '../../../../shared/components/qr-input-number/qr-input-number';
 import { FeesService } from '../../services/fees.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
+import { GlobalService } from '../../../../shared/services/global.service';
 @Component({
   selector: 'app-add-fee',
   imports: [
@@ -23,13 +25,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     QrInput,
     NzIconModule,
     QrInputNumber,
+    QrSelect,
   ],
   templateUrl: './add-fee.html',
   styleUrl: './add-fee.scss',
 })
-export class AddFee {
+export class AddFee implements OnInit {
   feeForm!: FormGroup;
-
+  globalServ = inject(GlobalService);
+  currencies = [];
   constructor(
     private fb: FormBuilder,
     private readonly feeServ: FeesService,
@@ -39,9 +43,13 @@ export class AddFee {
       name: ['', Validators.required],
       currency: ['', Validators.required],
       feeType: [0],
-      fixed: [null],
-      percentage: [null],
+      flatFee: [null],
+      percantage: [null],
     });
+  }
+
+  ngOnInit(): void {
+    this.getAllCurrencies();
   }
   submit() {
     if (this.feeForm.valid) {
@@ -55,5 +63,18 @@ export class AddFee {
       this.feeForm.markAllAsTouched();
     }
     console.log(this.feeForm.value);
+  }
+
+  getAllCurrencies() {
+    this.globalServ.getAllCurrencies().subscribe({
+      next: (data: any) => {
+        const mappedData = data.data.map((item: any) => ({
+          text: item.name,
+          value: String(item.id),
+        }));
+        console.log(data.data, 'wwwwwwww');
+        this.currencies = mappedData;
+      },
+    });
   }
 }

@@ -28,10 +28,10 @@
       </div>
       <div class="flex gap-3">
         <app-qr-select
-          formControlName="country"
-          [controlName]="'country'"
+          formControlName="countryCode"
+          [controlName]="'countryCode'"
           [parentGroup]="tenantForm"
-          [options]="types"
+          [options]="countries"
           [label]="'Country'"
           [placeholder]="'select country'"
           [required]="true"
