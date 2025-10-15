@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -52,6 +52,11 @@ export class MerchantList implements OnInit {
   ];
 
   merchants = [];
+  constructor() {
+    effect(() => {
+      this.globalServ.isSubmitted() ? this.getAllMerchants(1, 10) : '';
+    });
+  }
 
   ngOnInit(): void {
     this.getAllMerchants(1, 10);

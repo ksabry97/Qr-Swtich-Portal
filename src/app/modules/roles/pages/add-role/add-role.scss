@@ -22,3 +22,17 @@ section {
     padding-bottom: 0;
   }
 }
+textarea {
+  resize: none;
+  border-radius: 8px;
+  height: 80px;
+  border: 1px solid #e5e7eb;
+  &:hover {
+    border-color: #40a9ff;
+  }
+  &:focus,
+  :focus-visible {
+    border-color: #40a9ff;
+    outline: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -21,15 +21,13 @@ export class UserList implements OnInit {
   userServ = inject(UserService);
   addUser = AddUser;
   columns: TableColumn[] = [
-    { field: 'id', header: 'Name', width: '100px', sortable: false },
-    { field: 'name', header: 'Email', sortable: false },
+    { field: 'firstName', header: 'Name', width: '100px', sortable: false },
+    { field: 'username', header: 'Username', sortable: false },
     {
-      field: 'status',
-      header: 'Roles',
+      field: 'email',
+      header: 'Email',
       sortable: false,
     },
-    { field: 'country', header: 'Status', sortable: false },
-    { field: 'country', header: 'Created On', sortable: false },
   ];
 
   actions: TableAction[] = [
@@ -64,7 +62,11 @@ export class UserList implements OnInit {
   openModel() {
     this.globalServ.setModal(true);
   }
-
+  constructor() {
+    effect(() => {
+      this.globalServ.isSubmitted() ? this.getAllUsers() : '';
+    });
+  }
   ngOnInit(): void {
     this.getAllUsers();
   }

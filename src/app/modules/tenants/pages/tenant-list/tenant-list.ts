@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -53,7 +53,11 @@ export class TenantList implements OnInit {
     this.globalServ.setModal(true);
   }
 
-  constructor(private readonly tenantServ: TenantService) {}
+  constructor(private readonly tenantServ: TenantService) {
+    effect(() => {
+      this.globalServ.isSubmitted() ? this.getAllTenants() : '';
+    });
+  }
 
   ngOnInit(): void {
     this.getAllTenants();

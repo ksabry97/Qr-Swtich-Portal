@@ -52,6 +52,7 @@ export class AddUser implements OnInit {
         next: (data: any) => {
           this.message.success(data.message);
           this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
         },
         error: (err) => {
           this.message.error(err.error.message);

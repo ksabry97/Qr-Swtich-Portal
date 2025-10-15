@@ -13,6 +13,7 @@ import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { TenantService } from '../../services/tenants.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GlobalService } from '../../../../shared/services/global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-tenant',
@@ -30,6 +31,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 export class AddTenant implements OnInit {
   tenantForm!: FormGroup;
   globalServ = inject(GlobalService);
+  router = inject(Router);
   types: any = [
     {
       text: 'Development',
@@ -71,6 +73,7 @@ export class AddTenant implements OnInit {
         next: (data: any) => {
           this.message.success(data.message);
           this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
         },
         error: (err) => {
           this.message.error('endpoint failed');

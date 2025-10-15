@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class GlobalService {
   loading = signal<boolean>(false);
   isModalOpened = signal(false);
+  isSubmitted = signal<boolean>(false);
   http = inject(HttpClient);
   baseUrl = environment.baseApiUrl;
   setLoading(val: boolean) {

@@ -4,16 +4,9 @@
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="roleGroup" class="flex flex-col gap-5">
-    <section
-      class="flex w-full items-end justify-between gap-3"
-      [ngClass]="{
-        'items-center':
-          roleGroup.get('roleName')?.invalid &&
-          roleGroup.get('roleName')?.touched
-      }"
-    >
+    <section class="flex w-full flex-col gap-3">
       <app-qr-input
-        class="w-1/2"
+        class="w-full"
         [label]="'Role name'"
         [placeholder]="'ex. admin'"
         formControlName="roleName"
@@ -21,37 +14,30 @@
         [parentGroup]="roleGroup"
         [required]="true"
       ></app-qr-input>
-      <div class="flex items-center justify-between w-1/2 mb-2">
-        <label>Enable Role </label>
-        <nz-switch formControlName="isActive"></nz-switch>
-      </div>
-    </section>
-    <section class="flex w-full gap-5 flex-col last-section">
-      <div class="flex flex-col gap-2">
-        <label>User Managment</label>
-        <div class="flex w-full justify-between">
-          <div
-            class="flex items-center gap-2 w-1/4"
-            *ngFor="let perm of permissions"
-          >
-            <label>{{ perm }}</label>
-            <nz-switch></nz-switch>
-          </div>
+      <div class="flex gap-3">
+        <div class="flex gap-2 flex-col w-full">
+          <label>description</label>
+          <textarea
+            class="p-3"
+            placeholder="description"
+            formControlName="description"
+          ></textarea>
         </div>
       </div>
-      <div class="flex flex-col gap-2">
-        <label>Fees Managment</label>
-        <div class="flex w-full justify-between">
-          <div
-            class="flex items-center gap-2 w-1/4"
-            *ngFor="let perm of permissions"
-          >
-            <label>{{ perm }}</label>
-            <nz-switch></nz-switch>
-          </div>
-        </div>
-      </div>
+      <app-qr-select
+        formControlName="assignPermissionIds"
+        [controlName]="'assignPermissionIds'"
+        [parentGroup]="roleGroup"
+        [options]="assignedPermissions"
+        [label]="'Assigned Permissions'"
+        [placeholder]="'select permission'"
+        class="w-1/2"
+        [mode]="'multiple'"
+      ></app-qr-select>
     </section>
   </form>
 </div>
-<app-modal-footer [submitText]="'Save & Submit'"></app-modal-footer>
+<app-modal-footer
+  [submitText]="'Save & Submit'"
+  (isSubmitted)="submit()"
+></app-modal-footer>

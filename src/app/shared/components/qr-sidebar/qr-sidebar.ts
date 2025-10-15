@@ -38,17 +38,17 @@ export class QrSidebar {
       label: 'Fees',
       route: 'fees',
     },
-    {
-      label: 'Transactions',
-      route: 'transactions',
-    },
+    // {
+    //   label: 'Transactions',
+    //   route: 'transactions',
+    // },
     {
       label: 'Audit Logs',
       route: 'audit-logs',
     },
-    {
-      label: 'Login Audits',
-      route: 'login-audits',
-    },
+    // {
+    //   label: 'Login Audits',
+    //   route: 'login-audits',
+    // },
   ];
 }

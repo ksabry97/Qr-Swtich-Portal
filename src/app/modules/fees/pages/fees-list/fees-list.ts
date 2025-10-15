@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   TableColumn,
@@ -49,6 +49,11 @@ export class FeesList implements OnInit {
     },
   ];
 
+  constructor() {
+    effect(() => {
+      this.globalServ.isSubmitted() ? this.getAllFees(1, 10) : '';
+    });
+  }
   fees = [];
   openModel() {
     this.globalServ.setModal(true);

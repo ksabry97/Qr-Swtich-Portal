@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -15,7 +15,7 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
   templateUrl: './roles-list.html',
   styleUrl: './roles-list.scss',
 })
-export class RolesList {
+export class RolesList implements OnInit {
   addRole = AddRole;
   globalServ = inject(GlobalService);
   columns: TableColumn[] = [
@@ -48,6 +48,14 @@ export class RolesList {
 
   roles = [];
 
+  constructor() {
+    effect(() => {
+      this.globalServ.isSubmitted() ? this.getAllRoles() : '';
+    });
+  }
+  ngOnInit(): void {
+    this.getAllRoles();
+  }
   openModel() {
     this.globalServ.setModal(true);
   }

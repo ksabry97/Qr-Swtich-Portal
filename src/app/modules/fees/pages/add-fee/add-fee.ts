@@ -57,6 +57,7 @@ export class AddFee implements OnInit {
         next: (data: any) => {
           this.message.success(data.Message);
           this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
         },
         error: (err) => {
           this.message.error('endpoint failed');
