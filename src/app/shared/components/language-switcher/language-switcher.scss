@@ -1,0 +1,25 @@
+.language-switcher-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+  gap: 0.5rem;
+  height: 40px;
+}
+.language-switcher-icon {
+  font-size: 20px;
+  color: white;
+}
+.language-switcher-select {
+  width: 70px;
+}
+:host ::ng-deep {
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background: transparent;
+    border: none;
+    color: white;
+  }
+  .ant-select-arrow {
+    color: white;
+  }
+}

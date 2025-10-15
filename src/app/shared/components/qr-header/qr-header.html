@@ -1,19 +1,4 @@
 <header class="flex justify-end p-4 items-center gap-2">
-  <div>
-    <button
-      nz-button
-      nz-dropdown
-      [nzDropdownMenu]="menu"
-      nzPlacement="bottomLeft"
-    >
-      <nz-icon nzType="global" nzTheme="outline" /> Language
-    </button>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu class="p-1">
-        <li nz-menu-item>English</li>
-        <li nz-menu-item>French</li>
-      </ul>
-    </nz-dropdown-menu>
-  </div>
+  <app-language-switcher></app-language-switcher>
   <p (click)="logOut()">Logout</p>
 </header>

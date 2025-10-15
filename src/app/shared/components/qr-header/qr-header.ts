@@ -4,9 +4,18 @@ import { Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { LanguageSwitcher } from '../language-switcher/language-switcher';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-qr-header',
-  imports: [NzDropDownModule, NzButtonModule, CommonModule, NzIconModule],
+  imports: [
+    NzDropDownModule,
+    NzButtonModule,
+    CommonModule,
+    NzIconModule,
+    LanguageSwitcher,
+  ],
+  providers: [TranslateService],
   templateUrl: './qr-header.html',
   styleUrl: './qr-header.scss',
 })

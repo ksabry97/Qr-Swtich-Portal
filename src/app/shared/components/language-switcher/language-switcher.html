@@ -1,0 +1,16 @@
+<div class="language-switcher-container">
+  <span
+    nz-icon
+    nzType="global"
+    nzTheme="outline"
+    class="language-switcher-icon"
+  ></span>
+  <nz-select
+    [(ngModel)]="currentLang"
+    (ngModelChange)="switchLang($event)"
+    class="language-switcher-select"
+  >
+    <nz-option nzValue="en" nzLabel="En"></nz-option>
+    <nz-option nzValue="fr" nzLabel="Fr"></nz-option>
+  </nz-select>
+</div>
