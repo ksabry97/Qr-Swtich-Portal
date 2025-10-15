@@ -79,7 +79,6 @@ export class AddTenant implements OnInit {
     } else {
       this.tenantForm.markAllAsTouched();
     }
-    console.log(this.tenantForm.value);
   }
 
   getAllCountries() {

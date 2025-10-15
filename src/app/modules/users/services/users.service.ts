@@ -14,4 +14,9 @@ export class UserService {
     let url = this.baseUrl + '/management/users';
     return this.http.post(url, user);
   }
+
+  getAllUsers() {
+    let url = this.baseUrl + '/management/users';
+    return this.http.get(url);
+  }
 }

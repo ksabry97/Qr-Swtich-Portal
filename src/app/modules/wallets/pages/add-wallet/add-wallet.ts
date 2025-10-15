@@ -37,15 +37,25 @@ export class AddWallet {
   types = [
     {
       text: 'Development',
-      value: '1',
+      value: 0,
     },
     {
       text: 'Staging',
-      value: '2',
+      value: 1,
     },
     {
       text: 'Production',
-      value: '3',
+      value: 2,
+    },
+  ];
+  walletTypes = [
+    {
+      text: 'Wallet',
+      value: 0,
+    },
+    {
+      text: 'Bank',
+      value: 1,
     },
   ];
 

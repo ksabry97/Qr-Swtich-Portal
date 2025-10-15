@@ -12,7 +12,7 @@ export class MerchantService {
   baseUrl = environment.baseApiUrl;
 
   createMerchant(merchant: Merchant) {
-    let url = this.baseUrl + 'merchants/add';
+    let url = this.baseUrl + '/merchants/add';
     return this.http.post(url, merchant);
   }
 

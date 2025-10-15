@@ -99,12 +99,12 @@ export class AddMerchant implements OnInit {
   ) {
     this.getUserLocation();
     this.merchantForm = this.fb.group({
-      name: ['', Validators.required, Validators.maxLength(64)],
-      scheme: ['', Validators.required, Validators.maxLength(64)],
+      name: ['', [Validators.required, Validators.maxLength(64)]],
+      scheme: ['', [Validators.required, Validators.maxLength(64)]],
       msisdn: ['', [Validators.minLength(14), Validators.maxLength(14)]],
       merchantId: ['', [Validators.minLength(9), Validators.maxLength(9)]],
       commercialRegNo: [''],
-      issuancePlaceCode: [''],
+      issuancePlaceCode: ['', Validators.maxLength(4)],
       nationalId: [''],
       soleProprietorshipLicense: [''],
       serviceLicenseNumber: [''],
@@ -142,10 +142,12 @@ export class AddMerchant implements OnInit {
     });
   }
   submit() {
-    console.log(this.merchantForm.value);
     if (this.merchantForm.valid) {
       this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
-        next: (data: any) => {},
+        next: (data: any) => {
+          this.message.success(data.Message);
+          this.globalServ.setModal(false);
+        },
         error: (err) => {
           this.message.error('endpoint failed');
         },
@@ -192,32 +194,36 @@ export class AddMerchant implements OnInit {
     });
   }
   updateValidation(event: number) {
-    this.merchantForm
-      .get('commercialRegNo')
-      ?.removeValidators(Validators.required);
-    this.merchantForm
-      .get('serviceLicenseNumber')
-      ?.removeValidators(Validators.required);
-    this.merchantForm
-      .get('serviceLicenseNumber')
-      ?.removeValidators(Validators.required);
-    this.merchantForm
-      .get('soleProprietorshipLicense')
-      ?.removeValidators(Validators.required);
-    this.merchantForm.updateValueAndValidity();
+    const controlsToClear = [
+      'commercialRegNo',
+      'serviceLicenseNumber',
+      'soleProprietorshipLicense',
+      'nationalId',
+    ];
+
+    controlsToClear.forEach((controlName) => {
+      const control = this.merchantForm.get(controlName);
+      if (control) {
+        control.clearValidators();
+        control.updateValueAndValidity({ emitEvent: false });
+      }
+    });
+
     switch (event) {
       case 0:
         this.merchantForm
           .get('commercialRegNo')
           ?.addValidators([Validators.required, Validators.maxLength(15)]);
         this.merchantForm.get('commercialRegNo')?.updateValueAndValidity();
-        return;
+        break;
+
       case 1:
         this.merchantForm
           .get('serviceLicenseNumber')
           ?.addValidators([Validators.required]);
         this.merchantForm.get('serviceLicenseNumber')?.updateValueAndValidity();
-        return;
+        break;
+
       case 2:
         this.merchantForm
           .get('soleProprietorshipLicense')
@@ -225,13 +231,18 @@ export class AddMerchant implements OnInit {
         this.merchantForm
           .get('soleProprietorshipLicense')
           ?.updateValueAndValidity();
-        return;
+        break;
+
       case 3:
         this.merchantForm
           .get('nationalId')
-          ?.addValidators([Validators.required, Validators.maxLength(35)]);
+          ?.addValidators([
+            Validators.required,
+            Validators.minLength(15),
+            Validators.maxLength(15),
+          ]);
         this.merchantForm.get('nationalId')?.updateValueAndValidity();
-        return;
+        break;
     }
   }
 }

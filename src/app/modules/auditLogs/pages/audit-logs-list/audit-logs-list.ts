@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   TableColumn,
   TableAction,
   QrTable,
 } from '../../../../shared/components/qr-table/qr-table';
+import { AuditsService } from '../../services/auditlogs.service';
 
 @Component({
   selector: 'app-audit-logs-list',
@@ -12,18 +13,23 @@ import {
   templateUrl: './audit-logs-list.html',
   styleUrl: './audit-logs-list.scss',
 })
-export class AuditLogsList {
+export class AuditLogsList implements OnInit {
+  auditServ = inject(AuditsService);
   columns: TableColumn[] = [
-    { field: 'id', header: 'Date & Time', width: '100px', sortable: false },
-    { field: 'name', header: 'User', sortable: false },
+    { field: 'Id', header: 'ID', width: '200px', sortable: false },
     {
-      field: 'status',
-      header: 'Action',
+      field: 'OccurredOnUtc',
+      header: 'Date Of Occurance',
+      sortable: false,
+      template: 'date',
+    },
+    {
+      field: 'TenantId',
+      header: 'Tenant ID',
       sortable: false,
     },
-    { field: 'country', header: 'Entity', sortable: false },
-    { field: 'country', header: 'Entity ID', sortable: false },
-    { field: 'country', header: 'IP Address', sortable: false },
+    { field: 'TenantCode', header: 'Tenant Code', sortable: false },
+    { field: 'StatusCode', header: 'Status Code', sortable: false },
   ];
 
   actions: TableAction[] = [
@@ -33,31 +39,16 @@ export class AuditLogsList {
       severity: 'info',
     },
   ];
+  audits = [];
+  ngOnInit(): void {
+    this.getAllAudits(1, 10);
+  }
 
-  banks = [
-    {
-      id: 280122,
-      name: 'WE Bank',
-      status: true,
-      scheme: 'Visa',
-      terminals: 145,
-      country: 'Egypt',
-    },
-    {
-      id: 280121,
-      name: 'VodaBank',
-      status: true,
-      scheme: 'Mastercard',
-      terminals: 89,
-      country: 'Egypt',
-    },
-    {
-      id: 280120,
-      name: 'ADCB',
-      status: true,
-      scheme: 'Visa',
-      terminals: 234,
-      country: 'UAE',
-    },
-  ];
+  getAllAudits(pageNumber: number, pageSize: number) {
+    this.auditServ.getAllAsudits(pageNumber, pageSize).subscribe({
+      next: (data: any) => {
+        this.audits = data.items;
+      },
+    });
+  }
 }

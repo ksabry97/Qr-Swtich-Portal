@@ -35,4 +35,9 @@ export class GlobalService {
     let reqBody = { id };
     return this.http.post(url, reqBody);
   }
+
+  getAllRoles() {
+    let url = this.baseUrl + '/management/roles';
+    return this.http.get(url);
+  }
 }

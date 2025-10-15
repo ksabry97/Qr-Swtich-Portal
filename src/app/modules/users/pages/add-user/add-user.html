@@ -69,10 +69,11 @@
           formControlName="assignRoleById"
           [controlName]="'assignRoleById'"
           [parentGroup]="userForm"
-          [options]="types"
+          [options]="assignedRoles"
           [label]="'Assigned Roles'"
           [placeholder]="'select role'"
           class="w-1/2"
+          [mode]="'multiple'"
         ></app-qr-select>
       </div>
     </section>

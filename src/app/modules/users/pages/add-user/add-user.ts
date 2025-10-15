@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -11,6 +11,9 @@ import { ModalHeader } from '../../../../shared/components/modal-header/modal-he
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { QrPassword } from '../../../../shared/components/qr-password/qr-password';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { UserService } from '../../services/users.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-add-user',
@@ -26,8 +29,10 @@ import { QrPassword } from '../../../../shared/components/qr-password/qr-passwor
   templateUrl: './add-user.html',
   styleUrl: './add-user.scss',
 })
-export class AddUser {
+export class AddUser implements OnInit {
   userForm!: FormGroup;
+  globalServ = inject(GlobalService);
+  userServ = inject(UserService);
   types = [
     {
       text: 'Development',
@@ -42,19 +47,45 @@ export class AddUser {
       value: '3',
     },
   ];
-
-  constructor(private fb: FormBuilder) {
+  assignedRoles = [];
+  constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      tenantId: [''],
+      tenantId: ['', Validators.required],
       password: [''],
       assignRoleById: [[]],
     });
   }
   submit() {
-    console.log(this.userForm.value);
+    if (this.userForm.valid) {
+      this.userServ.createUser(this.userForm.value).subscribe({
+        next: (data: any) => {
+          this.message.success(data.message);
+          this.globalServ.setModal(false);
+        },
+        error: (err) => {
+          this.message.error(err.error.message);
+        },
+      });
+    } else {
+      this.userForm.markAllAsTouched();
+    }
+  }
+
+  ngOnInit(): void {
+    this.getAllRoles();
+  }
+  getAllRoles() {
+    this.globalServ.getAllRoles().subscribe({
+      next: (data: any) => {
+        const mappedData = data.data.map((value: any) => {
+          return { text: value.name, value: value.id };
+        });
+        this.assignedRoles = mappedData;
+      },
+    });
   }
 }
