@@ -18,4 +18,9 @@ export class TenantService {
     let url = this.baseUrl + '/api/Tenant';
     return this.http.get(url);
   }
+
+  approveTenant(tenantId: string) {
+    let url = this.baseUrl + `/api/Tenant/${tenantId}/approve`;
+    return this.http.post(url, '');
+  }
 }

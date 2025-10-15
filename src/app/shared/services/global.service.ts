@@ -49,4 +49,8 @@ export class GlobalService {
     let url = this.baseUrl + '/fees/lookup';
     return this.http.get(url);
   }
+  getAllPermissions() {
+    let url = this.baseUrl + '/management/permessions';
+    return this.http.get(url);
+  }
 }

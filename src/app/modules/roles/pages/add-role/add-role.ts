@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -29,32 +29,43 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './add-role.html',
   styleUrl: './add-role.scss',
 })
-export class AddRole {
+export class AddRole implements OnInit {
   assignedPermissions = [];
   roleGroup!: FormGroup;
   globalServ = inject(GlobalService);
   rolesServ = inject(RolesService);
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.roleGroup = this.fb.group({
-      roleName: ['', Validators.required],
+      name: ['', Validators.required],
       description: [''],
       assignPermissionIds: [[], Validators.required],
     });
   }
 
+  ngOnInit(): void {
+    this.getAllPermissions();
+  }
   submit() {
     if (this.roleGroup.valid) {
       this.rolesServ.createRole(this.roleGroup.value).subscribe({
         next: (data: any) => {
-          this.message.success(data.Message);
+          this.message.success(data.message);
           this.globalServ.setModal(false);
         },
         error: (err) => {
-          this.message.error(err.error.Message);
+          this.message.error(err.error.message);
         },
       });
     } else {
       this.roleGroup.markAllAsTouched();
     }
+  }
+
+  getAllPermissions() {
+    this.globalServ.getAllPermissions().subscribe({
+      next: (data: any) => {
+        this.assignedPermissions = data.data;
+      },
+    });
   }
 }

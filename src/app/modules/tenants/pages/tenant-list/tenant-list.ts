@@ -9,6 +9,7 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddTenant } from '../add-tenant/add-tenant';
 import { TenantService } from '../../services/tenants.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-tenant-list',
@@ -45,6 +46,11 @@ export class TenantList implements OnInit {
       icon: 'eye',
       severity: 'info',
     },
+    {
+      label: 'approve tenant',
+      icon: 'check',
+      severity: 'danger',
+    },
   ];
 
   tenants = [];
@@ -53,7 +59,10 @@ export class TenantList implements OnInit {
     this.globalServ.setModal(true);
   }
 
-  constructor(private readonly tenantServ: TenantService) {
+  constructor(
+    private readonly tenantServ: TenantService,
+    private message: NzMessageService
+  ) {
     effect(() => {
       this.globalServ.isSubmitted() ? this.getAllTenants() : '';
     });
@@ -76,5 +85,19 @@ export class TenantList implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+
+  callAction(action: any) {
+    switch (action.action.severity) {
+      case 'danger':
+        this.tenantServ.approveTenant(action.rowData.id).subscribe({
+          next: (data: any) => {
+            this.message.success(data.message);
+          },
+          error: (err) => {
+            this.message.error(err.error.message);
+          },
+        });
+    }
   }
 }
