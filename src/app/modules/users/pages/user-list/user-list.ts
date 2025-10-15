@@ -71,11 +71,17 @@ export class UserList implements OnInit {
     this.getAllUsers();
   }
   getAllUsers() {
+    this.globalServ.setLoading(true);
     this.userServ.getAllUsers().subscribe({
       next: (data: any) => {
         this.users = data.data;
       },
-      complete: () => {},
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
+      },
     });
   }
 }

@@ -45,17 +45,21 @@ export class AuditLogsList implements OnInit {
   total = 0;
   ngOnInit(): void {
     this.getAllAudits(1, 10);
-    console.log(this.total);
   }
 
   getAllAudits(pageNumber: number, pageSize: number) {
+    this.globalServ.setLoading(true);
     this.auditServ.getAllAsudits(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.audits = data.items;
         this.total = data.total;
-        console.log(this.total);
       },
-      complete: () => {},
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
+      },
     });
   }
 }

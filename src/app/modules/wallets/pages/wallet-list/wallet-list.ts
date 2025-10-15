@@ -64,9 +64,16 @@ export class WalletList implements OnInit {
   }
 
   getAllWallets(pageNumber: number, pageSize: number) {
+    this.globalServ.setLoading(true);
     this.walletServ.getAllWallets(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.wallets = data.data;
+      },
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
       },
     });
   }

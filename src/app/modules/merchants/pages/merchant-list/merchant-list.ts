@@ -66,9 +66,16 @@ export class MerchantList implements OnInit {
   }
 
   getAllMerchants(pageNumber: number, pageSize: number) {
+    this.globalServ.setLoading(true);
     this.merchantServ.getAllMerchants(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.merchants = data.data;
+      },
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
       },
     });
   }

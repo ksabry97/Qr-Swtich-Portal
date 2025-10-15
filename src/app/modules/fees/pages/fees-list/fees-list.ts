@@ -62,9 +62,16 @@ export class FeesList implements OnInit {
     this.getAllFees(1, 10);
   }
   getAllFees(pageNumber: number, pageSize: number) {
+    this.globalServ.setLoading(true);
     this.feeServ.getAllFees(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.fees = data.data;
+      },
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
       },
     });
   }

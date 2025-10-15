@@ -64,9 +64,16 @@ export class TenantList implements OnInit {
   }
 
   getAllTenants() {
+    this.globalServ.setLoading(true);
     this.tenantServ.getAllTenants().subscribe({
       next: (data: any) => {
         this.tenants = data.data;
+      },
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
       },
     });
   }
