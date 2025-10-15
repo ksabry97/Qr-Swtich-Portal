@@ -5,10 +5,12 @@ import { AddTenant } from '../../../tenants/pages/add-tenant/add-tenant';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddUser } from '../../../users/pages/add-user/add-user';
 import { AddRole } from '../../../roles/pages/add-role/add-role';
+import { LineChart } from '../../../../shared/components/line-chart/line-chart';
+import { PieChart } from '../../../../shared/components/pie-chart/pie-chart';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, QrModal],
+  imports: [CommonModule, QrModal, LineChart, PieChart],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

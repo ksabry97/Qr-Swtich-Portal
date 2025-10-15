@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -12,6 +13,7 @@ import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { authInterceptor } from './shared/services/headers.interceptor';
+import { NgxEchartsModule } from 'ngx-echarts';
 // Create array of all icons
 const icons: IconDefinition[] = Object.keys(AllIcons).map(
   (key) => (AllIcons as any)[key]
@@ -24,6 +26,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
+    importProvidersFrom(
+      NgxEchartsModule.forRoot({
+        echarts: () => import('echarts'),
+      })
+    ),
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: icons },
   ],
