@@ -35,15 +35,20 @@
         [controlName]="'password'"
         [parentGroup]="loginForm"
       ></app-qr-password>
-
+      <span *ngIf="errorMessage" class="error-message">
+        <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+        {{ errorMessage }}</span
+      >
       <span class="w-full flex justify-end forget" (click)="forgetPassword()"
         >forget password</span
       >
       <button
         class="w-full submit-btn border-0 rounded-md outline-none"
         (click)="submitLogin()"
+        [disabled]="loading"
       >
-        Send OTP
+        <nz-icon nzType="loading" *ngIf="loading" />
+        {{ loading ? "" : "Send OTP" }}
       </button>
     </form>
   </div>

@@ -11,9 +11,20 @@
     continue:
   </p>
   <app-otp-input (otpOutput)="otp = $event"></app-otp-input>
+  <span *ngIf="errorMessage" class="error-message">
+    <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    {{ errorMessage }}</span
+  >
   <span>{{ formatTime(timer) }}</span>
   <button class="resend" [disabled]="!resend" (click)="startTimer()">
     Resend
   </button>
-  <button class="rounded-md submit-btn p-2" (click)="login()">Login</button>
+  <button
+    class="rounded-md submit-btn p-2 min-w-8"
+    (click)="login()"
+    [disabled]="loading"
+  >
+    <nz-icon nzType="loading" *ngIf="loading" />
+    {{ loading ? "" : "Login" }}
+  </button>
 </div>

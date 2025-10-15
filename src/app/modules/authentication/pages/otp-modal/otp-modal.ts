@@ -4,9 +4,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { LoginServ } from '../../services/login-serv.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-otp-modal',
-  imports: [OTPInput, NzIconModule],
+  imports: [OTPInput, NzIconModule, CommonModule],
   templateUrl: './otp-modal.html',
   styleUrl: './otp-modal.scss',
 })
@@ -18,6 +19,8 @@ export class OtpModal implements OnInit, OnDestroy {
   globalServ = inject(GlobalService);
   loginServ = inject(LoginServ);
   router = inject(Router);
+  loading = false;
+  errorMessage = '';
   ngOnInit(): void {
     this.startTimer();
     this.clearInterval();
@@ -50,11 +53,18 @@ export class OtpModal implements OnInit, OnDestroy {
   }
 
   login() {
+    this.loading = true;
+    this.errorMessage = '';
     this.loginServ.sendOtp(this.otp).subscribe({
       next: (data: any) => {
         localStorage.setItem('token', data.accessToken);
         this.router.navigateByUrl('/dashboard');
         this.globalServ.setModal(false);
+        this.loading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.errorMessage;
+        this.loading = false;
       },
     });
   }
