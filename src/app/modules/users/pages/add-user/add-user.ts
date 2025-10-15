@@ -33,20 +33,7 @@ export class AddUser implements OnInit {
   userForm!: FormGroup;
   globalServ = inject(GlobalService);
   userServ = inject(UserService);
-  types = [
-    {
-      text: 'Development',
-      value: '1',
-    },
-    {
-      text: 'Staging',
-      value: '2',
-    },
-    {
-      text: 'Production',
-      value: '3',
-    },
-  ];
+  tenants = [];
   assignedRoles = [];
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.userForm = this.fb.group({
@@ -77,6 +64,7 @@ export class AddUser implements OnInit {
 
   ngOnInit(): void {
     this.getAllRoles();
+    this.getAllTenants();
   }
   getAllRoles() {
     this.globalServ.getAllRoles().subscribe({
@@ -85,6 +73,14 @@ export class AddUser implements OnInit {
           return { text: value.name, value: value.id };
         });
         this.assignedRoles = mappedData;
+      },
+    });
+  }
+
+  getAllTenants() {
+    this.globalServ.getAllTenantLookups().subscribe({
+      next: (data: any) => {
+        this.tenants = data.data;
       },
     });
   }

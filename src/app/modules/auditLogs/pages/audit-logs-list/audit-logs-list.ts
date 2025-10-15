@@ -6,6 +6,7 @@ import {
   QrTable,
 } from '../../../../shared/components/qr-table/qr-table';
 import { AuditsService } from '../../services/auditlogs.service';
+import { GlobalService } from '../../../../shared/services/global.service';
 
 @Component({
   selector: 'app-audit-logs-list',
@@ -15,6 +16,7 @@ import { AuditsService } from '../../services/auditlogs.service';
 })
 export class AuditLogsList implements OnInit {
   auditServ = inject(AuditsService);
+  globalServ = inject(GlobalService);
   columns: TableColumn[] = [
     { field: 'Id', header: 'ID', width: '200px', sortable: false },
     {
@@ -40,15 +42,20 @@ export class AuditLogsList implements OnInit {
     },
   ];
   audits = [];
+  total = 0;
   ngOnInit(): void {
     this.getAllAudits(1, 10);
+    console.log(this.total);
   }
 
   getAllAudits(pageNumber: number, pageSize: number) {
     this.auditServ.getAllAsudits(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.audits = data.items;
+        this.total = data.total;
+        console.log(this.total);
       },
+      complete: () => {},
     });
   }
 }

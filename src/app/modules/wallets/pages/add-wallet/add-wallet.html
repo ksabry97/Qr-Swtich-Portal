@@ -13,14 +13,14 @@
           class="w-1/2"
           [label]="'Wallet Name'"
           [placeholder]="'enter wallet name'"
-          formControlName="walletName"
-          [controlName]="'walletName'"
+          formControlName="name"
+          [controlName]="'name'"
           [parentGroup]="walletForm"
           [required]="true"
         ></app-qr-input>
         <app-qr-select
-          formControlName="walletType"
-          [controlName]="'walletType'"
+          formControlName="type"
+          [controlName]="'type'"
           [parentGroup]="walletForm"
           [options]="walletTypes"
           [label]="'Wallet Type'"
@@ -30,8 +30,8 @@
       </div>
       <div class="flex gap-3">
         <app-qr-select
-          formControlName="environmentId"
-          [controlName]="'environmentId'"
+          formControlName="environment"
+          [controlName]="'environment'"
           [parentGroup]="walletForm"
           [options]="types"
           [label]="'Environment'"
@@ -84,15 +84,15 @@
       </div>
       <div class="flex gap-3" *ngIf="isOpened[0]">
         <app-qr-input-number
-          formControlName="maxConnections"
-          [controlName]="'maxConnections'"
+          formControlName="macConnections"
+          [controlName]="'macConnections'"
           [parentGroup]="walletForm"
           [label]="'Max Connections'"
           class="w-1/2"
         ></app-qr-input-number>
         <app-qr-input-number
-          formControlName="timeout"
-          [controlName]="'timeout'"
+          formControlName="connectionTimeout"
+          [controlName]="'connectionTimeout'"
           [parentGroup]="walletForm"
           [label]="'Timeout (seconds)'"
           class="w-1/2"
@@ -116,7 +116,7 @@
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[1]">
         <label>Use SSL/HTTPS </label>
-        <nz-switch formControlName="useSSL"></nz-switch>
+        <nz-switch formControlName="isHttps"></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[1]">
         <app-qr-input
@@ -141,8 +141,8 @@
           class="w-1/2"
           [label]="'Password'"
           [placeholder]="'enter your password'"
-          formControlName="password"
-          [controlName]="'password'"
+          formControlName="userPassword"
+          [controlName]="'userPassword'"
           [parentGroup]="walletForm"
         ></app-qr-password>
       </div>
@@ -164,22 +164,23 @@
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[2]">
         <label>Enable Health Checks</label>
-        <nz-switch formControlName="enable"></nz-switch>
+        <nz-switch formControlName="enableHealthChecks"></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[2]">
-        <app-qr-input-number
-          formControlName="checkIntervals"
-          [controlName]="'checkIntervals'"
+        <app-qr-input
+          formControlName="healthChechInterval"
+          [controlName]="'healthChechInterval'"
           [parentGroup]="walletForm"
-          [label]="'Health Check Interval (minutes)'"
+          [label]="'Health Check Interval'"
+          [placeholder]="'00:00:00'"
           class="w-1/2"
-        ></app-qr-input-number>
+        ></app-qr-input>
         <div
           class="flex items-center justify-between w-1/2 mt-8"
           *ngIf="isOpened[2]"
         >
           <label>active </label>
-          <nz-switch formControlName="active"></nz-switch>
+          <nz-switch formControlName="isActive"></nz-switch>
         </div>
       </div>
 

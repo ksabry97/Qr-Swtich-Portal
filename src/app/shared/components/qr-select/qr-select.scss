@@ -4,7 +4,21 @@
     border-radius: 8px;
     height: 42px;
   }
+  .ant-select-multiple.ant-select:not(.ant-select-customize-input)
+    .ant-select-selector {
+    border-radius: 8px;
+    min-height: 42px; // use min-height instead of height for chips
+  }
   .ant-select-arrow {
     top: 69%;
+  }
+  .ant-select-multiple .ant-select-arrow {
+    top: 52%;
+  }
+  .ant-select-multiple.ant-select:not(.ant-select-customize-input)
+    .ant-select-selector
+    .ant-select-selection-search-input {
+    height: 30px;
+    font-size: 14px;
   }
 }

@@ -73,6 +73,7 @@ export class UserList implements OnInit {
       next: (data: any) => {
         this.users = data.data;
       },
+      complete: () => {},
     });
   }
 }

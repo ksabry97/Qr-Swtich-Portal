@@ -40,4 +40,12 @@ export class GlobalService {
     let url = this.baseUrl + '/management/roles';
     return this.http.get(url);
   }
+  getAllTenantLookups() {
+    let url = this.baseUrl + '/api/Tenant/Lookups';
+    return this.http.get(url);
+  }
+  getAllfeesLookups() {
+    let url = this.baseUrl + '/fees/lookup';
+    return this.http.get(url);
+  }
 }

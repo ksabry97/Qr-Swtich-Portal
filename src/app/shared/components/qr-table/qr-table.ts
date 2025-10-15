@@ -33,7 +33,7 @@ export class QrTable<T extends Record<string, any> = any> {
   @Input() rows: number = 10;
   @Input() rowsPerPageOptions: number[] = [5, 10, 20];
   @Input() actions: TableAction[] = [];
-
+  @Input() total: number = 0;
   @Output() onRowSelect = new EventEmitter<any>();
   @Output() onRowUnselect = new EventEmitter<any>();
   @Output() onRowClick = new EventEmitter<any>();

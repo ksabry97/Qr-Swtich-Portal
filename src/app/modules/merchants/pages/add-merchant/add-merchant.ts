@@ -92,6 +92,7 @@ export class AddMerchant implements OnInit {
   lat: number | null = null;
   countries = [];
   mccs = [];
+  feesProfiles = [];
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -134,10 +135,12 @@ export class AddMerchant implements OnInit {
     forkJoin({
       countries: this.globalServ.getAllCountries(),
       mccs: this.globalServ.getMccs(),
+      fees: this.globalServ.getAllfeesLookups(),
     }).subscribe({
       next: (data: any) => {
         this.countries = data.countries?.data;
         this.mccs = data.mccs?.data;
+        this.feesProfiles = data.fees?.data;
       },
     });
   }

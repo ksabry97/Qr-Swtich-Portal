@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { CommonModule } from '@angular/common';
 import {
@@ -14,6 +14,9 @@ import { QrPassword } from '../../../../shared/components/qr-password/qr-passwor
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { QrInputNumber } from '../../../../shared/components/qr-input-number/qr-input-number';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { WalletsService } from '../../services/wallets.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { GlobalService } from '../../../../shared/services/global.service';
 @Component({
   selector: 'app-add-wallet',
   imports: [
@@ -32,6 +35,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
   styleUrl: './add-wallet.scss',
 })
 export class AddWallet {
+  walletServ = inject(WalletsService);
+  globalServ = inject(GlobalService);
   walletForm!: FormGroup;
   isOpened = [false, false, false];
   types = [
@@ -59,27 +64,40 @@ export class AddWallet {
     },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.walletForm = this.fb.group({
-      walletName: ['', Validators.required],
-      walletType: [''],
-      environmentId: ['', Validators.required],
+      name: ['', Validators.required],
+      type: [''],
+      environment: ['', Validators.required],
       description: [''],
       baseUrl: [''],
       port: ['443', Validators.required],
-      maxConnections: ['', Validators.required],
-      timeout: [''],
-      useSSL: [false],
+      macConnections: ['', Validators.required],
+      connectionTimeout: [''],
+      isHttps: [false],
       apiKey: [''],
       userName: [''],
-      password: [''],
-      active: [false],
+      userPassword: [''],
+      isActive: [false],
       notes: [''],
-      enable: [false],
-      checkIntervals: [],
+      enableHealthChecks: [false],
+      healthChechInterval: [],
     });
   }
   submit() {
     console.log(this.walletForm.value);
+    if (this.walletForm.valid) {
+      this.walletServ.createWallet(this.walletForm.value).subscribe({
+        next: (data: any) => {
+          this.message.success(data.Message);
+          this.globalServ.setModal(false);
+        },
+        error: (err) => {
+          this.message.error(err.error.Message);
+        },
+      });
+    } else {
+      this.walletForm.markAllAsTouched();
+    }
   }
 }

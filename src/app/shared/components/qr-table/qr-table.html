@@ -12,6 +12,7 @@
     [nzSize]="'small'"
     (nzCurrentPageDataChange)="onRowSelect.emit($event)"
     (nzPageIndexChange)="onLazyLoad.emit($event)"
+    [nzTotal]="total"
   >
     <!-- Dynamic columns -->
     <thead>
