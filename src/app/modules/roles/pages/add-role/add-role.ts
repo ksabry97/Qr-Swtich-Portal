@@ -14,6 +14,7 @@ import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-role',
@@ -25,6 +26,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     QrInput,
     NzSwitchModule,
     QrSelect,
+    TranslateModule,
   ],
   templateUrl: './add-role.html',
   styleUrl: './add-role.scss',

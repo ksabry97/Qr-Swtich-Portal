@@ -9,10 +9,11 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { AddUser } from '../add-user/add-user';
 import { UserService } from '../../services/users.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
-  imports: [EntityHeader, QrTable, QrModal],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
@@ -21,38 +22,38 @@ export class UserList implements OnInit {
   userServ = inject(UserService);
   addUser = AddUser;
   columns: TableColumn[] = [
-    { field: 'firstName', header: 'Name', width: '100px', sortable: false },
-    { field: 'username', header: 'Username', sortable: false },
+    { field: 'firstName', header: 'users.table.name', width: '100px', sortable: false },
+    { field: 'username', header: 'users.table.username', sortable: false },
     {
       field: 'email',
-      header: 'Email',
+      header: 'users.table.email',
       sortable: false,
     },
   ];
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'users.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
     {
-      label: 'Edit',
+      label: 'users.actions.edit',
       icon: 'edit',
       severity: 'info',
     },
     {
-      label: 'Reset Password',
+      label: 'users.actions.resetPassword',
       icon: 'key',
       severity: 'info',
     },
     {
-      label: 'Deactivate',
+      label: 'users.actions.deactivate',
       icon: 'pause',
       severity: 'info',
     },
     {
-      label: 'Delete',
+      label: 'users.actions.delete',
       icon: 'delete',
       severity: 'info',
     },

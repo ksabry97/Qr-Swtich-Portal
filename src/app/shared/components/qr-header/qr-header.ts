@@ -5,7 +5,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LanguageSwitcher } from '../language-switcher/language-switcher';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-qr-header',
   imports: [
@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
     CommonModule,
     NzIconModule,
     LanguageSwitcher,
+    TranslateModule,
   ],
   providers: [TranslateService],
   templateUrl: './qr-header.html',

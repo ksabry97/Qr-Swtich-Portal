@@ -10,10 +10,11 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { AddTenant } from '../add-tenant/add-tenant';
 import { TenantService } from '../../services/tenants.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tenant-list',
-  imports: [EntityHeader, QrTable, QrModal],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
   templateUrl: './tenant-list.html',
   styleUrl: './tenant-list.scss',
 })
@@ -21,20 +22,20 @@ export class TenantList implements OnInit {
   globalServ = inject(GlobalService);
   createTenant = AddTenant;
   columns: TableColumn[] = [
-    { field: 'id', header: 'Tenant ID', width: '100px', sortable: false },
-    { field: 'tenantName', header: 'Name', sortable: false },
+    { field: 'id', header: 'tenants.table.tenantId', width: '100px', sortable: false },
+    { field: 'tenantName', header: 'tenants.table.name', sortable: false },
     {
       field: 'tenantCode',
-      header: 'Code',
+      header: 'tenants.table.code',
       sortable: false,
     },
-    { field: 'country', header: 'Country', sortable: false },
-    { field: 'contactEmail', header: 'Email', sortable: false },
-    { field: 'environment', header: 'Environment', sortable: false },
-    { field: 'status', header: 'Status', sortable: false },
+    { field: 'country', header: 'tenants.table.country', sortable: false },
+    { field: 'contactEmail', header: 'tenants.table.email', sortable: false },
+    { field: 'environment', header: 'tenants.table.environment', sortable: false },
+    { field: 'status', header: 'tenants.table.status', sortable: false },
     {
       field: 'createdAt',
-      header: 'Created On',
+      header: 'tenants.table.createdOn',
       sortable: false,
       template: 'date',
     },
@@ -42,12 +43,12 @@ export class TenantList implements OnInit {
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'tenants.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
     {
-      label: 'approve tenant',
+      label: 'tenants.actions.approveTenant',
       icon: 'check',
       severity: 'danger',
     },

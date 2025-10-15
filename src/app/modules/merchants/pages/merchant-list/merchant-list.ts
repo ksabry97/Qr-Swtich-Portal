@@ -9,10 +9,11 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddMerchant } from '../add-merchant/add-merchant';
 import { MerchantService } from '../../services/merchants.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-merchant-list',
-  imports: [EntityHeader, QrTable, QrModal],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
   templateUrl: './merchant-list.html',
   styleUrl: './merchant-list.scss',
 })
@@ -21,18 +22,18 @@ export class MerchantList implements OnInit {
   merchantServ = inject(MerchantService);
   addMerchant = AddMerchant;
   columns: TableColumn[] = [
-    { field: 'name', header: 'Name', width: '100px', sortable: false },
-    { field: 'scheme', header: 'Scheme', sortable: false },
+    { field: 'name', header: 'merchants.table.name', width: '100px', sortable: false },
+    { field: 'scheme', header: 'merchants.table.scheme', sortable: false },
     {
       field: 'msisdn',
-      header: 'msisdn',
+      header: 'merchants.table.msisdn',
       sortable: false,
     },
-    { field: 'contactEmail', header: 'Email', sortable: false },
-    { field: 'commercialRegNo', header: 'Commercial RegNo', sortable: false },
+    { field: 'contactEmail', header: 'merchants.table.email', sortable: false },
+    { field: 'commercialRegNo', header: 'merchants.table.commercialRegNo', sortable: false },
     {
       field: 'createdAt',
-      header: 'Created On',
+      header: 'merchants.table.createdOn',
       sortable: false,
       template: 'date',
     },
@@ -40,12 +41,12 @@ export class MerchantList implements OnInit {
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'merchants.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
     {
-      label: 'Edit',
+      label: 'merchants.actions.edit',
       icon: 'edit',
       severity: 'info',
     },

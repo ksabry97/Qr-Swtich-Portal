@@ -1,0 +1,322 @@
+{
+  "common": {
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "tenant": "Tenant",
+    "role": "Role",
+    "assignedRoles": "Assigned Roles",
+    "enterEmail": "enter your email",
+    "enterPassword": "enter your password",
+    "enterUsername": "enter user name",
+    "enterFirstName": "enter first name",
+    "enterLastName": "enter last name",
+    "selectTenant": "select tenant",
+    "selectRole": "select role",
+    "login": "Login",
+    "logout": "Logout",
+    "save": "Save",
+    "submit": "Submit",
+    "saveAndSubmit": "Save & Submit",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "resend": "Resend",
+    "sendOtp": "Send OTP",
+    "forgetPassword": "forget password",
+    "backToLogin": "Back to login",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "appTitle": "Paysky Qr Switch",
+      "forgetPassword": "forget password",
+      "sendOtp": "Send OTP"
+    },
+    "forgetPassword": {
+      "title": "Forget Password",
+      "continue": "Continue",
+      "backToLogin": "Back to login"
+    },
+    "otp": {
+      "title": "OTP",
+      "description": "One time OTP has been sent your registered email, please enter the OTP to continue:",
+      "resend": "Resend",
+      "login": "Login"
+    }
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "tenants": "Tenants",
+    "users": "Users",
+    "roles": "Roles",
+    "wallets": "Wallets",
+    "merchants": "Merchants",
+    "fees": "Fees",
+    "transactions": "Transactions",
+    "auditLogs": "Audit Logs",
+    "loginAudits": "Login Audits"
+  },
+  "dashboard": {
+    "addTenant": "add Tenant",
+    "addUser": "add User",
+    "addRole": "add Role",
+    "revenue": "Revenue"
+  },
+  "tenants": {
+    "title": "Tenant Management",
+    "addTenant": {
+      "title": "Add new tenant",
+      "description": "configure a new ATM service endpoint and settings",
+      "basicInfo": "Basic Information",
+      "tenantName": "Tenant Name",
+      "enterTenantName": "enter tenant name",
+      "country": "Country",
+      "selectCountry": "select country",
+      "environment": "Environment",
+      "selectEnvironment": "select environment",
+      "description": "Description",
+      "writeDescription": "write here what services do...",
+      "contactInfo": "Contact Information",
+      "contactEmail": "Contact Email",
+      "enterContactEmail": "enter contact email",
+      "contactPhone": "Contact Phone",
+      "enterContactPhone": "enter contact phone",
+      "contactPerson": "Contact Person",
+      "enterContactPerson": "enter contact person name",
+      "address": "Address",
+      "enterAddress": "enter address"
+    },
+    "table": {
+      "tenantId": "Tenant ID",
+      "name": "Name",
+      "code": "Code",
+      "country": "Country",
+      "email": "Email",
+      "environment": "Environment",
+      "status": "Status",
+      "createdOn": "Created On"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "approveTenant": "Approve Tenant"
+    },
+    "environmentTypes": {
+      "development": "Development",
+      "staging": "Staging",
+      "production": "Production"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "addUser": {
+      "title": "Add new user",
+      "description": "configure a new ATM service endpoint and settings"
+    },
+    "table": {
+      "name": "Name",
+      "username": "Username",
+      "email": "Email"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "resetPassword": "Reset Password",
+      "deactivate": "Deactivate",
+      "delete": "Delete"
+    }
+  },
+  "fees": {
+    "title": "Fees",
+    "addFee": {
+      "title": "Add new fee",
+      "description": "configure a new ATM service endpoint and settings",
+      "feeProfileName": "Fee Profile Name",
+      "enterFeeName": "enter fee name",
+      "currency": "Currency",
+      "selectCurrency": "select currency",
+      "feeType": "Fee Type",
+      "fixed": "Fixed",
+      "percentage": "Percentage",
+      "examplePlaceholder": "ex. pay bills"
+    },
+    "table": {
+      "name": "Name",
+      "type": "Type",
+      "currency": "Currency",
+      "effective": "Effective"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "simulate": "Simulate"
+    }
+  },
+  "merchants": {
+    "title": "Merchants",
+    "addMerchant": {
+      "title": "Add new merchant",
+      "description": "configure a new ATM service endpoint and settings",
+      "merchantName": "Merchant Name",
+      "enterMerchantName": "enter merchant name",
+      "country": "Country",
+      "selectCountry": "select country",
+      "identificationType": "Identification Type",
+      "selectIdentificationType": "select identification type",
+      "merchantId": "Merchant ID",
+      "enterMerchantId": "enter merchant id",
+      "city": "City",
+      "selectCity": "select city",
+      "scheme": "Scheme",
+      "enterScheme": "enter Scheme",
+      "msisdn": "MSISDN",
+      "enterMsisdn": "enter msisdn",
+      "mcc": "MCC",
+      "selectMcc": "select mcc",
+      "address": "Address",
+      "enterAddress": "enter address",
+      "contactEmail": "Contact Email",
+      "enterContactEmail": "enter contact email",
+      "contactPhone": "Contact Phone",
+      "enterContactPhone": "enter contact phone",
+      "commercialRegNo": "Commercial Registration No",
+      "enterCommercialRegNo": "enter Commercial Registration No",
+      "issuancePlaceCode": "Issuance Place Code",
+      "enterIssuancePlaceCode": "enter Issuance Place Code",
+      "soleProprietorshipLicense": "Sole Proprietorship License",
+      "enterSoleProprietorshipLicense": "enter sole proprietorship license",
+      "serviceLicenseNumber": "Service License Number",
+      "enterServiceLicenseNumber": "enter service license number",
+      "nationalId": "National ID",
+      "enterNationalId": "enter national id",
+      "feeProfile": "Fee Profile",
+      "selectFeeProfile": "select fee profile",
+      "parentMerchant": "Parent Merchant",
+      "merchantTypes": "Merchant Types",
+      "selectMerchantType": "select merchant type",
+      "canPerformRegistration": "Can Perform Registration"
+    },
+    "table": {
+      "name": "Name",
+      "scheme": "Scheme",
+      "msisdn": "msisdn",
+      "email": "Email",
+      "commercialRegNo": "Commercial RegNo",
+      "createdOn": "Created On"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit"
+    }
+  },
+  "roles": {
+    "title": "Roles",
+    "addRole": {
+      "title": "Create new role",
+      "description": "configure a new ATM service endpoint and settings",
+      "roleName": "Role name",
+      "enterRoleName": "ex. admin",
+      "description": "description",
+      "assignedPermissions": "Assigned Permissions",
+      "selectPermission": "select permission"
+    },
+    "table": {
+      "id": "ID",
+      "roleName": "Role Name",
+      "description": "Description"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "wallets": {
+    "title": "Wallets",
+    "addWallet": {
+      "title": "Add new wallet",
+      "description": "configure a new ATM service endpoint and settings",
+      "basicInfo": "Basic Information",
+      "walletName": "Wallet Name",
+      "enterWalletName": "enter wallet name",
+      "walletType": "Wallet Type",
+      "selectWalletType": "select wallet type",
+      "environment": "Environment",
+      "selectEnvironment": "select environment",
+      "description": "Description",
+      "writeDescription": "write here what services do...",
+      "connectionSettings": "Connection Settings",
+      "baseUrl": "Base URL",
+      "enterBaseUrl": "https://api.example.com/",
+      "port": "Port",
+      "maxConnections": "Max Connections",
+      "timeoutSeconds": "Timeout (seconds)",
+      "securitySettings": "Security Settings",
+      "useSslHttps": "Use SSL/HTTPS",
+      "apiKey": "API Key",
+      "enterApiKey": "enter API Key",
+      "username": "Username",
+      "enterUsername": "enter username",
+      "password": "Password",
+      "enterPassword": "enter your password",
+      "healthCheckSettings": "Health Check Settings",
+      "enableHealthChecks": "Enable Health Checks",
+      "healthCheckInterval": "Health Check Interval",
+      "active": "active",
+      "notes": "Notes"
+    },
+    "table": {
+      "id": "ID",
+      "walletName": "Wallet Name",
+      "environment": "Environment",
+      "baseUrl": "Base URL",
+      "maxConnections": "Max Connections",
+      "lastHealthCheck": "Last Health Check"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "testConnection": "Test Connection"
+    }
+  },
+  "auditLogs": {
+    "title": "Audit Logs",
+    "table": {
+      "id": "ID",
+      "dateOfOccurance": "Date Of Occurance",
+      "tenantId": "Tenant ID",
+      "tenantCode": "Tenant Code",
+      "statusCode": "Status Code"
+    },
+    "actions": {
+      "viewDetails": "View Details"
+    }
+  },
+  "loginAudits": {
+    "title": "Login Audits",
+    "table": {
+      "dateTime": "Date & Time",
+      "username": "Username",
+      "userId": "User Id",
+      "outcome": "Outcome",
+      "ipAddress": "IP Address",
+      "userAgent": "User Agent"
+    }
+  },
+  "language": {
+    "en": "En",
+    "fr": "Fr"
+  }
+}

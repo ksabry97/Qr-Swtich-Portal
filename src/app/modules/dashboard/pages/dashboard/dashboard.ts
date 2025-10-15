@@ -7,10 +7,11 @@ import { AddUser } from '../../../users/pages/add-user/add-user';
 import { AddRole } from '../../../roles/pages/add-role/add-role';
 import { LineChart } from '../../../../shared/components/line-chart/line-chart';
 import { PieChart } from '../../../../shared/components/pie-chart/pie-chart';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, QrModal, LineChart, PieChart],
+  imports: [CommonModule, QrModal, LineChart, PieChart, TranslateModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -20,22 +21,22 @@ export class Dashboard {
   globalServ = inject(GlobalService);
   items = [
     {
-      label: 'Tenants',
+      label: 'navigation.tenants',
       count: 30,
       icon: '',
     },
     {
-      label: 'Users',
+      label: 'navigation.users',
       count: 30,
       icon: '',
     },
     {
-      label: 'Transactions',
+      label: 'navigation.transactions',
       count: 30,
       icon: '',
     },
     {
-      label: 'Revenue',
+      label: 'dashboard.revenue',
       count: 30,
       icon: '',
     },

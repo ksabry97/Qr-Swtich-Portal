@@ -4,25 +4,26 @@ import {
   QrTable,
   TableColumn,
 } from '../../../../shared/components/qr-table/qr-table';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-audits-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, TranslateModule],
   templateUrl: './login-audits-list.html',
   styleUrl: './login-audits-list.scss',
 })
 export class LoginAuditsList {
   columns: TableColumn[] = [
-    { field: 'id', header: 'Date & Time', width: '100px', sortable: false },
-    { field: 'name', header: 'Username', sortable: false },
+    { field: 'id', header: 'loginAudits.table.dateTime', width: '100px', sortable: false },
+    { field: 'name', header: 'loginAudits.table.username', sortable: false },
     {
       field: 'status',
-      header: 'User Id',
+      header: 'loginAudits.table.userId',
       sortable: false,
     },
-    { field: 'country', header: 'Outcome', sortable: false },
-    { field: 'country', header: 'IP Address', sortable: false },
-    { field: 'country', header: 'User Agent', sortable: false },
+    { field: 'country', header: 'loginAudits.table.outcome', sortable: false },
+    { field: 'country', header: 'loginAudits.table.ipAddress', sortable: false },
+    { field: 'country', header: 'loginAudits.table.userAgent', sortable: false },
   ];
 
   banks = [

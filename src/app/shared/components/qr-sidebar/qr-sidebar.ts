@@ -1,53 +1,54 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-qr-sidebar',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './qr-sidebar.html',
   styleUrl: './qr-sidebar.scss',
 })
 export class QrSidebar {
   routes = [
     {
-      label: 'Dashboard',
+      label: 'navigation.dashboard',
       route: 'dashboard',
     },
     {
-      label: 'Tenants',
+      label: 'navigation.tenants',
       route: 'tenants',
     },
     {
-      label: 'Users',
+      label: 'navigation.users',
       route: 'users',
     },
     {
-      label: 'Roles',
+      label: 'navigation.roles',
       route: 'roles',
     },
     {
-      label: 'Wallets',
+      label: 'navigation.wallets',
       route: 'wallets',
     },
     {
-      label: 'Merchants',
+      label: 'navigation.merchants',
       route: 'merchants',
     },
     {
-      label: 'Fees',
+      label: 'navigation.fees',
       route: 'fees',
     },
     // {
-    //   label: 'Transactions',
+    //   label: 'navigation.transactions',
     //   route: 'transactions',
     // },
     {
-      label: 'Audit Logs',
+      label: 'navigation.auditLogs',
       route: 'audit-logs',
     },
     // {
-    //   label: 'Login Audits',
+    //   label: 'navigation.loginAudits',
     //   route: 'login-audits',
     // },
   ];

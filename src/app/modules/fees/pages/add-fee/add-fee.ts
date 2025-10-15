@@ -15,6 +15,7 @@ import { FeesService } from '../../services/fees.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { GlobalService } from '../../../../shared/services/global.service';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-fee',
   imports: [
@@ -26,6 +27,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
     NzIconModule,
     QrInputNumber,
     QrSelect,
+    TranslateModule,
   ],
   templateUrl: './add-fee.html',
   styleUrl: './add-fee.scss',

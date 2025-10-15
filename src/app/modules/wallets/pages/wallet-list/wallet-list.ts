@@ -9,9 +9,10 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { AddWallet } from '../add-wallet/add-wallet';
 import { WalletsService } from '../../services/wallets.service';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-wallet-list',
-  imports: [EntityHeader, QrTable, QrModal],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
   templateUrl: './wallet-list.html',
   styleUrl: './wallet-list.scss',
 })
@@ -20,18 +21,18 @@ export class WalletList implements OnInit {
   walletServ = inject(WalletsService);
   addWallet = AddWallet;
   columns: TableColumn[] = [
-    { field: 'id', header: 'ID', width: '100px', sortable: false },
-    { field: 'name', header: 'Wallet Name', sortable: false },
+    { field: 'id', header: 'wallets.table.id', width: '100px', sortable: false },
+    { field: 'name', header: 'wallets.table.walletName', sortable: false },
     {
       field: 'environment',
-      header: 'Environment',
+      header: 'wallets.table.environment',
       sortable: false,
     },
-    { field: 'baseUrl', header: 'Base URL', sortable: false },
-    { field: 'maxConnections', header: 'Max Connections', sortable: false },
+    { field: 'baseUrl', header: 'wallets.table.baseUrl', sortable: false },
+    { field: 'maxConnections', header: 'wallets.table.maxConnections', sortable: false },
     {
       field: 'lastHealthCheck',
-      header: 'Last Health Check',
+      header: 'wallets.table.lastHealthCheck',
       sortable: false,
       template: 'date',
     },
@@ -39,12 +40,12 @@ export class WalletList implements OnInit {
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'wallets.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
     {
-      label: 'Test Connection',
+      label: 'wallets.actions.testConnection',
       icon: 'cloud-sync',
       severity: 'info',
     },

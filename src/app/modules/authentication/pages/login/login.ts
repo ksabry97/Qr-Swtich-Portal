@@ -14,6 +14,8 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { LoginServ } from '../../services/login-serv.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +26,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     QrPassword,
     QrModal,
     NzIconModule,
+    TranslateModule,
+    LanguageSwitcher,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

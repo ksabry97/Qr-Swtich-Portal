@@ -14,6 +14,7 @@ import { TenantService } from '../../services/tenants.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-tenant',
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     QrInput,
     QrSelect,
+    TranslateModule,
   ],
   templateUrl: './add-tenant.html',
   styleUrl: './add-tenant.scss',
@@ -34,15 +36,15 @@ export class AddTenant implements OnInit {
   router = inject(Router);
   types: any = [
     {
-      text: 'Development',
+      text: 'tenants.environmentTypes.development',
       value: 0,
     },
     {
-      text: 'Staging',
+      text: 'tenants.environmentTypes.staging',
       value: 1,
     },
     {
-      text: 'Production',
+      text: 'tenants.environmentTypes.production',
       value: 2,
     },
   ];

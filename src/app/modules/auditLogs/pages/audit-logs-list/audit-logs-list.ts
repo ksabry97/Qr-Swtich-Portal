@@ -7,10 +7,11 @@ import {
 } from '../../../../shared/components/qr-table/qr-table';
 import { AuditsService } from '../../services/auditlogs.service';
 import { GlobalService } from '../../../../shared/services/global.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-audit-logs-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, TranslateModule],
   templateUrl: './audit-logs-list.html',
   styleUrl: './audit-logs-list.scss',
 })
@@ -18,25 +19,25 @@ export class AuditLogsList implements OnInit {
   auditServ = inject(AuditsService);
   globalServ = inject(GlobalService);
   columns: TableColumn[] = [
-    { field: 'Id', header: 'ID', width: '200px', sortable: false },
+    { field: 'Id', header: 'auditLogs.table.id', width: '200px', sortable: false },
     {
       field: 'OccurredOnUtc',
-      header: 'Date Of Occurance',
+      header: 'auditLogs.table.dateOfOccurance',
       sortable: false,
       template: 'date',
     },
     {
       field: 'TenantId',
-      header: 'Tenant ID',
+      header: 'auditLogs.table.tenantId',
       sortable: false,
     },
-    { field: 'TenantCode', header: 'Tenant Code', sortable: false },
-    { field: 'StatusCode', header: 'Status Code', sortable: false },
+    { field: 'TenantCode', header: 'auditLogs.table.tenantCode', sortable: false },
+    { field: 'StatusCode', header: 'auditLogs.table.statusCode', sortable: false },
   ];
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'auditLogs.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },

@@ -24,10 +24,10 @@
             *ngIf="col.sortable !== false"
             [style.width]="col.width"
           >
-            {{ col.header }}
+            {{ col.header | translate }}
           </th>
           <th *ngIf="col.sortable === false" [style.width]="col.width">
-            {{ col.header }}
+            {{ col.header | translate }}
           </th>
         </ng-container>
         <th *ngIf="actions && actions.length > 0" style="width: 120px">

@@ -14,6 +14,7 @@ import { QrPassword } from '../../../../shared/components/qr-password/qr-passwor
 import { GlobalService } from '../../../../shared/services/global.service';
 import { UserService } from '../../services/users.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-user',
@@ -25,6 +26,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     QrInput,
     QrSelect,
     QrPassword,
+    TranslateModule,
   ],
   templateUrl: './add-user.html',
   styleUrl: './add-user.scss',

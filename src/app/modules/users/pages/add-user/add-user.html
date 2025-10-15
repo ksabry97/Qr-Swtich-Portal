@@ -1,6 +1,6 @@
 <app-modal-header
-  [description]="'configure a new ATM service endpoint and settings'"
-  [title]="'Add new user'"
+  [description]="'users.addUser.description' | translate"
+  [title]="'users.addUser.title' | translate"
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="userForm" class="flex flex-col gap-3">
@@ -8,8 +8,8 @@
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Email'"
-          [placeholder]="'enter email'"
+          [label]="'common.email' | translate"
+          [placeholder]="'common.enterEmail' | translate"
           formControlName="email"
           [controlName]="'email'"
           [parentGroup]="userForm"
@@ -17,8 +17,8 @@
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'Username'"
-          [placeholder]="'enter user name'"
+          [label]="'common.username' | translate"
+          [placeholder]="'common.enterUsername' | translate"
           formControlName="username"
           [controlName]="'username'"
           [parentGroup]="userForm"
@@ -28,8 +28,8 @@
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'First Name'"
-          [placeholder]="'enter first name'"
+          [label]="'common.firstName' | translate"
+          [placeholder]="'common.enterFirstName' | translate"
           formControlName="firstName"
           [controlName]="'firstName'"
           [parentGroup]="userForm"
@@ -37,8 +37,8 @@
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'Last Name'"
-          [placeholder]="'enter last name'"
+          [label]="'common.lastName' | translate"
+          [placeholder]="'common.enterLastName' | translate"
           formControlName="lastName"
           [controlName]="'lastName'"
           [parentGroup]="userForm"
@@ -51,13 +51,13 @@
           [controlName]="'tenantId'"
           [parentGroup]="userForm"
           [options]="tenants"
-          [label]="'Tenant'"
-          [placeholder]="'select tenant'"
+          [label]="'common.tenant' | translate"
+          [placeholder]="'common.selectTenant' | translate"
           class="w-1/2"
         ></app-qr-select>
         <app-qr-password
-          [label]="'Password'"
-          [placeholder]="'enter your password'"
+          [label]="'common.password' | translate"
+          [placeholder]="'common.enterPassword' | translate"
           formControlName="password"
           [controlName]="'password'"
           [parentGroup]="userForm"
@@ -70,8 +70,8 @@
           [controlName]="'assignRoleById'"
           [parentGroup]="userForm"
           [options]="assignedRoles"
-          [label]="'Assigned Roles'"
-          [placeholder]="'select role'"
+          [label]="'common.assignedRoles' | translate"
+          [placeholder]="'common.selectRole' | translate"
           class="w-1/2"
           [mode]="'multiple'"
         ></app-qr-select>
@@ -80,6 +80,6 @@
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'Save & Submit'"
+  [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

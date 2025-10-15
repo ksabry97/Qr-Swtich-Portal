@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface TableColumn {
   field: string;
@@ -21,7 +22,13 @@ export interface TableAction {
 }
 @Component({
   selector: 'app-qr-table',
-  imports: [CommonModule, NzTableModule, NzSpinModule, NzIconModule],
+  imports: [
+    CommonModule,
+    NzTableModule,
+    NzSpinModule,
+    NzIconModule,
+    TranslateModule,
+  ],
   templateUrl: './qr-table.html',
   styleUrl: './qr-table.scss',
 })

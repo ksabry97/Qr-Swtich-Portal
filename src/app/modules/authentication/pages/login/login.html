@@ -11,26 +11,31 @@
         />
         <img src="assets/paysky-title-white.svg" />
       </div>
-      <h1>Paysky Qr Switch</h1>
+      <h1>{{ "auth.login.appTitle" | translate }}</h1>
     </div>
   </div>
-  <div class="right w-5/12 flex justify-center items-center">
+  <div class="right w-5/12 flex justify-center items-center flex-col gap-12">
+    <div class="rounded-md flex justify-end w-full">
+      <div class="bg-black rounded-md m-4">
+        <app-language-switcher></app-language-switcher>
+      </div>
+    </div>
     <form
       class="form-container flex flex-col gap-4 w-3/4 h-fit p-4 rounded-md"
       [formGroup]="loginForm"
     >
-      <h1>Login</h1>
+      <h1>{{ "auth.login.title" | translate }}</h1>
 
       <app-qr-input
-        [label]="'Email'"
-        [placeholder]="'enter your email'"
+        [label]="'common.email' | translate"
+        [placeholder]="'common.enterEmail' | translate"
         formControlName="username"
         [controlName]="'username'"
         [parentGroup]="loginForm"
       ></app-qr-input>
       <app-qr-password
-        [label]="'Password'"
-        [placeholder]="'enter your password'"
+        [label]="'common.password' | translate"
+        [placeholder]="'common.enterPassword' | translate"
         formControlName="password"
         [controlName]="'password'"
         [parentGroup]="loginForm"
@@ -39,16 +44,16 @@
         <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
         {{ errorMessage }}</span
       >
-      <span class="w-full flex justify-end forget" (click)="forgetPassword()"
-        >forget password</span
-      >
+      <span class="w-full flex justify-end forget" (click)="forgetPassword()">{{
+        "auth.login.forgetPassword" | translate
+      }}</span>
       <button
         class="w-full submit-btn border-0 rounded-md outline-none"
         (click)="submitLogin()"
         [disabled]="loading"
       >
         <nz-icon nzType="loading" *ngIf="loading" />
-        {{ loading ? "" : "Send OTP" }}
+        {{ loading ? "" : ("auth.login.sendOtp" | translate) }}
       </button>
     </form>
   </div>

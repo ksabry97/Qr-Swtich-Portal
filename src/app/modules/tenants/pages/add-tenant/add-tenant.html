@@ -1,16 +1,16 @@
 <app-modal-header
-  [description]="'configure a new ATM service endpoint and settings'"
-  [title]="'Add new tenant'"
+  [description]="'tenants.addTenant.description' | translate"
+  [title]="'tenants.addTenant.title' | translate"
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="tenantForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
-      <label>Basic Information</label>
+      <label>{{ 'tenants.addTenant.basicInfo' | translate }}</label>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Tenant Name'"
-          [placeholder]="'enter tenant name'"
+          [label]="'tenants.addTenant.tenantName' | translate"
+          [placeholder]="'tenants.addTenant.enterTenantName' | translate"
           formControlName="tenantName"
           [controlName]="'tenantName'"
           [parentGroup]="tenantForm"
@@ -21,8 +21,8 @@
           [controlName]="'countryCode'"
           [parentGroup]="tenantForm"
           [options]="countries"
-          [label]="'Country'"
-          [placeholder]="'select country'"
+          [label]="'tenants.addTenant.country' | translate"
+          [placeholder]="'tenants.addTenant.selectCountry' | translate"
           [required]="true"
           class="w-1/2"
         ></app-qr-select>
@@ -33,36 +33,36 @@
           [controlName]="'environment'"
           [parentGroup]="tenantForm"
           [options]="types"
-          [label]="'Environment'"
-          [placeholder]="'select environment'"
+          [label]="'tenants.addTenant.environment' | translate"
+          [placeholder]="'tenants.addTenant.selectEnvironment' | translate"
           [required]="true"
           class="w-1/2"
         ></app-qr-select>
       </div>
       <div class="flex gap-2 flex-col">
-        <label>Description</label>
+        <label>{{ 'tenants.addTenant.description' | translate }}</label>
         <textarea
           class="p-3"
-          placeholder="write here what services do..."
+          [placeholder]="'tenants.addTenant.writeDescription' | translate"
           formControlName="description"
         ></textarea>
       </div>
     </section>
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
-      <label>Contact Information</label>
+      <label>{{ 'tenants.addTenant.contactInfo' | translate }}</label>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Contact Email'"
-          [placeholder]="'enter contact email'"
+          [label]="'tenants.addTenant.contactEmail' | translate"
+          [placeholder]="'tenants.addTenant.enterContactEmail' | translate"
           formControlName="contactEmail"
           [controlName]="'contactEmail'"
           [parentGroup]="tenantForm"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'Contact Phone'"
-          [placeholder]="'enter contact phone'"
+          [label]="'tenants.addTenant.contactPhone' | translate"
+          [placeholder]="'tenants.addTenant.enterContactPhone' | translate"
           formControlName="contactPhone"
           [controlName]="'contactPhone'"
           [parentGroup]="tenantForm"
@@ -71,16 +71,16 @@
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Contact Person'"
-          [placeholder]="'enter contact person name'"
+          [label]="'tenants.addTenant.contactPerson' | translate"
+          [placeholder]="'tenants.addTenant.enterContactPerson' | translate"
           formControlName="contactName"
           [controlName]="'contactName'"
           [parentGroup]="tenantForm"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'Address'"
-          [placeholder]="'enter address'"
+          [label]="'tenants.addTenant.address' | translate"
+          [placeholder]="'tenants.addTenant.enterAddress' | translate"
           formControlName="contactAddress"
           [controlName]="'contactAddress'"
           [parentGroup]="tenantForm"
@@ -90,6 +90,6 @@
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'Save & Submit'"
+  [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

@@ -1,14 +1,14 @@
 <app-modal-header
-  [description]="'configure a new ATM service endpoint and settings'"
-  [title]="'Create new role'"
+  [description]="'roles.addRole.description' | translate"
+  [title]="'roles.addRole.title' | translate"
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="roleGroup" class="flex flex-col gap-5">
     <section class="flex w-full flex-col gap-3">
       <app-qr-input
         class="w-full"
-        [label]="'Role name'"
-        [placeholder]="'ex. admin'"
+        [label]="'roles.addRole.roleName' | translate"
+        [placeholder]="'roles.addRole.enterRoleName' | translate"
         formControlName="name"
         [controlName]="'name'"
         [parentGroup]="roleGroup"
@@ -16,10 +16,10 @@
       ></app-qr-input>
       <div class="flex gap-3">
         <div class="flex gap-2 flex-col w-full">
-          <label>description</label>
+          <label>{{ 'roles.addRole.description' | translate }}</label>
           <textarea
             class="p-3"
-            placeholder="description"
+            [placeholder]="'roles.addRole.description' | translate"
             formControlName="description"
           ></textarea>
         </div>
@@ -29,8 +29,8 @@
         [controlName]="'assignPermissionIds'"
         [parentGroup]="roleGroup"
         [options]="assignedPermissions"
-        [label]="'Assigned Permissions'"
-        [placeholder]="'select permission'"
+        [label]="'roles.addRole.assignedPermissions' | translate"
+        [placeholder]="'roles.addRole.selectPermission' | translate"
         class="w-1/2"
         [mode]="'multiple'"
       ></app-qr-select>
@@ -38,6 +38,6 @@
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'Save & Submit'"
+  [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

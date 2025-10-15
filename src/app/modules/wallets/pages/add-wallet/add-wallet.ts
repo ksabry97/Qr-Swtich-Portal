@@ -17,6 +17,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { WalletsService } from '../../services/wallets.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GlobalService } from '../../../../shared/services/global.service';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-wallet',
   imports: [
@@ -30,6 +31,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
     QrInputNumber,
     NzIconModule,
     NzSwitchModule,
+    TranslateModule,
   ],
   templateUrl: './add-wallet.html',
   styleUrl: './add-wallet.scss',

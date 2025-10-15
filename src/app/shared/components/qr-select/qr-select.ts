@@ -10,6 +10,7 @@ import {
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ErrorMessages } from '../../services/error-messages.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TranslateModule } from '@ngx-translate/core';
 export interface ValidationRule {
   type: 'required' | 'minLength' | 'maxLength' | 'pattern' | 'email' | 'custom';
   value?: any;
@@ -28,6 +29,7 @@ interface SmartOption {
     NzSelectModule,
     NzIconModule,
     FormsModule,
+    TranslateModule,
   ],
   providers: [
     {

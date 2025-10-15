@@ -1,0 +1,322 @@
+{
+  "common": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "username": "Nom d'utilisateur",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "tenant": "Locataire",
+    "role": "Rôle",
+    "assignedRoles": "Rôles assignés",
+    "enterEmail": "entrez votre email",
+    "enterPassword": "entrez votre mot de passe",
+    "enterUsername": "entrez le nom d'utilisateur",
+    "enterFirstName": "entrez le prénom",
+    "enterLastName": "entrez le nom de famille",
+    "selectTenant": "sélectionner le locataire",
+    "selectRole": "sélectionner le rôle",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "save": "Enregistrer",
+    "submit": "Soumettre",
+    "saveAndSubmit": "Enregistrer et soumettre",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "back": "Retour",
+    "resend": "Renvoyer",
+    "sendOtp": "Envoyer OTP",
+    "forgetPassword": "mot de passe oublié",
+    "backToLogin": "Retour à la connexion",
+    "add": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "view": "Voir",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "clear": "Effacer",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Info"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "appTitle": "Paysky Qr Switch",
+      "forgetPassword": "mot de passe oublié",
+      "sendOtp": "Envoyer OTP"
+    },
+    "forgetPassword": {
+      "title": "Mot de passe oublié",
+      "continue": "Continuer",
+      "backToLogin": "Retour à la connexion"
+    },
+    "otp": {
+      "title": "OTP",
+      "description": "Un OTP unique a été envoyé à votre email enregistré, veuillez entrer l'OTP pour continuer:",
+      "resend": "Renvoyer",
+      "login": "Connexion"
+    }
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "tenants": "Locataires",
+    "users": "Utilisateurs",
+    "roles": "Rôles",
+    "wallets": "Portefeuilles",
+    "merchants": "Marchands",
+    "fees": "Frais",
+    "transactions": "Transactions",
+    "auditLogs": "Journaux d'audit",
+    "loginAudits": "Audits de connexion"
+  },
+  "dashboard": {
+    "addTenant": "ajouter Locataire",
+    "addUser": "ajouter Utilisateur",
+    "addRole": "ajouter Rôle",
+    "revenue": "Revenus"
+  },
+  "tenants": {
+    "title": "Gestion des locataires",
+    "addTenant": {
+      "title": "Ajouter un nouveau locataire",
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "basicInfo": "Informations de base",
+      "tenantName": "Nom du locataire",
+      "enterTenantName": "entrez le nom du locataire",
+      "country": "Pays",
+      "selectCountry": "sélectionner le pays",
+      "environment": "Environnement",
+      "selectEnvironment": "sélectionner l'environnement",
+      "description": "Description",
+      "writeDescription": "écrivez ici ce que font les services...",
+      "contactInfo": "Informations de contact",
+      "contactEmail": "Email de contact",
+      "enterContactEmail": "entrez l'email de contact",
+      "contactPhone": "Téléphone de contact",
+      "enterContactPhone": "entrez le téléphone de contact",
+      "contactPerson": "Personne de contact",
+      "enterContactPerson": "entrez le nom de la personne de contact",
+      "address": "Adresse",
+      "enterAddress": "entrez l'adresse"
+    },
+    "table": {
+      "tenantId": "ID du locataire",
+      "name": "Nom",
+      "code": "Code",
+      "country": "Pays",
+      "email": "Email",
+      "environment": "Environnement",
+      "status": "Statut",
+      "createdOn": "Créé le"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "approveTenant": "Approuver le locataire"
+    },
+    "environmentTypes": {
+      "development": "Développement",
+      "staging": "Mise en scène",
+      "production": "Production"
+    }
+  },
+  "users": {
+    "title": "Utilisateurs",
+    "addUser": {
+      "title": "Ajouter un nouvel utilisateur",
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres"
+    },
+    "table": {
+      "name": "Nom",
+      "username": "Nom d'utilisateur",
+      "email": "Email"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "edit": "Modifier",
+      "resetPassword": "Réinitialiser le mot de passe",
+      "deactivate": "Désactiver",
+      "delete": "Supprimer"
+    }
+  },
+  "fees": {
+    "title": "Frais",
+    "addFee": {
+      "title": "Ajouter de nouveaux frais",
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "feeProfileName": "Nom du profil de frais",
+      "enterFeeName": "entrez le nom des frais",
+      "currency": "Devise",
+      "selectCurrency": "sélectionner la devise",
+      "feeType": "Type de frais",
+      "fixed": "Fixe",
+      "percentage": "Pourcentage",
+      "examplePlaceholder": "ex. payer les factures"
+    },
+    "table": {
+      "name": "Nom",
+      "type": "Type",
+      "currency": "Devise",
+      "effective": "Effectif"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "simulate": "Simuler"
+    }
+  },
+  "merchants": {
+    "title": "Marchands",
+    "addMerchant": {
+      "title": "Ajouter un nouveau marchand",
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "merchantName": "Nom du marchand",
+      "enterMerchantName": "entrez le nom du marchand",
+      "country": "Pays",
+      "selectCountry": "sélectionner le pays",
+      "identificationType": "Type d'identification",
+      "selectIdentificationType": "sélectionner le type d'identification",
+      "merchantId": "ID du marchand",
+      "enterMerchantId": "entrez l'ID du marchand",
+      "city": "Ville",
+      "selectCity": "sélectionner la ville",
+      "scheme": "Schéma",
+      "enterScheme": "entrez le schéma",
+      "msisdn": "MSISDN",
+      "enterMsisdn": "entrez le msisdn",
+      "mcc": "MCC",
+      "selectMcc": "sélectionner le mcc",
+      "address": "Adresse",
+      "enterAddress": "entrez l'adresse",
+      "contactEmail": "Email de contact",
+      "enterContactEmail": "entrez l'email de contact",
+      "contactPhone": "Téléphone de contact",
+      "enterContactPhone": "entrez le téléphone de contact",
+      "commercialRegNo": "Numéro d'enregistrement commercial",
+      "enterCommercialRegNo": "entrez le numéro d'enregistrement commercial",
+      "issuancePlaceCode": "Code du lieu d'émission",
+      "enterIssuancePlaceCode": "entrez le code du lieu d'émission",
+      "soleProprietorshipLicense": "Licence de propriétaire unique",
+      "enterSoleProprietorshipLicense": "entrez la licence de propriétaire unique",
+      "serviceLicenseNumber": "Numéro de licence de service",
+      "enterServiceLicenseNumber": "entrez le numéro de licence de service",
+      "nationalId": "ID national",
+      "enterNationalId": "entrez l'ID national",
+      "feeProfile": "Profil de frais",
+      "selectFeeProfile": "sélectionner le profil de frais",
+      "parentMerchant": "Marchand parent",
+      "merchantTypes": "Types de marchands",
+      "selectMerchantType": "sélectionner le type de marchand",
+      "canPerformRegistration": "Peut effectuer l'enregistrement"
+    },
+    "table": {
+      "name": "Nom",
+      "scheme": "Schéma",
+      "msisdn": "msisdn",
+      "email": "Email",
+      "commercialRegNo": "RegNo commercial",
+      "createdOn": "Créé le"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "edit": "Modifier"
+    }
+  },
+  "roles": {
+    "title": "Rôles",
+    "addRole": {
+      "title": "Créer un nouveau rôle",
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "roleName": "Nom du rôle",
+      "enterRoleName": "ex. admin",
+      "description": "description",
+      "assignedPermissions": "Permissions assignées",
+      "selectPermission": "sélectionner la permission"
+    },
+    "table": {
+      "id": "ID",
+      "roleName": "Nom du rôle",
+      "description": "Description"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    }
+  },
+  "wallets": {
+    "title": "Portefeuilles",
+    "addWallet": {
+      "title": "Ajouter un nouveau portefeuille",
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "basicInfo": "Informations de base",
+      "walletName": "Nom du portefeuille",
+      "enterWalletName": "entrez le nom du portefeuille",
+      "walletType": "Type de portefeuille",
+      "selectWalletType": "sélectionner le type de portefeuille",
+      "environment": "Environnement",
+      "selectEnvironment": "sélectionner l'environnement",
+      "description": "Description",
+      "writeDescription": "écrivez ici ce que font les services...",
+      "connectionSettings": "Paramètres de connexion",
+      "baseUrl": "URL de base",
+      "enterBaseUrl": "https://api.example.com/",
+      "port": "Port",
+      "maxConnections": "Connexions max",
+      "timeoutSeconds": "Délai d'attente (secondes)",
+      "securitySettings": "Paramètres de sécurité",
+      "useSslHttps": "Utiliser SSL/HTTPS",
+      "apiKey": "Clé API",
+      "enterApiKey": "entrez la clé API",
+      "username": "Nom d'utilisateur",
+      "enterUsername": "entrez le nom d'utilisateur",
+      "password": "Mot de passe",
+      "enterPassword": "entrez votre mot de passe",
+      "healthCheckSettings": "Paramètres de vérification de santé",
+      "enableHealthChecks": "Activer les vérifications de santé",
+      "healthCheckInterval": "Intervalle de vérification de santé",
+      "active": "actif",
+      "notes": "Notes"
+    },
+    "table": {
+      "id": "ID",
+      "walletName": "Nom du portefeuille",
+      "environment": "Environnement",
+      "baseUrl": "URL de base",
+      "maxConnections": "Connexions max",
+      "lastHealthCheck": "Dernière vérification de santé"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "testConnection": "Tester la connexion"
+    }
+  },
+  "auditLogs": {
+    "title": "Journaux d'audit",
+    "table": {
+      "id": "ID",
+      "dateOfOccurance": "Date d'occurrence",
+      "tenantId": "ID du locataire",
+      "tenantCode": "Code du locataire",
+      "statusCode": "Code de statut"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails"
+    }
+  },
+  "loginAudits": {
+    "title": "Audits de connexion",
+    "table": {
+      "dateTime": "Date et heure",
+      "username": "Nom d'utilisateur",
+      "userId": "ID utilisateur",
+      "outcome": "Résultat",
+      "ipAddress": "Adresse IP",
+      "userAgent": "Agent utilisateur"
+    }
+  },
+  "language": {
+    "en": "En",
+    "fr": "Fr"
+  }
+}

@@ -9,10 +9,11 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { AddFee } from '../add-fee/add-fee';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { FeesService } from '../../services/fees.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-fees-list',
-  imports: [EntityHeader, QrTable, QrModal],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
   templateUrl: './fees-list.html',
   styleUrl: './fees-list.scss',
 })
@@ -21,16 +22,16 @@ export class FeesList implements OnInit {
   feeServ = inject(FeesService);
   addFee = AddFee;
   columns: TableColumn[] = [
-    { field: 'name', header: 'Name', width: '100px', sortable: false },
-    { field: 'feeType', header: 'Type', sortable: false },
+    { field: 'name', header: 'fees.table.name', width: '100px', sortable: false },
+    { field: 'feeType', header: 'fees.table.type', sortable: false },
     {
       field: 'currency',
-      header: 'Currency',
+      header: 'fees.table.currency',
       sortable: false,
     },
     {
       field: 'effectiveFrom',
-      header: 'Effective',
+      header: 'fees.table.effective',
       sortable: false,
       template: 'date',
     },
@@ -38,12 +39,12 @@ export class FeesList implements OnInit {
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'fees.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
     {
-      label: 'Simulate',
+      label: 'fees.actions.simulate',
       icon: 'calculator',
       severity: 'info',
     },

@@ -8,10 +8,11 @@ import {
 } from '@angular/forms';
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forget-password',
-  imports: [CommonModule, ReactiveFormsModule, QrInput],
+  imports: [CommonModule, ReactiveFormsModule, QrInput, TranslateModule],
   templateUrl: './forget-password.html',
   styleUrl: './forget-password.scss',
 })

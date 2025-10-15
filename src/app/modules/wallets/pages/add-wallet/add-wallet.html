@@ -1,18 +1,18 @@
 <app-modal-header
-  [description]="'configure a new ATM service endpoint and settings'"
-  [title]="'Add new wallet'"
+  [description]="'wallets.addWallet.description' | translate"
+  [title]="'wallets.addWallet.title' | translate"
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="walletForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
       <div class="flex items-center w-full justify-between">
-        <label>Basic Information</label>
+        <label>{{ 'wallets.addWallet.basicInfo' | translate }}</label>
       </div>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Wallet Name'"
-          [placeholder]="'enter wallet name'"
+          [label]="'wallets.addWallet.walletName' | translate"
+          [placeholder]="'wallets.addWallet.enterWalletName' | translate"
           formControlName="name"
           [controlName]="'name'"
           [parentGroup]="walletForm"
@@ -23,8 +23,8 @@
           [controlName]="'type'"
           [parentGroup]="walletForm"
           [options]="walletTypes"
-          [label]="'Wallet Type'"
-          [placeholder]="'select wallet type'"
+          [label]="'wallets.addWallet.walletType' | translate"
+          [placeholder]="'wallets.addWallet.selectWalletType' | translate"
           class="w-1/2"
         ></app-qr-select>
       </div>
@@ -34,16 +34,16 @@
           [controlName]="'environment'"
           [parentGroup]="walletForm"
           [options]="types"
-          [label]="'Environment'"
-          [placeholder]="'select environment'"
+          [label]="'wallets.addWallet.environment' | translate"
+          [placeholder]="'wallets.addWallet.selectEnvironment' | translate"
           class="w-1/2"
           [required]="true"
         ></app-qr-select>
         <div class="flex gap-2 flex-col w-1/2">
-          <label>Description</label>
+          <label>{{ 'wallets.addWallet.description' | translate }}</label>
           <textarea
             class="p-3"
-            placeholder="write here what services do..."
+            [placeholder]="'wallets.addWallet.writeDescription' | translate"
             formControlName="description"
           ></textarea>
         </div>
@@ -57,7 +57,7 @@
         class="flex items-center w-full justify-between"
         (click)="isOpened[0] = !isOpened[0]"
       >
-        <label>Connection Settings</label>
+        <label>{{ 'wallets.addWallet.connectionSettings' | translate }}</label>
         <nz-icon
           [nzType]="isOpened[0] ? 'minus' : 'plus'"
           nzTheme="outline"
@@ -67,8 +67,8 @@
       <div class="flex gap-3" *ngIf="isOpened[0]">
         <app-qr-input
           class="w-1/2"
-          [label]="'Base URL'"
-          [placeholder]="'https://api.example.com/'"
+          [label]="'wallets.addWallet.baseUrl' | translate"
+          [placeholder]="'wallets.addWallet.enterBaseUrl' | translate"
           formControlName="baseUrl"
           [controlName]="'baseUrl'"
           [parentGroup]="walletForm"
@@ -77,7 +77,7 @@
           formControlName="port"
           [controlName]="'port'"
           [parentGroup]="walletForm"
-          [label]="'Port'"
+          [label]="'wallets.addWallet.port' | translate"
           class="w-1/2"
           [required]="true"
         ></app-qr-input-number>
@@ -87,14 +87,14 @@
           formControlName="macConnections"
           [controlName]="'macConnections'"
           [parentGroup]="walletForm"
-          [label]="'Max Connections'"
+          [label]="'wallets.addWallet.maxConnections' | translate"
           class="w-1/2"
         ></app-qr-input-number>
         <app-qr-input-number
           formControlName="connectionTimeout"
           [controlName]="'connectionTimeout'"
           [parentGroup]="walletForm"
-          [label]="'Timeout (seconds)'"
+          [label]="'wallets.addWallet.timeoutSeconds' | translate"
           class="w-1/2"
         ></app-qr-input-number>
       </div>
@@ -107,7 +107,7 @@
         class="flex items-center w-full justify-between"
         (click)="isOpened[1] = !isOpened[1]"
       >
-        <label>Security Settings</label>
+        <label>{{ 'wallets.addWallet.securitySettings' | translate }}</label>
         <nz-icon
           [nzType]="isOpened[1] ? 'minus' : 'plus'"
           nzTheme="outline"
@@ -115,22 +115,22 @@
         ></nz-icon>
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[1]">
-        <label>Use SSL/HTTPS </label>
+        <label>{{ 'wallets.addWallet.useSslHttps' | translate }}</label>
         <nz-switch formControlName="isHttps"></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[1]">
         <app-qr-input
           class="w-1/2"
-          [label]="'API Key'"
-          [placeholder]="'enter API Key'"
+          [label]="'wallets.addWallet.apiKey' | translate"
+          [placeholder]="'wallets.addWallet.enterApiKey' | translate"
           formControlName="apiKey"
           [controlName]="'apiKey'"
           [parentGroup]="walletForm"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'Username'"
-          [placeholder]="'enter username'"
+          [label]="'wallets.addWallet.username' | translate"
+          [placeholder]="'wallets.addWallet.enterUsername' | translate"
           formControlName="userName"
           [controlName]="'userName'"
           [parentGroup]="walletForm"
@@ -139,8 +139,8 @@
       <div class="flex gap-3" *ngIf="isOpened[1]">
         <app-qr-password
           class="w-1/2"
-          [label]="'Password'"
-          [placeholder]="'enter your password'"
+          [label]="'wallets.addWallet.password' | translate"
+          [placeholder]="'wallets.addWallet.enterPassword' | translate"
           formControlName="userPassword"
           [controlName]="'userPassword'"
           [parentGroup]="walletForm"
@@ -155,7 +155,7 @@
         class="flex items-center w-full justify-between"
         (click)="isOpened[2] = !isOpened[2]"
       >
-        <label>Health Check Settings</label>
+        <label>{{ 'wallets.addWallet.healthCheckSettings' | translate }}</label>
         <nz-icon
           [nzType]="isOpened[2] ? 'minus' : 'plus'"
           nzTheme="outline"
@@ -163,7 +163,7 @@
         ></nz-icon>
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[2]">
-        <label>Enable Health Checks</label>
+        <label>{{ 'wallets.addWallet.enableHealthChecks' | translate }}</label>
         <nz-switch formControlName="enableHealthChecks"></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[2]">
@@ -171,7 +171,7 @@
           formControlName="healthChechInterval"
           [controlName]="'healthChechInterval'"
           [parentGroup]="walletForm"
-          [label]="'Health Check Interval'"
+          [label]="'wallets.addWallet.healthCheckInterval' | translate"
           [placeholder]="'00:00:00'"
           class="w-1/2"
         ></app-qr-input>
@@ -179,17 +179,17 @@
           class="flex items-center justify-between w-1/2 mt-8"
           *ngIf="isOpened[2]"
         >
-          <label>active </label>
+          <label>{{ 'wallets.addWallet.active' | translate }}</label>
           <nz-switch formControlName="isActive"></nz-switch>
         </div>
       </div>
 
       <div class="flex gap-3" *ngIf="isOpened[2]">
         <div class="flex gap-2 flex-col w-full">
-          <label>Notes</label>
+          <label>{{ 'wallets.addWallet.notes' | translate }}</label>
           <textarea
             class="p-3"
-            placeholder="write here what services do..."
+            [placeholder]="'wallets.addWallet.writeDescription' | translate"
             formControlName="notes"
           ></textarea>
         </div>
@@ -198,6 +198,6 @@
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'Save & Submit'"
+  [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

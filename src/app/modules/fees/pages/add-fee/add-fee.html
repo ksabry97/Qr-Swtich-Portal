@@ -1,6 +1,6 @@
 <app-modal-header
-  [description]="'configure a new ATM service endpoint and settings'"
-  [title]="'Add new fee'"
+  [description]="'fees.addFee.description' | translate"
+  [title]="'fees.addFee.title' | translate"
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="feeForm" class="flex flex-col gap-3">
@@ -8,8 +8,8 @@
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'Fee Profile Name'"
-          [placeholder]="'enter fee name'"
+          [label]="'fees.addFee.feeProfileName' | translate"
+          [placeholder]="'fees.addFee.enterFeeName' | translate"
           formControlName="name"
           [controlName]="'name'"
           [parentGroup]="feeForm"
@@ -20,20 +20,20 @@
           [controlName]="'currency'"
           [parentGroup]="feeForm"
           [options]="currencies"
-          [label]="'Currency'"
-          [placeholder]="'select currency'"
+          [label]="'fees.addFee.currency' | translate"
+          [placeholder]="'fees.addFee.selectCurrency' | translate"
           [required]="true"
           class="w-1/2"
         ></app-qr-select>
       </div>
 
-      <label>Fee Type</label>
+      <label>{{ 'fees.addFee.feeType' | translate }}</label>
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-3 w-1/2">
           <input type="radio" formControlName="feeType" [value]="0" />
-          <label>Fixed</label>
+          <label>{{ 'fees.addFee.fixed' | translate }}</label>
           <app-qr-input-number
-            [placeholder]="'ex. pay bills'"
+            [placeholder]="'fees.addFee.examplePlaceholder' | translate"
             formControlName="flatFee"
             [controlName]="'flatFee'"
             [parentGroup]="feeForm"
@@ -43,9 +43,9 @@
         </div>
         <div class="flex items-center gap-3 w-1/2">
           <input type="radio" formControlName="feeType" [value]="1" />
-          <label>Percentage</label>
+          <label>{{ 'fees.addFee.percentage' | translate }}</label>
           <app-qr-input-number
-            [placeholder]="'ex. pay bills'"
+            [placeholder]="'fees.addFee.examplePlaceholder' | translate"
             formControlName="percantage"
             [controlName]="'percantage'"
             [parentGroup]="feeForm"
@@ -58,6 +58,6 @@
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'Save & Submit'"
+  [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

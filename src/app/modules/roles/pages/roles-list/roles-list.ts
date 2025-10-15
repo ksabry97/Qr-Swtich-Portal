@@ -8,10 +8,11 @@ import {
 import { AddRole } from '../add-role/add-role';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-roles-list',
-  imports: [EntityHeader, QrTable, QrModal],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
   templateUrl: './roles-list.html',
   styleUrl: './roles-list.scss',
 })
@@ -19,28 +20,28 @@ export class RolesList implements OnInit {
   addRole = AddRole;
   globalServ = inject(GlobalService);
   columns: TableColumn[] = [
-    { field: 'id', header: 'ID', width: '100px', sortable: false },
-    { field: 'name', header: 'Role Name', sortable: false },
+    { field: 'id', header: 'roles.table.id', width: '100px', sortable: false },
+    { field: 'name', header: 'roles.table.roleName', sortable: false },
     {
       field: 'description',
-      header: 'Description',
+      header: 'roles.table.description',
       sortable: false,
     },
   ];
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'roles.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
     {
-      label: 'Edit',
+      label: 'roles.actions.edit',
       icon: 'edit',
       severity: 'info',
     },
     {
-      label: 'Delete',
+      label: 'roles.actions.delete',
       icon: 'delete',
       severity: 'info',
     },

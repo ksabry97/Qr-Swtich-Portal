@@ -5,9 +5,10 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { LoginServ } from '../../services/login-serv.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-otp-modal',
-  imports: [OTPInput, NzIconModule, CommonModule],
+  imports: [OTPInput, NzIconModule, CommonModule, TranslateModule],
   templateUrl: './otp-modal.html',
   styleUrl: './otp-modal.scss',
 })

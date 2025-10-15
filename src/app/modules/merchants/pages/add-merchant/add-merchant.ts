@@ -16,6 +16,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { MerchantService } from '../../services/merchants.service';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { forkJoin } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-merchant',
@@ -28,6 +29,7 @@ import { forkJoin } from 'rxjs';
     QrSelect,
     NzSwitchModule,
     FormsModule,
+    TranslateModule,
   ],
   templateUrl: './add-merchant.html',
   styleUrl: './add-merchant.scss',

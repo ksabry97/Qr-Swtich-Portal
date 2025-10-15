@@ -15,7 +15,7 @@
     class="mb-2"
   >
     @for (option of options; track $index) {
-    <nz-option [nzValue]="option.value" [nzLabel]="option.text"></nz-option>
+    <nz-option [nzValue]="option.value" [nzLabel]="option.text | translate"></nz-option>
     }
   </nz-select>
 
