@@ -73,8 +73,8 @@ export class AddFee implements OnInit {
     this.globalServ.getAllCurrencies().subscribe({
       next: (data: any) => {
         const mappedData = data.data.map((item: any) => ({
-          text: item.name,
-          value: String(item.id),
+          text: item.text,
+          value: String(item.value),
         }));
         this.currencies = mappedData;
       },
