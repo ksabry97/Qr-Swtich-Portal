@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  baseApiUrl: 'http://localhost:8881',
+  baseApiUrl: 'https://gimuat.gimpay.org:6023',
 };
