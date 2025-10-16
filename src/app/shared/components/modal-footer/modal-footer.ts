@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-modal-footer',
@@ -9,6 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   styleUrl: './modal-footer.scss',
 })
 export class ModalFooter {
+  globalServ = inject(GlobalService);
   @Input() submitText!: string;
   @Input() subText: string = '';
   @Input() disabled = false;

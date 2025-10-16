@@ -12,8 +12,17 @@
       <nz-icon nzType="plus" nzTheme="outline" />
       {{ subText }}
     </button>
-    <button class="submit-btn rounded-md p-2" (click)="submit()">
-      {{ submitText }}
+    <button
+      class="submit-btn rounded-md p-2"
+      (click)="submit()"
+      [disabled]="globalServ.requestLoading()"
+    >
+      <nz-icon
+        nzType="loading"
+        *ngIf="globalServ.requestLoading()"
+        style="font-size: 20px"
+      />
+      {{ globalServ.requestLoading() ? "" : submitText }}
     </button>
   </div>
 </footer>

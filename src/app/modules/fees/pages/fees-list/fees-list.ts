@@ -22,7 +22,12 @@ export class FeesList implements OnInit {
   feeServ = inject(FeesService);
   addFee = AddFee;
   columns: TableColumn[] = [
-    { field: 'name', header: 'fees.table.name', width: '100px', sortable: false },
+    {
+      field: 'name',
+      header: 'fees.table.name',
+      width: '100px',
+      sortable: false,
+    },
     { field: 'feeType', header: 'fees.table.type', sortable: false },
     {
       field: 'currency',
@@ -47,6 +52,7 @@ export class FeesList implements OnInit {
       label: 'fees.actions.simulate',
       icon: 'calculator',
       severity: 'info',
+      disabled: true,
     },
   ];
 

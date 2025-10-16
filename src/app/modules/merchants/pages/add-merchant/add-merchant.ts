@@ -147,15 +147,18 @@ export class AddMerchant implements OnInit {
     });
   }
   submit() {
+    this.globalServ.requestLoading.set(true);
     if (this.merchantForm.valid) {
       this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
         next: (data: any) => {
           this.message.success(data.Message);
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
+          this.globalServ.requestLoading.set(false);
         },
         error: (err) => {
-          this.message.error('endpoint failed');
+          this.message.error(err.error.Message);
+          this.globalServ.requestLoading.set(false);
         },
       });
     } else {

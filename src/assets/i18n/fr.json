@@ -53,6 +53,7 @@
     "login": {
       "title": "Connexion",
       "appTitle": "Paysky Qr Switch",
+      "sidebarTitle": "QR Switch",
       "forgetPassword": "mot de passe oublié",
       "sendOtp": "Envoyer OTP"
     },

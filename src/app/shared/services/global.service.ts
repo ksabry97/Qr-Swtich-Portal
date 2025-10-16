@@ -11,6 +11,7 @@ export class GlobalService {
   isSubmitted = signal<boolean>(false);
   http = inject(HttpClient);
   baseUrl = environment.baseApiUrl;
+  requestLoading = signal<boolean>(false);
   setLoading(val: boolean) {
     this.loading.set(val);
   }

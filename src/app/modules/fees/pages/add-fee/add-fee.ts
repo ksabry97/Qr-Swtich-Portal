@@ -54,15 +54,18 @@ export class AddFee implements OnInit {
     this.getAllCurrencies();
   }
   submit() {
+    this.globalServ.requestLoading.set(true);
     if (this.feeForm.valid) {
       this.feeServ.createFee(this.feeForm.value).subscribe({
         next: (data: any) => {
           this.message.success(data.Message);
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
+          this.globalServ.requestLoading.set(false);
         },
         error: (err) => {
-          this.message.error('endpoint failed');
+          this.globalServ.requestLoading.set(false);
+          this.message.error(err.error.Message);
         },
       });
     } else {

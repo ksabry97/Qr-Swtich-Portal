@@ -49,15 +49,18 @@ export class AddUser implements OnInit {
     });
   }
   submit() {
+    this.globalServ.requestLoading.set(true);
     if (this.userForm.valid) {
       this.userServ.createUser(this.userForm.value).subscribe({
         next: (data: any) => {
           this.message.success(data.message);
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
+          this.globalServ.requestLoading.set(false);
         },
         error: (err) => {
           this.message.error(err.error.message);
+          this.globalServ.requestLoading.set(false);
         },
       });
     } else {
