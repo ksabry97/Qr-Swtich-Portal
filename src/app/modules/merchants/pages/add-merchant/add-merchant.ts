@@ -113,14 +113,14 @@ export class AddMerchant implements OnInit {
       serviceLicenseNumber: [''],
       mcc: ['', Validators.required],
       canPerformRegistration: [false],
-      parentId: [
-        '',
-        [
-          Validators.minLength(14),
-          Validators.maxLength(14),
-          Validators.required,
-        ],
-      ],
+      // parentId: [
+      //   '',
+      //   [
+      //     Validators.minLength(14),
+      //     Validators.maxLength(14),
+      //     Validators.required,
+      //   ],
+      // ],
       countryId: ['', Validators.required],
       cityId: ['', Validators.required],
       contactEmail: ['', Validators.email],

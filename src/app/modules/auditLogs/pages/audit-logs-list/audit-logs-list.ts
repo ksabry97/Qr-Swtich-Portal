@@ -19,7 +19,6 @@ export class AuditLogsList implements OnInit {
   auditServ = inject(AuditsService);
   globalServ = inject(GlobalService);
   columns: TableColumn[] = [
-    { field: 'Id', header: 'auditLogs.table.id', width: '200px', sortable: false },
     {
       field: 'OccurredOnUtc',
       header: 'auditLogs.table.dateOfOccurance',
@@ -31,8 +30,16 @@ export class AuditLogsList implements OnInit {
       header: 'auditLogs.table.tenantId',
       sortable: false,
     },
-    { field: 'TenantCode', header: 'auditLogs.table.tenantCode', sortable: false },
-    { field: 'StatusCode', header: 'auditLogs.table.statusCode', sortable: false },
+    {
+      field: 'TenantCode',
+      header: 'auditLogs.table.tenantCode',
+      sortable: false,
+    },
+    {
+      field: 'StatusCode',
+      header: 'auditLogs.table.statusCode',
+      sortable: false,
+    },
   ];
 
   actions: TableAction[] = [

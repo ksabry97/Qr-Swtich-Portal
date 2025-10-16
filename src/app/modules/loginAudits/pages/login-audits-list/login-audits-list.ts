@@ -14,7 +14,6 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class LoginAuditsList {
   columns: TableColumn[] = [
-    { field: 'id', header: 'loginAudits.table.dateTime', width: '100px', sortable: false },
     { field: 'name', header: 'loginAudits.table.username', sortable: false },
     {
       field: 'status',
@@ -22,8 +21,16 @@ export class LoginAuditsList {
       sortable: false,
     },
     { field: 'country', header: 'loginAudits.table.outcome', sortable: false },
-    { field: 'country', header: 'loginAudits.table.ipAddress', sortable: false },
-    { field: 'country', header: 'loginAudits.table.userAgent', sortable: false },
+    {
+      field: 'country',
+      header: 'loginAudits.table.ipAddress',
+      sortable: false,
+    },
+    {
+      field: 'country',
+      header: 'loginAudits.table.userAgent',
+      sortable: false,
+    },
   ];
 
   banks = [

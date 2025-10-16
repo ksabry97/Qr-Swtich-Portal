@@ -21,7 +21,6 @@ export class WalletList implements OnInit {
   walletServ = inject(WalletsService);
   addWallet = AddWallet;
   columns: TableColumn[] = [
-    { field: 'id', header: 'wallets.table.id', width: '100px', sortable: false },
     { field: 'name', header: 'wallets.table.walletName', sortable: false },
     {
       field: 'environment',
@@ -29,7 +28,11 @@ export class WalletList implements OnInit {
       sortable: false,
     },
     { field: 'baseUrl', header: 'wallets.table.baseUrl', sortable: false },
-    { field: 'maxConnections', header: 'wallets.table.maxConnections', sortable: false },
+    {
+      field: 'maxConnections',
+      header: 'wallets.table.maxConnections',
+      sortable: false,
+    },
     {
       field: 'lastHealthCheck',
       header: 'wallets.table.lastHealthCheck',

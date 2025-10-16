@@ -38,8 +38,18 @@
             'merchants.addMerchant.selectIdentificationType' | translate
           "
           [required]="true"
-          class="w-full"
+          class="w-1/2"
           (ngModelChange)="updateValidation($event)"
+        ></app-qr-select>
+        <app-qr-select
+          formControlName="merchantType"
+          [controlName]="'merchantType'"
+          [parentGroup]="merchantForm"
+          [options]="merchantTypes"
+          [label]="'merchants.addMerchant.merchantTypes' | translate"
+          [placeholder]="'merchants.addMerchant.selectMerchantType' | translate"
+          [required]="true"
+          class="w-1/2"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
@@ -194,7 +204,7 @@
       </div>
 
       <div class="flex gap-3">
-        <app-qr-input
+        <!-- <app-qr-input
           class="w-1/2"
           [label]="'merchants.addMerchant.parentMerchant' | translate"
           [placeholder]="''"
@@ -202,17 +212,7 @@
           [controlName]="'parentId'"
           [parentGroup]="merchantForm"
           [required]="true"
-        ></app-qr-input>
-        <app-qr-select
-          formControlName="merchantType"
-          [controlName]="'merchantType'"
-          [parentGroup]="merchantForm"
-          [options]="merchantTypes"
-          [label]="'merchants.addMerchant.merchantTypes' | translate"
-          [placeholder]="'merchants.addMerchant.selectMerchantType' | translate"
-          [required]="true"
-          class="w-1/2"
-        ></app-qr-select>
+        ></app-qr-input> -->
       </div>
       <div class="flex gap-3">
         <div class="flex items-center justify-between w-1/2">

@@ -22,7 +22,6 @@ export class TenantList implements OnInit {
   globalServ = inject(GlobalService);
   createTenant = AddTenant;
   columns: TableColumn[] = [
-    { field: 'id', header: 'tenants.table.tenantId', width: '100px', sortable: false },
     { field: 'tenantName', header: 'tenants.table.name', sortable: false },
     {
       field: 'tenantCode',
@@ -31,7 +30,11 @@ export class TenantList implements OnInit {
     },
     { field: 'country', header: 'tenants.table.country', sortable: false },
     { field: 'contactEmail', header: 'tenants.table.email', sortable: false },
-    { field: 'environment', header: 'tenants.table.environment', sortable: false },
+    {
+      field: 'environment',
+      header: 'tenants.table.environment',
+      sortable: false,
+    },
     { field: 'status', header: 'tenants.table.status', sortable: false },
     {
       field: 'createdAt',

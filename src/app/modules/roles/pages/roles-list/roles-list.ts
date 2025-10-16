@@ -20,7 +20,6 @@ export class RolesList implements OnInit {
   addRole = AddRole;
   globalServ = inject(GlobalService);
   columns: TableColumn[] = [
-    { field: 'id', header: 'roles.table.id', width: '100px', sortable: false },
     { field: 'name', header: 'roles.table.roleName', sortable: false },
     {
       field: 'description',
