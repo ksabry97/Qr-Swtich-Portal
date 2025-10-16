@@ -24,21 +24,25 @@ export class Dashboard {
       label: 'navigation.tenants',
       count: 30,
       icon: '',
+      color: 'rgb(182, 214, 52)',
     },
     {
       label: 'navigation.users',
       count: 30,
       icon: '',
+      color: 'rgb(80, 112, 221)',
     },
     {
       label: 'navigation.transactions',
       count: 30,
       icon: '',
+      color: 'rgb(182, 214, 52)',
     },
     {
       label: 'dashboard.revenue',
       count: 30,
       icon: '',
+      color: 'rgb(80, 112, 221)',
     },
   ];
   openModel(i: number) {

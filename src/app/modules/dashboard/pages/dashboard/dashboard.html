@@ -2,25 +2,26 @@
   <div
     class="w-1/5 card rounded-md flex justify-center items-center flex-col gap-4"
     *ngFor="let item of items"
+    [ngStyle]="{ 'border-color': item.color }"
   >
     <h1>{{ item.label | translate }}</h1>
     <p>{{ item.count }}</p>
   </div>
 </div>
 
-<div class="flex justify-center w-full gap-4 mt-4">
+<div class="flex justify-center w-full gap-4 mt-8">
   <button class="submit-btn rounded-md p-2" (click)="openModel(0)">
-    {{ 'dashboard.addTenant' | translate }}
+    {{ "dashboard.addTenant" | translate }}
   </button>
   <button class="submit-btn rounded-md p-2" (click)="openModel(1)">
-    {{ 'dashboard.addUser' | translate }}
+    {{ "dashboard.addUser" | translate }}
   </button>
   <button class="submit-btn rounded-md p-2" (click)="openModel(2)">
-    {{ 'dashboard.addRole' | translate }}
+    {{ "dashboard.addRole" | translate }}
   </button>
 </div>
 
-<div class="flex gap-2 mt-4">
+<div class="flex gap-2 mt-8">
   <div class="w-2/3">
     <app-line-chart></app-line-chart>
   </div>
