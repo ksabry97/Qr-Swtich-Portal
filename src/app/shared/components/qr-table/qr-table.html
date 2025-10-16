@@ -64,12 +64,17 @@
         <td *ngIf="actions && actions.length > 0">
           <div class="action-buttons">
             <button
-              *ngFor="let action of actions"
+              *ngFor="let action of actions; let i = index"
               class="action-btn"
               [class]="action.severity || 'primary'"
               [disabled]="action.disabled || false"
               (click)="onActionClick.emit({ action, rowData, rowIndex })"
               [title]="action.label | translate"
+              [hidden]="
+                isTenantTable &&
+                i == 1 &&
+                rowData['status'] == tenantStatus.approved
+              "
             >
               <i nz-icon [nzType]="action.icon || ''" nzTheme="outline"></i>
             </button>

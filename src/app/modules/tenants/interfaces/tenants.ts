@@ -15,3 +15,8 @@ enum Enviroment {
   stagging,
   production,
 }
+
+export enum TenantStatus {
+  pending = 0,
+  approved,
+}

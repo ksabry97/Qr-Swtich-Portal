@@ -1,11 +1,14 @@
 <app-modal-header
-  [description]="'tenants.addTenant.description' | translate"
-  [title]="'tenants.addTenant.title' | translate"
+  [title]="
+    viewMode
+      ? ('tenants.addTenant.viewTenant' | translate)
+      : ('tenants.addTenant.title' | translate)
+  "
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="tenantForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
-      <label>{{ 'tenants.addTenant.basicInfo' | translate }}</label>
+      <label>{{ "tenants.addTenant.basicInfo" | translate }}</label>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
@@ -15,6 +18,7 @@
           [controlName]="'tenantName'"
           [parentGroup]="tenantForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-select
           formControlName="countryCode"
@@ -25,6 +29,7 @@
           [placeholder]="'tenants.addTenant.selectCountry' | translate"
           [required]="true"
           class="w-1/2"
+          [disabled]="viewMode"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
@@ -37,19 +42,21 @@
           [placeholder]="'tenants.addTenant.selectEnvironment' | translate"
           [required]="true"
           class="w-1/2"
+          [disabled]="viewMode"
         ></app-qr-select>
       </div>
       <div class="flex gap-2 flex-col">
-        <label>{{ 'tenants.addTenant.description' | translate }}</label>
+        <label>{{ "tenants.addTenant.description" | translate }}</label>
         <textarea
           class="p-3"
           [placeholder]="'tenants.addTenant.writeDescription' | translate"
           formControlName="description"
+          [readonly]="viewMode"
         ></textarea>
       </div>
     </section>
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
-      <label>{{ 'tenants.addTenant.contactInfo' | translate }}</label>
+      <label>{{ "tenants.addTenant.contactInfo" | translate }}</label>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
@@ -58,6 +65,7 @@
           formControlName="contactEmail"
           [controlName]="'contactEmail'"
           [parentGroup]="tenantForm"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -66,6 +74,7 @@
           formControlName="contactPhone"
           [controlName]="'contactPhone'"
           [parentGroup]="tenantForm"
+          [disabled]="viewMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -76,6 +85,7 @@
           formControlName="contactName"
           [controlName]="'contactName'"
           [parentGroup]="tenantForm"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -84,12 +94,14 @@
           formControlName="contactAddress"
           [controlName]="'contactAddress'"
           [parentGroup]="tenantForm"
+          [disabled]="viewMode"
         ></app-qr-input>
       </div>
     </section>
   </form>
 </div>
 <app-modal-footer
+  *ngIf="!viewMode"
   [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

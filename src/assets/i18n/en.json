@@ -96,7 +96,6 @@
     "title": "Tenant Management",
     "addTenant": {
       "title": "Add new tenant",
-      "description": "configure a new ATM service endpoint and settings",
       "basicInfo": "Basic Information",
       "tenantName": "Tenant Name",
       "enterTenantName": "enter tenant name",
@@ -114,7 +113,8 @@
       "contactPerson": "Contact Person",
       "enterContactPerson": "enter contact person name",
       "address": "Address",
-      "enterAddress": "enter address"
+      "enterAddress": "enter address",
+      "viewTenant": "View tenant"
     },
     "table": {
       "tenantId": "Tenant ID",

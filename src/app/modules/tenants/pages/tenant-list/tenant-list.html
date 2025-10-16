@@ -10,9 +10,11 @@
     [paginator]="true"
     [rows]="10"
     (onActionClick)="callAction($event)"
+    [isTenantTable]="true"
   ></app-qr-table>
 </div>
 <app-qr-modal
   [modalComponent]="createTenant"
   [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ viewMode: viewMode, tenantId: tenantId }"
 ></app-qr-modal>

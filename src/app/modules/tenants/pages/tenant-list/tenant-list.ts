@@ -21,6 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
 export class TenantList implements OnInit {
   globalServ = inject(GlobalService);
   createTenant = AddTenant;
+  viewMode = false;
+  tenantId = '';
   columns: TableColumn[] = [
     { field: 'tenantName', header: 'tenants.table.name', sortable: false },
     {
@@ -60,6 +62,7 @@ export class TenantList implements OnInit {
   tenants = [];
 
   openModel() {
+    this.viewMode = false;
     this.globalServ.setModal(true);
   }
 
@@ -97,11 +100,17 @@ export class TenantList implements OnInit {
         this.tenantServ.approveTenant(action.rowData.id).subscribe({
           next: (data: any) => {
             this.message.success(data.message);
+            this.getAllTenants();
           },
           error: (err) => {
             this.message.error(err.error.message);
           },
         });
+        return;
+      case 'info':
+        this.globalServ.setModal(true);
+        this.viewMode = true;
+        this.tenantId = action.rowData.id;
     }
   }
 }

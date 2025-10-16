@@ -10,4 +10,5 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 export class QrModal {
   @Input() isVisible: boolean = false;
   @Input() modalComponent!: any;
+  @Input() inputs: any;
 }

@@ -95,7 +95,6 @@
     "title": "Gestion des locataires",
     "addTenant": {
       "title": "Ajouter un nouveau locataire",
-      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
       "basicInfo": "Informations de base",
       "tenantName": "Nom du locataire",
       "enterTenantName": "entrez le nom du locataire",
@@ -113,7 +112,8 @@
       "contactPerson": "Personne de contact",
       "enterContactPerson": "entrez le nom de la personne de contact",
       "address": "Adresse",
-      "enterAddress": "entrez l'adresse"
+      "enterAddress": "entrez l'adresse",
+      "viewTenant": "Voir le locataire"
     },
     "table": {
       "tenantId": "ID du locataire",

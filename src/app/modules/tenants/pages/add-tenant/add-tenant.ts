@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -30,10 +37,12 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './add-tenant.html',
   styleUrl: './add-tenant.scss',
 })
-export class AddTenant implements OnInit {
+export class AddTenant implements OnInit, OnChanges {
   tenantForm!: FormGroup;
   globalServ = inject(GlobalService);
   router = inject(Router);
+  @Input() tenantId = '';
+  @Input() viewMode = false;
   types: any = [
     {
       text: 'tenants.environmentTypes.development',
@@ -101,5 +110,17 @@ export class AddTenant implements OnInit {
         this.countries = mappedCountries;
       },
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewMode']) {
+      if (this.viewMode) {
+        this.tenantServ.getTenantById(this.tenantId).subscribe({
+          next: (data: any) => {
+            this.tenantForm.patchValue(data.data);
+          },
+        });
+      }
+    }
   }
 }

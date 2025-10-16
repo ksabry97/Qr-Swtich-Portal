@@ -1,9 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { TenantStatus } from '../../../modules/tenants/interfaces/tenants';
 
 export interface TableColumn {
   field: string;
@@ -50,4 +58,6 @@ export class QrTable<T extends Record<string, any> = any> {
     rowData: T;
     rowIndex: number;
   }>();
+  @Input() isTenantTable = false;
+  tenantStatus = TenantStatus;
 }

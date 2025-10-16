@@ -1,5 +1,7 @@
 <nz-modal [nzFooter]="null" [nzClosable]="false" [(nzVisible)]="isVisible">
   <ng-container *nzModalContent>
-    <ng-container *ngComponentOutlet="modalComponent"></ng-container>
+    <ng-container
+      *ngComponentOutlet="modalComponent; inputs: inputs"
+    ></ng-container>
   </ng-container>
 </nz-modal>
