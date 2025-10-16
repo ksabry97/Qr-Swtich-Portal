@@ -38,7 +38,16 @@
     "error": "Erreur",
     "success": "Succès",
     "warning": "Avertissement",
-    "info": "Info"
+    "info": "Info",
+    "days": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam",
+      "sun": "Dim"
+    }
   },
   "auth": {
     "login": {
@@ -75,7 +84,11 @@
     "addTenant": "ajouter Locataire",
     "addUser": "ajouter Utilisateur",
     "addRole": "ajouter Rôle",
-    "revenue": "Revenus"
+    "revenue": "Revenus",
+    "charts": {
+      "pendingTenants": "Locataires en attente",
+      "approvedTenants": "Locataires approuvés"
+    }
   },
   "tenants": {
     "title": "Gestion des locataires",

@@ -38,7 +38,16 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
-    "info": "Info"
+    "info": "Info",
+    "days": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    }
   },
   "auth": {
     "login": {
@@ -75,7 +84,11 @@
     "addTenant": "add Tenant",
     "addUser": "add User",
     "addRole": "add Role",
-    "revenue": "Revenue"
+    "revenue": "Revenue",
+    "charts": {
+      "pendingTenants": "Pending Tenants",
+      "approvedTenants": "Approved Tenants"
+    }
   },
   "tenants": {
     "title": "Tenant Management",
