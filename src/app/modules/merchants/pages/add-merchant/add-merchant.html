@@ -34,7 +34,9 @@
           [parentGroup]="merchantForm"
           [options]="identificationTypes"
           [label]="'merchants.addMerchant.identificationType' | translate"
-          [placeholder]="'merchants.addMerchant.selectIdentificationType' | translate"
+          [placeholder]="
+            'merchants.addMerchant.selectIdentificationType' | translate
+          "
           [required]="true"
           class="w-full"
           (ngModelChange)="updateValidation($event)"
@@ -124,15 +126,20 @@
         <app-qr-input
           class="w-1/2"
           [label]="'merchants.addMerchant.commercialRegNo' | translate"
-          [placeholder]="'merchants.addMerchant.enterCommercialRegNo' | translate"
+          [placeholder]="
+            'merchants.addMerchant.enterCommercialRegNo' | translate
+          "
           formControlName="commercialRegNo"
           [controlName]="'commercialRegNo'"
           [parentGroup]="merchantForm"
+          [required]="merchantForm.get('identificationType')?.value == 0"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
           [label]="'merchants.addMerchant.issuancePlaceCode' | translate"
-          [placeholder]="'merchants.addMerchant.enterIssuancePlaceCode' | translate"
+          [placeholder]="
+            'merchants.addMerchant.enterIssuancePlaceCode' | translate
+          "
           formControlName="issuancePlaceCode"
           [controlName]="'issuancePlaceCode'"
           [parentGroup]="merchantForm"
@@ -141,19 +148,27 @@
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'merchants.addMerchant.soleProprietorshipLicense' | translate"
-          [placeholder]="'merchants.addMerchant.enterSoleProprietorshipLicense' | translate"
+          [label]="
+            'merchants.addMerchant.soleProprietorshipLicense' | translate
+          "
+          [placeholder]="
+            'merchants.addMerchant.enterSoleProprietorshipLicense' | translate
+          "
           formControlName="soleProprietorshipLicense"
           [controlName]="'soleProprietorshipLicense'"
           [parentGroup]="merchantForm"
+          [required]="merchantForm.get('identificationType')?.value == 2"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
           [label]="'merchants.addMerchant.serviceLicenseNumber' | translate"
-          [placeholder]="'merchants.addMerchant.enterServiceLicenseNumber' | translate"
+          [placeholder]="
+            'merchants.addMerchant.enterServiceLicenseNumber' | translate
+          "
           formControlName="serviceLicenseNumber"
           [controlName]="'serviceLicenseNumber'"
           [parentGroup]="merchantForm"
+          [required]="merchantForm.get('identificationType')?.value == 1"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -164,6 +179,7 @@
           formControlName="nationalId"
           [controlName]="'nationalId'"
           [parentGroup]="merchantForm"
+          [required]="merchantForm.get('identificationType')?.value == 3"
         ></app-qr-input>
         <app-qr-select
           formControlName="feeProfileId"
@@ -200,7 +216,9 @@
       </div>
       <div class="flex gap-3">
         <div class="flex items-center justify-between w-1/2">
-          <label>{{ 'merchants.addMerchant.canPerformRegistration' | translate }}</label>
+          <label>{{
+            "merchants.addMerchant.canPerformRegistration" | translate
+          }}</label>
           <nz-switch formControlName="canPerformRegistration"></nz-switch>
         </div>
       </div>
