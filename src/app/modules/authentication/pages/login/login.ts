@@ -15,7 +15,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { LoginServ } from '../../services/login-serv.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
+import { LanguageSwitch } from '../../../../shared/components/labguage-switch/language-switcher';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ import { LanguageSwitcher } from '../../../../shared/components/language-switche
     QrModal,
     NzIconModule,
     TranslateModule,
-    LanguageSwitcher,
+    LanguageSwitch,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

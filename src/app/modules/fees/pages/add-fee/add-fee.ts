@@ -58,20 +58,19 @@ export class AddFee implements OnInit {
     if (this.feeForm.valid) {
       this.feeServ.createFee(this.feeForm.value).subscribe({
         next: (data: any) => {
-          this.message.success(data.Message);
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
           this.globalServ.requestLoading.set(false);
+          this.message.success(data?.Message);
         },
         error: (err) => {
           this.globalServ.requestLoading.set(false);
-          this.message.error(err.error.Message);
+          this.message.error(err?.error?.Message);
         },
       });
     } else {
       this.feeForm.markAllAsTouched();
     }
-    console.log(this.feeForm.value);
   }
 
   getAllCurrencies() {

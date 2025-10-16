@@ -46,7 +46,7 @@
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
-        <app-qr-select
+        <!-- <app-qr-select
           formControlName="tenantId"
           [controlName]="'tenantId'"
           [parentGroup]="userForm"
@@ -54,7 +54,7 @@
           [label]="'common.tenant' | translate"
           [placeholder]="'common.selectTenant' | translate"
           class="w-1/2"
-        ></app-qr-select>
+        ></app-qr-select> -->
         <app-qr-password
           [label]="'common.password' | translate"
           [placeholder]="'common.enterPassword' | translate"
@@ -63,8 +63,6 @@
           [parentGroup]="userForm"
           class="w-1/2"
         ></app-qr-password>
-      </div>
-      <div class="flex gap-3">
         <app-qr-select
           formControlName="assignRoleById"
           [controlName]="'assignRoleById'"
@@ -76,6 +74,7 @@
           [mode]="'multiple'"
         ></app-qr-select>
       </div>
+      <!-- <div class="flex gap-3"></div> -->
     </section>
   </form>
 </div>

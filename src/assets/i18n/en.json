@@ -55,7 +55,8 @@
       "appTitle": "Paysky QR Switch",
       "sidebarTitle": "QR Switch",
       "forgetPassword": "forget password",
-      "sendOtp": "Send OTP"
+      "sendOtp": "Send OTP",
+      "description": "You can develop a complete structure to enable interoperability between banks, wallets, and merchants, allowing secure and instant QR-based transactions across all payment channels."
     },
     "forgetPassword": {
       "title": "Forget Password",

@@ -1,6 +1,6 @@
 <div class="flex login-container">
-  <div class="left w-7/12 flex justify-center items-center">
-    <div class="flex items-start flex-col gap-3">
+  <div class="left w-2/3 flex justify-center items-center">
+    <div class="flex items-start flex-col gap-3 w-full p-20">
       <div class="flex gap-1 items-center">
         <img
           src="assets/paysky-logo-white.svg"
@@ -12,12 +12,17 @@
         <img src="assets/paysky-title-white.svg" />
       </div>
       <h1>{{ "auth.login.appTitle" | translate }}</h1>
+      <p>
+        You can develop a complete structure to enable interoperability between
+        banks, wallets, and merchants, allowing secure and instant QR-based
+        transactions across all payment channels.
+      </p>
     </div>
   </div>
-  <div class="right w-5/12 flex justify-center items-center flex-col gap-12">
+  <div class="right w-1/3 flex justify-center items-center flex-col gap-12">
     <div class="rounded-md flex justify-end w-full">
-      <div class="bg-black rounded-md m-4">
-        <app-language-switcher></app-language-switcher>
+      <div class="rounded-md m-4">
+        <app-language-switch class="w-1/6"></app-language-switch>
       </div>
     </div>
     <form

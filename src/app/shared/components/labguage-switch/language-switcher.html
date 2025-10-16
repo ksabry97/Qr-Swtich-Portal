@@ -1,0 +1,10 @@
+<div class="language-switcher-container" id="switcher">
+  <nz-select
+    [(ngModel)]="currentLang"
+    (ngModelChange)="switchLang($event)"
+    class="language-switcher-select"
+  >
+    <nz-option nzValue="en" nzLabel="English"></nz-option>
+    <nz-option nzValue="fr" nzLabel="French"></nz-option>
+  </nz-select>
+</div>

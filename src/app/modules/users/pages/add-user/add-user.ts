@@ -43,7 +43,7 @@ export class AddUser implements OnInit {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      tenantId: ['', Validators.required],
+      // tenantId: ['', Validators.required],
       password: [''],
       assignRoleById: [[]],
     });
@@ -53,14 +53,14 @@ export class AddUser implements OnInit {
     if (this.userForm.valid) {
       this.userServ.createUser(this.userForm.value).subscribe({
         next: (data: any) => {
-          this.message.success(data.message);
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
           this.globalServ.requestLoading.set(false);
+          this.message.success(data?.message);
         },
         error: (err) => {
-          this.message.error(err.error.message);
           this.globalServ.requestLoading.set(false);
+          this.message.error(err?.error?.message);
         },
       });
     } else {
@@ -70,7 +70,7 @@ export class AddUser implements OnInit {
 
   ngOnInit(): void {
     this.getAllRoles();
-    this.getAllTenants();
+    // this.getAllTenants();
   }
   getAllRoles() {
     this.globalServ.getAllRoles().subscribe({

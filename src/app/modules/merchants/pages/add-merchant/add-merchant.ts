@@ -151,14 +151,14 @@ export class AddMerchant implements OnInit {
     if (this.merchantForm.valid) {
       this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
         next: (data: any) => {
-          this.message.success(data.Message);
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
           this.globalServ.requestLoading.set(false);
+          this.message.success(data?.Message);
         },
         error: (err) => {
-          this.message.error(err.error.Message);
           this.globalServ.requestLoading.set(false);
+          this.message.error(err?.error?.Message);
         },
       });
     } else {
