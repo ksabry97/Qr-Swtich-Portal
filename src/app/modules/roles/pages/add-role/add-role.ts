@@ -48,8 +48,8 @@ export class AddRole implements OnInit {
     this.getAllPermissions();
   }
   submit() {
-    this.globalServ.requestLoading.set(true);
     if (this.roleGroup.valid) {
+      this.globalServ.requestLoading.set(true);
       this.rolesServ.createRole(this.roleGroup.value).subscribe({
         next: (data: any) => {
           this.globalServ.setModal(false);

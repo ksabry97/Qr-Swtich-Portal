@@ -75,7 +75,7 @@ export class AddWallet {
       baseUrl: [''],
       port: ['443', Validators.required],
       macConnections: ['', Validators.required],
-      connectionTimeout: [''],
+      connectionTimeout: ['', Validators.required],
       isHttps: [false],
       apiKey: [''],
       userName: [''],
@@ -87,8 +87,8 @@ export class AddWallet {
     });
   }
   submit() {
-    this.globalServ.requestLoading.set(true);
     if (this.walletForm.valid) {
+      this.globalServ.requestLoading.set(true);
       this.walletServ.createWallet(this.walletForm.value).subscribe({
         next: (data: any) => {
           this.globalServ.setModal(false);
@@ -103,6 +103,7 @@ export class AddWallet {
       });
     } else {
       this.walletForm.markAllAsTouched();
+      this.isOpened[0] = true;
     }
   }
 }

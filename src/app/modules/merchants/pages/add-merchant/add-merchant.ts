@@ -147,8 +147,8 @@ export class AddMerchant implements OnInit {
     });
   }
   submit() {
-    this.globalServ.requestLoading.set(true);
     if (this.merchantForm.valid) {
+      this.globalServ.requestLoading.set(true);
       this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
         next: (data: any) => {
           this.globalServ.setModal(false);

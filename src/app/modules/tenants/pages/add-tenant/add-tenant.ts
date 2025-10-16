@@ -79,8 +79,8 @@ export class AddTenant implements OnInit, OnChanges {
     this.getAllCountries();
   }
   submit() {
-    this.globalServ.requestLoading.set(true);
     if (this.tenantForm.valid) {
+      this.globalServ.requestLoading.set(true);
       this.tenantServ.createTenant(this.tenantForm.value).subscribe({
         next: (data: any) => {
           this.globalServ.setModal(false);

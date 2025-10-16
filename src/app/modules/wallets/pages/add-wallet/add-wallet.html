@@ -6,7 +6,7 @@
   <form [formGroup]="walletForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
       <div class="flex items-center w-full justify-between">
-        <label>{{ 'wallets.addWallet.basicInfo' | translate }}</label>
+        <label>{{ "wallets.addWallet.basicInfo" | translate }}</label>
       </div>
       <div class="flex gap-3">
         <app-qr-input
@@ -40,7 +40,7 @@
           [required]="true"
         ></app-qr-select>
         <div class="flex gap-2 flex-col w-1/2">
-          <label>{{ 'wallets.addWallet.description' | translate }}</label>
+          <label>{{ "wallets.addWallet.description" | translate }}</label>
           <textarea
             class="p-3"
             [placeholder]="'wallets.addWallet.writeDescription' | translate"
@@ -57,7 +57,7 @@
         class="flex items-center w-full justify-between"
         (click)="isOpened[0] = !isOpened[0]"
       >
-        <label>{{ 'wallets.addWallet.connectionSettings' | translate }}</label>
+        <label>{{ "wallets.addWallet.connectionSettings" | translate }}</label>
         <nz-icon
           [nzType]="isOpened[0] ? 'minus' : 'plus'"
           nzTheme="outline"
@@ -89,6 +89,7 @@
           [parentGroup]="walletForm"
           [label]="'wallets.addWallet.maxConnections' | translate"
           class="w-1/2"
+          [required]="true"
         ></app-qr-input-number>
         <app-qr-input-number
           formControlName="connectionTimeout"
@@ -96,6 +97,7 @@
           [parentGroup]="walletForm"
           [label]="'wallets.addWallet.timeoutSeconds' | translate"
           class="w-1/2"
+          [required]="true"
         ></app-qr-input-number>
       </div>
     </section>
@@ -107,7 +109,7 @@
         class="flex items-center w-full justify-between"
         (click)="isOpened[1] = !isOpened[1]"
       >
-        <label>{{ 'wallets.addWallet.securitySettings' | translate }}</label>
+        <label>{{ "wallets.addWallet.securitySettings" | translate }}</label>
         <nz-icon
           [nzType]="isOpened[1] ? 'minus' : 'plus'"
           nzTheme="outline"
@@ -115,7 +117,7 @@
         ></nz-icon>
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[1]">
-        <label>{{ 'wallets.addWallet.useSslHttps' | translate }}</label>
+        <label>{{ "wallets.addWallet.useSslHttps" | translate }}</label>
         <nz-switch formControlName="isHttps"></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[1]">
@@ -155,7 +157,7 @@
         class="flex items-center w-full justify-between"
         (click)="isOpened[2] = !isOpened[2]"
       >
-        <label>{{ 'wallets.addWallet.healthCheckSettings' | translate }}</label>
+        <label>{{ "wallets.addWallet.healthCheckSettings" | translate }}</label>
         <nz-icon
           [nzType]="isOpened[2] ? 'minus' : 'plus'"
           nzTheme="outline"
@@ -163,7 +165,7 @@
         ></nz-icon>
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[2]">
-        <label>{{ 'wallets.addWallet.enableHealthChecks' | translate }}</label>
+        <label>{{ "wallets.addWallet.enableHealthChecks" | translate }}</label>
         <nz-switch formControlName="enableHealthChecks"></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[2]">
@@ -179,14 +181,14 @@
           class="flex items-center justify-between w-1/2 mt-8"
           *ngIf="isOpened[2]"
         >
-          <label>{{ 'wallets.addWallet.active' | translate }}</label>
+          <label>{{ "wallets.addWallet.active" | translate }}</label>
           <nz-switch formControlName="isActive"></nz-switch>
         </div>
       </div>
 
       <div class="flex gap-3" *ngIf="isOpened[2]">
         <div class="flex gap-2 flex-col w-full">
-          <label>{{ 'wallets.addWallet.notes' | translate }}</label>
+          <label>{{ "wallets.addWallet.notes" | translate }}</label>
           <textarea
             class="p-3"
             [placeholder]="'wallets.addWallet.writeDescription' | translate"
