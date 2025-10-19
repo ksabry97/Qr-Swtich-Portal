@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -31,11 +38,14 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './add-role.html',
   styleUrl: './add-role.scss',
 })
-export class AddRole implements OnInit {
+export class AddRole implements OnInit, OnChanges {
   assignedPermissions = [];
   roleGroup!: FormGroup;
   globalServ = inject(GlobalService);
   rolesServ = inject(RolesService);
+  @Input() roleId = '';
+  @Input() viewMode = false;
+  @Input() editMode = false;
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.roleGroup = this.fb.group({
       name: ['', Validators.required],
@@ -73,5 +83,26 @@ export class AddRole implements OnInit {
         this.assignedPermissions = data.data;
       },
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewMode']) {
+      if (this.viewMode) {
+        this.getRoleById(this.roleId);
+      }
+    }
+    if (changes['editMode']) {
+      if (this.editMode) {
+        this.getRoleById(this.roleId);
+      }
+    }
+  }
+
+  getRoleById(roleId: string) {
+    // this.rolesServ.getUserById(this.roleId).subscribe({
+    //   next: (data: any) => {
+    //     this.roleGroup.patchValue(data.data);
+    //   },
+    // });
   }
 }

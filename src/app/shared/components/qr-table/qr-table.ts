@@ -12,6 +12,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { TenantStatus } from '../../../modules/tenants/interfaces/tenants';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 export interface TableColumn {
   field: string;
@@ -36,6 +37,7 @@ export interface TableAction {
     NzSpinModule,
     NzIconModule,
     TranslateModule,
+    NzPopconfirmModule,
   ],
   templateUrl: './qr-table.html',
   styleUrl: './qr-table.scss',
@@ -58,6 +60,11 @@ export class QrTable<T extends Record<string, any> = any> {
     rowData: T;
     rowIndex: number;
   }>();
+  @Output() isConfirmed = new EventEmitter<any>();
   @Input() isTenantTable = false;
   tenantStatus = TenantStatus;
+
+  confirm(event: any) {
+    this.isConfirmed.emit(event);
+  }
 }

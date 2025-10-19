@@ -9,6 +9,8 @@ import { AddRole } from '../add-role/add-role';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { TranslateModule } from '@ngx-translate/core';
+import { RolesService } from '../../services/roles.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-roles-list',
@@ -19,6 +21,10 @@ import { TranslateModule } from '@ngx-translate/core';
 export class RolesList implements OnInit {
   addRole = AddRole;
   globalServ = inject(GlobalService);
+  roleServ = inject(RolesService);
+  viewMode = false;
+  roleId = '';
+  editMode = false;
   columns: TableColumn[] = [
     { field: 'name', header: 'roles.table.roleName', sortable: false },
     {
@@ -37,18 +43,13 @@ export class RolesList implements OnInit {
     {
       label: 'roles.actions.edit',
       icon: 'edit',
-      severity: 'info',
-    },
-    {
-      label: 'roles.actions.delete',
-      icon: 'delete',
-      severity: 'info',
+      severity: 'warn',
     },
   ];
 
   roles = [];
 
-  constructor() {
+  constructor(private readonly message: NzMessageService) {
     effect(() => {
       this.globalServ.isSubmitted() ? this.getAllRoles() : '';
     });
@@ -73,5 +74,19 @@ export class RolesList implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+
+  callAction(action: any) {
+    switch (action.action.severity) {
+      case 'info':
+        this.globalServ.setModal(true);
+        this.viewMode = true;
+        this.roleId = action.rowData.id;
+        return;
+      case 'warn':
+        this.globalServ.setModal(true);
+        this.editMode = true;
+        this.roleId = action.rowData.id;
+    }
   }
 }

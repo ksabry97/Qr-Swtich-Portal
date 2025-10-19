@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -32,10 +39,12 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './add-fee.html',
   styleUrl: './add-fee.scss',
 })
-export class AddFee implements OnInit {
+export class AddFee implements OnInit, OnChanges {
   feeForm!: FormGroup;
   globalServ = inject(GlobalService);
   currencies = [];
+  @Input() viewMode = false;
+  @Input() feeId = '';
   constructor(
     private fb: FormBuilder,
     private readonly feeServ: FeesService,
@@ -83,5 +92,17 @@ export class AddFee implements OnInit {
         this.currencies = mappedData;
       },
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewMode']) {
+      if (this.viewMode) {
+        this.feeServ.getFeeProfileById(this.feeId).subscribe({
+          next: (data: any) => {
+            this.feeForm.patchValue(data.data);
+          },
+        });
+      }
+    }
   }
 }

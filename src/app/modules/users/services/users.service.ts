@@ -19,4 +19,12 @@ export class UserService {
     let url = this.baseUrl + '/management/users';
     return this.http.get(url);
   }
+  getUserById(userId: string) {
+    let url = this.baseUrl + `/management/users/${userId}`;
+    return this.http.get(url);
+  }
+  deleteUser(userId: string) {
+    let url = this.baseUrl + `/management/users/${userId}`;
+    return this.http.delete(url);
+  }
 }

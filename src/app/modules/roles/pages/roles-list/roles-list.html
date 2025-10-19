@@ -14,4 +14,5 @@
 <app-qr-modal
   [modalComponent]="addRole"
   [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ viewMode: viewMode, userId: roleId, editMode: editMode }"
 ></app-qr-modal>

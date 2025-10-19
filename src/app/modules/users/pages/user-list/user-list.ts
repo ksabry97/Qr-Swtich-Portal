@@ -10,6 +10,7 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { AddUser } from '../add-user/add-user';
 import { UserService } from '../../services/users.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-user-list',
@@ -21,8 +22,16 @@ export class UserList implements OnInit {
   globalServ = inject(GlobalService);
   userServ = inject(UserService);
   addUser = AddUser;
+  viewMode = false;
+  editMode = false;
+  userId = '';
   columns: TableColumn[] = [
-    { field: 'firstName', header: 'users.table.name', width: '100px', sortable: false },
+    {
+      field: 'firstName',
+      header: 'users.table.name',
+      width: '100px',
+      sortable: false,
+    },
     { field: 'username', header: 'users.table.username', sortable: false },
     {
       field: 'email',
@@ -40,30 +49,23 @@ export class UserList implements OnInit {
     {
       label: 'users.actions.edit',
       icon: 'edit',
-      severity: 'info',
+      severity: 'warn',
     },
-    {
-      label: 'users.actions.resetPassword',
-      icon: 'key',
-      severity: 'info',
-    },
-    {
-      label: 'users.actions.deactivate',
-      icon: 'pause',
-      severity: 'info',
-    },
+
     {
       label: 'users.actions.delete',
       icon: 'delete',
-      severity: 'info',
+      severity: 'danger',
     },
   ];
 
   users = [];
   openModel() {
+    this.viewMode = false;
+    this.editMode = false;
     this.globalServ.setModal(true);
   }
-  constructor() {
+  constructor(private readonly message: NzMessageService) {
     effect(() => {
       this.globalServ.isSubmitted() ? this.getAllUsers() : '';
     });
@@ -82,6 +84,31 @@ export class UserList implements OnInit {
       },
       complete: () => {
         this.globalServ.setLoading(false);
+      },
+    });
+  }
+
+  callAction(action: any) {
+    switch (action.action.severity) {
+      case 'info':
+        this.globalServ.setModal(true);
+        this.viewMode = true;
+        this.userId = action.rowData.id;
+        return;
+      case 'warn':
+        this.globalServ.setModal(true);
+        this.editMode = true;
+        this.userId = action.rowData.id;
+    }
+  }
+
+  deleteUser(event: any) {
+    this.userServ.deleteUser(event.id).subscribe({
+      next: (data: any) => {
+        this.message.success(data.message);
+      },
+      error: (err) => {
+        this.message.error(err.error.message);
       },
     });
   }

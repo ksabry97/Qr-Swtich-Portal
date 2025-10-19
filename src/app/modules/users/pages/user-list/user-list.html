@@ -9,9 +9,12 @@
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
+    (onActionClick)="callAction($event)"
+    (isConfirmed)="deleteUser($event)"
   ></app-qr-table>
 </div>
 <app-qr-modal
   [modalComponent]="addUser"
   [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ viewMode: viewMode, userId: userId, editMode: editMode }"
 ></app-qr-modal>

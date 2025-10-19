@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -31,12 +38,15 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './add-user.html',
   styleUrl: './add-user.scss',
 })
-export class AddUser implements OnInit {
+export class AddUser implements OnInit, OnChanges {
   userForm!: FormGroup;
   globalServ = inject(GlobalService);
   userServ = inject(UserService);
   tenants = [];
   assignedRoles = [];
+  @Input() userId = '';
+  @Input() viewMode = false;
+  @Input() editMode = false;
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
@@ -89,5 +99,25 @@ export class AddUser implements OnInit {
         this.tenants = data.data;
       },
     });
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewMode']) {
+      if (this.viewMode) {
+        this.userServ.getUserById(this.userId).subscribe({
+          next: (data: any) => {
+            this.userForm.patchValue(data.data);
+          },
+        });
+      }
+    }
+    if (changes['editMode']) {
+      if (this.editMode) {
+        this.userServ.getUserById(this.userId).subscribe({
+          next: (data: any) => {
+            this.userForm.patchValue(data.data);
+          },
+        });
+      }
+    }
   }
 }

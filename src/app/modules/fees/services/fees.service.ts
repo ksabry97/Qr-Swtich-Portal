@@ -24,4 +24,10 @@ export class FeesService {
     };
     return this.http.post(url, reqBody);
   }
+
+  getFeeProfileById(feeProfileId: string) {
+    let reqBody = { feeProfileId };
+    let url = this.baseUrl + '/fees/getById';
+    return this.http.post(url, reqBody);
+  }
 }

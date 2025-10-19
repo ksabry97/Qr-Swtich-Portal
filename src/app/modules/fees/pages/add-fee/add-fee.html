@@ -1,7 +1,4 @@
-<app-modal-header
-  [description]="'fees.addFee.description' | translate"
-  [title]="'fees.addFee.title' | translate"
-></app-modal-header>
+<app-modal-header [title]="'fees.addFee.title' | translate"></app-modal-header>
 <div class="content">
   <form [formGroup]="feeForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
@@ -14,6 +11,7 @@
           [controlName]="'name'"
           [parentGroup]="feeForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-select
           formControlName="currency"
@@ -23,34 +21,45 @@
           [label]="'fees.addFee.currency' | translate"
           [placeholder]="'fees.addFee.selectCurrency' | translate"
           [required]="true"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-select>
       </div>
 
-      <label>{{ 'fees.addFee.feeType' | translate }}</label>
+      <label>{{ "fees.addFee.feeType" | translate }}</label>
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-3 w-1/2">
-          <input type="radio" formControlName="feeType" [value]="0" />
-          <label>{{ 'fees.addFee.fixed' | translate }}</label>
+          <input
+            type="radio"
+            formControlName="feeType"
+            [value]="0"
+            [attr.disabled]="viewMode ? true : null"
+          />
+          <label>{{ "fees.addFee.fixed" | translate }}</label>
           <app-qr-input-number
             [placeholder]="'fees.addFee.examplePlaceholder' | translate"
             formControlName="flatFee"
             [controlName]="'flatFee'"
             [parentGroup]="feeForm"
             [unit]="'XOF'"
-            [disabled]="feeForm.get('feeType')?.value !== 0"
+            [disabled]="feeForm.get('feeType')?.value !== 0 || viewMode"
           ></app-qr-input-number>
         </div>
         <div class="flex items-center gap-3 w-1/2">
-          <input type="radio" formControlName="feeType" [value]="1" />
-          <label>{{ 'fees.addFee.percentage' | translate }}</label>
+          <input
+            type="radio"
+            formControlName="feeType"
+            [value]="1"
+            [attr.disabled]="viewMode ? true : null"
+          />
+          <label>{{ "fees.addFee.percentage" | translate }}</label>
           <app-qr-input-number
             [placeholder]="'fees.addFee.examplePlaceholder' | translate"
             formControlName="percantage"
             [controlName]="'percantage'"
             [parentGroup]="feeForm"
             [unit]="'%'"
-            [disabled]="feeForm.get('feeType')?.value !== 1"
+            [disabled]="feeForm.get('feeType')?.value !== 1 || viewMode"
           ></app-qr-input-number>
         </div>
       </div>
@@ -58,6 +67,7 @@
   </form>
 </div>
 <app-modal-footer
+  *ngIf="!viewMode"
   [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

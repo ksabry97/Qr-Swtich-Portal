@@ -21,6 +21,8 @@ export class FeesList implements OnInit {
   globalServ = inject(GlobalService);
   feeServ = inject(FeesService);
   addFee = AddFee;
+  viewMode = false;
+  feeId = '';
   columns: TableColumn[] = [
     {
       field: 'name',
@@ -51,7 +53,7 @@ export class FeesList implements OnInit {
     {
       label: 'fees.actions.simulate',
       icon: 'calculator',
-      severity: 'info',
+      severity: 'warn',
       disabled: true,
     },
   ];
@@ -63,6 +65,7 @@ export class FeesList implements OnInit {
   }
   fees = [];
   openModel() {
+    this.viewMode = false;
     this.globalServ.setModal(true);
   }
   ngOnInit(): void {
@@ -81,5 +84,14 @@ export class FeesList implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+  callAction(action: any) {
+    switch (action.action.severity) {
+      case 'info':
+        this.globalServ.setModal(true);
+        this.viewMode = true;
+        this.feeId = action.rowData.id;
+        return;
+    }
   }
 }
