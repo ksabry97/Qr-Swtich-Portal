@@ -140,7 +140,9 @@
     "title": "Users",
     "addUser": {
       "title": "Add new user",
-      "description": "configure a new ATM service endpoint and settings"
+      "description": "configure a new ATM service endpoint and settings",
+      "viewUser": "View user",
+      "editUser": "Edit user"
     },
     "table": {
       "name": "Name",
@@ -167,7 +169,8 @@
       "feeType": "Fee Type",
       "fixed": "Fixed",
       "percentage": "Percentage",
-      "examplePlaceholder": "ex. pay bills"
+      "examplePlaceholder": "ex. pay bills",
+      "viewFee": "View fee"
     },
     "table": {
       "name": "Name",
@@ -222,7 +225,9 @@
       "parentMerchant": "Parent Merchant",
       "merchantTypes": "Merchant Types",
       "selectMerchantType": "select merchant type",
-      "canPerformRegistration": "Can Perform Registration"
+      "canPerformRegistration": "Can Perform Registration",
+      "viewMerchant": "View merchant",
+      "editMerchant": "Edit merchant"
     },
     "table": {
       "name": "Name",
@@ -241,12 +246,13 @@
     "title": "Roles",
     "addRole": {
       "title": "Create new role",
-      "description": "configure a new ATM service endpoint and settings",
       "roleName": "Role name",
       "enterRoleName": "ex. admin",
       "description": "description",
       "assignedPermissions": "Assigned Permissions",
-      "selectPermission": "select permission"
+      "selectPermission": "select permission",
+      "viewRole": "View role",
+      "editRole": "Edit role"
     },
     "table": {
       "id": "ID",
@@ -263,7 +269,7 @@
     "title": "Hosts",
     "addWallet": {
       "title": "Add new host",
-      "description": "configure a new ATM service endpoint and settings",
+
       "basicInfo": "Basic Information",
       "walletName": "Host Name",
       "enterWalletName": "enter host name",

@@ -140,7 +140,9 @@
     "title": "Utilisateurs",
     "addUser": {
       "title": "Ajouter un nouvel utilisateur",
-      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres"
+      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "viewUser": "voir l'utilisateur",
+      "editUser": "modifier l'utilisateur"
     },
     "table": {
       "name": "Nom",
@@ -167,7 +169,8 @@
       "feeType": "Type de frais",
       "fixed": "Fixe",
       "percentage": "Pourcentage",
-      "examplePlaceholder": "ex. payer les factures"
+      "examplePlaceholder": "ex. payer les factures",
+      "viewFee": "Frais de vue"
     },
     "table": {
       "name": "Nom",
@@ -222,7 +225,9 @@
       "parentMerchant": "Marchand parent",
       "merchantTypes": "Types de marchands",
       "selectMerchantType": "sélectionner le type de marchand",
-      "canPerformRegistration": "Peut effectuer l'enregistrement"
+      "canPerformRegistration": "Peut effectuer l'enregistrement",
+      "viewMerchant": "Voir le marchand",
+      "editMerchant": "Modifier le marchand"
     },
     "table": {
       "name": "Nom",
@@ -241,12 +246,13 @@
     "title": "Rôles",
     "addRole": {
       "title": "Créer un nouveau rôle",
-      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
       "roleName": "Nom du rôle",
       "enterRoleName": "ex. admin",
       "description": "description",
       "assignedPermissions": "Permissions assignées",
-      "selectPermission": "sélectionner la permission"
+      "selectPermission": "sélectionner la permission",
+      "viewRole": "Voir le rôle",
+      "editRole": "Modifier le rôle"
     },
     "table": {
       "id": "ID",

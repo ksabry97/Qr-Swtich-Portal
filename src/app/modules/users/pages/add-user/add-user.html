@@ -1,5 +1,11 @@
 <app-modal-header
-  [title]="'users.addUser.title' | translate"
+  [title]="
+    viewMode
+      ? ('users.addUser.viewUser' | translate)
+      : editMode
+      ? ('users.addUser.editUser' | translate)
+      : ('users.addUser.title' | translate)
+  "
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="userForm" class="flex flex-col gap-3">
@@ -76,4 +82,5 @@
 <app-modal-footer
   [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
+  *ngIf="!viewMode"
 ></app-modal-footer>

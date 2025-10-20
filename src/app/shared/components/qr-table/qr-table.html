@@ -14,7 +14,7 @@
     (nzPageIndexChange)="onLazyLoad.emit($event)"
     (nzPageSizeChange)="onPageSize.emit($event)"
     [nzTotal]="total"
-    [nzFrontPagination]="false"
+    [nzFrontPagination]="frontPagination"
   >
     <!-- Dynamic columns -->
     <thead>

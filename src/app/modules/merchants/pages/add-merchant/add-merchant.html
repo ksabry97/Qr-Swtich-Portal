@@ -1,5 +1,11 @@
 <app-modal-header
-  [title]="'merchants.addMerchant.title' | translate"
+  [title]="
+    viewMode
+      ? ('merchants.addMerchant.viewMerchant' | translate)
+      : editMode
+      ? ('merchants.addMerchant.editMerchant' | translate)
+      : ('merchants.addMerchant.title' | translate)
+  "
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="merchantForm" class="flex flex-col gap-3">

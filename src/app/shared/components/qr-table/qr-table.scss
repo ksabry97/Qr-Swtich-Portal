@@ -179,3 +179,6 @@
 :host ::ng-deep .ant-table.ant-table-small .nz-table-hide-scrollbar {
   scrollbar-color: #e5e4e4 #e5e4e4;
 }
+:host ::ng-deep .ant-table {
+  height: calc(100dvh - 210px);
+}

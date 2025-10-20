@@ -1,4 +1,10 @@
-<app-modal-header [title]="'fees.addFee.title' | translate"></app-modal-header>
+<app-modal-header
+  [title]="
+    viewMode
+      ? ('fees.addFee.viewFee' | translate)
+      : ('fees.addFee.title' | translate)
+  "
+></app-modal-header>
 <div class="content">
   <form [formGroup]="feeForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">

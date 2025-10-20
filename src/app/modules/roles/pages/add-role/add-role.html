@@ -1,6 +1,11 @@
 <app-modal-header
-  [description]="'roles.addRole.description' | translate"
-  [title]="'roles.addRole.title' | translate"
+  [title]="
+    viewMode
+      ? ('roles.addRole.viewRole' | translate)
+      : editMode
+      ? ('roles.addRole.editRole' | translate)
+      : ('roles.addRole.title' | translate)
+  "
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="roleGroup" class="flex flex-col gap-5">
@@ -16,7 +21,7 @@
       ></app-qr-input>
       <div class="flex gap-3">
         <div class="flex gap-2 flex-col w-full">
-          <label>{{ 'roles.addRole.description' | translate }}</label>
+          <label>{{ "roles.addRole.description" | translate }}</label>
           <textarea
             class="p-3"
             [placeholder]="'roles.addRole.description' | translate"
