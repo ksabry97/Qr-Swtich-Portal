@@ -75,7 +75,7 @@ export class QrPassword {
     this.touched = fn;
   }
   public setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.isDisabled = isDisabled;
   }
   get errorMessage() {
     if (this.control.invalid && this.control.touched) {

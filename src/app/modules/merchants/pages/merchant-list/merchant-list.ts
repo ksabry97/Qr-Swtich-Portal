@@ -21,8 +21,16 @@ export class MerchantList implements OnInit {
   globalServ = inject(GlobalService);
   merchantServ = inject(MerchantService);
   addMerchant = AddMerchant;
+  viewMode = false;
+  editMode = false;
+  merchantId = '';
   columns: TableColumn[] = [
-    { field: 'name', header: 'merchants.table.name', width: '100px', sortable: false },
+    {
+      field: 'name',
+      header: 'merchants.table.name',
+      width: '100px',
+      sortable: false,
+    },
     { field: 'scheme', header: 'merchants.table.scheme', sortable: false },
     {
       field: 'msisdn',
@@ -30,7 +38,11 @@ export class MerchantList implements OnInit {
       sortable: false,
     },
     { field: 'contactEmail', header: 'merchants.table.email', sortable: false },
-    { field: 'commercialRegNo', header: 'merchants.table.commercialRegNo', sortable: false },
+    {
+      field: 'commercialRegNo',
+      header: 'merchants.table.commercialRegNo',
+      sortable: false,
+    },
     {
       field: 'createdAt',
       header: 'merchants.table.createdOn',
@@ -48,7 +60,7 @@ export class MerchantList implements OnInit {
     {
       label: 'merchants.actions.edit',
       icon: 'edit',
-      severity: 'info',
+      severity: 'warn',
     },
   ];
 
@@ -63,6 +75,8 @@ export class MerchantList implements OnInit {
     this.getAllMerchants(1, 10);
   }
   openModel() {
+    this.viewMode = false;
+    this.editMode = false;
     this.globalServ.setModal(true);
   }
 
@@ -79,5 +93,21 @@ export class MerchantList implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+  callAction(action: any) {
+    this.viewMode = false;
+    this.editMode = false;
+    switch (action.action.severity) {
+      case 'info':
+        this.globalServ.setModal(true);
+        this.viewMode = true;
+        this.merchantId = action.rowData.merchantId;
+        return;
+      case 'warn':
+        this.globalServ.setModal(true);
+        this.editMode = true;
+        this.merchantId = action.rowData.merchantId;
+        return;
+    }
   }
 }

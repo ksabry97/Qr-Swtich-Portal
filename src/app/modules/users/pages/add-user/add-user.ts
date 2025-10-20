@@ -53,7 +53,6 @@ export class AddUser implements OnInit, OnChanges {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      // tenantId: ['', Validators.required],
       password: [''],
       assignRoleById: [[]],
     });
@@ -61,18 +60,7 @@ export class AddUser implements OnInit, OnChanges {
   submit() {
     if (this.userForm.valid) {
       this.globalServ.requestLoading.set(true);
-      this.userServ.createUser(this.userForm.value).subscribe({
-        next: (data: any) => {
-          this.globalServ.setModal(false);
-          this.globalServ.isSubmitted.set(true);
-          this.globalServ.requestLoading.set(false);
-          this.message.success(data?.message);
-        },
-        error: (err) => {
-          this.globalServ.requestLoading.set(false);
-          this.message.error(err?.error?.message);
-        },
-      });
+      this.editMode ? this.updateUser() : this.createUser();
     } else {
       this.userForm.markAllAsTouched();
     }
@@ -80,7 +68,6 @@ export class AddUser implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getAllRoles();
-    // this.getAllTenants();
   }
   getAllRoles() {
     this.globalServ.getAllRoles().subscribe({
@@ -93,13 +80,6 @@ export class AddUser implements OnInit, OnChanges {
     });
   }
 
-  getAllTenants() {
-    this.globalServ.getAllTenantLookups().subscribe({
-      next: (data: any) => {
-        this.tenants = data.data;
-      },
-    });
-  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['viewMode']) {
       if (this.viewMode) {
@@ -119,5 +99,34 @@ export class AddUser implements OnInit, OnChanges {
         });
       }
     }
+  }
+
+  createUser() {
+    this.userServ.createUser(this.userForm.value).subscribe({
+      next: (data: any) => {
+        this.globalServ.setModal(false);
+        this.globalServ.isSubmitted.set(true);
+        this.globalServ.requestLoading.set(false);
+        this.message.success(data?.message);
+      },
+      error: (err) => {
+        this.globalServ.requestLoading.set(false);
+        this.message.error(err?.error?.message);
+      },
+    });
+  }
+  updateUser() {
+    this.userServ.updateUser(this.userId, this.userForm.value).subscribe({
+      next: (data: any) => {
+        this.globalServ.setModal(false);
+        this.globalServ.isSubmitted.set(true);
+        this.globalServ.requestLoading.set(false);
+        this.message.success(data?.message);
+      },
+      error: (err) => {
+        this.globalServ.requestLoading.set(false);
+        this.message.error(err?.error?.message);
+      },
+    });
   }
 }

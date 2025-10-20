@@ -9,6 +9,7 @@
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
+    (onActionClick)="callAction($event)"
   ></app-qr-table>
 </div>
 <app-qr-modal

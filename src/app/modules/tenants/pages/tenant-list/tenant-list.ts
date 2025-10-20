@@ -52,11 +52,6 @@ export class TenantList implements OnInit {
       icon: 'eye',
       severity: 'info',
     },
-    {
-      label: 'tenants.actions.approveTenant',
-      icon: 'check',
-      severity: 'danger',
-    },
   ];
 
   tenants = [];
@@ -96,17 +91,6 @@ export class TenantList implements OnInit {
 
   callAction(action: any) {
     switch (action.action.severity) {
-      case 'danger':
-        this.tenantServ.approveTenant(action.rowData.id).subscribe({
-          next: (data: any) => {
-            this.message.success(data.message);
-            this.getAllTenants();
-          },
-          error: (err) => {
-            this.message.error(err.error.message);
-          },
-        });
-        return;
       case 'info':
         this.globalServ.setModal(true);
         this.viewMode = true;

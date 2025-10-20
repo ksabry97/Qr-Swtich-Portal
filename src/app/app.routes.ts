@@ -13,6 +13,7 @@ import { FeesList } from './modules/fees/pages/fees-list/fees-list';
 import { AuditLogsList } from './modules/auditLogs/pages/audit-logs-list/audit-logs-list';
 import { LoginAuditsList } from './modules/loginAudits/pages/login-audits-list/login-audits-list';
 import { TransactionsList } from './modules/transactions/pages/transactions-list/transactions-list';
+import { PermissonGuard } from './shared/services/permission-guard.service';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,8 @@ export const routes: Routes = [
       {
         path: 'tenants',
         component: TenantList,
+        canActivate: [PermissonGuard],
+        data: { permission: '' },
       },
       {
         path: 'users',

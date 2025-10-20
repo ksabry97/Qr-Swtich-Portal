@@ -71,7 +71,7 @@ export class AddTenant implements OnInit, OnChanges {
       contactEmail: [''],
       contactPhone: [''],
       contactName: [''],
-      contactAddress: [''],
+      contantAddress: [''],
     });
   }
 

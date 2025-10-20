@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -34,9 +41,12 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './add-merchant.html',
   styleUrl: './add-merchant.scss',
 })
-export class AddMerchant implements OnInit {
+export class AddMerchant implements OnInit, OnChanges {
   globalServ = inject(GlobalService);
   merchantForm!: FormGroup;
+  @Input() viewMode = false;
+  @Input() editMode = false;
+  @Input() merchantId = '';
   types = [
     {
       text: 'Development',
@@ -55,19 +65,19 @@ export class AddMerchant implements OnInit {
   merchantTypes = [
     {
       text: 'Merchant',
-      value: '0',
+      value: 0,
     },
     {
       text: 'Agent',
-      value: '1',
+      value: 1,
     },
     {
       text: 'Biller',
-      value: '2',
+      value: 2,
     },
     {
       text: 'Aggregator',
-      value: '3',
+      value: 3,
     },
   ];
   cities = [];
@@ -111,7 +121,7 @@ export class AddMerchant implements OnInit {
       nationalId: [''],
       soleProprietorshipLicense: [''],
       serviceLicenseNumber: [''],
-      mcc: ['', Validators.required],
+      mccId: ['', Validators.required],
       canPerformRegistration: [false],
       // parentId: [
       //   '',
@@ -129,7 +139,7 @@ export class AddMerchant implements OnInit {
       lang: [this.lang],
       lat: [this.lat],
       feeProfileId: [null],
-      merchantType: [, Validators.required],
+      type: [, Validators.required],
       identificationType: [, Validators.required],
     });
   }
@@ -149,18 +159,11 @@ export class AddMerchant implements OnInit {
   submit() {
     if (this.merchantForm.valid) {
       this.globalServ.requestLoading.set(true);
-      this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
-        next: (data: any) => {
-          this.globalServ.setModal(false);
-          this.globalServ.isSubmitted.set(true);
-          this.globalServ.requestLoading.set(false);
-          this.message.success(data?.Message);
-        },
-        error: (err) => {
-          this.globalServ.requestLoading.set(false);
-          this.message.error(err?.error?.Message);
-        },
-      });
+      if (this.editMode) {
+        this.updateMerchant();
+      } else {
+        this.createMerchant();
+      }
     } else {
       this.merchantForm.markAllAsTouched();
     }
@@ -253,5 +256,56 @@ export class AddMerchant implements OnInit {
         this.merchantForm.get('nationalId')?.updateValueAndValidity();
         break;
     }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewMode']) {
+      if (this.viewMode) {
+        this.getMerchantById();
+      }
+    }
+    if (changes['editMode']) {
+      if (this.editMode) {
+        this.getMerchantById();
+      }
+    }
+  }
+
+  getMerchantById() {
+    this.merchantServ
+      .getMerchantByMerchantId(String(this.merchantId))
+      .subscribe({
+        next: (data: any) => {
+          this.merchantForm.patchValue(data.data);
+        },
+      });
+  }
+
+  createMerchant() {
+    this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
+      next: (data: any) => {
+        this.globalServ.setModal(false);
+        this.globalServ.isSubmitted.set(true);
+        this.globalServ.requestLoading.set(false);
+        this.message.success(data?.Message);
+      },
+      error: (err) => {
+        this.globalServ.requestLoading.set(false);
+        this.message.error(err?.error?.Message);
+      },
+    });
+  }
+  updateMerchant() {
+    this.merchantServ.updateMerchant(this.merchantForm.value).subscribe({
+      next: (data: any) => {
+        this.globalServ.setModal(false);
+        this.globalServ.isSubmitted.set(true);
+        this.globalServ.requestLoading.set(false);
+        this.message.success(data?.Message);
+      },
+      error: (err) => {
+        this.globalServ.requestLoading.set(false);
+        this.message.error(err?.error?.Message);
+      },
+    });
   }
 }

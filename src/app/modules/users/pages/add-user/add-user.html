@@ -13,6 +13,7 @@
           [controlName]="'email'"
           [parentGroup]="userForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -22,6 +23,7 @@
           [controlName]="'username'"
           [parentGroup]="userForm"
           [required]="true"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -33,6 +35,7 @@
           [controlName]="'firstName'"
           [parentGroup]="userForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -42,24 +45,17 @@
           [controlName]="'lastName'"
           [parentGroup]="userForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
-        <!-- <app-qr-select
-          formControlName="tenantId"
-          [controlName]="'tenantId'"
-          [parentGroup]="userForm"
-          [options]="tenants"
-          [label]="'common.tenant' | translate"
-          [placeholder]="'common.selectTenant' | translate"
-          class="w-1/2"
-        ></app-qr-select> -->
         <app-qr-password
           [label]="'common.password' | translate"
           [placeholder]="'common.enterPassword' | translate"
           formControlName="password"
           [controlName]="'password'"
           [parentGroup]="userForm"
+          [disabled]="viewMode || editMode"
           class="w-1/2"
         ></app-qr-password>
         <app-qr-select
@@ -71,9 +67,9 @@
           [placeholder]="'common.selectRole' | translate"
           class="w-1/2"
           [mode]="'multiple'"
+          [disabled]="viewMode"
         ></app-qr-select>
       </div>
-      <!-- <div class="flex gap-3"></div> -->
     </section>
   </form>
 </div>

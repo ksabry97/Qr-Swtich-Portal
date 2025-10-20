@@ -58,6 +58,8 @@ export class RolesList implements OnInit {
     this.getAllRoles();
   }
   openModel() {
+    this.viewMode = false;
+    this.editMode = false;
     this.globalServ.setModal(true);
   }
 
@@ -77,6 +79,8 @@ export class RolesList implements OnInit {
   }
 
   callAction(action: any) {
+    this.viewMode = false;
+    this.editMode = false;
     switch (action.action.severity) {
       case 'info':
         this.globalServ.setModal(true);

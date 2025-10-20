@@ -27,4 +27,8 @@ export class UserService {
     let url = this.baseUrl + `/management/users/${userId}`;
     return this.http.delete(url);
   }
+  updateUser(userId: string, user: User) {
+    let url = this.baseUrl + `/management/users/${userId}`;
+    return this.http.put(url, user);
+  }
 }

@@ -9,9 +9,11 @@
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
+    (onActionClick)="callAction($event)"
   ></app-qr-table>
 </div>
 <app-qr-modal
   [modalComponent]="addMerchant"
   [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ viewMode: viewMode, merchantId: merchantId, editMode: editMode }"
 ></app-qr-modal>

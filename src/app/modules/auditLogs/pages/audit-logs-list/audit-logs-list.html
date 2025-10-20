@@ -10,5 +10,7 @@
     [paginator]="true"
     [rows]="10"
     [total]="total"
+    (onLazyLoad)="getAllAudits($event, 10)"
+    (onPageSize)="getAllAudits(pageIndex, $event)"
   ></app-qr-table>
 </div>

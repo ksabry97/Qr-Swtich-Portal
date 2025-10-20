@@ -12,7 +12,9 @@
     [nzSize]="'small'"
     (nzCurrentPageDataChange)="onRowSelect.emit($event)"
     (nzPageIndexChange)="onLazyLoad.emit($event)"
+    (nzPageSizeChange)="onPageSize.emit($event)"
     [nzTotal]="total"
+    [nzFrontPagination]="false"
   >
     <!-- Dynamic columns -->
     <thead>
@@ -70,11 +72,6 @@
               [disabled]="action.disabled || false"
               (click)="onActionClick.emit({ action, rowData, rowIndex })"
               [title]="action.label | translate"
-              [hidden]="
-                isTenantTable &&
-                i == 1 &&
-                rowData['status'] == tenantStatus.approved
-              "
             >
               <a
                 class="w-full h-full"

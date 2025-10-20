@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
+  OnInit,
+  ChangeDetectorRef,
   SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,6 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
-import { TenantStatus } from '../../../modules/tenants/interfaces/tenants';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 export interface TableColumn {
@@ -55,14 +55,13 @@ export class QrTable<T extends Record<string, any> = any> {
   @Output() onRowUnselect = new EventEmitter<any>();
   @Output() onRowClick = new EventEmitter<any>();
   @Output() onLazyLoad = new EventEmitter<any>();
+  @Output() onPageSize = new EventEmitter<any>();
   @Output() onActionClick = new EventEmitter<{
     action: TableAction;
     rowData: T;
     rowIndex: number;
   }>();
   @Output() isConfirmed = new EventEmitter<any>();
-  @Input() isTenantTable = false;
-  tenantStatus = TenantStatus;
 
   confirm(event: any) {
     this.isConfirmed.emit(event);

@@ -1,5 +1,4 @@
 <app-modal-header
-  [description]="'merchants.addMerchant.description' | translate"
   [title]="'merchants.addMerchant.title' | translate"
 ></app-modal-header>
 <div class="content">
@@ -14,6 +13,7 @@
           [controlName]="'name'"
           [parentGroup]="merchantForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-select
           formControlName="countryId"
@@ -25,6 +25,7 @@
           [required]="true"
           class="w-1/2"
           (ngModelChange)="getCity($event)"
+          [disabled]="viewMode"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
@@ -40,15 +41,17 @@
           [required]="true"
           class="w-1/2"
           (ngModelChange)="updateValidation($event)"
+          [disabled]="viewMode || editMode"
         ></app-qr-select>
         <app-qr-select
-          formControlName="merchantType"
-          [controlName]="'merchantType'"
+          formControlName="type"
+          [controlName]="'type'"
           [parentGroup]="merchantForm"
           [options]="merchantTypes"
           [label]="'merchants.addMerchant.merchantTypes' | translate"
           [placeholder]="'merchants.addMerchant.selectMerchantType' | translate"
           [required]="true"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-select>
       </div>
@@ -61,6 +64,7 @@
           [controlName]="'merchantId'"
           [parentGroup]="merchantForm"
           [required]="true"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
         <app-qr-select
           formControlName="cityId"
@@ -70,6 +74,7 @@
           [label]="'merchants.addMerchant.city' | translate"
           [placeholder]="'merchants.addMerchant.selectCity' | translate"
           [required]="true"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-select>
       </div>
@@ -82,6 +87,7 @@
           [controlName]="'scheme'"
           [parentGroup]="merchantForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -91,17 +97,19 @@
           [controlName]="'msisdn'"
           [parentGroup]="merchantForm"
           [required]="true"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
         <app-qr-select
-          formControlName="mcc"
-          [controlName]="'mcc'"
+          formControlName="mccId"
+          [controlName]="'mccId'"
           [parentGroup]="merchantForm"
           [options]="mccs"
           [label]="'merchants.addMerchant.mcc' | translate"
           [placeholder]="'merchants.addMerchant.selectMcc' | translate"
           [required]="true"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-select>
         <app-qr-input
@@ -112,6 +120,7 @@
           [controlName]="'address'"
           [parentGroup]="merchantForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -122,6 +131,7 @@
           formControlName="contactEmail"
           [controlName]="'contactEmail'"
           [parentGroup]="merchantForm"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -130,6 +140,7 @@
           formControlName="contactPhone"
           [controlName]="'contactPhone'"
           [parentGroup]="merchantForm"
+          [disabled]="viewMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -143,6 +154,7 @@
           [controlName]="'commercialRegNo'"
           [parentGroup]="merchantForm"
           [required]="merchantForm.get('identificationType')?.value == 0"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -153,6 +165,7 @@
           formControlName="issuancePlaceCode"
           [controlName]="'issuancePlaceCode'"
           [parentGroup]="merchantForm"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -168,6 +181,7 @@
           [controlName]="'soleProprietorshipLicense'"
           [parentGroup]="merchantForm"
           [required]="merchantForm.get('identificationType')?.value == 2"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -179,6 +193,7 @@
           [controlName]="'serviceLicenseNumber'"
           [parentGroup]="merchantForm"
           [required]="merchantForm.get('identificationType')?.value == 1"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
@@ -190,6 +205,7 @@
           [controlName]="'nationalId'"
           [parentGroup]="merchantForm"
           [required]="merchantForm.get('identificationType')?.value == 3"
+          [disabled]="viewMode || editMode"
         ></app-qr-input>
         <app-qr-select
           formControlName="feeProfileId"
@@ -199,6 +215,7 @@
           [label]="'merchants.addMerchant.feeProfile' | translate"
           [placeholder]="'merchants.addMerchant.selectFeeProfile' | translate"
           [required]="true"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-select>
       </div>
@@ -219,13 +236,17 @@
           <label>{{
             "merchants.addMerchant.canPerformRegistration" | translate
           }}</label>
-          <nz-switch formControlName="canPerformRegistration"></nz-switch>
+          <nz-switch
+            formControlName="canPerformRegistration"
+            [nzDisabled]="viewMode"
+          ></nz-switch>
         </div>
       </div>
     </section>
   </form>
 </div>
 <app-modal-footer
+  *ngIf="!viewMode"
   [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

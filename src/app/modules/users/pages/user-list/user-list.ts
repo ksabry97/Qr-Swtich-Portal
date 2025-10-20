@@ -89,6 +89,8 @@ export class UserList implements OnInit {
   }
 
   callAction(action: any) {
+    this.viewMode = false;
+    this.editMode = false;
     switch (action.action.severity) {
       case 'info':
         this.globalServ.setModal(true);
