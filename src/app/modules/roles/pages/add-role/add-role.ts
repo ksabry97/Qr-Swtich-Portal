@@ -60,18 +60,7 @@ export class AddRole implements OnInit, OnChanges {
   submit() {
     if (this.roleGroup.valid) {
       this.globalServ.requestLoading.set(true);
-      this.rolesServ.createRole(this.roleGroup.value).subscribe({
-        next: (data: any) => {
-          this.globalServ.setModal(false);
-          this.globalServ.requestLoading.set(false);
-          this.globalServ.isSubmitted.set(true);
-          this.message.success(data?.message);
-        },
-        error: (err) => {
-          this.globalServ.requestLoading.set(false);
-          this.message.error(err?.error?.message);
-        },
-      });
+      this.editMode ? this.updateRole() : this.createRole();
     } else {
       this.roleGroup.markAllAsTouched();
     }
@@ -88,21 +77,57 @@ export class AddRole implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['viewMode']) {
       if (this.viewMode) {
-        this.getRoleById(this.roleId);
+        this.getRoleById();
       }
     }
     if (changes['editMode']) {
       if (this.editMode) {
-        this.getRoleById(this.roleId);
+        this.getRoleById();
       }
     }
   }
 
-  getRoleById(roleId: string) {
-    // this.rolesServ.getUserById(this.roleId).subscribe({
-    //   next: (data: any) => {
-    //     this.roleGroup.patchValue(data.data);
-    //   },
-    // });
+  getRoleById() {
+    this.rolesServ.getRoleById(this.roleId).subscribe({
+      next: (data: any) => {
+        this.roleGroup.patchValue(data.data.role);
+        let permissions = data.data.compositeRoles.map((data: any) => {
+          return data.id;
+        });
+        this.roleGroup.patchValue({ assignPermissionIds: permissions });
+      },
+    });
+  }
+  createRole() {
+    this.rolesServ.createRole(this.roleGroup.value).subscribe({
+      next: (data: any) => {
+        this.globalServ.setModal(false);
+        this.globalServ.requestLoading.set(false);
+        this.globalServ.isSubmitted.set(true);
+        this.message.success(data?.message);
+      },
+      error: (err) => {
+        this.globalServ.requestLoading.set(false);
+        this.message.error(err?.error?.message);
+      },
+    });
+  }
+  updateRole() {
+    let description = this.roleGroup.value.description;
+    let assignRoleById = this.roleGroup.value.assignPermissionIds;
+    this.rolesServ
+      .updateRole(this.roleId, description, assignRoleById)
+      .subscribe({
+        next: (data: any) => {
+          this.globalServ.setModal(false);
+          this.globalServ.requestLoading.set(false);
+          this.globalServ.isSubmitted.set(true);
+          this.message.success(data?.message);
+        },
+        error: (err) => {
+          this.globalServ.requestLoading.set(false);
+          this.message.error(err?.error?.message);
+        },
+      });
   }
 }

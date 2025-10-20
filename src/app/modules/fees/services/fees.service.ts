@@ -31,7 +31,7 @@ export class FeesService {
     return this.http.post(url, reqBody);
   }
   simulateFee(feeProfile: any) {
-    let url = this.baseUrl + '';
+    let url = this.baseUrl + '/fees/simulatefee';
     return this.http.post(url, feeProfile);
   }
 }

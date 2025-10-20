@@ -95,10 +95,10 @@ export class SimulateFee implements OnInit, OnChanges {
       this.globalServ.requestLoading.set(true);
       this.feeServ.simulateFee(this.feeForm.value).subscribe({
         next: (data: any) => {
-          this.details[0].value = data.inputAmount;
-          this.details[1].value = data.calculatedFee;
-          this.details[2].value = data.toatlAmount;
-          this.details[3].value = data.detail;
+          this.details[0].value = data.data.inputAmount;
+          this.details[1].value = data.data.calculatedFee;
+          this.details[2].value = data.data.toatlAmount;
+          this.details[3].value = data.data.detail;
           this.showDetails = true;
         },
         error: (err) => {

@@ -18,6 +18,7 @@
         [controlName]="'name'"
         [parentGroup]="roleGroup"
         [required]="true"
+        [disabled]="viewMode || editMode"
       ></app-qr-input>
       <div class="flex gap-3">
         <div class="flex gap-2 flex-col w-full">
@@ -26,6 +27,7 @@
             class="p-3"
             [placeholder]="'roles.addRole.description' | translate"
             formControlName="description"
+            [readonly]="viewMode"
           ></textarea>
         </div>
       </div>
@@ -38,6 +40,7 @@
         [placeholder]="'roles.addRole.selectPermission' | translate"
         class="w-1/2"
         [mode]="'multiple'"
+        [disabled]="viewMode"
       ></app-qr-select>
     </section>
   </form>
