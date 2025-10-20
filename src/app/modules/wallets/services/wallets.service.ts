@@ -20,4 +20,10 @@ export class WalletsService {
     let reqBody = { pageNumber, pageSize };
     return this.http.post(url, reqBody);
   }
+
+  getWalletById(id: string | number) {
+    let reqBody = { id };
+    let url = this.baseUrl + '/wallets/getById';
+    return this.http.post(url, reqBody);
+  }
 }

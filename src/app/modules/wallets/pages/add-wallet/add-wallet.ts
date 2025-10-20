@@ -1,4 +1,10 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { CommonModule } from '@angular/common';
 import {
@@ -36,7 +42,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './add-wallet.html',
   styleUrl: './add-wallet.scss',
 })
-export class AddWallet {
+export class AddWallet implements OnChanges {
   walletServ = inject(WalletsService);
   globalServ = inject(GlobalService);
   walletForm!: FormGroup;
@@ -106,6 +112,18 @@ export class AddWallet {
     } else {
       this.walletForm.markAllAsTouched();
       this.isOpened[0] = true;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewMode']) {
+      if (this.viewMode) {
+        this.walletServ.getWalletById(this.walletId).subscribe({
+          next: (data: any) => {
+            this.walletForm.patchValue(data.data);
+          },
+        });
+      }
     }
   }
 }
