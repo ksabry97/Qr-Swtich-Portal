@@ -44,6 +44,7 @@ export class SimulateFee implements OnInit, OnChanges {
   feeForm!: FormGroup;
   globalServ = inject(GlobalService);
   feesProfiles = [];
+  showDetails = false;
   details = [
     {
       label: 'fees.simulateFee.inputAmount',
@@ -59,7 +60,7 @@ export class SimulateFee implements OnInit, OnChanges {
     },
     {
       label: 'fees.simulateFee.detail',
-      value: 0,
+      value: '',
     },
   ];
   @Input() feeId = '';
@@ -89,6 +90,27 @@ export class SimulateFee implements OnInit, OnChanges {
     }
   }
   submit() {
-    console.log('sasdw');
+    this.showDetails = false;
+    if (this.feeForm.valid) {
+      this.globalServ.requestLoading.set(true);
+      this.feeServ.simulateFee(this.feeForm.value).subscribe({
+        next: (data: any) => {
+          this.details[0].value = data.inputAmount;
+          this.details[1].value = data.calculatedFee;
+          this.details[2].value = data.toatlAmount;
+          this.details[3].value = data.detail;
+          this.showDetails = true;
+        },
+        error: (err) => {
+          this.globalServ.requestLoading.set(false);
+          this.message.error(err?.error?.message);
+        },
+        complete: () => {
+          this.globalServ.requestLoading.set(false);
+        },
+      });
+    } else {
+      this.feeForm.markAllAsTouched();
+    }
   }
 }

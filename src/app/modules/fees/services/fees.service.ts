@@ -30,4 +30,8 @@ export class FeesService {
     let url = this.baseUrl + '/fees/getById';
     return this.http.post(url, reqBody);
   }
+  simulateFee(feeProfile: any) {
+    let url = this.baseUrl + '';
+    return this.http.post(url, feeProfile);
+  }
 }

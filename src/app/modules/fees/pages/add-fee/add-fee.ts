@@ -54,7 +54,7 @@ export class AddFee implements OnInit, OnChanges {
       name: ['', Validators.required],
       currency: ['', Validators.required],
       feeType: [0],
-      flatFee: [null],
+      flatFee: [null, Validators.required],
       percantage: [null],
     });
   }
@@ -104,5 +104,13 @@ export class AddFee implements OnInit, OnChanges {
         });
       }
     }
+  }
+
+  addValidator(controlName: string, removedControl: string) {
+    console.log(controlName, 'ssssssss');
+    this.feeForm.get(controlName)?.addValidators([Validators.required]);
+    this.feeForm.get(removedControl)?.removeValidators([Validators.required]);
+    this.feeForm.get(controlName)?.updateValueAndValidity();
+    this.feeForm.get(removedControl)?.updateValueAndValidity();
   }
 }
