@@ -10,6 +10,9 @@
     [paginator]="true"
     [rows]="10"
     (onActionClick)="callAction($event)"
+    [total]="total"
+    (onLazyLoad)="getAllMerchants($event, 10)"
+    (onPageSize)="getAllMerchants(pageIndex, $event)"
   ></app-qr-table>
 </div>
 <app-qr-modal

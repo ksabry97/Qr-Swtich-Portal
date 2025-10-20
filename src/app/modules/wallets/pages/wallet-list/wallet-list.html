@@ -9,9 +9,14 @@
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
+    [total]="total"
+    (onActionClick)="callAction($event)"
+    (onLazyLoad)="getAllWallets($event, 10)"
+    (onPageSize)="getAllWallets(pageIndex, $event)"
   ></app-qr-table>
 </div>
 <app-qr-modal
   [modalComponent]="addWallet"
   [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ viewMode: viewMode, walletId: walletId }"
 ></app-qr-modal>

@@ -181,8 +181,7 @@
     "actions": {
       "viewDetails": "Voir les détails",
       "simulate": "Simuler"
-    }
-  ,
+    },
     "simulateFee": {
       "title": "Simulation des frais",
       "amount": "Montant",
@@ -279,7 +278,7 @@
     "title": "Hôte",
     "addWallet": {
       "title": "Ajouter un nouveau hôte",
-      "description": "configurer un nouveau point de terminaison de service ATM et les paramètres",
+      "viewWallet": "Voir l'hôte",
       "basicInfo": "Informations de base",
       "walletName": "Nom du hôte",
       "enterWalletName": "entrez le nom du hôte",

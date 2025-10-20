@@ -181,8 +181,7 @@
     "actions": {
       "viewDetails": "View Details",
       "simulate": "Simulate"
-    }
-  ,
+    },
     "simulateFee": {
       "title": "Fee Simulation",
       "amount": "Amount",
@@ -279,7 +278,7 @@
     "title": "Hosts",
     "addWallet": {
       "title": "Add new host",
-
+      "viewWallet": "View host",
       "basicInfo": "Basic Information",
       "walletName": "Host Name",
       "enterWalletName": "enter host name",

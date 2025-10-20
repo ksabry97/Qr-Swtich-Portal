@@ -37,6 +37,11 @@ textarea {
     border-color: #40a9ff;
     outline: none;
   }
+  &:read-only {
+    background: #f5f5f5;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+  }
 }
 
 .pbt-2 {

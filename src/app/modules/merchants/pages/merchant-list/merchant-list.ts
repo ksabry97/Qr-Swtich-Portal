@@ -24,6 +24,9 @@ export class MerchantList implements OnInit {
   viewMode = false;
   editMode = false;
   merchantId = '';
+  total = 0;
+  pageIndex = 1;
+  pageSize = 10;
   columns: TableColumn[] = [
     {
       field: 'name',
@@ -72,7 +75,7 @@ export class MerchantList implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllMerchants(1, 10);
+    this.getAllMerchants(this.pageIndex, this.pageSize);
   }
   openModel() {
     this.viewMode = false;
@@ -82,9 +85,11 @@ export class MerchantList implements OnInit {
 
   getAllMerchants(pageNumber: number, pageSize: number) {
     this.globalServ.setLoading(true);
+    this.pageIndex = pageNumber;
     this.merchantServ.getAllMerchants(pageNumber, pageSize).subscribe({
       next: (data: any) => {
-        this.merchants = data.data;
+        this.merchants = data.data.items;
+        this.total = data.data.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);

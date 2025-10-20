@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { CommonModule } from '@angular/common';
 import {
@@ -41,6 +41,8 @@ export class AddWallet {
   globalServ = inject(GlobalService);
   walletForm!: FormGroup;
   isOpened = [false, false, false];
+  @Input() viewMode = false;
+  @Input() walletId = '';
   types = [
     {
       text: 'Development',

@@ -20,6 +20,11 @@ export class WalletList implements OnInit {
   globalServ = inject(GlobalService);
   walletServ = inject(WalletsService);
   addWallet = AddWallet;
+  viewMode = false;
+  walletId = '';
+  total = 0;
+  pageIndex = 0;
+  pageSize = 10;
   columns: TableColumn[] = [
     { field: 'name', header: 'wallets.table.walletName', sortable: false },
     {
@@ -56,17 +61,20 @@ export class WalletList implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.getAllWallets(1, 10);
+    this.getAllWallets(this.pageIndex, this.pageSize);
   }
   openModel() {
+    this.viewMode = false;
     this.globalServ.setModal(true);
   }
 
   getAllWallets(pageNumber: number, pageSize: number) {
     this.globalServ.setLoading(true);
+    this.pageIndex = pageNumber;
     this.walletServ.getAllWallets(pageNumber, pageSize).subscribe({
       next: (data: any) => {
-        this.wallets = data.data;
+        this.wallets = data.data.items;
+        this.total = data.data.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -75,5 +83,15 @@ export class WalletList implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+  callAction(action: any) {
+    this.viewMode = false;
+    switch (action.action.severity) {
+      case 'info':
+        this.globalServ.setModal(true);
+        this.viewMode = true;
+        this.walletId = action.rowData.id;
+        return;
+    }
   }
 }

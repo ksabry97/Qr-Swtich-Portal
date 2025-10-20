@@ -1,6 +1,9 @@
 <app-modal-header
-  [description]="'wallets.addWallet.description' | translate"
-  [title]="'wallets.addWallet.title' | translate"
+  [title]="
+    viewMode
+      ? ('wallets.addWallet.viewWallet' | translate)
+      : ('wallets.addWallet.title' | translate)
+  "
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="walletForm" class="flex flex-col gap-3">
@@ -17,6 +20,7 @@
           [controlName]="'name'"
           [parentGroup]="walletForm"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-select
           [required]="true"
@@ -26,6 +30,7 @@
           [options]="walletTypes"
           [label]="'wallets.addWallet.walletType' | translate"
           [placeholder]="'wallets.addWallet.selectWalletType' | translate"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-select>
       </div>
@@ -39,6 +44,7 @@
           [placeholder]="'wallets.addWallet.selectEnvironment' | translate"
           class="w-1/2"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-select>
         <div class="flex gap-2 flex-col w-1/2">
           <label>{{ "wallets.addWallet.description" | translate }}</label>
@@ -46,6 +52,7 @@
             class="p-3"
             [placeholder]="'wallets.addWallet.writeDescription' | translate"
             formControlName="description"
+            [readonly]="viewMode"
           ></textarea>
         </div>
       </div>
@@ -73,6 +80,7 @@
           formControlName="baseUrl"
           [controlName]="'baseUrl'"
           [parentGroup]="walletForm"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input-number
           formControlName="port"
@@ -81,6 +89,7 @@
           [label]="'wallets.addWallet.port' | translate"
           class="w-1/2"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input-number>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[0]">
@@ -91,6 +100,7 @@
           [label]="'wallets.addWallet.maxConnections' | translate"
           class="w-1/2"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input-number>
         <app-qr-input-number
           formControlName="connectionTimeout"
@@ -99,6 +109,7 @@
           [label]="'wallets.addWallet.timeoutSeconds' | translate"
           class="w-1/2"
           [required]="true"
+          [disabled]="viewMode"
         ></app-qr-input-number>
       </div>
     </section>
@@ -119,7 +130,10 @@
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[1]">
         <label>{{ "wallets.addWallet.useSslHttps" | translate }}</label>
-        <nz-switch formControlName="isHttps"></nz-switch>
+        <nz-switch
+          formControlName="isHttps"
+          [nzDisabled]="viewMode"
+        ></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[1]">
         <app-qr-input
@@ -129,6 +143,7 @@
           formControlName="apiKey"
           [controlName]="'apiKey'"
           [parentGroup]="walletForm"
+          [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
@@ -137,6 +152,7 @@
           formControlName="userName"
           [controlName]="'userName'"
           [parentGroup]="walletForm"
+          [disabled]="viewMode"
         ></app-qr-input>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[1]">
@@ -147,6 +163,7 @@
           formControlName="userPassword"
           [controlName]="'userPassword'"
           [parentGroup]="walletForm"
+          [disabled]="viewMode"
         ></app-qr-password>
       </div>
     </section>
@@ -167,7 +184,10 @@
       </div>
       <div class="flex items-center justify-between w-1/2" *ngIf="isOpened[2]">
         <label>{{ "wallets.addWallet.enableHealthChecks" | translate }}</label>
-        <nz-switch formControlName="enableHealthChecks"></nz-switch>
+        <nz-switch
+          formControlName="enableHealthChecks"
+          [nzDisabled]="viewMode"
+        ></nz-switch>
       </div>
       <div class="flex gap-3" *ngIf="isOpened[2]">
         <app-qr-input
@@ -176,6 +196,7 @@
           [parentGroup]="walletForm"
           [label]="'wallets.addWallet.healthCheckInterval' | translate"
           [placeholder]="'00:00:00'"
+          [disabled]="viewMode"
           class="w-1/2"
         ></app-qr-input>
         <div
@@ -183,7 +204,10 @@
           *ngIf="isOpened[2]"
         >
           <label>{{ "wallets.addWallet.active" | translate }}</label>
-          <nz-switch formControlName="isActive"></nz-switch>
+          <nz-switch
+            formControlName="isActive"
+            [nzDisabled]="viewMode"
+          ></nz-switch>
         </div>
       </div>
 
@@ -194,6 +218,7 @@
             class="p-3"
             [placeholder]="'wallets.addWallet.writeDescription' | translate"
             formControlName="notes"
+            [readonly]="viewMode"
           ></textarea>
         </div>
       </div>
