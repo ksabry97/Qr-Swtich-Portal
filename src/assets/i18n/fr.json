@@ -182,6 +182,16 @@
       "viewDetails": "Voir les détails",
       "simulate": "Simuler"
     }
+  ,
+    "simulateFee": {
+      "title": "Simulation des frais",
+      "amount": "Montant",
+      "inputAmount": "Montant saisi",
+      "calculatedFee": "Frais calculés",
+      "totalAmount": "Montant total",
+      "detail": "Détail",
+      "simulate": "Simuler"
+    }
   },
   "merchants": {
     "title": "Marchands",

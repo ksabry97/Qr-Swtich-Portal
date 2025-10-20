@@ -182,6 +182,16 @@
       "viewDetails": "View Details",
       "simulate": "Simulate"
     }
+  ,
+    "simulateFee": {
+      "title": "Fee Simulation",
+      "amount": "Amount",
+      "inputAmount": "Input Amount",
+      "calculatedFee": "Calculated Fee",
+      "totalAmount": "Total Amount",
+      "detail": "Detail",
+      "simulate": "Simulate"
+    }
   },
   "merchants": {
     "title": "Merchants",

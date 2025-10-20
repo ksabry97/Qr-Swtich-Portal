@@ -46,19 +46,19 @@ export class SimulateFee implements OnInit, OnChanges {
   feesProfiles = [];
   details = [
     {
-      label: 'Input Amount',
+      label: 'fees.simulateFee.inputAmount',
       value: 0,
     },
     {
-      label: 'Calculated Fee',
+      label: 'fees.simulateFee.calculatedFee',
       value: 0,
     },
     {
-      label: 'Total Amount',
+      label: 'fees.simulateFee.totalAmount',
       value: 0,
     },
     {
-      label: 'Detail',
+      label: 'fees.simulateFee.detail',
       value: 0,
     },
   ];

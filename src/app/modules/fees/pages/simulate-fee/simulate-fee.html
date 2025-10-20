@@ -1,4 +1,4 @@
-<app-modal-header [title]="'Fee Simultaion'"></app-modal-header>
+<app-modal-header [title]="'fees.simulateFee.title' | translate"></app-modal-header>
 <div class="content">
   <form [formGroup]="feeForm" class="flex flex-col gap-3">
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
@@ -19,7 +19,7 @@
           [controlName]="'amount'"
           [parentGroup]="feeForm"
           [unit]="'XOF'"
-          [label]="'Amount'"
+          [label]="'fees.simulateFee.amount' | translate"
           class="w-1/2"
         ></app-qr-input-number>
       </div>
@@ -28,7 +28,7 @@
         class="flex w-full flex-wrap p-4 rounded-md justify-between gap-3"
       >
         <div class="flex flex-col gap-2 w-1/4" *ngFor="let detail of details">
-          <label>{{ detail.label }}</label>
+          <label>{{ detail.label | translate }}</label>
           <p>{{ detail.value }} XOF</p>
         </div>
       </section>
@@ -36,6 +36,6 @@
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'Simulate'"
+  [submitText]="'fees.simulateFee.simulate' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>
