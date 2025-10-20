@@ -10,6 +10,7 @@ import { AddFee } from '../add-fee/add-fee';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { FeesService } from '../../services/fees.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { SimulateFee } from '../simulate-fee/simulate-fee';
 
 @Component({
   selector: 'app-fees-list',
@@ -20,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
 export class FeesList implements OnInit {
   globalServ = inject(GlobalService);
   feeServ = inject(FeesService);
-  addFee = AddFee;
+  createModal = [AddFee, SimulateFee];
+  isOpened = -1;
   viewMode = false;
   feeId = '';
   columns: TableColumn[] = [
@@ -54,7 +56,6 @@ export class FeesList implements OnInit {
       label: 'fees.actions.simulate',
       icon: 'calculator',
       severity: 'warn',
-      disabled: true,
     },
   ];
 
@@ -64,8 +65,9 @@ export class FeesList implements OnInit {
     });
   }
   fees = [];
-  openModel() {
+  openModel(i: number) {
     this.viewMode = false;
+    this.isOpened = i;
     this.globalServ.setModal(true);
   }
   ngOnInit(): void {
@@ -88,8 +90,12 @@ export class FeesList implements OnInit {
   callAction(action: any) {
     switch (action.action.severity) {
       case 'info':
-        this.globalServ.setModal(true);
+        this.openModel(0);
         this.viewMode = true;
+        this.feeId = action.rowData.id;
+        return;
+      case 'warn':
+        this.openModel(1);
         this.feeId = action.rowData.id;
         return;
     }

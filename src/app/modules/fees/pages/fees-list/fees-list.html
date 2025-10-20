@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-2">
   <app-entity-header
     [title]="'fees.title' | translate"
-    (isCreateClicked)="openModel()"
+    (isCreateClicked)="openModel(0)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"
@@ -14,7 +14,7 @@
   ></app-qr-table>
 </div>
 <app-qr-modal
-  [modalComponent]="addFee"
+  [modalComponent]="createModal[isOpened]"
   [isVisible]="globalServ.isModalOpened()"
   [inputs]="{ viewMode: viewMode, feeId: feeId }"
 ></app-qr-modal>

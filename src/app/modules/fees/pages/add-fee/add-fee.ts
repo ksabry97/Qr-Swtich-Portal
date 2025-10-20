@@ -87,7 +87,7 @@ export class AddFee implements OnInit, OnChanges {
       next: (data: any) => {
         const mappedData = data.data.map((item: any) => ({
           text: item.text,
-          value: String(item.value),
+          value: item.text,
         }));
         this.currencies = mappedData;
       },

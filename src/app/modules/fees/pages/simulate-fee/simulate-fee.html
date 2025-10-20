@@ -1,0 +1,32 @@
+<app-modal-header [title]="'Fee Simultaion'"></app-modal-header>
+<div class="content">
+  <form [formGroup]="feeForm" class="flex flex-col gap-3">
+    <section class="flex w-full flex-col gap-3 p-2 rounded-md">
+      <div class="flex gap-3">
+        <app-qr-select
+          formControlName="feeProfileId"
+          [controlName]="'feeProfileId'"
+          [parentGroup]="feeForm"
+          [options]="feesProfiles"
+          [label]="'fees.addFee.currency' | translate"
+          [placeholder]="'fees.addFee.selectCurrency' | translate"
+          [required]="true"
+          class="w-1/2"
+        ></app-qr-select>
+        <app-qr-input-number
+          [placeholder]="'fees.addFee.examplePlaceholder' | translate"
+          formControlName="amount"
+          [controlName]="'amount'"
+          [parentGroup]="feeForm"
+          [unit]="'XOF'"
+          [label]="'Amount'"
+          class="w-1/2"
+        ></app-qr-input-number>
+      </div>
+    </section>
+  </form>
+</div>
+<app-modal-footer
+  [submitText]="'common.saveAndSubmit' | translate"
+  (isSubmitted)="submit()"
+></app-modal-footer>
