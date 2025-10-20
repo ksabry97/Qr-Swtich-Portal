@@ -44,7 +44,26 @@ export class SimulateFee implements OnInit, OnChanges {
   feeForm!: FormGroup;
   globalServ = inject(GlobalService);
   feesProfiles = [];
+  details = [
+    {
+      label: 'Input Amount',
+      value: 0,
+    },
+    {
+      label: 'Calculated Fee',
+      value: 0,
+    },
+    {
+      label: 'Total Amount',
+      value: 0,
+    },
+    {
+      label: 'Detail',
+      value: 0,
+    },
+  ];
   @Input() feeId = '';
+
   constructor(
     private fb: FormBuilder,
     private readonly feeServ: FeesService,

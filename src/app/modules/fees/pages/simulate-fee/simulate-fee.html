@@ -23,10 +23,19 @@
           class="w-1/2"
         ></app-qr-input-number>
       </div>
+
+      <section
+        class="flex w-full flex-wrap p-4 rounded-md justify-between gap-3"
+      >
+        <div class="flex flex-col gap-2 w-1/4" *ngFor="let detail of details">
+          <label>{{ detail.label }}</label>
+          <p>{{ detail.value }} XOF</p>
+        </div>
+      </section>
     </section>
   </form>
 </div>
 <app-modal-footer
-  [submitText]="'common.saveAndSubmit' | translate"
+  [submitText]="'Simulate'"
   (isSubmitted)="submit()"
 ></app-modal-footer>

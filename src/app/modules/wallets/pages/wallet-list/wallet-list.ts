@@ -47,11 +47,6 @@ export class WalletList implements OnInit {
       icon: 'eye',
       severity: 'info',
     },
-    {
-      label: 'wallets.actions.testConnection',
-      icon: 'cloud-sync',
-      severity: 'info',
-    },
   ];
 
   wallets = [];
