@@ -68,8 +68,8 @@ export class AddTenant implements OnInit, OnChanges {
       countryCode: ['', Validators.required],
       environment: ['', Validators.required],
       description: [''],
-      contactEmail: [''],
-      contactPhone: [''],
+      contactEmail: ['', Validators.required],
+      contactPhone: ['', Validators.required],
       contactName: [''],
       contantAddress: [''],
     });

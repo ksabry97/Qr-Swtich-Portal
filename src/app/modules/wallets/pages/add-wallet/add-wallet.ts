@@ -69,7 +69,7 @@ export class AddWallet {
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.walletForm = this.fb.group({
       name: ['', Validators.required],
-      type: [''],
+      type: ['', Validators.required],
       environment: ['', Validators.required],
       description: [''],
       baseUrl: [''],
