@@ -6,6 +6,8 @@ import { LoginServ } from '../../services/login-serv.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { decryptBackendResponse } from '../../../../utils/aes-decryptor';
+import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-otp-modal',
   imports: [OTPInput, NzIconModule, CommonModule, TranslateModule],
@@ -21,6 +23,7 @@ export class OtpModal implements OnInit, OnDestroy {
   loginServ = inject(LoginServ);
   router = inject(Router);
   loading = false;
+  encryptionKey = environment.publicEncryptionKey;
   errorMessage = '';
   ngOnInit(): void {
     this.startTimer();
@@ -53,20 +56,20 @@ export class OtpModal implements OnInit, OnDestroy {
     this.globalServ.setModal(false);
   }
 
-  login() {
+  async login() {
     this.loading = true;
     this.errorMessage = '';
-    this.loginServ.sendOtp(this.otp).subscribe({
-      next: (data: any) => {
-        localStorage.setItem('token', data.accessToken);
-        this.router.navigateByUrl('/dashboard');
-        this.globalServ.setModal(false);
+    (await this.loginServ.sendOtp(this.otp)).subscribe((data) => {
+      decryptBackendResponse(data, this.encryptionKey).then((value) => {
+        if (value.Success) {
+          localStorage.setItem('token', value?.AccessToken);
+          this.router.navigateByUrl('/dashboard');
+          this.globalServ.setModal(false);
+        } else {
+          this.errorMessage = value?.ErrorMessage;
+        }
         this.loading = false;
-      },
-      error: (err) => {
-        this.errorMessage = err.error.errorMessage;
-        this.loading = false;
-      },
+      });
     });
   }
   ngOnDestroy(): void {
