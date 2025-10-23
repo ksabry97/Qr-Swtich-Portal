@@ -22,6 +22,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { UserService } from '../../services/users.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
+import { PasswordValidators } from '../../services/password-validator';
 
 @Component({
   selector: 'app-add-user',
@@ -44,6 +45,7 @@ export class AddUser implements OnInit, OnChanges {
   userServ = inject(UserService);
   tenants = [];
   assignedRoles = [];
+  errorMessages: string[] = [];
   @Input() userId = '';
   @Input() viewMode = false;
   @Input() editMode = false;
@@ -53,7 +55,7 @@ export class AddUser implements OnInit, OnChanges {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      password: [''],
+      password: ['', PasswordValidators.passwordStrength()],
       assignRoleById: [[]],
     });
   }
@@ -128,5 +130,16 @@ export class AddUser implements OnInit, OnChanges {
         this.message.error(err?.error?.message);
       },
     });
+  }
+
+  validate() {
+    this.errorMessages = [];
+    const passwordControl = this.userForm.get('password');
+    const requirements = passwordControl?.errors?.['passwordRequirements'];
+
+    for (const [key, value] of Object.entries(requirements)) {
+      let error = `${key}: ${value}` || '';
+      this.errorMessages.push(error);
+    }
   }
 }

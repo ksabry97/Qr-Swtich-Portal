@@ -55,15 +55,21 @@
         ></app-qr-input>
       </div>
       <div class="flex gap-3">
-        <app-qr-password
-          [label]="'common.password' | translate"
-          [placeholder]="'common.enterPassword' | translate"
-          formControlName="password"
-          [controlName]="'password'"
-          [parentGroup]="userForm"
-          [disabled]="viewMode || editMode"
-          class="w-1/2"
-        ></app-qr-password>
+        <div class="flex flex-col gap-2 w-1/2">
+          <app-qr-password
+            [label]="'common.password' | translate"
+            [placeholder]="'common.enterPassword' | translate"
+            formControlName="password"
+            [controlName]="'password'"
+            [parentGroup]="userForm"
+            [disabled]="viewMode || editMode"
+            (ngModelChange)="validate()"
+            class="w-full"
+          ></app-qr-password>
+          <span class="text-red-500" *ngIf="errorMessages">{{
+            errorMessages[0]
+          }}</span>
+        </div>
         <app-qr-select
           formControlName="assignRoleById"
           [controlName]="'assignRoleById'"
