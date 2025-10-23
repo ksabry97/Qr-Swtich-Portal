@@ -38,7 +38,7 @@
         [ngClass]="{
           'items-baseline':
             feeForm.get('flatFee')?.invalid ||
-            feeForm.get('percantage')?.invalid
+            feeForm.get('percentage')?.invalid
         }"
       >
         <div
@@ -50,7 +50,7 @@
             formControlName="feeType"
             [value]="0"
             [attr.disabled]="viewMode ? true : null"
-            (change)="addValidator('flatFee', 'percantage')"
+            (change)="addValidator('flatFee', 'percentage')"
           />
           <label>{{ "fees.addFee.fixed" | translate }}</label>
           <app-qr-input-number
@@ -64,20 +64,20 @@
         </div>
         <div
           class="flex items-center gap-3 w-1/2"
-          [ngClass]="{ 'items-baseline': feeForm.get('percantage')?.invalid }"
+          [ngClass]="{ 'items-baseline': feeForm.get('percentage')?.invalid }"
         >
           <input
             type="radio"
             formControlName="feeType"
             [value]="1"
             [attr.disabled]="viewMode ? true : null"
-            (change)="addValidator('percantage', 'flatFee')"
+            (change)="addValidator('percentage', 'flatFee')"
           />
           <label>{{ "fees.addFee.percentage" | translate }}</label>
           <app-qr-input-number
             [placeholder]="'fees.addFee.examplePlaceholder' | translate"
-            formControlName="percantage"
-            [controlName]="'percantage'"
+            formControlName="percentage"
+            [controlName]="'percentage'"
             [parentGroup]="feeForm"
             [unit]="'%'"
             [disabled]="feeForm.get('feeType')?.value !== 1 || viewMode"

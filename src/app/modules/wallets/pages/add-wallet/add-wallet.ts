@@ -80,7 +80,7 @@ export class AddWallet implements OnChanges {
       type: ['', Validators.required],
       environment: ['', Validators.required],
       description: [''],
-      baseUrl: [''],
+      baseUrl: ['', Validators.required],
       port: ['443', Validators.required],
       macConnections: ['', Validators.required],
       connectionTimeout: ['', Validators.required],

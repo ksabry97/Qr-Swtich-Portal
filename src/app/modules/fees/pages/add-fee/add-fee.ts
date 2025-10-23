@@ -23,6 +23,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { integerValidator } from '../../services/integer-validator';
 @Component({
   selector: 'app-add-fee',
   imports: [
@@ -54,8 +55,11 @@ export class AddFee implements OnInit, OnChanges {
       name: ['', Validators.required],
       currency: ['', Validators.required],
       feeType: [0],
-      flatFee: [null, [Validators.required, Validators.min(0)]],
-      percantage: [null, [Validators.max(100)]],
+      flatFee: [
+        null,
+        [Validators.required, Validators.min(0), integerValidator()],
+      ],
+      percentage: [null, [Validators.max(100)]],
     });
   }
 
