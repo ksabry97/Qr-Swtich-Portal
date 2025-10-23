@@ -48,4 +48,5 @@
 <app-modal-footer
   [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
+  *ngIf="!viewMode"
 ></app-modal-footer>

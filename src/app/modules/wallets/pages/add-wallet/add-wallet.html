@@ -226,6 +226,7 @@
   </form>
 </div>
 <app-modal-footer
+  *ngIf="!viewMode"
   [submitText]="'common.saveAndSubmit' | translate"
   (isSubmitted)="submit()"
 ></app-modal-footer>

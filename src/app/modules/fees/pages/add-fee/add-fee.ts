@@ -54,8 +54,8 @@ export class AddFee implements OnInit, OnChanges {
       name: ['', Validators.required],
       currency: ['', Validators.required],
       feeType: [0],
-      flatFee: [null, Validators.required],
-      percantage: [null],
+      flatFee: [null, [Validators.required, Validators.min(0)]],
+      percantage: [null, [Validators.max(100)]],
     });
   }
 

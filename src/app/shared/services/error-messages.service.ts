@@ -13,6 +13,12 @@ export class ErrorMessages {
       if (errors['required']) {
         return `${label} is required`;
       }
+      if (errors['min']) {
+        return `${label} must be at least ${errors['min'].min}`;
+      }
+      if (errors['max']) {
+        return `${label} must be at most ${errors['max'].max}`;
+      }
 
       if (errors['minlength']) {
         return `${label} must be at least ${errors['minlength'].requiredLength} characters long`;
