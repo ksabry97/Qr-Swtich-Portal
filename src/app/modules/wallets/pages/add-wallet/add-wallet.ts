@@ -99,10 +99,14 @@ export class AddWallet implements OnChanges {
       this.globalServ.requestLoading.set(true);
       this.walletServ.createWallet(this.walletForm.value).subscribe({
         next: (data: any) => {
-          this.globalServ.setModal(false);
-          this.globalServ.isSubmitted.set(true);
+          if (data.status == 200) {
+            this.globalServ.setModal(false);
+            this.globalServ.isSubmitted.set(true);
+            this.message.success(data?.Message);
+          } else {
+            this.message.error(data?.Message);
+          }
           this.globalServ.requestLoading.set(false);
-          this.message.success(data?.Message);
         },
         error: (err) => {
           this.globalServ.requestLoading.set(false);
