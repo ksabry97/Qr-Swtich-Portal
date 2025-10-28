@@ -23,7 +23,7 @@
   </button>
   <button
     class="rounded-md submit-btn p-2 min-w-8"
-    (click)="login()"
+    (click)="onSubmit($event)"
     [disabled]="loading"
   >
     <nz-icon nzType="loading" *ngIf="loading" />

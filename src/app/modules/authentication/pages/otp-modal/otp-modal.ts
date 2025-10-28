@@ -84,8 +84,15 @@ export class OtpModal implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
   }
-  onSubmit(event?: Event | any) {
+  async onSubmit(event?: Event | any) {
     event?.preventDefault();
-    this.login();
+    event?.stopPropagation();
+    
+    // Ensure OTP is not empty and not already loading
+    if (!this.otp || this.otp.length !== 4 || this.loading) {
+      return;
+    }
+    
+    await this.login();
   }
 }

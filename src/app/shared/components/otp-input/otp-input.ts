@@ -24,6 +24,8 @@ export class OTPInput {
   @Output() enterPressed = new EventEmitter<void>();
 
   onEnterPressed(event: KeyboardEvent | any) {
+    // Get the current OTP value before emitting enter event
+    this.getValue();
     this.enterPressed.emit(event);
   }
   onOtpInput(event: Event, index: number) {
