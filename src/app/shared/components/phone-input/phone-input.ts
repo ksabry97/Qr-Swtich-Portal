@@ -85,7 +85,10 @@ export class PhoneInput implements ControlValueAccessor, Validator, OnInit {
       const parsed = parsePhoneNumberFromString(value);
       if (parsed && parsed.country) {
         this.selectedCountryCode = parsed.country as CountryCode;
-        this.value = parsed.nationalNumber || parsed.number?.replace(parsed.countryCallingCode, '').trim() || '';
+        this.value =
+          parsed.nationalNumber ||
+          parsed.number?.replace(parsed.countryCallingCode, '').trim() ||
+          '';
       } else {
         // If value already has country code, try to extract it
         const fullNumber = value.toString().trim();
@@ -152,7 +155,7 @@ export class PhoneInput implements ControlValueAccessor, Validator, OnInit {
 
   validate(control: AbstractControl): ValidationErrors | null {
     const value = control?.value;
-    
+
     if (this.required && (!value || !value.toString().trim())) {
       return { required: true };
     }
@@ -163,7 +166,10 @@ export class PhoneInput implements ControlValueAccessor, Validator, OnInit {
 
     // Try to parse the full number with country code
     const fullNumber = value.toString().trim();
-    let phoneNumber = parsePhoneNumberFromString(fullNumber, this.selectedCountryCode);
+    let phoneNumber = parsePhoneNumberFromString(
+      fullNumber,
+      this.selectedCountryCode
+    );
 
     // If parsing with country code fails, try without specifying country
     if (!phoneNumber || !phoneNumber.isValid()) {
