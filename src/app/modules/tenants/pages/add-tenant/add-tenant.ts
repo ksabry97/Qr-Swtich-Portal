@@ -22,6 +22,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { PhoneInput } from '../../../../shared/components/phone-input/phone-input';
 
 @Component({
   selector: 'app-add-tenant',
@@ -33,6 +34,7 @@ import { TranslateModule } from '@ngx-translate/core';
     QrInput,
     QrSelect,
     TranslateModule,
+    PhoneInput,
   ],
   templateUrl: './add-tenant.html',
   styleUrl: './add-tenant.scss',
@@ -66,7 +68,6 @@ export class AddTenant implements OnInit, OnChanges {
     this.tenantForm = this.fb.group({
       tenantName: ['', Validators.required],
       countryCode: ['', Validators.required],
-      environment: ['', Validators.required],
       description: [''],
       contactEmail: ['', Validators.required],
       contactPhone: [
@@ -77,7 +78,7 @@ export class AddTenant implements OnInit, OnChanges {
           Validators.maxLength(15),
         ],
       ],
-      contactName: [''],
+      contactName: ['', [Validators.required]],
       contantAddress: [''],
     });
   }

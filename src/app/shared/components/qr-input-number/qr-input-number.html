@@ -3,18 +3,20 @@
     {{ label }}
   </label>
 
-  <!-- Text Input -->
+  <!-- Number Input -->
   <div class="input-wrapper" [ngClass]="{ filled: filled }">
     <input
       nz-input
       [placeholder]="placeholder"
-      [disabled]="disabled"
+      [disabled]="disabled || isDisabled"
       [readonly]="readonly"
       type="number"
       [value]="value"
-      [nzStatus]="control.touched && control.invalid ? 'error' : ''"
+      [nzStatus]="control && control.touched && control.invalid ? 'error' : ''"
       (input)="onChange($event)"
       (blur)="touched()"
+      [min]="min"
+      [max]="max"
     />
 
     <span class="input-number-icon" *ngIf="unit">{{ unit }}</span>

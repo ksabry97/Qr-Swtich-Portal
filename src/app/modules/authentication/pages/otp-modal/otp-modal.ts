@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { decryptBackendResponse } from '../../../../utils/aes-decryptor';
 import { environment } from '../../../../../environments/environment';
+import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-otp-modal',
   imports: [OTPInput, NzIconModule, CommonModule, TranslateModule],
@@ -43,6 +44,7 @@ export class OtpModal implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.timer -= 1;
     }, 1000);
+    this.clearInterval();
   }
   formatTime(totalSeconds: number): string {
     const minutes = Math.floor(totalSeconds / 60);
@@ -59,20 +61,31 @@ export class OtpModal implements OnInit, OnDestroy {
   async login() {
     this.loading = true;
     this.errorMessage = '';
-    (await this.loginServ.sendOtp(this.otp)).subscribe((data) => {
-      decryptBackendResponse(data, this.encryptionKey).then((value) => {
-        if (value.Success) {
-          localStorage.setItem('token', value?.AccessToken);
-          this.router.navigateByUrl('/dashboard');
-          this.globalServ.setModal(false);
-        } else {
-          this.errorMessage = value?.ErrorMessage;
-        }
-        this.loading = false;
-      });
-    });
+
+    try {
+      const response = await this.loginServ.sendOtp(this.otp);
+      const value = await decryptBackendResponse(response, this.encryptionKey);
+
+      if (value.Success) {
+        localStorage.setItem('token', value?.AccessToken);
+        this.router.navigateByUrl('/dashboard');
+        this.globalServ.setModal(false);
+      } else {
+        this.errorMessage = value?.ErrorMessage;
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      this.errorMessage = 'Something went wrong';
+    } finally {
+      this.loading = false;
+    }
   }
+
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
+  }
+  onSubmit(event?: Event | any) {
+    event?.preventDefault();
+    this.login();
   }
 }

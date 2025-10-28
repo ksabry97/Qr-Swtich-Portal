@@ -32,19 +32,7 @@
           [disabled]="viewMode"
         ></app-qr-select>
       </div>
-      <div class="flex gap-3">
-        <app-qr-select
-          formControlName="environment"
-          [controlName]="'environment'"
-          [parentGroup]="tenantForm"
-          [options]="types"
-          [label]="'tenants.addTenant.environment' | translate"
-          [placeholder]="'tenants.addTenant.selectEnvironment' | translate"
-          [required]="true"
-          class="w-1/2"
-          [disabled]="viewMode"
-        ></app-qr-select>
-      </div>
+
       <div class="flex gap-2 flex-col">
         <label>{{ "tenants.addTenant.description" | translate }}</label>
         <textarea
@@ -68,7 +56,7 @@
           [disabled]="viewMode"
           [required]="true"
         ></app-qr-input>
-        <app-qr-input
+        <!-- <app-qr-input
           class="w-1/2"
           [label]="'tenants.addTenant.contactPhone' | translate"
           [placeholder]="'tenants.addTenant.enterContactPhone' | translate"
@@ -77,7 +65,17 @@
           [parentGroup]="tenantForm"
           [disabled]="viewMode"
           [required]="true"
-        ></app-qr-input>
+        ></app-qr-input> -->
+        <app-phone-input
+          class="w-1/2"
+          [label]="'tenants.addTenant.contactPhone' | translate"
+          [placeholder]="'tenants.addTenant.enterContactPhone' | translate"
+          formControlName="contactPhone"
+          [controlName]="'contactPhone'"
+          [parentGroup]="tenantForm"
+          [disabled]="viewMode"
+          [required]="true"
+        ></app-phone-input>
       </div>
       <div class="flex gap-3">
         <app-qr-input
@@ -88,6 +86,7 @@
           [controlName]="'contactName'"
           [parentGroup]="tenantForm"
           [disabled]="viewMode"
+          [required]="true"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"

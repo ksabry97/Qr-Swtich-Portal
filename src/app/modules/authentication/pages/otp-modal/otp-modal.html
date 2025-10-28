@@ -5,18 +5,21 @@
     class="icon"
     (click)="closeModal()"
   />
-  <h1>{{ 'auth.otp.title' | translate }}</h1>
+  <h1>{{ "auth.otp.title" | translate }}</h1>
   <p class="w-3/5">
-    {{ 'auth.otp.description' | translate }}
+    {{ "auth.otp.description" | translate }}
   </p>
-  <app-otp-input (otpOutput)="otp = $event"></app-otp-input>
+  <app-otp-input
+    (otpOutput)="otp = $event"
+    (enterPressed)="onSubmit($event)"
+  ></app-otp-input>
   <span *ngIf="errorMessage" class="error-message">
     <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
     {{ errorMessage }}</span
   >
   <span>{{ formatTime(timer) }}</span>
   <button class="resend" [disabled]="!resend" (click)="startTimer()">
-    {{ 'auth.otp.resend' | translate }}
+    {{ "auth.otp.resend" | translate }}
   </button>
   <button
     class="rounded-md submit-btn p-2 min-w-8"
@@ -24,6 +27,6 @@
     [disabled]="loading"
   >
     <nz-icon nzType="loading" *ngIf="loading" />
-    {{ loading ? "" : ('auth.otp.login' | translate) }}
+    {{ loading ? "" : ("auth.otp.login" | translate) }}
   </button>
 </div>

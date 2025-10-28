@@ -35,6 +35,14 @@ export class ErrorMessages {
       if (errors['pattern']) {
         return `Invalid format`;
       }
+
+      if (errors['invalidPhone']) {
+        return `Please enter a valid phone number`;
+      }
+
+      if (errors['invalidNumber']) {
+        return `Please enter a valid number`;
+      }
     }
 
     return null;

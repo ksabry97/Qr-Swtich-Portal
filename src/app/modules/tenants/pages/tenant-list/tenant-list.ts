@@ -32,12 +32,13 @@ export class TenantList implements OnInit {
     },
     { field: 'country', header: 'tenants.table.country', sortable: false },
     { field: 'contactEmail', header: 'tenants.table.email', sortable: false },
+
     {
-      field: 'environment',
-      header: 'tenants.table.environment',
+      field: 'status',
+      header: 'tenants.table.status',
       sortable: false,
+      template: 'boolean',
     },
-    { field: 'status', header: 'tenants.table.status', sortable: false },
     {
       field: 'createdAt',
       header: 'tenants.table.createdOn',

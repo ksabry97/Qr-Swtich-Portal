@@ -28,6 +28,8 @@
     "@angular/router": "^20.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "country-flag-icons": "^1.5.21",
+    "libphonenumber-js": "^1.12.25",
     "ng-zorro-antd": "^20.3.1",
     "ngx-echarts": "^20.0.2",
     "rxjs": "~7.8.0",

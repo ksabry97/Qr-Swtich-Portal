@@ -1,0 +1,12 @@
+<div class="p-8 w-full flex justify-between items-center">
+  <div class="w-1/2">
+    <app-qr-input-number
+      [placeholder]="'enter MSSIDN'"
+      [(ngModel)]="mssidn"
+      [label]="'MSSIDN'"
+    ></app-qr-input-number>
+  </div>
+  <button class="submit-btn rounded-md p-2">Pay</button>
+</div>
+
+<img *ngIf="qrDataUrl" [src]="qrDataUrl" alt="QR code" />

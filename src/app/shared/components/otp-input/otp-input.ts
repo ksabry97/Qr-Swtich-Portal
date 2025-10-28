@@ -21,7 +21,11 @@ export class OTPInput {
   arr = new Array(this.length).fill(0);
   otpVal: string = '';
   @Output() otpOutput = new EventEmitter<string>();
+  @Output() enterPressed = new EventEmitter<void>();
 
+  onEnterPressed(event: KeyboardEvent | any) {
+    this.enterPressed.emit(event);
+  }
   onOtpInput(event: Event, index: number) {
     const input = event.target as HTMLInputElement;
 

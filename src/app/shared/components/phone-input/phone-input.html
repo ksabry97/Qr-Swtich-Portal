@@ -1,0 +1,40 @@
+<div class="phone-input">
+  <label *ngIf="label" class="input-label" [class.required]="required">
+    {{ label }}
+  </label>
+  <div
+    class="input-group"
+    [ngClass]="{
+      invalid: control && control.touched && control.invalid
+    }"
+  >
+    <select
+      class="country-select"
+      [ngModel]="selectedCountryCode"
+      (ngModelChange)="onCountryCodeChange($event)"
+      [disabled]="disabled || isDisabled"
+    >
+      <option *ngFor="let c of countries" [value]="c.code">
+        ({{ c.dial }})
+      </option>
+    </select>
+
+    <input
+      type="tel"
+      (input)="onPhoneInput($event.target.value)"
+      (blur)="onTouched()"
+      nz-input
+      [placeholder]="placeholder"
+      [disabled]="disabled || isDisabled"
+      [readonly]="readonly"
+      [value]="value"
+      [nzStatus]="control && control.touched && control.invalid ? 'error' : ''"
+    />
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    {{ errorMessage }}
+  </div>
+</div>
