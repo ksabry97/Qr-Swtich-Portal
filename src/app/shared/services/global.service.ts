@@ -51,7 +51,7 @@ export class GlobalService {
     return this.http.get(url);
   }
   getAllPermissions() {
-    let url = this.baseUrl + '/management/permessions';
+    let url = this.baseUrl + '/management/Permission';
     return this.http.get(url);
   }
 }
