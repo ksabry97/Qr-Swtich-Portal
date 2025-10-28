@@ -24,6 +24,7 @@ import { MerchantService } from '../../services/merchants.service';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { forkJoin } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import { PhoneInput } from '../../../../shared/components/phone-input/phone-input';
 
 @Component({
   selector: 'app-add-merchant',
@@ -37,6 +38,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NzSwitchModule,
     FormsModule,
     TranslateModule,
+    PhoneInput,
   ],
   templateUrl: './add-merchant.html',
   styleUrl: './add-merchant.scss',
@@ -123,14 +125,7 @@ export class AddMerchant implements OnInit, OnChanges {
       serviceLicenseNumber: [''],
       mccId: ['', Validators.required],
       canPerformRegistration: [false],
-      // parentId: [
-      //   '',
-      //   [
-      //     Validators.minLength(14),
-      //     Validators.maxLength(14),
-      //     Validators.required,
-      //   ],
-      // ],
+
       countryId: ['', Validators.required],
       cityId: ['', Validators.required],
       contactEmail: ['', Validators.email],
