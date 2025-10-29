@@ -47,7 +47,9 @@
       "fri": "Ven",
       "sat": "Sam",
       "sun": "Dim"
-    }
+    },
+    "active": "actif",
+    "inactive": "inactif"
   },
   "auth": {
     "login": {

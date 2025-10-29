@@ -56,7 +56,11 @@
               [class.active]="rowData[col.field]"
               [class.inactive]="!rowData[col.field]"
             >
-              {{ rowData[col.field] ? "Active" : "Inactive" }}
+              {{
+                rowData[col.field]
+                  ? ("common.active" | translate)
+                  : ("common.inactive" | translate)
+              }}
             </span>
           </td>
           <td *ngIf="!col.template">

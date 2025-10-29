@@ -47,7 +47,9 @@
       "fri": "Fri",
       "sat": "Sat",
       "sun": "Sun"
-    }
+    },
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "auth": {
     "login": {

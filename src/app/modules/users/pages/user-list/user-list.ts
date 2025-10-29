@@ -53,8 +53,8 @@ export class UserList implements OnInit {
     },
 
     {
-      label: 'users.actions.delete',
-      icon: 'delete',
+      label: 'users.actions.deactivate',
+      icon: 'lock',
       severity: 'danger',
     },
   ];
