@@ -33,32 +33,36 @@ export class QrSidebar implements OnInit {
         {
           label: 'navigation.users',
           route: 'users',
-          isDisabled: false,
+          isDisabled: !this.isAllowed(value?.Users?.permissions?.ViewUser),
         },
         {
           label: 'navigation.roles',
           route: 'roles',
-          isDisabled: false,
+          isDisabled: !this.isAllowed(value?.Roles?.permissions?.ViewRole),
         },
         {
           label: 'navigation.wallets',
           route: 'wallets',
-          isDisabled: false,
+          isDisabled: !this.isAllowed(value?.Wallets?.permissions?.ViewWallet),
         },
         {
           label: 'navigation.merchants',
           route: 'merchants',
-          isDisabled: false,
+          isDisabled: !this.isAllowed(
+            value?.Merchants?.permissions?.ViewMerchant
+          ),
         },
         {
           label: 'navigation.fees',
           route: 'fees',
-          isDisabled: false,
+          isDisabled: !this.isAllowed(value?.Fees?.permissions?.ViewFee),
         },
         {
           label: 'navigation.auditLogs',
           route: 'audit-logs',
-          isDisabled: false,
+          isDisabled: !this.isAllowed(
+            value?.AuditLogs?.permissions?.ViewAllLogs
+          ),
         },
       ];
     });
