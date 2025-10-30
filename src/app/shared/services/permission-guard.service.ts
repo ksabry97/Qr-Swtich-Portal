@@ -20,6 +20,7 @@ export class PermissonGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     const requiredPermission = route.data['permission'];
+
     if (
       this.authServ.hasPermission(requiredPermission) ||
       !requiredPermission

@@ -80,7 +80,7 @@ export class TenantList implements OnInit {
           label: 'users.actions.viewDetails',
           icon: 'eye',
           severity: 'info',
-          disabled: !this.isAllowed(this.Tenants.ViewTenant),
+          disabled: !this.isAllowed(this.Tenants?.ViewTenant),
         },
       ];
     });
