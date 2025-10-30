@@ -65,7 +65,7 @@ export class App implements OnInit {
         let roles = decoded.realm_access?.roles || decoded['role'] || [];
 
         roles = Array.isArray(roles) ? roles : [roles];
-        this.globalServ.usersPermission = roles;
+        this.globalServ.usersPermission.next(roles);
         console.log(this.globalServ.usersPermission, '22222222');
       },
     });

@@ -81,6 +81,6 @@ export class Dashboard implements OnInit {
   }
 
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.includes(permission);
+    return this.globalServ.usersPermission.value.includes(permission);
   }
 }

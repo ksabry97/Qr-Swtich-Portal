@@ -15,7 +15,7 @@ export interface Permission {
   isAllowed: boolean;
 }
 interface ResourcePermissions {
-  permissions: Permission[];
+  permissions: any;
   groupedPermissions: any[];
 }
 export interface ResourcesObject {

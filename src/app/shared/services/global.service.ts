@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class GlobalService {
   PermissionsPerModule = new BehaviorSubject<Partial<ResourcesObject>>({});
-  usersPermission: string[] = [];
+  usersPermission = new BehaviorSubject<string[]>([]);
   loading = signal<boolean>(false);
   isModalOpened = signal(false);
   isSubmitted = signal<boolean>(false);

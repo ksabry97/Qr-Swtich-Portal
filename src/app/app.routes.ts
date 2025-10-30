@@ -35,22 +35,32 @@ export const routes: Routes = [
       {
         path: 'users',
         component: UserList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'Users.ViewUser' },
       },
       {
         path: 'roles',
         component: RolesList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'Roles.ViewRole' },
       },
       {
         path: 'wallets',
         component: WalletList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'Wallets.ViewWallet' },
       },
       {
         path: 'merchants',
         component: MerchantList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'Merchants.ViewMerchant' },
       },
       {
         path: 'fees',
         component: FeesList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'Fees.ViewFee' },
       },
       {
         path: 'transactions',
@@ -59,6 +69,8 @@ export const routes: Routes = [
       {
         path: 'audit-logs',
         component: AuditLogsList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'AuditLogs.ViewAllLogs' },
       },
       {
         path: 'login-audits',

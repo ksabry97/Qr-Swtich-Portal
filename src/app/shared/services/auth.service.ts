@@ -9,6 +9,8 @@ export class AuthService {
   usersPermission = this.globalServ.usersPermission;
 
   hasPermission(permission: string) {
-    return this.usersPermission.includes(permission);
+    return this.globalServ.usersPermission.subscribe((value) => {
+      return value.includes(permission);
+    });
   }
 }
