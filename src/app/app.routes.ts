@@ -15,6 +15,7 @@ import { LoginAuditsList } from './modules/loginAudits/pages/login-audits-list/l
 import { TransactionsList } from './modules/transactions/pages/transactions-list/transactions-list';
 import { PermissonGuard } from './shared/services/permission-guard.service';
 import { Simulator } from './shared/components/simulator/simulator';
+import { UnAuthorized } from './shared/components/un-authorized/un-authorized';
 
 export const routes: Routes = [
   {
@@ -89,5 +90,9 @@ export const routes: Routes = [
   {
     path: 'simulator',
     component: Simulator,
+  },
+  {
+    path: 'unathourized',
+    component: UnAuthorized,
   },
 ];

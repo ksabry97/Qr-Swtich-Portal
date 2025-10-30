@@ -347,6 +347,12 @@
       "userAgent": "Agent utilisateur"
     }
   },
+  "unauthorized": {
+    "title": "401",
+    "subtitle": "Accès refusé",
+    "message": "Vous n'avez pas la permission d'accéder à cette ressource. Veuillez vous connecter avec un compte autorisé ou contacter votre administrateur.",
+    "back": "Retour"
+  },
   "language": {
     "en": "En",
     "fr": "Fr"
