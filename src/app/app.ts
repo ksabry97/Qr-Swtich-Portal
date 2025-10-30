@@ -56,7 +56,7 @@ export class App implements OnInit {
             ]
           )
         ) as Partial<ResourcesObject>;
-        console.log(permissions);
+
         this.globalServ.PermissionsPerModule.next(permissions);
         const token = localStorage.getItem('token') || '';
 
@@ -66,7 +66,6 @@ export class App implements OnInit {
 
         roles = Array.isArray(roles) ? roles : [roles];
         this.globalServ.usersPermission.next(roles);
-        console.log(this.globalServ.usersPermission, '22222222');
       },
     });
   }

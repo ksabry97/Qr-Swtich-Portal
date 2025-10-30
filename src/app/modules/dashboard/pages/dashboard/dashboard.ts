@@ -55,12 +55,13 @@ export class Dashboard implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTenantsCount();
-    this.getUsersCount();
     this.globalServ.PermissionsPerModule.subscribe((value) => {
       this.Tenants = value.Tenants?.permissions;
       this.Roles = value.Roles?.permissions;
       this.Users = value.Users?.permissions;
+
+      this.isAllowed(this.Users?.ViewUser) ? this.getUsersCount() : '';
+      this.isAllowed(this.Tenants?.ViewTenant) ? this.getTenantsCount() : '';
     });
   }
 

@@ -19,57 +19,54 @@ export class QrSidebar implements OnInit {
     this.globalServ.PermissionsPerModule.pipe(
       filter((value) => Object.keys(value || {}).length > 0)
     ).subscribe((value) => {
-      this.routes = [
-        {
-          label: 'navigation.dashboard',
-          route: 'dashboard',
-          isDisabled: false,
-        },
-        {
-          label: 'navigation.tenants',
-          route: 'tenants',
-          isDisabled: !this.isAllowed(value?.Tenants?.permissions?.ViewTenant),
-        },
-        {
-          label: 'navigation.users',
-          route: 'users',
-          isDisabled: !this.isAllowed(value?.Users?.permissions?.ViewUser),
-        },
-        {
-          label: 'navigation.roles',
-          route: 'roles',
-          isDisabled: !this.isAllowed(value?.Roles?.permissions?.ViewRole),
-        },
-        {
-          label: 'navigation.wallets',
-          route: 'wallets',
-          isDisabled: !this.isAllowed(value?.Wallets?.permissions?.ViewWallet),
-        },
-        {
-          label: 'navigation.merchants',
-          route: 'merchants',
-          isDisabled: !this.isAllowed(
-            value?.Merchants?.permissions?.ViewMerchant
-          ),
-        },
-        {
-          label: 'navigation.fees',
-          route: 'fees',
-          isDisabled: !this.isAllowed(value?.Fees?.permissions?.ViewFee),
-        },
-        {
-          label: 'navigation.auditLogs',
-          route: 'audit-logs',
-          isDisabled: !this.isAllowed(
-            value?.AuditLogs?.permissions?.ViewAllLogs
-          ),
-        },
-      ];
-    });
-  }
-  isAllowed(permission: string) {
-    return this.globalServ.usersPermission.subscribe((value) => {
-      return value.includes(permission);
+      this.globalServ.usersPermission.subscribe((perm) => {
+        this.routes = [
+          {
+            label: 'navigation.dashboard',
+            route: 'dashboard',
+            isDisabled: false,
+          },
+          {
+            label: 'navigation.tenants',
+            route: 'tenants',
+            isDisabled: !perm.includes(value?.Tenants?.permissions?.ViewTenant),
+          },
+          {
+            label: 'navigation.users',
+            route: 'users',
+            isDisabled: !perm.includes(value?.Users?.permissions?.ViewUser),
+          },
+          {
+            label: 'navigation.roles',
+            route: 'roles',
+            isDisabled: !perm.includes(value?.Roles?.permissions?.ViewRole),
+          },
+          {
+            label: 'navigation.wallets',
+            route: 'wallets',
+            isDisabled: !perm.includes(value?.Wallets?.permissions?.ViewWallet),
+          },
+          {
+            label: 'navigation.merchants',
+            route: 'merchants',
+            isDisabled: !perm.includes(
+              value?.Merchants?.permissions?.ViewMerchant
+            ),
+          },
+          {
+            label: 'navigation.fees',
+            route: 'fees',
+            isDisabled: !perm.includes(value?.Fees?.permissions?.ViewFee),
+          },
+          {
+            label: 'navigation.auditLogs',
+            route: 'audit-logs',
+            isDisabled: !perm.includes(
+              value?.AuditLogs?.permissions?.ViewAllLogs
+            ),
+          },
+        ];
+      });
     });
   }
 }

@@ -116,8 +116,6 @@ export class FeesList implements OnInit {
     }
   }
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.subscribe((value) => {
-      return value.includes(permission);
-    });
+    return this.globalServ.usersPermission.value.includes(permission);
   }
 }
