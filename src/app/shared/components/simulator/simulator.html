@@ -1,12 +1,23 @@
-<div class="p-8 w-full flex justify-between items-center">
-  <div class="w-1/2">
+<div
+  class="p-8 w-full flex justify-between items-center custom-container gap-8"
+>
+  <form class="w-1/2 flex flex-col gap-6" [formGroup]="simulatorForm">
     <app-qr-input-number
-      [placeholder]="'enter MSSIDN'"
-      [(ngModel)]="mssidn"
-      [label]="'MSSIDN'"
+      [placeholder]="'enter number'"
+      formControlName="senderPhone"
+      [label]="'Sender Number'"
     ></app-qr-input-number>
-  </div>
-  <button class="submit-btn rounded-md p-2">Pay</button>
+    <app-qr-input-number
+      [placeholder]="'enter number'"
+      formControlName="recieverPhone"
+      [label]="'Reciever Number'"
+    ></app-qr-input-number>
+    <app-qr-input-number
+      [placeholder]="'enter amount'"
+      formControlName="amount"
+      [label]="'Amount'"
+    ></app-qr-input-number>
+    <button class="submit-btn rounded-md p-2">Pay</button>
+  </form>
+  <img src="assets/bg.jpg" class="w-1/2" />
 </div>
-
-<img *ngIf="qrDataUrl" [src]="qrDataUrl" alt="QR code" />

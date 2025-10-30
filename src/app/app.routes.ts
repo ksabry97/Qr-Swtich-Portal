@@ -64,10 +64,6 @@ export const routes: Routes = [
         path: 'login-audits',
         component: LoginAuditsList,
       },
-      {
-        path: 'simulator',
-        component: Simulator,
-      },
     ],
   },
   {
@@ -77,5 +73,9 @@ export const routes: Routes = [
   {
     path: 'forget-password',
     component: ForgetPassword,
+  },
+  {
+    path: 'simulator',
+    component: Simulator,
   },
 ];
