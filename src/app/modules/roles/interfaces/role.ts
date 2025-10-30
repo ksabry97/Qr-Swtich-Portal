@@ -14,3 +14,16 @@ export interface Permission {
   name: string;
   isAllowed: boolean;
 }
+interface ResourcePermissions {
+  permissions: Permission[];
+  groupedPermissions: any[];
+}
+export interface ResourcesObject {
+  Roles: ResourcePermissions;
+  AuditLogs: ResourcePermissions;
+  Tenants: ResourcePermissions;
+  Users: ResourcePermissions;
+  Merchants: ResourcePermissions;
+  Fees: ResourcePermissions;
+  Wallets: ResourcePermissions;
+}

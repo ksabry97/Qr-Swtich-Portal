@@ -1,11 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { ResourcesObject, Roles } from '../../modules/roles/interfaces/role';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalService {
+  PermissionsPerModule = new BehaviorSubject<Partial<ResourcesObject>>({});
+  usersPermission: string[] = [];
   loading = signal<boolean>(false);
   isModalOpened = signal(false);
   isSubmitted = signal<boolean>(false);

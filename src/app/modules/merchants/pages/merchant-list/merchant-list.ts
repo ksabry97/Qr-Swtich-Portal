@@ -68,14 +68,34 @@ export class MerchantList implements OnInit {
   ];
 
   merchants = [];
+  Merchants: any;
   constructor() {
     effect(() => {
-      this.globalServ.isSubmitted() ? this.getAllMerchants(1, 10) : '';
+      this.globalServ.isSubmitted()
+        ? this.getAllMerchants(this.pageIndex, this.pageSize)
+        : '';
     });
   }
 
   ngOnInit(): void {
     this.getAllMerchants(this.pageIndex, this.pageSize);
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Merchants = value.Merchants?.permissions;
+      this.actions = [
+        {
+          label: 'users.actions.viewDetails',
+          icon: 'eye',
+          severity: 'info',
+          disabled: !this.isAllowed(this.Merchants.ViewMerchant),
+        },
+        {
+          label: 'users.actions.edit',
+          icon: 'edit',
+          severity: 'warn',
+          disabled: !this.isAllowed(this.Merchants.EditMerchant),
+        },
+      ];
+    });
   }
   openModel() {
     this.viewMode = false;
@@ -86,6 +106,7 @@ export class MerchantList implements OnInit {
   getAllMerchants(pageNumber: number, pageSize: number) {
     this.globalServ.setLoading(true);
     this.pageIndex = pageNumber;
+    this.pageSize = pageSize;
     this.merchantServ.getAllMerchants(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.merchants = data.data.items;
@@ -114,5 +135,8 @@ export class MerchantList implements OnInit {
         this.merchantId = action.rowData.merchantId;
         return;
     }
+  }
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }

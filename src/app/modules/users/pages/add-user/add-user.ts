@@ -87,7 +87,7 @@ export class AddUser implements OnInit, OnChanges {
       if (this.viewMode) {
         this.userServ.getUserById(this.userId).subscribe({
           next: (data: any) => {
-            this.userForm.patchValue(data.data);
+            this.userForm.patchValue(data);
           },
         });
       }
@@ -96,7 +96,7 @@ export class AddUser implements OnInit, OnChanges {
       if (this.editMode) {
         this.userServ.getUserById(this.userId).subscribe({
           next: (data: any) => {
-            this.userForm.patchValue(data.data);
+            this.userForm.patchValue(data);
           },
         });
       }

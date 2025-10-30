@@ -2,6 +2,7 @@
   <app-entity-header
     [title]="'tenants.title' | translate"
     (isCreateClicked)="openModel()"
+    [showButton]="isAllowed(Tenants.CreateTenant)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"

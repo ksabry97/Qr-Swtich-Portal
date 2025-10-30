@@ -2,6 +2,7 @@
   <app-entity-header
     [title]="'fees.title' | translate"
     (isCreateClicked)="openModel(0)"
+    [showButton]="isAllowed(Fees.CreateFee)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"
@@ -9,8 +10,10 @@
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
-    [frontPagination]="true"
     (onActionClick)="callAction($event)"
+    [total]="total"
+    (onLazyLoad)="getAllFees($event, 10)"
+    (onPageSize)="getAllFees(pageIndex, $event)"
   ></app-qr-table>
 </div>
 <app-qr-modal

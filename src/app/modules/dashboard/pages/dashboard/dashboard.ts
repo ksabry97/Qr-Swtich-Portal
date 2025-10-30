@@ -19,6 +19,9 @@ export class Dashboard implements OnInit {
   createModal = [AddTenant, AddUser, AddRole];
   isOpened = -1;
   globalServ = inject(GlobalService);
+  Roles: any;
+  Users: any;
+  Tenants: any;
   items = [
     {
       label: 'navigation.tenants',
@@ -45,6 +48,7 @@ export class Dashboard implements OnInit {
       color: 'rgb(80, 112, 221)',
     },
   ];
+
   openModel(i: number) {
     this.isOpened = i;
     this.globalServ.setModal(true);
@@ -53,6 +57,11 @@ export class Dashboard implements OnInit {
   ngOnInit(): void {
     this.getTenantsCount();
     this.getUsersCount();
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Tenants = value.Tenants?.permissions;
+      this.Roles = value.Roles?.permissions;
+      this.Users = value.Users?.permissions;
+    });
   }
 
   getTenantsCount() {
@@ -69,5 +78,9 @@ export class Dashboard implements OnInit {
         this.items[1].count = data.data;
       },
     });
+  }
+
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }

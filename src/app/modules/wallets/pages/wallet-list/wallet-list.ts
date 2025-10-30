@@ -55,6 +55,7 @@ export class WalletList implements OnInit {
   ];
 
   wallets = [];
+  Wallets: any;
   constructor() {
     effect(() => {
       this.globalServ.isSubmitted() ? this.getAllWallets(1, 10) : '';
@@ -62,6 +63,17 @@ export class WalletList implements OnInit {
   }
   ngOnInit(): void {
     this.getAllWallets(this.pageIndex, this.pageSize);
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Wallets = value.Wallets?.permissions;
+      this.actions = [
+        {
+          label: 'users.actions.viewDetails',
+          icon: 'eye',
+          severity: 'info',
+          disabled: !this.isAllowed(this.Wallets?.ViewWallet),
+        },
+      ];
+    });
   }
   openModel() {
     this.viewMode = false;
@@ -93,5 +105,8 @@ export class WalletList implements OnInit {
         this.walletId = action.rowData.id;
         return;
     }
+  }
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }

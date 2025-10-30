@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  permissions: string[] = ['view'];
+  globalServ = inject(GlobalService);
+  usersPermission = this.globalServ.usersPermission;
+
   hasPermission(permission: string) {
-    return this.permissions.includes(permission);
+    return this.usersPermission.includes(permission);
   }
 }

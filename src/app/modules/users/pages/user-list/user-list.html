@@ -2,6 +2,7 @@
   <app-entity-header
     [title]="'users.title' | translate"
     (isCreateClicked)="openModel()"
+    [showButton]="isAllowed(Users?.CreateUser)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"

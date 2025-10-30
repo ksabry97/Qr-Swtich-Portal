@@ -56,7 +56,7 @@ export class TenantList implements OnInit {
   ];
 
   tenants = [];
-
+  Tenants: any;
   openModel() {
     this.viewMode = false;
     this.globalServ.setModal(true);
@@ -73,6 +73,17 @@ export class TenantList implements OnInit {
 
   ngOnInit(): void {
     this.getAllTenants();
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Tenants = value.Tenants?.permissions;
+      this.actions = [
+        {
+          label: 'users.actions.viewDetails',
+          icon: 'eye',
+          severity: 'info',
+          disabled: !this.isAllowed(this.Tenants.ViewTenant),
+        },
+      ];
+    });
   }
 
   getAllTenants() {
@@ -97,5 +108,8 @@ export class TenantList implements OnInit {
         this.viewMode = true;
         this.tenantId = action.rowData.id;
     }
+  }
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }

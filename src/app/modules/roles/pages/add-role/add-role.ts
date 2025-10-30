@@ -18,7 +18,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { ModalFooter } from '../../../../shared/components/modal-footer/modal-footer';
 import { ModalHeader } from '../../../../shared/components/modal-header/modal-header';
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
-import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
+
 import { GlobalService } from '../../../../shared/services/global.service';
 import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -34,7 +34,7 @@ import { Permission, Roles } from '../../interfaces/role';
     ReactiveFormsModule,
     QrInput,
     NzSwitchModule,
-    QrSelect,
+
     TranslateModule,
     FormsModule,
   ],

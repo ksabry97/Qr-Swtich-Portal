@@ -2,6 +2,7 @@
   <app-entity-header
     [title]="'wallets.title' | translate"
     (isCreateClicked)="openModel()"
+    [showButton]="isAllowed(Wallets.CreateWallet)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"

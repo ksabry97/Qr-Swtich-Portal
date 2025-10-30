@@ -46,38 +46,53 @@ export class FeesList implements OnInit {
     },
   ];
 
-  actions: TableAction[] = [
-    {
-      label: 'fees.actions.viewDetails',
-      icon: 'eye',
-      severity: 'info',
-    },
-    {
-      label: 'fees.actions.simulate',
-      icon: 'calculator',
-      severity: 'warn',
-    },
-  ];
+  actions: TableAction[] = [];
 
   constructor() {
     effect(() => {
-      this.globalServ.isSubmitted() ? this.getAllFees(1, 10) : '';
+      this.globalServ.isSubmitted()
+        ? this.getAllFees(this.pageIndex, this.pageSize)
+        : '';
     });
   }
   fees = [];
+  total = 0;
+  pageIndex = 1;
+  pageSize = 10;
+  Fees: any;
   openModel(i: number) {
     this.viewMode = false;
     this.isOpened = i;
     this.globalServ.setModal(true);
   }
   ngOnInit(): void {
-    this.getAllFees(1, 10);
+    this.getAllFees(this.pageIndex, this.pageSize);
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Fees = value.Fees?.permissions;
+      this.actions = [
+        {
+          label: 'users.actions.viewDetails',
+          icon: 'eye',
+          severity: 'info',
+          disabled: !this.isAllowed(this.Fees.ViewFee),
+        },
+        {
+          label: 'fees.actions.simulate',
+          icon: 'calculator',
+          severity: 'warn',
+          disabled: !this.isAllowed(this.Fees.SimulateFee),
+        },
+      ];
+    });
   }
   getAllFees(pageNumber: number, pageSize: number) {
     this.globalServ.setLoading(true);
+    this.pageIndex = pageNumber;
+    this.pageSize = pageSize;
     this.feeServ.getAllFees(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.fees = data.data;
+        this.total = data?.data?.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -99,5 +114,8 @@ export class FeesList implements OnInit {
         this.feeId = action.rowData.id;
         return;
     }
+  }
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }

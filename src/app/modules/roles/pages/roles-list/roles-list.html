@@ -2,6 +2,7 @@
   <app-entity-header
     [title]="'roles.title' | translate"
     (isCreateClicked)="openModel()"
+    [showButton]="isAllowed(Roles.CreateRole)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"

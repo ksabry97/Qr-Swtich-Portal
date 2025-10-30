@@ -2,6 +2,7 @@
   <app-entity-header
     [title]="'merchants.title' | translate"
     (isCreateClicked)="openModel()"
+    [showButton]="isAllowed(Merchants.CreateMerchant)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"

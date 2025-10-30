@@ -39,27 +39,11 @@ export class UserList implements OnInit {
       sortable: false,
     },
   ];
-
-  actions: TableAction[] = [
-    {
-      label: 'users.actions.viewDetails',
-      icon: 'eye',
-      severity: 'info',
-    },
-    {
-      label: 'users.actions.edit',
-      icon: 'edit',
-      severity: 'warn',
-    },
-
-    {
-      label: 'users.actions.deactivate',
-      icon: 'lock',
-      severity: 'danger',
-    },
-  ];
+  Users: any;
+  actions: TableAction[] = [];
 
   users = [];
+
   openModel() {
     this.viewMode = false;
     this.editMode = false;
@@ -72,6 +56,30 @@ export class UserList implements OnInit {
   }
   ngOnInit(): void {
     this.getAllUsers();
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Users = value.Users?.permissions;
+      this.actions = [
+        {
+          label: 'users.actions.viewDetails',
+          icon: 'eye',
+          severity: 'info',
+          disabled: !this.isAllowed(this.Users.ViewUser),
+        },
+        {
+          label: 'users.actions.edit',
+          icon: 'edit',
+          severity: 'warn',
+          disabled: !this.isAllowed(this.Users.EditUser),
+        },
+
+        {
+          label: 'users.actions.deactivate',
+          icon: 'lock',
+          severity: 'danger',
+          disabled: !this.isAllowed(this.Users.DeactivateUser),
+        },
+      ];
+    });
   }
   getAllUsers() {
     this.globalServ.setLoading(true);
@@ -113,5 +121,8 @@ export class UserList implements OnInit {
         this.message.error(err.error.message);
       },
     });
+  }
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }

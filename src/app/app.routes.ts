@@ -30,7 +30,7 @@ export const routes: Routes = [
         path: 'tenants',
         component: TenantList,
         canActivate: [PermissonGuard],
-        data: { permission: '' },
+        data: { permission: 'Tenants.ViewTenant' },
       },
       {
         path: 'users',

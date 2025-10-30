@@ -48,7 +48,7 @@ export class RolesList implements OnInit {
   ];
 
   roles = [];
-
+  Roles: any;
   constructor(private readonly message: NzMessageService) {
     effect(() => {
       this.globalServ.isSubmitted() ? this.getAllRoles() : '';
@@ -56,6 +56,23 @@ export class RolesList implements OnInit {
   }
   ngOnInit(): void {
     this.getAllRoles();
+    this.globalServ.PermissionsPerModule.subscribe((value) => {
+      this.Roles = value.Roles?.permissions;
+      this.actions = [
+        {
+          label: 'users.actions.viewDetails',
+          icon: 'eye',
+          severity: 'info',
+          disabled: !this.isAllowed(this.Roles.ViewRole),
+        },
+        {
+          label: 'users.actions.edit',
+          icon: 'edit',
+          severity: 'warn',
+          disabled: !this.isAllowed(this.Roles.EditRole),
+        },
+      ];
+    });
   }
   openModel() {
     this.viewMode = false;
@@ -92,5 +109,8 @@ export class RolesList implements OnInit {
         this.editMode = true;
         this.roleId = action.rowData.id;
     }
+  }
+  isAllowed(permission: string) {
+    return this.globalServ.usersPermission.includes(permission);
   }
 }
