@@ -31,17 +31,42 @@
           ></textarea>
         </div>
       </div>
-      <app-qr-select
-        formControlName="assignPermissionIds"
-        [controlName]="'assignPermissionIds'"
-        [parentGroup]="roleGroup"
-        [options]="assignedPermissions"
-        [label]="'roles.addRole.assignedPermissions' | translate"
-        [placeholder]="'roles.addRole.selectPermission' | translate"
-        class="w-1/2"
-        [mode]="'multiple'"
-        [disabled]="viewMode"
-      ></app-qr-select>
+    </section>
+    <section class="last-section">
+      <label>Role permissions</label>
+      <div class="flex justify-between w-full flex-col gap-2 mt-3">
+        <div
+          class="flex w-full justify-between wrapper flex-col"
+          *ngFor="let role of roles"
+        >
+          <div class="flex items-center w-full justify-between">
+            <label>{{ role.resource }} Managment</label>
+            <nz-switch
+              [formControlName]="role.resource"
+              [nzDisabled]="viewMode"
+            ></nz-switch>
+          </div>
+          <div
+            class="switches grid grid-cols-2 w-full gap-4 mt-2"
+            *ngIf="roleGroup.get(role.resource)?.value"
+          >
+            <div
+              class="flex flex-col w-full gap-1"
+              *ngFor="let item of role.permissions"
+            >
+              <div class="flex items-center w-full justify-between h-full">
+                <label>{{ item.name }}</label>
+                <nz-switch
+                  [(ngModel)]="item.isAllowed"
+                  [ngModelOptions]="{ standalone: true }"
+                  (ngModelChange)="updatePermssion($event, item.id)"
+                  [nzDisabled]="viewMode"
+                ></nz-switch>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </form>
 </div>

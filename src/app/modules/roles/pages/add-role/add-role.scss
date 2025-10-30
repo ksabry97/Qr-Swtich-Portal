@@ -42,3 +42,68 @@ textarea {
     color: #b6b6b6;
   }
 }
+section {
+  &.last-section {
+    border-radius: var(--lg, 8px);
+    background: var(--bg-primary, #fff);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.09);
+    padding: 8px 12px;
+    .wrapper {
+      border-radius: var(--lg, 8px);
+      border: 1px solid var(--border-primary, #cbd5e1);
+      background: var(--bg-primary, #fff);
+      min-height: 44px;
+      padding: 12px;
+    }
+  }
+}
+:host ::ng-deep {
+  .ant-switch {
+    position: relative;
+    display: inline-block;
+    min-width: 28px; // still need min width for toggle motion
+    width: 28px;
+    height: 16px;
+    line-height: 16px;
+    background-color: #d9d9d9;
+    border-radius: 16px;
+    transition: all 0.3s;
+    vertical-align: middle;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    padding: 0;
+
+    // make the handle fill correctly
+    .ant-switch-handle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #fff;
+      transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    }
+
+    // remove the internal pseudo-element spacing
+    .ant-switch-inner {
+      display: none; // hide default ON/OFF text
+    }
+
+    // when checked (on)
+    &.ant-switch-checked {
+      background-color: var(--primary);
+
+      .ant-switch-handle {
+        left: calc(100% - 16px); // move exactly to the right edge
+      }
+    }
+
+    // disabled state (optional)
+    &.ant-switch-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

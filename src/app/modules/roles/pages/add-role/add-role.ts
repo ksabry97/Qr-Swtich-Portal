@@ -12,6 +12,7 @@ import {
   FormBuilder,
   Validators,
   ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { ModalFooter } from '../../../../shared/components/modal-footer/modal-footer';
@@ -22,6 +23,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
+import { Permission, Roles } from '../../interfaces/role';
 
 @Component({
   selector: 'app-add-role',
@@ -34,6 +36,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NzSwitchModule,
     QrSelect,
     TranslateModule,
+    FormsModule,
   ],
   templateUrl: './add-role.html',
   styleUrl: './add-role.scss',
@@ -46,11 +49,19 @@ export class AddRole implements OnInit, OnChanges {
   @Input() roleId = '';
   @Input() viewMode = false;
   @Input() editMode = false;
+  roles: Roles[] = [];
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.roleGroup = this.fb.group({
       name: ['', Validators.required],
       description: [''],
       assignPermissionIds: [[], Validators.required],
+      Roles: [false],
+      AuditLogs: [false],
+      Tenants: [false],
+      Users: [false],
+      Merchants: [false],
+      Fees: [false],
+      Wallets: [false],
     });
   }
 
@@ -69,7 +80,12 @@ export class AddRole implements OnInit, OnChanges {
   getAllPermissions() {
     this.globalServ.getAllPermissions().subscribe({
       next: (data: any) => {
-        this.assignedPermissions = data.data;
+        this.roles = data?.data;
+        this.roles.map((role: Roles) => {
+          role.permissions.map((perm: Permission) => {
+            perm.isAllowed = false;
+          });
+        });
       },
     });
   }
@@ -91,10 +107,9 @@ export class AddRole implements OnInit, OnChanges {
     this.rolesServ.getRoleById(this.roleId).subscribe({
       next: (data: any) => {
         this.roleGroup.patchValue(data.data.role);
-        let permissions = data.data.compositeRoles.map((data: any) => {
-          return data.id;
-        });
-        this.roleGroup.patchValue({ assignPermissionIds: permissions });
+        setTimeout(() => {
+          this.updatePermissions(data);
+        }, 500);
       },
     });
   }
@@ -129,5 +144,32 @@ export class AddRole implements OnInit, OnChanges {
           this.message.error(err?.error?.message);
         },
       });
+  }
+  updatePermissions(data: any) {
+    let permissionIds: any[] = [];
+    data.data.permissions.forEach((perm: any) => {
+      permissionIds.push(perm.id);
+      this.roles.forEach((role: Roles) => {
+        role.resource == perm.resource
+          ? this.roleGroup.get(role.resource)?.patchValue(true)
+          : this.roleGroup.get(role.resource)?.patchValue(false);
+        role.permissions.forEach((permission: Permission) => {
+          permission.id === perm.id ? (permission.isAllowed = true) : '';
+        });
+      });
+    });
+
+    this.roleGroup.get('assignPermissionIds')?.patchValue(permissionIds);
+  }
+  updatePermssion(event: boolean | any, id: string) {
+    let permissionIds = this.roleGroup.get('assignPermissionIds')
+      ?.value as Array<string>;
+    if (event) {
+      permissionIds.push(id);
+    } else {
+      let permIndex = permissionIds.indexOf(id);
+      permIndex !== -1 ? permissionIds.splice(permIndex, 1) : '';
+    }
+    this.roleGroup.get('assignPermissionIds')?.patchValue(permissionIds);
   }
 }
