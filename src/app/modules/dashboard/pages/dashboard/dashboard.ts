@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { AddTenant } from '../../../tenants/pages/add-tenant/add-tenant';
 import { GlobalService } from '../../../../shared/services/global.service';
@@ -15,32 +15,32 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
   createModal = [AddTenant, AddUser, AddRole];
   isOpened = -1;
   globalServ = inject(GlobalService);
   items = [
     {
       label: 'navigation.tenants',
-      count: 30,
+      count: 0,
       icon: '',
       color: 'rgb(182, 214, 52)',
     },
     {
       label: 'navigation.users',
-      count: 30,
+      count: 0,
       icon: '',
       color: 'rgb(80, 112, 221)',
     },
     {
       label: 'navigation.transactions',
-      count: 30,
+      count: 0,
       icon: '',
       color: 'rgb(182, 214, 52)',
     },
     {
       label: 'dashboard.revenue',
-      count: 30,
+      count: 0,
       icon: '',
       color: 'rgb(80, 112, 221)',
     },
@@ -48,5 +48,26 @@ export class Dashboard {
   openModel(i: number) {
     this.isOpened = i;
     this.globalServ.setModal(true);
+  }
+
+  ngOnInit(): void {
+    this.getTenantsCount();
+    this.getUsersCount();
+  }
+
+  getTenantsCount() {
+    this.globalServ.getTenantsCount().subscribe({
+      next: (data: any) => {
+        this.items[0].count = data.data;
+      },
+    });
+  }
+
+  getUsersCount() {
+    this.globalServ.getUsersCount().subscribe({
+      next: (data: any) => {
+        this.items[1].count = data.data;
+      },
+    });
   }
 }

@@ -54,4 +54,13 @@ export class GlobalService {
     let url = this.baseUrl + '/management/Permission';
     return this.http.get(url);
   }
+
+  getTenantsCount() {
+    let url = this.baseUrl + '/api/Tenant/Count';
+    return this.http.get(url);
+  }
+  getUsersCount() {
+    let url = this.baseUrl + '/management/users/count';
+    return this.http.get(url);
+  }
 }
