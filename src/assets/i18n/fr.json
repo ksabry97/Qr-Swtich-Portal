@@ -348,7 +348,7 @@
     }
   },
   "unauthorized": {
-    "title": "401",
+    "title": "403",
     "subtitle": "Accès refusé",
     "message": "Vous n'avez pas la permission d'accéder à cette ressource. Veuillez vous connecter avec un compte autorisé ou contacter votre administrateur.",
     "back": "Retour"

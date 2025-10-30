@@ -348,7 +348,7 @@
     }
   },
   "unauthorized": {
-    "title": "401",
+    "title": "403",
     "subtitle": "Access Denied",
     "message": "You don't have permission to access this resource. Please sign in with an authorized account or contact your administrator.",
     "back": "Back"
