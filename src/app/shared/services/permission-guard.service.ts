@@ -6,7 +6,14 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-
+import { jwtDecode } from 'jwt-decode';
+interface JwtPayload {
+  sub: string;
+  name?: string;
+  email?: string;
+  realm_access?: { roles?: string[] }; // adjust key based on your token structure
+  [key: string]: any;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -20,11 +27,15 @@ export class PermissonGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     const requiredPermission = route.data['permission'];
+    const token = localStorage.getItem('token') || '';
 
-    if (
-      this.authServ.hasPermission(requiredPermission) ||
-      !requiredPermission
-    ) {
+    const decoded = jwtDecode<JwtPayload>(token);
+
+    let roles = decoded.realm_access?.roles || decoded['role'] || [];
+
+    roles = Array.isArray(roles) ? roles : [roles];
+
+    if (roles.includes(requiredPermission) || !requiredPermission) {
       return true;
     } else {
       this.router.navigateByUrl('unathourized');

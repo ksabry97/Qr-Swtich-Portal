@@ -34,7 +34,7 @@ export class TenantList implements OnInit {
     { field: 'contactEmail', header: 'tenants.table.email', sortable: false },
 
     {
-      field: 'status',
+      field: 'isActive',
       header: 'tenants.table.status',
       sortable: false,
       template: 'boolean',
