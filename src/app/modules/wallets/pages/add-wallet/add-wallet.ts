@@ -78,11 +78,10 @@ export class AddWallet implements OnChanges {
     this.walletForm = this.fb.group({
       name: ['', Validators.required],
       type: ['', Validators.required],
-      environment: ['', Validators.required],
       description: [''],
       baseUrl: ['', Validators.required],
       port: ['443', Validators.required],
-      macConnections: ['', Validators.required],
+      maxConnections: ['', Validators.required],
       connectionTimeout: ['', Validators.required],
       isHttps: [false],
       apiKey: [''],
@@ -99,7 +98,7 @@ export class AddWallet implements OnChanges {
       this.globalServ.requestLoading.set(true);
       this.walletServ.createWallet(this.walletForm.value).subscribe({
         next: (data: any) => {
-          if (data.status == 200) {
+          if (data.status == 200 || data.status == 201) {
             this.globalServ.setModal(false);
             this.globalServ.isSubmitted.set(true);
             this.message.success(data?.Message);

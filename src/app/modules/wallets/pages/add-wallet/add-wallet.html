@@ -35,17 +35,6 @@
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
-        <app-qr-select
-          formControlName="environment"
-          [controlName]="'environment'"
-          [parentGroup]="walletForm"
-          [options]="types"
-          [label]="'wallets.addWallet.environment' | translate"
-          [placeholder]="'wallets.addWallet.selectEnvironment' | translate"
-          class="w-1/2"
-          [required]="true"
-          [disabled]="viewMode"
-        ></app-qr-select>
         <div class="flex gap-2 flex-col w-1/2">
           <label>{{ "wallets.addWallet.description" | translate }}</label>
           <textarea
@@ -95,8 +84,8 @@
       </div>
       <div class="flex gap-3" *ngIf="isOpened[0]">
         <app-qr-input-number
-          formControlName="macConnections"
-          [controlName]="'macConnections'"
+          formControlName="maxConnections"
+          [controlName]="'maxConnections'"
           [parentGroup]="walletForm"
           [label]="'wallets.addWallet.maxConnections' | translate"
           class="w-1/2"
