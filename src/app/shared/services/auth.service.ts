@@ -1,14 +1,25 @@
-import { inject, Injectable } from '@angular/core';
-import { GlobalService } from './global.service';
+import { Injectable } from '@angular/core';
 
+import { jwtDecode } from 'jwt-decode';
+interface JwtPayload {
+  sub: string;
+  name?: string;
+  email?: string;
+  realm_access?: { roles?: string[] }; // adjust key based on your token structure
+  [key: string]: any;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  globalServ = inject(GlobalService);
-  usersPermission = this.globalServ.usersPermission;
-
   hasPermission(permission: string) {
-    return this.usersPermission.value.includes(permission);
+    const token = localStorage.getItem('token') || '';
+
+    const decoded = jwtDecode<JwtPayload>(token);
+
+    let roles = decoded.realm_access?.roles || decoded['role'] || [];
+
+    roles = Array.isArray(roles) ? roles : [roles];
+    return roles.includes(permission);
   }
 }

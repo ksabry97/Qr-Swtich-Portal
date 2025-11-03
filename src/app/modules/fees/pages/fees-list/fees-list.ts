@@ -11,6 +11,7 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { FeesService } from '../../services/fees.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { SimulateFee } from '../simulate-fee/simulate-fee';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-fees-list',
@@ -21,6 +22,7 @@ import { SimulateFee } from '../simulate-fee/simulate-fee';
 export class FeesList implements OnInit {
   globalServ = inject(GlobalService);
   feeServ = inject(FeesService);
+  authServ = inject(AuthService);
   createModal = [AddFee, SimulateFee];
   isOpened = -1;
   viewMode = false;
@@ -116,6 +118,6 @@ export class FeesList implements OnInit {
     }
   }
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }

@@ -10,6 +10,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { AddWallet } from '../add-wallet/add-wallet';
 import { WalletsService } from '../../services/wallets.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../../shared/services/auth.service';
 @Component({
   selector: 'app-wallet-list',
   imports: [EntityHeader, QrTable, QrModal, TranslateModule],
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class WalletList implements OnInit {
   globalServ = inject(GlobalService);
   walletServ = inject(WalletsService);
+  authServ = inject(AuthService);
   addWallet = AddWallet;
   viewMode = false;
   walletId = '';
@@ -107,6 +109,6 @@ export class WalletList implements OnInit {
     }
   }
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }

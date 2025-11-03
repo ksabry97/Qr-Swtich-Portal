@@ -11,6 +11,7 @@ import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { TranslateModule } from '@ngx-translate/core';
 import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-roles-list',
@@ -22,6 +23,7 @@ export class RolesList implements OnInit {
   addRole = AddRole;
   globalServ = inject(GlobalService);
   roleServ = inject(RolesService);
+  authServ = inject(AuthService);
   viewMode = false;
   roleId = '';
   editMode = false;
@@ -111,6 +113,6 @@ export class RolesList implements OnInit {
     }
   }
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }

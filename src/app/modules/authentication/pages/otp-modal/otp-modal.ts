@@ -8,7 +8,16 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { decryptBackendResponse } from '../../../../utils/aes-decryptor';
 import { environment } from '../../../../../environments/environment';
-import { firstValueFrom } from 'rxjs';
+
+import { jwtDecode } from 'jwt-decode';
+import { ResourcesObject } from '../../../roles/interfaces/role';
+interface JwtPayload {
+  sub: string;
+  name?: string;
+  email?: string;
+  realm_access?: { roles?: string[] }; // adjust key based on your token structure
+  [key: string]: any;
+}
 @Component({
   selector: 'app-otp-modal',
   imports: [OTPInput, NzIconModule, CommonModule, TranslateModule],
@@ -70,6 +79,7 @@ export class OtpModal implements OnInit, OnDestroy {
         localStorage.setItem('token', value?.AccessToken);
         this.router.navigateByUrl('/dashboard');
         this.globalServ.setModal(false);
+        this.getAllPermissions();
       } else {
         this.errorMessage = value?.ErrorMessage;
       }
@@ -87,12 +97,46 @@ export class OtpModal implements OnInit, OnDestroy {
   async onSubmit(event?: Event | any) {
     event?.preventDefault();
     event?.stopPropagation();
-    
+
     // Ensure OTP is not empty and not already loading
     if (!this.otp || this.otp.length !== 4 || this.loading) {
       return;
     }
-    
+
     await this.login();
+  }
+  getAllPermissions() {
+    this.globalServ.getAllPermissions().subscribe({
+      next: (data: any) => {
+        let permissions = Object.fromEntries(
+          data.data.map(
+            ({
+              resource,
+              permissions,
+            }: {
+              resource: string;
+              permissions: { name: string; code: any }[];
+            }) => [
+              resource,
+              {
+                permissions: Object.fromEntries(
+                  permissions.map((p) => [p.name, p.code])
+                ),
+              },
+            ]
+          )
+        ) as Partial<ResourcesObject>;
+
+        this.globalServ.PermissionsPerModule.next(permissions);
+        const token = localStorage.getItem('token') || '';
+
+        const decoded = jwtDecode<JwtPayload>(token);
+
+        let roles = decoded.realm_access?.roles || decoded['role'] || [];
+
+        roles = Array.isArray(roles) ? roles : [roles];
+        this.globalServ.usersPermission.next(roles);
+      },
+    });
   }
 }

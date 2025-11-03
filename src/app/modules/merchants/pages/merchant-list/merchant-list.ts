@@ -10,6 +10,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { AddMerchant } from '../add-merchant/add-merchant';
 import { MerchantService } from '../../services/merchants.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-merchant-list',
@@ -20,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class MerchantList implements OnInit {
   globalServ = inject(GlobalService);
   merchantServ = inject(MerchantService);
+  authServ = inject(AuthService);
   addMerchant = AddMerchant;
   viewMode = false;
   editMode = false;
@@ -137,6 +139,6 @@ export class MerchantList implements OnInit {
     }
   }
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }

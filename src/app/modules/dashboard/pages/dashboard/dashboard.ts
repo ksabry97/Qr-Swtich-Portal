@@ -8,6 +8,7 @@ import { AddRole } from '../../../roles/pages/add-role/add-role';
 import { LineChart } from '../../../../shared/components/line-chart/line-chart';
 import { PieChart } from '../../../../shared/components/pie-chart/pie-chart';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ export class Dashboard implements OnInit {
   createModal = [AddTenant, AddUser, AddRole];
   isOpened = -1;
   globalServ = inject(GlobalService);
+  authServ = inject(AuthService);
   Roles: any;
   Users: any;
   Tenants: any;
@@ -82,6 +84,6 @@ export class Dashboard implements OnInit {
   }
 
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }

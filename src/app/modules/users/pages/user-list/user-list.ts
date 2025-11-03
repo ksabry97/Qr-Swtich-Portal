@@ -11,6 +11,7 @@ import { AddUser } from '../add-user/add-user';
 import { UserService } from '../../services/users.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-user-list',
@@ -21,6 +22,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class UserList implements OnInit {
   globalServ = inject(GlobalService);
   userServ = inject(UserService);
+  authServ = inject(AuthService);
   addUser = AddUser;
   viewMode = false;
   editMode = false;
@@ -122,7 +124,8 @@ export class UserList implements OnInit {
       },
     });
   }
+
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }

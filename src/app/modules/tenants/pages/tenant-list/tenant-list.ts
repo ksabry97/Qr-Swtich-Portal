@@ -11,6 +11,7 @@ import { AddTenant } from '../add-tenant/add-tenant';
 import { TenantService } from '../../services/tenants.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-tenant-list',
@@ -20,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class TenantList implements OnInit {
   globalServ = inject(GlobalService);
+  authServ = inject(AuthService);
   createTenant = AddTenant;
   viewMode = false;
   tenantId = '';
@@ -110,6 +112,6 @@ export class TenantList implements OnInit {
     }
   }
   isAllowed(permission: string) {
-    return this.globalServ.usersPermission.value.includes(permission);
+    return this.authServ.hasPermission(permission);
   }
 }
