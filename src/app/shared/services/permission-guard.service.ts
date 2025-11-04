@@ -27,15 +27,11 @@ export class PermissonGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     const requiredPermission = route.data['permission'];
-    const token = localStorage.getItem('token') || '';
 
-    const decoded = jwtDecode<JwtPayload>(token);
-
-    let roles = decoded.realm_access?.roles || decoded['role'] || [];
-
-    roles = Array.isArray(roles) ? roles : [roles];
-
-    if (roles.includes(requiredPermission) || !requiredPermission) {
+    if (
+      this.authServ.hasPermission(requiredPermission) ||
+      !requiredPermission
+    ) {
       return true;
     } else {
       this.router.navigateByUrl('unathourized');

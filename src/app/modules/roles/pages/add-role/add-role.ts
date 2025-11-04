@@ -147,14 +147,16 @@ export class AddRole implements OnInit, OnChanges {
   }
   updatePermissions(data: any) {
     let permissionIds: any[] = [];
-    data.data.permissions.forEach((perm: any) => {
-      permissionIds.push(perm.id);
+    data.data.role.groupedPermissions.forEach((perm: any) => {
       this.roles.forEach((role: Roles) => {
         role.resource == perm.resource
           ? this.roleGroup.get(role.resource)?.patchValue(true)
-          : this.roleGroup.get(role.resource)?.patchValue(false);
+          : '';
         role.permissions.forEach((permission: Permission) => {
-          permission.id === perm.id ? (permission.isAllowed = true) : '';
+          perm.permissions.forEach((value: any) => {
+            permissionIds.push(value.id);
+            permission.id === value.id ? (permission.isAllowed = true) : '';
+          });
         });
       });
     });

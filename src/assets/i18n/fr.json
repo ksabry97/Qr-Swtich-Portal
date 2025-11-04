@@ -156,7 +156,8 @@
       "edit": "Modifier",
       "resetPassword": "Réinitialiser le mot de passe",
       "deactivate": "Désactiver",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "activate": "Activer"
     }
   },
   "fees": {

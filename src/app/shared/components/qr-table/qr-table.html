@@ -75,7 +75,11 @@
               [class]="action.severity || 'primary'"
               [hidden]="action.disabled || false"
               (click)="onActionClick.emit({ action, rowData, rowIndex })"
-              [title]="action.label | translate"
+              [title]="
+                !rowData['enabled'] && i == 2
+                  ? ('users.actions.activate' | translate)
+                  : (action.label | translate)
+              "
             >
               <a
                 class="w-full h-full"

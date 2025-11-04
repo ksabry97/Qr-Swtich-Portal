@@ -65,13 +65,13 @@ export class RolesList implements OnInit {
           label: 'users.actions.viewDetails',
           icon: 'eye',
           severity: 'info',
-          disabled: !this.isAllowed(this.Roles.ViewRole),
+          disabled: !this.isAllowed(this.Roles?.ViewRole),
         },
         {
           label: 'users.actions.edit',
           icon: 'edit',
           severity: 'warn',
-          disabled: !this.isAllowed(this.Roles.EditRole),
+          disabled: !this.isAllowed(this.Roles?.EditRole),
         },
       ];
     });

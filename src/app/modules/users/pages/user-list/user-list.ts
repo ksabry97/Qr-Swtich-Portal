@@ -65,20 +65,20 @@ export class UserList implements OnInit {
           label: 'users.actions.viewDetails',
           icon: 'eye',
           severity: 'info',
-          disabled: !this.isAllowed(this.Users.ViewUser),
+          disabled: !this.isAllowed(this.Users?.ViewUser),
         },
         {
           label: 'users.actions.edit',
           icon: 'edit',
           severity: 'warn',
-          disabled: !this.isAllowed(this.Users.EditUser),
+          disabled: !this.isAllowed(this.Users?.EditUser),
         },
 
         {
           label: 'users.actions.deactivate',
           icon: 'lock',
           severity: 'danger',
-          disabled: !this.isAllowed(this.Users.DeactivateUser),
+          disabled: !this.isAllowed(this.Users?.DeactivateUser),
         },
       ];
     });
@@ -114,13 +114,14 @@ export class UserList implements OnInit {
     }
   }
 
-  deleteUser(event: any) {
-    this.userServ.deleteUser(event.id).subscribe({
+  activateUser(event: any) {
+    this.userServ.activateUser(event.id).subscribe({
       next: (data: any) => {
-        this.message.success(data.message);
+        this.message.success(data.Message);
+        this.getAllUsers();
       },
       error: (err) => {
-        this.message.error(err.error.message);
+        this.message.error(err.error.Message);
       },
     });
   }

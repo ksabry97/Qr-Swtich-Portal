@@ -31,4 +31,9 @@ export class UserService {
     let url = this.baseUrl + `/management/users/${userId}`;
     return this.http.put(url, user);
   }
+
+  activateUser(userId: string) {
+    let url = this.baseUrl + `/management/users/${userId}/active-and-deactive`;
+    return this.http.patch(url, '');
+  }
 }
