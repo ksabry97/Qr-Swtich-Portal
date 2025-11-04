@@ -66,6 +66,8 @@ export const routes: Routes = [
       {
         path: 'transactions',
         component: TransactionsList,
+        canActivate: [PermissonGuard],
+        data: { permission: 'Transactions.ViewTransaction' },
       },
       {
         path: 'audit-logs',

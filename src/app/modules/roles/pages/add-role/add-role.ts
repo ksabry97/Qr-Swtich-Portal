@@ -62,6 +62,7 @@ export class AddRole implements OnInit, OnChanges {
       Merchants: [false],
       Fees: [false],
       Wallets: [false],
+      Transactions: [false],
     });
   }
 
@@ -83,6 +84,7 @@ export class AddRole implements OnInit, OnChanges {
         this.roles = data?.data;
         this.roles.map((role: Roles) => {
           role.permissions.map((perm: Permission) => {
+            console.log(perm, '222222222');
             perm.isAllowed = false;
           });
         });

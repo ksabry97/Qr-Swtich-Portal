@@ -26,4 +26,5 @@ export interface ResourcesObject {
   Merchants: ResourcePermissions;
   Fees: ResourcePermissions;
   Wallets: ResourcePermissions;
+  Transactions: ResourcePermissions;
 }

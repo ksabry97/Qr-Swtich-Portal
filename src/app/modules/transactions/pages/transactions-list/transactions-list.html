@@ -5,9 +5,12 @@
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"
-    [data]="banks"
+    [data]="transactions"
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
+    [total]="total"
+    (onLazyLoad)="getAllTransactions($event, 10)"
+    (onPageSize)="getAllTransactions(pageIndex, $event)"
   ></app-qr-table>
 </div>
