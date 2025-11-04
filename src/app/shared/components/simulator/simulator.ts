@@ -10,6 +10,7 @@ import { QrInputNumber } from '../qr-input-number/qr-input-number';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalService } from '../../services/global.service';
 import { SimulaterRes } from '../../core/interfaces';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-simulator',
@@ -19,13 +20,14 @@ import { SimulaterRes } from '../../core/interfaces';
     QrInputNumber,
     ReactiveFormsModule,
     TranslateModule,
+    NzIconModule,
   ],
   templateUrl: './simulator.html',
   styleUrl: './simulator.scss',
 })
 export class Simulator {
   mssidn: number | null = null;
-
+  loading = false;
   simulatorForm!: FormGroup;
   globalServ = inject(GlobalService);
   constructor(private fb: FormBuilder) {
@@ -38,6 +40,7 @@ export class Simulator {
   }
 
   pay() {
+    this.loading = true;
     let simulateBody = this.simulatorForm.value;
     let reqBody: SimulaterRes = {
       senderMsisdn: simulateBody?.senderMsisdn,
@@ -52,9 +55,14 @@ export class Simulator {
     this.globalServ.simulatePay(reqBody).subscribe({
       next: (data: any) => {
         console.log(data);
+        this.loading = false;
       },
       error: (err) => {
         console.log(err);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
       },
     });
   }

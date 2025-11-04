@@ -25,7 +25,10 @@
         formControlName="description"
       ></textarea>
     </div>
-    <button class="submit-btn rounded-md p-2" (click)="pay()">Pay</button>
+    <button class="submit-btn rounded-md p-2" (click)="pay()">
+      <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
+      {{ loading ? "" : "Pay" }}
+    </button>
   </form>
   <img src="assets/bg.jpg" class="w-1/2" />
 </div>
