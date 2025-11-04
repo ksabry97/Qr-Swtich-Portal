@@ -63,7 +63,7 @@ export class QrTable<T extends Record<string, any> = any> {
   }>();
   @Output() isConfirmed = new EventEmitter<any>();
   @Input() frontPagination = false;
-
+  @Input() tenantTable = false;
   confirm(event: any) {
     this.isConfirmed.emit(event);
   }

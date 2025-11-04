@@ -76,7 +76,8 @@
               [hidden]="action.disabled || false"
               (click)="onActionClick.emit({ action, rowData, rowIndex })"
               [title]="
-                !rowData['enabled'] && i == 2
+                (!rowData['enabled'] && i == 2) ||
+                (tenantTable && !rowData['isActive'] && i == 1)
                   ? ('users.actions.activate' | translate)
                   : (action.label | translate)
               "

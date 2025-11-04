@@ -84,6 +84,12 @@ export class TenantList implements OnInit {
           severity: 'info',
           disabled: !this.isAllowed(this.Tenants?.ViewTenant),
         },
+        {
+          label: 'users.actions.deactivate',
+          icon: 'lock',
+          severity: 'danger',
+          disabled: false,
+        },
       ];
     });
   }
@@ -113,5 +119,28 @@ export class TenantList implements OnInit {
   }
   isAllowed(permission: string) {
     return this.authServ.hasPermission(permission);
+  }
+  activateTenant(event: any) {
+    if (event.isActive) {
+      this.tenantServ.deactivateTenant(event.id).subscribe({
+        next: (data: any) => {
+          this.message.success(data.message);
+          this.getAllTenants();
+        },
+        error: (err) => {
+          this.message.error(err.error.message);
+        },
+      });
+    } else {
+      this.tenantServ.activateTenant(event.id).subscribe({
+        next: (data: any) => {
+          this.message.success(data.message);
+          this.getAllTenants();
+        },
+        error: (err) => {
+          this.message.error(err.error.message);
+        },
+      });
+    }
   }
 }

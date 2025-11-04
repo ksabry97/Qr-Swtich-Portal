@@ -12,6 +12,8 @@
     [rows]="10"
     [frontPagination]="true"
     (onActionClick)="callAction($event)"
+    [tenantTable]="true"
+    (isConfirmed)="activateTenant($event)"
   ></app-qr-table>
 </div>
 <app-qr-modal

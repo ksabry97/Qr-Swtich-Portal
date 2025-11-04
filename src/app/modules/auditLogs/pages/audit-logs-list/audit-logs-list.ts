@@ -23,23 +23,23 @@ export class AuditLogsList implements OnInit {
   pageSize = 10;
   columns: TableColumn[] = [
     {
-      field: 'OccurredOnUtc',
+      field: 'occurredOnUtc',
       header: 'auditLogs.table.dateOfOccurance',
       sortable: false,
       template: 'date',
     },
     {
-      field: 'TenantId',
+      field: 'tenantId',
       header: 'auditLogs.table.tenantId',
       sortable: false,
     },
     {
-      field: 'TenantCode',
+      field: 'tenantCode',
       header: 'auditLogs.table.tenantCode',
       sortable: false,
     },
     {
-      field: 'StatusCode',
+      field: 'statusCode',
       header: 'auditLogs.table.statusCode',
       sortable: false,
     },
@@ -58,6 +58,7 @@ export class AuditLogsList implements OnInit {
     this.auditServ.getAllAsudits(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.audits = data.items;
+        console.log(this.audits, 'wwwwwwwwwwww');
         this.total = data.total;
       },
       error: () => {

@@ -27,4 +27,13 @@ export class TenantService {
     let url = this.baseUrl + `/api/Tenant/${tenantId}`;
     return this.http.get(url);
   }
+
+  activateTenant(tenantId: string) {
+    let url = this.baseUrl + `/api/Tenant/${tenantId}/activate`;
+    return this.http.post(url, '');
+  }
+  deactivateTenant(tenantId: string) {
+    let url = this.baseUrl + `/api/Tenant/${tenantId}/deactivate`;
+    return this.http.post(url, '');
+  }
 }
