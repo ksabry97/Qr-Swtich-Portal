@@ -84,7 +84,6 @@ export class AddRole implements OnInit, OnChanges {
         this.roles = data?.data;
         this.roles.map((role: Roles) => {
           role.permissions.map((perm: Permission) => {
-            console.log(perm, '222222222');
             perm.isAllowed = false;
           });
         });
@@ -156,7 +155,7 @@ export class AddRole implements OnInit, OnChanges {
           : '';
         role.permissions.forEach((permission: Permission) => {
           perm.permissions.forEach((value: any) => {
-            permissionIds.push(value.id);
+            permission.id === value.id ? permissionIds.push(value.id) : '';
             permission.id === value.id ? (permission.isAllowed = true) : '';
           });
         });

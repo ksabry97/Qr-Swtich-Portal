@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ResourcesObject, Roles } from '../../modules/roles/interfaces/role';
 import { BehaviorSubject } from 'rxjs';
+import { SimulaterRes } from '../core/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -66,5 +67,10 @@ export class GlobalService {
   getUsersCount() {
     let url = this.baseUrl + '/management/users/count';
     return this.http.get(url);
+  }
+
+  simulatePay(res: SimulaterRes) {
+    let url = 'http://172.25.64.4:6033/schemeA/send-p2p';
+    return this.http.post(url, res);
   }
 }

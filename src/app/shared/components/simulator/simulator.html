@@ -4,12 +4,12 @@
   <form class="w-1/2 flex flex-col gap-6" [formGroup]="simulatorForm">
     <app-qr-input-number
       [placeholder]="'enter number'"
-      formControlName="senderPhone"
+      formControlName="senderMsisdn"
       [label]="'Sender Number'"
     ></app-qr-input-number>
     <app-qr-input-number
       [placeholder]="'enter number'"
-      formControlName="recieverPhone"
+      formControlName="receiverMsisdn"
       [label]="'Reciever Number'"
     ></app-qr-input-number>
     <app-qr-input-number
@@ -17,7 +17,15 @@
       formControlName="amount"
       [label]="'Amount'"
     ></app-qr-input-number>
-    <button class="submit-btn rounded-md p-2">Pay</button>
+    <div class="flex gap-2 flex-col w-full">
+      <label>{{ "wallets.addWallet.description" | translate }}</label>
+      <textarea
+        class="p-3"
+        [placeholder]="'wallets.addWallet.writeDescription' | translate"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <button class="submit-btn rounded-md p-2" (click)="pay()">Pay</button>
   </form>
   <img src="assets/bg.jpg" class="w-1/2" />
 </div>
