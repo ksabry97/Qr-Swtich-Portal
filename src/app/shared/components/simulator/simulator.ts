@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { GlobalService } from '../../services/global.service';
 import { SimulaterRes } from '../../core/interfaces';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-simulator',
@@ -30,6 +31,7 @@ export class Simulator {
   loading = false;
   simulatorForm!: FormGroup;
   globalServ = inject(GlobalService);
+  message = inject(NzMessageService);
   constructor(private fb: FormBuilder) {
     this.simulatorForm = this.fb.group({
       senderMsisdn: [],
@@ -56,6 +58,27 @@ export class Simulator {
       next: (data: any) => {
         console.log(data);
         this.loading = false;
+
+        switch (data?.body?.responseCode) {
+          case '00000':
+            this.message.success('paid successfully');
+            break;
+          case '10001':
+            this.message.error('Invalid sender');
+            break;
+          case '10002':
+            this.message.error('Invalid receiver');
+            break;
+          case '10012':
+            this.message.error('Request Timeout');
+            break;
+          case '10008':
+            this.message.error('Transaction Not Found');
+            break;
+          case '10011':
+            this.message.error('System Error');
+            break;
+        }
       },
       error: (err) => {
         console.log(err);
