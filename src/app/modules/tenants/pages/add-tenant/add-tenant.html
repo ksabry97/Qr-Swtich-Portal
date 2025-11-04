@@ -73,22 +73,32 @@
           class="w-1/2"
           [label]="'tenants.addTenant.contactPerson' | translate"
           [placeholder]="'tenants.addTenant.enterContactPerson' | translate"
-          formControlName="contactName"
-          [controlName]="'contactName'"
+          formControlName="firstName"
+          [controlName]="'firstName'"
           [parentGroup]="tenantForm"
           [disabled]="viewMode"
           [required]="true"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'tenants.addTenant.address' | translate"
-          [placeholder]="'tenants.addTenant.enterAddress' | translate"
-          formControlName="contantAddress"
-          [controlName]="'contantAddress'"
+          [label]="'common.lastName' | translate"
+          [placeholder]="'common.lastName' | translate"
+          formControlName="lastName"
+          [controlName]="'lastName'"
           [parentGroup]="tenantForm"
           [disabled]="viewMode"
+          [required]="true"
         ></app-qr-input>
       </div>
+      <app-qr-input
+        class="w-full"
+        [label]="'tenants.addTenant.address' | translate"
+        [placeholder]="'tenants.addTenant.enterAddress' | translate"
+        formControlName="contantAddress"
+        [controlName]="'contantAddress'"
+        [parentGroup]="tenantForm"
+        [disabled]="viewMode"
+      ></app-qr-input>
     </section>
   </form>
 </div>

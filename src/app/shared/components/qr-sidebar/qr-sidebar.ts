@@ -60,6 +60,10 @@ export class QrSidebar implements OnInit {
           isDisabled: !this.isAllowed(value?.Fees?.permissions?.ViewFee),
         },
         {
+          label: 'navigation.transactions',
+          route: 'transactions',
+        },
+        {
           label: 'navigation.auditLogs',
           route: 'audit-logs',
           isDisabled: !this.isAllowed(

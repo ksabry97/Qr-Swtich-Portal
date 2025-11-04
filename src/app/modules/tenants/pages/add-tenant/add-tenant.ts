@@ -71,7 +71,8 @@ export class AddTenant implements OnInit, OnChanges {
       description: [''],
       contactEmail: ['', Validators.required],
       contactPhone: ['', [Validators.required]],
-      contactName: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       contantAddress: [''],
     });
   }
