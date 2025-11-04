@@ -44,6 +44,17 @@
             [readonly]="viewMode"
           ></textarea>
         </div>
+        <app-qr-tags-input
+          [required]="true"
+          formControlName="prefixes"
+          [controlName]="'prefixes'"
+          [parentGroup]="walletForm"
+          [label]="'wallets.addWallet.perefixes' | translate"
+          [placeholder]="'wallets.addWallet.addPerefix' | translate"
+          [disabled]="viewMode"
+          class="w-1/2"
+          [mode]="'tags'"
+        ></app-qr-tags-input>
       </div>
     </section>
     <section

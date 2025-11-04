@@ -1,0 +1,15 @@
+@use "../../../../styles" as styles;
+
+.tags-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+

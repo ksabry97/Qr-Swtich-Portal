@@ -29,11 +29,7 @@ export class WalletList implements OnInit {
   pageSize = 10;
   columns: TableColumn[] = [
     { field: 'name', header: 'wallets.table.walletName', sortable: false },
-    {
-      field: 'environment',
-      header: 'wallets.table.environment',
-      sortable: false,
-    },
+
     { field: 'baseUrl', header: 'wallets.table.baseUrl', sortable: false },
     {
       field: 'maxConnections',

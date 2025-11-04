@@ -24,6 +24,7 @@ import { WalletsService } from '../../services/wallets.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { QrTagsInput } from '../../../../shared/components/qr-tags-input/qr-tags-input';
 @Component({
   selector: 'app-add-wallet',
   imports: [
@@ -38,6 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NzIconModule,
     NzSwitchModule,
     TranslateModule,
+    QrTagsInput,
   ],
   templateUrl: './add-wallet.html',
   styleUrl: './add-wallet.scss',
@@ -79,6 +81,7 @@ export class AddWallet implements OnChanges {
       name: ['', Validators.required],
       type: ['', Validators.required],
       description: [''],
+      prefixes: [[], Validators.required],
       baseUrl: ['', Validators.required],
       port: ['443', Validators.required],
       maxConnections: ['', Validators.required],

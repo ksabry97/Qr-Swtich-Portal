@@ -106,10 +106,15 @@ export class AddUser implements OnInit, OnChanges {
   createUser() {
     this.userServ.createUser(this.userForm.value).subscribe({
       next: (data: any) => {
-        this.globalServ.setModal(false);
-        this.globalServ.isSubmitted.set(true);
+        if (data.status == 200 || data.status == 201) {
+          this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
+
+          this.message.success(data?.message);
+        } else {
+          this.message.error(data?.Message);
+        }
         this.globalServ.requestLoading.set(false);
-        this.message.success(data?.message);
       },
       error: (err) => {
         this.globalServ.requestLoading.set(false);

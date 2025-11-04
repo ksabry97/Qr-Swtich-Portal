@@ -309,7 +309,9 @@
       "enableHealthChecks": "Enable Health Checks",
       "healthCheckInterval": "Health Check Interval",
       "active": "active",
-      "notes": "Notes"
+      "notes": "Notes",
+      "perefixes": "Prefixes",
+      "addPerefix": "Add prefixes"
     },
     "table": {
       "id": "ID",

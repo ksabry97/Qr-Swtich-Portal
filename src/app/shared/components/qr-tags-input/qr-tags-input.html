@@ -1,0 +1,36 @@
+<div class="ngx-smart-input-container">
+  <label *ngIf="label" class="input-label" [class.required]="required">
+    {{ label }}
+  </label>
+
+  <div class="tags-input-wrapper input-wrapper">
+    <div class="tags-list">
+      <nz-tag
+        *ngFor="let tag of tags; let i = index"
+        [nzMode]="
+          !readonly && !disabled && !isDisabled ? 'closeable' : 'default'
+        "
+        (nzOnClose)="removeTag(i)"
+      >
+        {{ tag }}
+      </nz-tag>
+    </div>
+
+    <input
+      nz-input
+      [placeholder]="placeholder"
+      [disabled]="disabled || isDisabled"
+      [readonly]="readonly"
+      [nzStatus]="control.touched && control.invalid ? 'error' : ''"
+      [value]="inputValue"
+      (input)="onInputChange($any($event.target).value)"
+      (keydown)="onInputKeydown($event)"
+      (blur)="touched()"
+    />
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    {{ errorMessage }}
+  </div>
+</div>
