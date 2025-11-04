@@ -70,7 +70,7 @@ export class GlobalService {
   }
 
   simulatePay(res: SimulaterRes) {
-    let url = 'http://172.25.64.4:6033/schemeA/send-p2p';
+    let url = 'https://gimuat.gimpay.org:6016/schemeA/send-p2p';
     return this.http.post(url, res);
   }
 }
