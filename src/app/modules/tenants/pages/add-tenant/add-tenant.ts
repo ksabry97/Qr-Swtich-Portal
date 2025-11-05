@@ -88,7 +88,7 @@ export class AddTenant implements OnInit, OnChanges {
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
           this.globalServ.requestLoading.set(false);
-          this.message.success(data.message);
+          this.message.success(data?.message);
         },
         error: (err) => {
           this.globalServ.requestLoading.set(false);
@@ -120,6 +120,7 @@ export class AddTenant implements OnInit, OnChanges {
         this.tenantServ.getTenantById(this.tenantId).subscribe({
           next: (data: any) => {
             this.tenantForm.patchValue(data.data);
+            this.tenantForm.patchValue({ countryCode: data?.data?.country });
           },
         });
       }
