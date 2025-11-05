@@ -89,6 +89,7 @@ export class FeesList implements OnInit {
   }
   getAllFees(pageNumber: number, pageSize: number) {
     this.globalServ.setLoading(true);
+    this.globalServ.isSubmitted.set(false);
     this.pageIndex = pageNumber;
     this.pageSize = pageSize;
     this.feeServ.getAllFees(pageNumber, pageSize).subscribe({
