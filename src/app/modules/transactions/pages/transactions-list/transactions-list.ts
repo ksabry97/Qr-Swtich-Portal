@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import {
   QrTable,
@@ -10,7 +11,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 
 @Component({
   selector: 'app-transactions-list',
-  imports: [EntityHeader, QrTable],
+  imports: [EntityHeader, QrTable, TranslateModule],
   templateUrl: './transactions-list.html',
   styleUrl: './transactions-list.scss',
 })
@@ -20,27 +21,27 @@ export class TransactionsList implements OnInit {
   columns: TableColumn[] = [
     {
       field: 'transactionId',
-      header: 'Transaction Id',
+      header: 'transactions.table.transactionId',
 
       sortable: false,
     },
-    { field: 'senderName', header: 'Sender Name', sortable: false },
+    { field: 'senderName', header: 'transactions.table.senderName', sortable: false },
     {
       field: 'senderMsisdn',
-      header: 'Sender Msisdn',
+      header: 'transactions.table.senderMsisdn',
       sortable: false,
     },
-    { field: 'amount', header: 'Amount', sortable: false },
-    { field: 'currency', header: 'Currency', sortable: false },
-    { field: 'transactionType', header: 'Transaction Type', sortable: false },
-    { field: 'status', header: 'Status', sortable: false },
-    { field: 'receiverName', header: 'Receiver Name', sortable: false },
-    { field: 'receiverMsisdn', header: 'Receiver Msisdn', sortable: false },
+    { field: 'amount', header: 'transactions.table.amount', sortable: false },
+    { field: 'currency', header: 'transactions.table.currency', sortable: false },
+    { field: 'transactionType', header: 'transactions.table.transactionType', sortable: false },
+    { field: 'status', header: 'transactions.table.status', sortable: false },
+    { field: 'receiverName', header: 'transactions.table.receiverName', sortable: false },
+    { field: 'receiverMsisdn', header: 'transactions.table.receiverMsisdn', sortable: false },
   ];
 
   actions: TableAction[] = [
     {
-      label: 'View Details',
+      label: 'transactions.actions.viewDetails',
       icon: 'eye',
       severity: 'info',
     },
