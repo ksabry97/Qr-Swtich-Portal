@@ -10,7 +10,9 @@
     [actions]="actions"
     [paginator]="true"
     [rows]="10"
-    [frontPagination]="true"
+    [total]="total"
+    (onLazyLoad)="getAllUsers($event, 10)"
+    (onPageSize)="getAllUsers(pageIndex, $event)"
     (onActionClick)="callAction($event)"
     (isConfirmed)="activateUser($event)"
   ></app-qr-table>

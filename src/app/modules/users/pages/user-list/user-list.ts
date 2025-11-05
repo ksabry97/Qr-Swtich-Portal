@@ -45,7 +45,9 @@ export class UserList implements OnInit {
   actions: TableAction[] = [];
 
   users = [];
-
+  total = 0;
+  pageIndex = 1;
+  pageSize = 10;
   openModel() {
     this.viewMode = false;
     this.editMode = false;
@@ -53,11 +55,13 @@ export class UserList implements OnInit {
   }
   constructor(private readonly message: NzMessageService) {
     effect(() => {
-      this.globalServ.isSubmitted() ? this.getAllUsers() : '';
+      this.globalServ.isSubmitted()
+        ? this.getAllUsers(this.pageIndex, this.pageSize)
+        : '';
     });
   }
   ngOnInit(): void {
-    this.getAllUsers();
+    this.getAllUsers(this.pageIndex, this.pageSize);
     this.globalServ.PermissionsPerModule.subscribe((value) => {
       this.Users = value.Users?.permissions;
       this.actions = [
@@ -83,11 +87,14 @@ export class UserList implements OnInit {
       ];
     });
   }
-  getAllUsers() {
+  getAllUsers(pageIndex: number, pageSize: number) {
     this.globalServ.setLoading(true);
-    this.userServ.getAllUsers().subscribe({
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
+    this.userServ.getAllUsers(pageIndex, pageSize).subscribe({
       next: (data: any) => {
         this.users = data.data;
+        this.total = data?.pagination?.size;
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -118,7 +125,7 @@ export class UserList implements OnInit {
     this.userServ.activateUser(event.id).subscribe({
       next: (data: any) => {
         this.message.success(data.Message);
-        this.getAllUsers();
+        this.getAllUsers(this.pageIndex, this.pageSize);
       },
       error: (err) => {
         this.message.error(err.error.Message);

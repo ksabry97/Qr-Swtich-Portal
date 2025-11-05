@@ -25,18 +25,38 @@ export class TransactionsList implements OnInit {
 
       sortable: false,
     },
-    { field: 'senderName', header: 'transactions.table.senderName', sortable: false },
+    {
+      field: 'senderName',
+      header: 'transactions.table.senderName',
+      sortable: false,
+    },
     {
       field: 'senderMsisdn',
       header: 'transactions.table.senderMsisdn',
       sortable: false,
     },
     { field: 'amount', header: 'transactions.table.amount', sortable: false },
-    { field: 'currency', header: 'transactions.table.currency', sortable: false },
-    { field: 'transactionType', header: 'transactions.table.transactionType', sortable: false },
+    {
+      field: 'currency',
+      header: 'transactions.table.currency',
+      sortable: false,
+    },
+    {
+      field: 'transactionType',
+      header: 'transactions.table.transactionType',
+      sortable: false,
+    },
     { field: 'status', header: 'transactions.table.status', sortable: false },
-    { field: 'receiverName', header: 'transactions.table.receiverName', sortable: false },
-    { field: 'receiverMsisdn', header: 'transactions.table.receiverMsisdn', sortable: false },
+    {
+      field: 'receiverName',
+      header: 'transactions.table.receiverName',
+      sortable: false,
+    },
+    {
+      field: 'receiverMsisdn',
+      header: 'transactions.table.receiverMsisdn',
+      sortable: false,
+    },
   ];
 
   actions: TableAction[] = [
@@ -64,6 +84,7 @@ export class TransactionsList implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.transactions = data.data;
+          this.total = data?.data?.totalCount;
         },
         error: () => {
           this.globalServ.setLoading(false);

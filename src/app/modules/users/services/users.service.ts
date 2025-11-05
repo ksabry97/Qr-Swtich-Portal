@@ -15,8 +15,10 @@ export class UserService {
     return this.http.post(url, user);
   }
 
-  getAllUsers() {
-    let url = this.baseUrl + '/management/users';
+  getAllUsers(PageNumber: number, PageSize: number) {
+    let url =
+      this.baseUrl +
+      `/management/users?PageNumber=${PageNumber}&PageSize=${PageSize}`;
     return this.http.get(url);
   }
   getUserById(userId: string) {
