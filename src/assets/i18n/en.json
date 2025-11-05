@@ -350,6 +350,23 @@
       "userAgent": "User Agent"
     }
   },
+  "transactions": {
+    "title": "Transactions",
+    "table": {
+      "transactionId": "Transaction ID",
+      "senderName": "Sender Name",
+      "senderMsisdn": "Sender MSISDN",
+      "amount": "Amount",
+      "currency": "Currency",
+      "transactionType": "Transaction Type",
+      "status": "Status",
+      "receiverName": "Receiver Name",
+      "receiverMsisdn": "Receiver MSISDN"
+    },
+    "actions": {
+      "viewDetails": "View Details"
+    }
+  },
   "unauthorized": {
     "title": "403",
     "subtitle": "Access Denied",

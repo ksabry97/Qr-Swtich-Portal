@@ -350,6 +350,23 @@
       "userAgent": "Agent utilisateur"
     }
   },
+  "transactions": {
+    "title": "Transactions",
+    "table": {
+      "transactionId": "ID de transaction",
+      "senderName": "Nom de l'expéditeur",
+      "senderMsisdn": "MSISDN de l'expéditeur",
+      "amount": "Montant",
+      "currency": "Devise",
+      "transactionType": "Type de transaction",
+      "status": "Statut",
+      "receiverName": "Nom du destinataire",
+      "receiverMsisdn": "MSISDN du destinataire"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails"
+    }
+  },
   "unauthorized": {
     "title": "403",
     "subtitle": "Accès refusé",
