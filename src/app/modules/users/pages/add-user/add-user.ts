@@ -110,15 +110,15 @@ export class AddUser implements OnInit, OnChanges {
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
 
-          this.message.success(data?.message);
+          this.message.success(data?.Message);
         } else {
-          this.message.error(data?.message);
+          this.message.error(data?.Message);
         }
         this.globalServ.requestLoading.set(false);
       },
       error: (err) => {
         this.globalServ.requestLoading.set(false);
-        this.message.error(err?.error?.message);
+        this.message.error(err?.error?.Message);
       },
     });
   }
