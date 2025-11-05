@@ -56,32 +56,15 @@ export class Simulator {
 
     this.globalServ.simulatePay(reqBody).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.loading = false;
-
-        switch (data?.body?.responseCode) {
-          case '00000':
-            this.message.success('paid successfully');
-            break;
-          case '10001':
-            this.message.error('Invalid sender');
-            break;
-          case '10002':
-            this.message.error('Invalid receiver');
-            break;
-          case '10012':
-            this.message.error('Request Timeout');
-            break;
-          case '10008':
-            this.message.error('Transaction Not Found');
-            break;
-          case '10011':
-            this.message.error('System Error');
-            break;
+        if (data?.body.responseCode === '00000') {
+          this.message.success(data?.body?.responseDescription);
+        } else {
+          this.message.error(data?.body?.responseDescription);
         }
       },
       error: (err) => {
-        console.log(err);
+        this.message.error(err.error.message);
         this.loading = false;
       },
       complete: () => {

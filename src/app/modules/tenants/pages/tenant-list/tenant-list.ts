@@ -88,7 +88,7 @@ export class TenantList implements OnInit {
           label: 'users.actions.deactivate',
           icon: 'lock',
           severity: 'danger',
-          disabled: false,
+          disabled: !this.isAllowed(this.Tenants?.EditTenant),
         },
       ];
     });

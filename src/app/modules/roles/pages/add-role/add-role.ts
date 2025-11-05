@@ -23,7 +23,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
-import { Permission, Roles } from '../../interfaces/role';
+import { Permission, Role, Roles } from '../../interfaces/role';
 
 @Component({
   selector: 'app-add-role',
@@ -174,5 +174,18 @@ export class AddRole implements OnInit, OnChanges {
       permIndex !== -1 ? permissionIds.splice(permIndex, 1) : '';
     }
     this.roleGroup.get('assignPermissionIds')?.patchValue(permissionIds);
+  }
+
+  removePermissions(event: any, role: Roles) {
+    let assignedPermissions = this.roleGroup.get('assignPermissionIds')
+      ?.value as Array<string>;
+    if (!event) {
+      role.permissions.forEach((perm: any) => {
+        perm.isAllowed = false;
+        assignedPermissions.indexOf(perm.id) !== -1
+          ? assignedPermissions.splice(assignedPermissions.indexOf(perm.id), 1)
+          : '';
+      });
+    }
   }
 }

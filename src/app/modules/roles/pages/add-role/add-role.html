@@ -44,6 +44,7 @@
             <nz-switch
               [formControlName]="role.resource"
               [nzDisabled]="viewMode"
+              (ngModelChange)="removePermissions($event, role)"
             ></nz-switch>
           </div>
           <div

@@ -37,3 +37,11 @@ label {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
 }
+.imag-contain {
+  width: 75%;
+  border-radius: 16px;
+  overflow: hidden;
+  img {
+    object-fit: contain;
+  }
+}
