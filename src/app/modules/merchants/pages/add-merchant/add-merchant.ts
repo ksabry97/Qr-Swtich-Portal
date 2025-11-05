@@ -115,7 +115,7 @@ export class AddMerchant implements OnInit, OnChanges {
     this.getUserLocation();
     this.merchantForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(64)]],
-      scheme: ['', [Validators.required, Validators.maxLength(64)]],
+      scheme: [''],
       msisdn: ['', [Validators.minLength(14), Validators.maxLength(14)]],
       merchantId: ['', [Validators.minLength(9), Validators.maxLength(9)]],
       commercialRegNo: [''],

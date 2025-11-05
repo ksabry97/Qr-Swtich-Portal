@@ -1,4 +1,10 @@
 {
+  "app": {
+    "powered_by": "Propulsé par",
+    "enabled_by": "Activé par",
+    "inc": "Inc.",
+    "terms_and_conditions": "Termes et conditions"
+  },
   "common": {
     "email": "Email",
     "password": "Mot de passe",

@@ -92,8 +92,8 @@
           formControlName="scheme"
           [controlName]="'scheme'"
           [parentGroup]="merchantForm"
-          [required]="true"
-          [disabled]="viewMode"
+          [disabled]="viewMode || editMode"
+          *ngIf="viewMode || editMode"
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"

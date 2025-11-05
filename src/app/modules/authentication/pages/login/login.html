@@ -1,4 +1,4 @@
-<div class="flex login-container">
+<!-- <div class="flex login-container">
   <div class="left w-2/3 flex justify-center items-center">
     <div class="flex items-start flex-col gap-3 w-full p-20">
       <div class="flex gap-1 items-center">
@@ -59,6 +59,81 @@
         {{ loading ? "" : ("auth.login.sendOtp" | translate) }}
       </button>
     </form>
+  </div>
+</div> -->
+
+<div class="flex login-container">
+  <div class="left w-2/3 flex justify-center items-center">
+    <div class="flex items-start flex-col gap-3 justify-center w-1/2">
+      <div class="flex gap-1 items-center">
+        <img
+          src="assets/paysky-logo-white.svg"
+          width="46px"
+          height="46px"
+          loading="lazy"
+          alt="'logo'"
+        />
+        <img src="assets/paysky-title-white.svg" />
+      </div>
+      <h1>{{ "auth.login.appTitle" | translate }}</h1>
+      <p>
+        {{ "auth.login.description" | translate }}
+      </p>
+    </div>
+  </div>
+  <div class="right w-1/3 flex justify-center items-center p-6 flex-col gap-6">
+    <div class="flex justify-end w-full">
+      <app-language-switch></app-language-switch>
+    </div>
+    <form
+      class="form-container flex flex-col gap-6 w-full h-fit rounded-md"
+      [formGroup]="loginForm"
+    >
+      <div class="head-form flex gap-2 items-center">
+        <div class="icon flex items-center justify-center">
+          <img src="assets/qr-code.jpg" loading="lazy" alt="'logo'" />
+        </div>
+        <h1>{{ "auth.login.appTitle" | translate }}</h1>
+      </div>
+      <h1>{{ "auth.login.title" | translate }}</h1>
+
+      <app-qr-input
+        [label]="'common.email' | translate"
+        [placeholder]="'common.enterEmail' | translate"
+        formControlName="username"
+        [controlName]="'username'"
+        [parentGroup]="loginForm"
+      ></app-qr-input>
+      <app-qr-password
+        [label]="'common.password' | translate"
+        [placeholder]="'common.enterPassword' | translate"
+        formControlName="password"
+        [controlName]="'password'"
+        [parentGroup]="loginForm"
+      ></app-qr-password>
+      <span class="text-red-500" *ngIf="errorMessage">{{ errorMessage }}</span>
+      <span
+        class="w-full flex justify-center forget"
+        (click)="forgetPassword()"
+        >{{ "auth.login.forgetPassword" | translate }}</span
+      >
+      <button
+        class="w-full submit-btn border-0 rounded-md outline-none"
+        (click)="submitLogin()"
+      >
+        {{ loading ? "" : ("auth.login.sendOtp" | translate) }}
+      </button>
+      <p class="w-full text-center terms">
+        {{ "app.terms_and_conditions" | translate }}
+      </p>
+    </form>
+    <p class="flex items-center gap-1 foot">
+      {{ "app.powered_by" | translate }}
+      <img src="assets/sm-logo.svg" />
+      {{ "app.inc" | translate }}
+      <span>{{ "app.enabled_by" | translate }}</span>
+      <img src="assets/GIM.svg" />
+    </p>
   </div>
 </div>
 <app-qr-modal
