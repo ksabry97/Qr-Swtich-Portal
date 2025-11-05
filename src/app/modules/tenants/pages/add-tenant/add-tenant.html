@@ -68,11 +68,12 @@
           [required]="true"
         ></app-phone-input>
       </div>
+      <label>{{ "tenants.addTenant.contactPerson" | translate }}</label>
       <div class="flex gap-3">
         <app-qr-input
           class="w-1/2"
-          [label]="'tenants.addTenant.contactPerson' | translate"
-          [placeholder]="'tenants.addTenant.enterContactPerson' | translate"
+          [label]="'common.firstName' | translate"
+          [placeholder]="'common.firstName' | translate"
           formControlName="firstName"
           [controlName]="'firstName'"
           [parentGroup]="tenantForm"

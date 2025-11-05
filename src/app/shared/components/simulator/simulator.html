@@ -1,34 +1,47 @@
 <div
   class="p-8 w-full flex justify-between items-center custom-container gap-8"
 >
-  <form class="w-1/2 flex flex-col gap-6" [formGroup]="simulatorForm">
-    <app-qr-input-number
-      [placeholder]="'enter number'"
-      formControlName="senderMsisdn"
-      [label]="'Sender Number'"
-    ></app-qr-input-number>
-    <app-qr-input-number
-      [placeholder]="'enter number'"
-      formControlName="receiverMsisdn"
-      [label]="'Reciever Number'"
-    ></app-qr-input-number>
-    <app-qr-input-number
-      [placeholder]="'enter amount'"
-      formControlName="amount"
-      [label]="'Amount'"
-    ></app-qr-input-number>
-    <div class="flex gap-2 flex-col w-full">
-      <label>{{ "wallets.addWallet.description" | translate }}</label>
-      <textarea
-        class="p-3"
-        [placeholder]="'wallets.addWallet.writeDescription' | translate"
-        formControlName="description"
-      ></textarea>
+  <div
+    class="form-container w-[95vw] bg-white min-h-[95vh] rounded-3xl relative p-6 flex justify-between items-center"
+  >
+    <form class="w-1/2 flex flex-col gap-6" [formGroup]="simulatorForm">
+      <app-qr-input-number
+        [placeholder]="'enter number'"
+        formControlName="senderMsisdn"
+        [label]="'Sender Number'"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter number'"
+        formControlName="receiverMsisdn"
+        [label]="'Reciever Number'"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter amount'"
+        formControlName="amount"
+        [label]="'Amount'"
+      ></app-qr-input-number>
+      <div class="flex gap-2 flex-col w-full">
+        <label>{{ "wallets.addWallet.description" | translate }}</label>
+        <textarea
+          class="p-3"
+          [placeholder]="'wallets.addWallet.writeDescription' | translate"
+          formControlName="description"
+        ></textarea>
+      </div>
+      <button class="submit-btn rounded-md p-2" (click)="pay()">
+        <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
+        {{ loading ? "" : "Pay" }}
+      </button>
+    </form>
+    <div class="flex flex-col gap-8">
+      <img src="assets/QR Code-1.png" />
+      <p class="flex items-center gap-1 foot">
+        {{ "app.powered_by" | translate }}
+        <img src="assets/sm-logo.svg" />
+        {{ "app.inc" | translate }}
+        <span>{{ "app.enabled_by" | translate }}</span>
+        <img src="assets/GIM.svg" />
+      </p>
     </div>
-    <button class="submit-btn rounded-md p-2" (click)="pay()">
-      <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
-      {{ loading ? "" : "Pay" }}
-    </button>
-  </form>
-  <img src="assets/bg.jpg" class="w-1/2" />
+  </div>
 </div>

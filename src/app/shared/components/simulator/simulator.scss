@@ -1,7 +1,7 @@
 .custom-container {
   width: 100dvw;
   height: 100dvh;
-  background: url("../../../../assets/bg.jpg");
+  background-color: #004d9c;
 }
 textarea {
   resize: none;
@@ -27,4 +27,13 @@ label {
   font-weight: 600;
   color: #374151;
   font-size: 0.875rem;
+}
+
+.submit-btn {
+  background-color: #004d9c !important;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
 }

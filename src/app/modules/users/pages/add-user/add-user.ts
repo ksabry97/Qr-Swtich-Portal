@@ -112,7 +112,7 @@ export class AddUser implements OnInit, OnChanges {
 
           this.message.success(data?.message);
         } else {
-          this.message.error(data?.Message);
+          this.message.error(data?.message);
         }
         this.globalServ.requestLoading.set(false);
       },

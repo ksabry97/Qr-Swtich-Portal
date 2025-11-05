@@ -62,16 +62,6 @@
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
-        <app-qr-input
-          class="w-1/2"
-          [label]="'merchants.addMerchant.merchantId' | translate"
-          [placeholder]="'merchants.addMerchant.enterMerchantId' | translate"
-          formControlName="merchantId"
-          [controlName]="'merchantId'"
-          [parentGroup]="merchantForm"
-          [required]="true"
-          [disabled]="viewMode || editMode"
-        ></app-qr-input>
         <app-qr-select
           formControlName="cityId"
           [controlName]="'cityId'"
@@ -81,7 +71,7 @@
           [placeholder]="'merchants.addMerchant.selectCity' | translate"
           [required]="true"
           [disabled]="viewMode"
-          class="w-1/2"
+          class="w-full"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">

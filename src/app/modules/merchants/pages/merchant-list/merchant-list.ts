@@ -88,13 +88,13 @@ export class MerchantList implements OnInit {
           label: 'users.actions.viewDetails',
           icon: 'eye',
           severity: 'info',
-          disabled: !this.isAllowed(this.Merchants.ViewMerchant),
+          disabled: !this.isAllowed(this.Merchants?.ViewMerchant),
         },
         {
           label: 'users.actions.edit',
           icon: 'edit',
           severity: 'warn',
-          disabled: !this.isAllowed(this.Merchants.EditMerchant),
+          disabled: !this.isAllowed(this.Merchants?.EditMerchant),
         },
       ];
     });
