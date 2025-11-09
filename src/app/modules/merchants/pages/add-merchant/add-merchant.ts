@@ -278,10 +278,14 @@ export class AddMerchant implements OnInit, OnChanges {
   createMerchant() {
     this.merchantServ.createMerchant(this.merchantForm.value).subscribe({
       next: (data: any) => {
-        this.globalServ.setModal(false);
-        this.globalServ.isSubmitted.set(true);
+        if (data.status == 200 || data.status == 201) {
+          this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
+          this.message.success(data?.Message);
+        } else {
+          this.message.error(data?.Message);
+        }
         this.globalServ.requestLoading.set(false);
-        this.message.success(data?.Message);
       },
       error: (err) => {
         this.globalServ.requestLoading.set(false);
@@ -292,10 +296,14 @@ export class AddMerchant implements OnInit, OnChanges {
   updateMerchant() {
     this.merchantServ.updateMerchant(this.merchantForm.value).subscribe({
       next: (data: any) => {
-        this.globalServ.setModal(false);
-        this.globalServ.isSubmitted.set(true);
+        if (data.status == 200 || data.status == 201) {
+          this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
+          this.message.success(data?.Message);
+        } else {
+          this.message.error(data?.Message);
+        }
         this.globalServ.requestLoading.set(false);
-        this.message.success(data?.Message);
       },
       error: (err) => {
         this.globalServ.requestLoading.set(false);
