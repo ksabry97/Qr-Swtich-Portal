@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ResourcesObject, Roles } from '../../modules/roles/interfaces/role';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, retry } from 'rxjs';
 import { QrRes } from '../core/interfaces';
 
 @Injectable({
@@ -72,5 +72,16 @@ export class GlobalService {
   generateQr(res: QrRes) {
     let url = 'https://gimuat.gimpay.org:6033/schemeB/generate-qr';
     return this.http.post(url, res);
+  }
+
+  scanQr(qrString: string) {
+    let url = 'https://gimuat.gimpay.org:6033/schemeB/parse';
+    let reqBody = { qrString };
+    return this.http.post(url, reqBody);
+  }
+
+  payQr(qrBody: any) {
+    let url = 'https://gimuat.gimpay.org:6033/schemeA/pay-from-qr';
+    return this.http.post(url, qrBody);
   }
 }
