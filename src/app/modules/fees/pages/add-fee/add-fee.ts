@@ -117,6 +117,7 @@ export class AddFee implements OnInit, OnChanges {
   addValidator(controlName: string, removedControl: string) {
     this.feeForm.get(controlName)?.addValidators([Validators.required]);
     this.feeForm.get(removedControl)?.removeValidators([Validators.required]);
+    this.feeForm.get(removedControl)?.patchValue(null);
     this.feeForm.get(controlName)?.updateValueAndValidity();
     this.feeForm.get(removedControl)?.updateValueAndValidity();
   }
