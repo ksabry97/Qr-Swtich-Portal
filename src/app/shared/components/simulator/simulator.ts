@@ -39,6 +39,7 @@ export class Simulator {
   errorCorrectionLevel: 'L' | 'M' | 'Q' | 'H' = 'M';
   qrValue = '';
   openPayForm = false;
+  hasAmount = false;
   constructor(private fb: FormBuilder) {
     this.simulatorForm = this.fb.group({
       msisdn: [],
@@ -83,6 +84,7 @@ export class Simulator {
     this.globalServ.scanQr(this.qrValue).subscribe({
       next: (data: any) => {
         this.openPayForm = true;
+        data.amount ? (this.hasAmount = true) : (this.hasAmount = false);
         this.payForm.patchValue({ amount: data.amount });
       },
       error: (err) => {
