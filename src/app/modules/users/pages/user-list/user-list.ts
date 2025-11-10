@@ -40,6 +40,12 @@ export class UserList implements OnInit {
       header: 'users.table.email',
       sortable: false,
     },
+    {
+      field: 'enabled',
+      header: 'tenants.table.status',
+      sortable: false,
+      template: 'boolean',
+    },
   ];
   Users: any;
   actions: TableAction[] = [];
