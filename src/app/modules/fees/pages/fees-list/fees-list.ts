@@ -76,13 +76,13 @@ export class FeesList implements OnInit {
           label: 'users.actions.viewDetails',
           icon: 'eye',
           severity: 'info',
-          disabled: !this.isAllowed(this.Fees.ViewFee),
+          disabled: !this.isAllowed(this.Fees?.ViewFee),
         },
         {
           label: 'fees.actions.simulate',
           icon: 'calculator',
           severity: 'warn',
-          disabled: !this.isAllowed(this.Fees.SimulateFee),
+          disabled: !this.isAllowed(this.Fees?.SimulateFee),
         },
       ];
     });

@@ -2,7 +2,7 @@
   <app-entity-header
     [title]="'fees.title' | translate"
     (isCreateClicked)="openModel(0)"
-    [showButton]="isAllowed(Fees.CreateFee)"
+    [showButton]="isAllowed(Fees?.CreateFee)"
   ></app-entity-header>
   <app-qr-table
     [columns]="columns"
