@@ -59,13 +59,7 @@ export class TransactionsList implements OnInit {
     },
   ];
 
-  actions: TableAction[] = [
-    {
-      label: 'transactions.actions.viewDetails',
-      icon: 'eye',
-      severity: 'info',
-    },
-  ];
+  actions: TableAction[] = [];
 
   transactions = [];
   total = 0;

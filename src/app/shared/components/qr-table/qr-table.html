@@ -73,7 +73,11 @@
               *ngFor="let action of actions; let i = index"
               class="action-btn"
               [class]="action.severity || 'primary'"
-              [hidden]="action.disabled || false"
+              [hidden]="
+                action.disabled ||
+                false ||
+                (i == 0 && isAudit && !rowData?.['additionalData']?.EntityChanges)
+              "
               (click)="onActionClick.emit({ action, rowData, rowIndex })"
               [title]="
                 (!rowData['enabled'] && i == 2) ||

@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ResourcesObject, Roles } from '../../modules/roles/interfaces/role';
 import { BehaviorSubject } from 'rxjs';
-import { SimulaterRes } from '../core/interfaces';
+import { QrRes } from '../core/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -69,8 +69,8 @@ export class GlobalService {
     return this.http.get(url);
   }
 
-  simulatePay(res: SimulaterRes) {
-    let url = 'https://gimuat.gimpay.org:6033/schemeA/send-p2p';
+  generateQr(res: QrRes) {
+    let url = 'https://gimuat.gimpay.org:6033/schemeB/generate-qr';
     return this.http.post(url, res);
   }
 }

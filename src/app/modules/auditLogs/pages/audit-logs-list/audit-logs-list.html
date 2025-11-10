@@ -12,5 +12,12 @@
     [total]="total"
     (onLazyLoad)="getAllAudits($event, 10)"
     (onPageSize)="getAllAudits(pageIndex, $event)"
+    (onActionClick)="viewAudit($event)"
+    [isAudit]="true"
   ></app-qr-table>
 </div>
+<app-qr-modal
+  [modalComponent]="viewAuditCom"
+  [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ additionalData: additionalData }"
+></app-qr-modal>

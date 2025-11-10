@@ -9,14 +9,18 @@ import { AuditsService } from '../../services/auditlogs.service';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { ViewAudit } from '../view-audit/view-audit';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { AdditionalData } from '../../interfaces/audit';
 
 @Component({
   selector: 'app-audit-logs-list',
-  imports: [EntityHeader, QrTable, TranslateModule, CommonModule],
+  imports: [EntityHeader, QrTable, TranslateModule, CommonModule, QrModal],
   templateUrl: './audit-logs-list.html',
   styleUrl: './audit-logs-list.scss',
 })
 export class AuditLogsList implements OnInit {
+  viewAuditCom = ViewAudit;
   auditServ = inject(AuditsService);
   globalServ = inject(GlobalService);
   pageIndex = 1;
@@ -29,25 +33,32 @@ export class AuditLogsList implements OnInit {
       template: 'date',
     },
     {
-      field: 'tenantId',
-      header: 'auditLogs.table.tenantId',
+      field: 'userName',
+      header: 'auditLogs.table.username',
       sortable: false,
     },
     {
-      field: 'tenantCode',
-      header: 'auditLogs.table.tenantCode',
+      field: 'actionType',
+      header: 'auditLogs.table.actionType',
       sortable: false,
     },
     {
-      field: 'statusCode',
-      header: 'auditLogs.table.statusCode',
+      field: 'actionDetails',
+      header: 'auditLogs.table.actionDetails',
       sortable: false,
     },
   ];
 
-  actions: TableAction[] = [];
+  actions: TableAction[] = [
+    {
+      label: 'transactions.actions.viewDetails',
+      icon: 'eye',
+      severity: 'info',
+    },
+  ];
   audits = [];
   total = 0;
+  additionalData!: AdditionalData;
   ngOnInit(): void {
     this.getAllAudits(this.pageIndex, this.pageSize);
   }
@@ -58,8 +69,7 @@ export class AuditLogsList implements OnInit {
     this.auditServ.getAllAsudits(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.audits = data.items;
-        console.log(this.audits, 'wwwwwwwwwwww');
-        this.total = data.total;
+        this.total = data.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -68,5 +78,11 @@ export class AuditLogsList implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+
+  viewAudit(event: any) {
+    this.globalServ.setModal(true);
+
+    this.additionalData = event?.rowData?.additionalData;
   }
 }

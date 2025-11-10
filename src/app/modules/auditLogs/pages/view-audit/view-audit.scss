@@ -1,0 +1,14 @@
+.content {
+  padding: 0px 16px;
+  width: 560px;
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* creates vertical gap between rows */
+    border: none;
+    td {
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+  }
+}

@@ -9,10 +9,11 @@ import {
 import { QrInputNumber } from '../qr-input-number/qr-input-number';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalService } from '../../services/global.service';
-import { SimulaterRes } from '../../core/interfaces';
+
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { QrRes } from '../../core/interfaces';
+import { QRCodeComponent } from 'angularx-qrcode';
 @Component({
   selector: 'app-simulator',
   imports: [
@@ -22,6 +23,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     ReactiveFormsModule,
     TranslateModule,
     NzIconModule,
+    QRCodeComponent,
   ],
   templateUrl: './simulator.html',
   styleUrl: './simulator.scss',
@@ -32,10 +34,13 @@ export class Simulator {
   simulatorForm!: FormGroup;
   globalServ = inject(GlobalService);
   message = inject(NzMessageService);
+  elementType: 'url' | 'img' | 'canvas' | 'svg' = 'svg';
+  errorCorrectionLevel: 'L' | 'M' | 'Q' | 'H' = 'M';
+  qrValue =
+    '00020101021126510020com.qrswitch.schemeA01122010000000040207SchemeB520400005303XOF5406110.005905eslam6007senegal62100806string630474F5';
   constructor(private fb: FormBuilder) {
     this.simulatorForm = this.fb.group({
-      senderMsisdn: [],
-      receiverMsisdn: [],
+      msisdn: [],
       amount: [],
       description: [],
     });
@@ -44,17 +49,14 @@ export class Simulator {
   pay() {
     this.loading = true;
     let simulateBody = this.simulatorForm.value;
-    let reqBody: SimulaterRes = {
-      senderMsisdn: simulateBody?.senderMsisdn,
-      amount: {
-        value: simulateBody?.amount,
-        currency: 'XOF',
-      },
-      description: simulateBody?.description,
-      receiverMsisdn: simulateBody?.receiverMsisdn,
+    let reqBody: QrRes = {
+      msisdn: simulateBody.msisdn,
+      amount: simulateBody.amount,
+      isStatic: true,
+      purpose: simulateBody.description,
     };
 
-    this.globalServ.simulatePay(reqBody).subscribe({
+    this.globalServ.generateQr(reqBody).subscribe({
       next: (data: any) => {
         this.loading = false;
         if (data?.body.responseCode === '00000') {
