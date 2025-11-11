@@ -44,17 +44,16 @@
             [readonly]="viewMode"
           ></textarea>
         </div>
-        <app-qr-tags-input
-          [required]="true"
-          formControlName="prefixes"
-          [controlName]="'prefixes'"
-          [parentGroup]="walletForm"
-          [label]="'wallets.addWallet.perefixes' | translate"
-          [placeholder]="'wallets.addWallet.addPerefix' | translate"
-          [disabled]="viewMode"
+        <app-qr-input
           class="w-1/2"
-          [mode]="'tags'"
-        ></app-qr-tags-input>
+          [label]="'Wallet Acquirer Id'"
+          [placeholder]="'enter wallet acquirer id'"
+          formControlName="walletAcquirerId"
+          [controlName]="'walletAcquirerId'"
+          [parentGroup]="walletForm"
+          [required]="true"
+          [disabled]="viewMode"
+        ></app-qr-input>
       </div>
     </section>
     <section
