@@ -10,11 +10,13 @@
         [placeholder]="'enter number'"
         formControlName="msisdn"
         [label]="'Reciever Number'"
+        [disabled]="qrValue ? true : false"
       ></app-qr-input-number>
       <app-qr-input-number
         [placeholder]="'enter amount'"
         formControlName="amount"
         [label]="'Amount'"
+        [disabled]="qrValue ? true : false"
       ></app-qr-input-number>
       <div class="flex gap-2 flex-col w-full">
         <label>{{ "wallets.addWallet.description" | translate }}</label>
@@ -22,6 +24,7 @@
           class="p-3"
           [placeholder]="'wallets.addWallet.writeDescription' | translate"
           formControlName="description"
+          [attr.disabled]="qrValue ? true : false"
         ></textarea>
       </div>
       <button

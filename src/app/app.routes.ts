@@ -16,6 +16,7 @@ import { TransactionsList } from './modules/transactions/pages/transactions-list
 import { PermissonGuard } from './shared/services/permission-guard.service';
 import { Simulator } from './shared/components/simulator/simulator';
 import { UnAuthorized } from './shared/components/un-authorized/un-authorized';
+import { WalletsSimulator } from './shared/components/wallets-simulator/wallets-simulator';
 
 export const routes: Routes = [
   {
@@ -92,6 +93,10 @@ export const routes: Routes = [
   {
     path: 'simulator',
     component: Simulator,
+  },
+  {
+    path: 'wallets-simulator',
+    component: WalletsSimulator,
   },
   {
     path: 'unathourized',
