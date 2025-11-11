@@ -23,7 +23,6 @@ export class WalletsSimulator implements OnInit {
     this.walletServ.getAllWallets(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.wallets = data.data.items;
-        console.log(this.wallets, 'wwwwwww');
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -32,5 +31,13 @@ export class WalletsSimulator implements OnInit {
         this.globalServ.setLoading(false);
       },
     });
+  }
+
+  openWalletWindow(walletName: string, walletId: string) {
+    window.open(
+      `http://localhost:4200/walletWindow?name=${walletName}&id=${walletId}`,
+      '_blank',
+      'width=800,height=600,scrollbars=yes,resizable=no'
+    );
   }
 }

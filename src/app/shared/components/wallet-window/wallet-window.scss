@@ -1,0 +1,28 @@
+.window-container {
+  width: 100dvw;
+  height: 100dvh;
+  color: #fff;
+  h1 {
+    color: #fff;
+    span {
+      color: #004d9c;
+    }
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}

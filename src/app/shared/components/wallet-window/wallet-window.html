@@ -1,0 +1,14 @@
+<div class="window-container bg-black p-8">
+  <h1>
+    Listening on wallet <span>{{ walletName }}</span>
+  </h1>
+  <p *ngFor="let log of visibleLogs" class="mt-2">
+    {{ log }}
+
+    <span
+      *ngIf="isTyping && log === visibleLogs[visibleLogs.length - 1]"
+      class="cursor"
+      >|</span
+    >
+  </p>
+</div>

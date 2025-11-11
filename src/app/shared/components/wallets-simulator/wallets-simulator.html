@@ -6,7 +6,11 @@
   >
     <h1>Active Wallets</h1>
     <div class="grid grid-cols-2 gap-4 w-full">
-      <div class="wallet w-full p-4 rounded-md" *ngFor="let wallet of wallets">
+      <div
+        class="wallet w-full p-4 rounded-md"
+        *ngFor="let wallet of wallets"
+        (click)="openWalletWindow(wallet.name, wallet.walletAcqId)"
+      >
         <p>{{ wallet.name }} ({{ wallet.id }})</p>
       </div>
     </div>

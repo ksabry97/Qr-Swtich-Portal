@@ -79,7 +79,7 @@ export class AddWallet implements OnChanges {
       name: ['', Validators.required],
       type: ['', Validators.required],
       description: [''],
-      walletAcquirerId: [[], Validators.required],
+      walletAcqId: [[], Validators.required],
       baseUrl: ['', Validators.required],
       port: ['443', Validators.required],
       maxConnections: ['', Validators.required],

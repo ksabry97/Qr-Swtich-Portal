@@ -17,6 +17,7 @@ import { PermissonGuard } from './shared/services/permission-guard.service';
 import { Simulator } from './shared/components/simulator/simulator';
 import { UnAuthorized } from './shared/components/un-authorized/un-authorized';
 import { WalletsSimulator } from './shared/components/wallets-simulator/wallets-simulator';
+import { WalletWindow } from './shared/components/wallet-window/wallet-window';
 
 export const routes: Routes = [
   {
@@ -101,5 +102,9 @@ export const routes: Routes = [
   {
     path: 'unathourized',
     component: UnAuthorized,
+  },
+  {
+    path: 'walletWindow',
+    component: WalletWindow,
   },
 ];
