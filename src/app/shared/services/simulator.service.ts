@@ -10,7 +10,9 @@ export class LogsService {
 
   startConnection(walletId: string) {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://gimuat.gimpay.org:6033/loggingHub')
+      .withUrl('https://gimuat.gimpay.org:6033/loggingHub', {
+        withCredentials: false, // 👈 or remove the option entirely
+      })
       .build();
 
     this.hubConnection.start();
