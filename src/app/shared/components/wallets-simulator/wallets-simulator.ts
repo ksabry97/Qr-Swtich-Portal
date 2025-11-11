@@ -34,8 +34,10 @@ export class WalletsSimulator implements OnInit {
   }
 
   openWalletWindow(walletName: string, walletId: string) {
+    const baseUrl = window.origin;
+
     window.open(
-      `http://localhost:4200/walletWindow?name=${walletName}&id=${walletId}`,
+      `${baseUrl}/walletWindow?name=${walletName}&id=${walletId}`,
       '_blank',
       'width=800,height=600,scrollbars=yes,resizable=no'
     );
