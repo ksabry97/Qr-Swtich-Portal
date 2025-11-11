@@ -361,6 +361,13 @@
   },
   "transactions": {
     "title": "Transactions",
+    "actions": {
+      "viewDetails": "View Details"
+    },
+    "viewTransaction": {
+      "title": "Transaction Details",
+      "transactionId": "Transaction ID"
+    },
     "table": {
       "transactionId": "Transaction ID",
       "senderName": "Sender Name",
@@ -370,10 +377,9 @@
       "transactionType": "Transaction Type",
       "status": "Status",
       "receiverName": "Receiver Name",
-      "receiverMsisdn": "Receiver MSISDN"
-    },
-    "actions": {
-      "viewDetails": "View Details"
+      "receiverMsisdn": "Receiver MSISDN",
+      "transactionDate": "Transaction Date",
+      "transactionReference": "Transaction Reference"
     }
   },
   "unauthorized": {

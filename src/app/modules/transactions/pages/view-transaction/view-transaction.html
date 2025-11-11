@@ -1,7 +1,7 @@
-<app-modal-header [title]="'Transactions Details'"></app-modal-header>
+<app-modal-header [title]="'transactions.viewTransaction.title' | translate"></app-modal-header>
 <div class="content">
   <section>
-    <h1>{{ Transaction Id}} : {{ transactionNo }}</h1>
+    <h1>{{ 'transactions.viewTransaction.transactionId' | translate }} : {{ transactionNo }}</h1>
     <div class="grid grid-cols-3 gap-3 mt-3">
       <div class="flex flex-col" *ngFor="let item of data; let i = index">
         <p>{{ item.label | translate }}</p>

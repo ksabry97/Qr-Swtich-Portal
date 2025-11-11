@@ -370,10 +370,16 @@
       "transactionType": "Type de transaction",
       "status": "Statut",
       "receiverName": "Nom du destinataire",
-      "receiverMsisdn": "MSISDN du destinataire"
+      "receiverMsisdn": "MSISDN du destinataire",
+      "transactionDate": "Date de transaction",
+      "transactionReference": "Référence de transaction"
     },
     "actions": {
       "viewDetails": "Voir les détails"
+    },
+    "viewTransaction": {
+      "title": "Détails de la transaction",
+      "transactionId": "ID de transaction"
     }
   },
   "unauthorized": {

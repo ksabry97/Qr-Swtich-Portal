@@ -21,44 +21,44 @@ export class ViewTransaction {
   transactionNo = '';
   data = [
     {
-      label: 'Transaction Date',
+      label: 'transactions.table.transactionDate',
       value: 0,
       type: 'date',
     },
     {
-      label: 'Sender Name',
+      label: 'transactions.table.senderName',
       value: 0,
     },
     {
-      label: 'Sender Msisdn',
+      label: 'transactions.table.senderMsisdn',
       value: 0,
     },
     {
-      label: 'Receiver Name',
+      label: 'transactions.table.receiverName',
       value: 0,
     },
     {
-      label: 'Receiver Msisdn',
+      label: 'transactions.table.receiverMsisdn',
       value: 0,
     },
     {
-      label: 'Amount',
+      label: 'transactions.table.amount',
       value: 0,
     },
     {
-      label: 'Currency',
+      label: 'transactions.table.currency',
       value: 0,
     },
     {
-      label: 'Status',
+      label: 'transactions.table.status',
       value: 0,
     },
     {
-      label: 'Transaction Type',
+      label: 'transactions.table.transactionType',
       value: 0,
     },
     {
-      label: 'Transaction Reference',
+      label: 'transactions.table.transactionReference',
       value: 0,
     },
   ];
