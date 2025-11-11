@@ -8,17 +8,26 @@ import {
 } from '../../../../shared/components/qr-table/qr-table';
 import { TransactionsService } from '../../services/transactions.service';
 import { GlobalService } from '../../../../shared/services/global.service';
+import { ViewTransaction } from '../view-transaction/view-transaction';
+import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 
 @Component({
   selector: 'app-transactions-list',
-  imports: [EntityHeader, QrTable, TranslateModule],
+  imports: [EntityHeader, QrTable, TranslateModule, QrModal],
   templateUrl: './transactions-list.html',
   styleUrl: './transactions-list.scss',
 })
 export class TransactionsList implements OnInit {
   transactionServ = inject(TransactionsService);
   globalServ = inject(GlobalService);
+  view = ViewTransaction;
   columns: TableColumn[] = [
+    {
+      field: 'transactionDate',
+      header: 'auditLogs.table.dateOfOccurance',
+      sortable: false,
+      template: 'date',
+    },
     {
       field: 'transactionId',
       header: 'transactions.table.transactionId',
@@ -59,8 +68,14 @@ export class TransactionsList implements OnInit {
     },
   ];
 
-  actions: TableAction[] = [];
-
+  actions: TableAction[] = [
+    {
+      label: 'transactions.actions.viewDetails',
+      icon: 'eye',
+      severity: 'info',
+    },
+  ];
+  transactionId = '';
   transactions = [];
   total = 0;
   pageIndex = 1;
@@ -78,7 +93,7 @@ export class TransactionsList implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.transactions = data.data;
-          this.total = data?.data?.totalCount;
+          this.total = data?.totalCount;
         },
         error: () => {
           this.globalServ.setLoading(false);
@@ -87,5 +102,9 @@ export class TransactionsList implements OnInit {
           this.globalServ.setLoading(false);
         },
       });
+  }
+  openModel(action: any) {
+    this.globalServ.setModal(true);
+    this.transactionId = action.rowData.transactionId;
   }
 }

@@ -1,0 +1,41 @@
+.content {
+  padding: 24px;
+  width: 767px;
+  section {
+    border-radius: var(--lg, 8px);
+    background: var(--bg-primary, #fff);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.09);
+    padding: 8px 20px;
+    h1 {
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+    p {
+      color: #475569;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    span {
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+.active {
+  border-radius: 6px;
+  width: fit-content;
+  background: #aaf0c4;
+  color: #099250 !important;
+  padding: 4px;
+  font-size: 12px !important;
+}
+.inactive {
+  padding: 4px;
+  border-radius: 6px;
+  width: fit-content;
+  background: #dc2626 !important;
+  color: #fff !important;
+  font-size: 12px !important;
+}

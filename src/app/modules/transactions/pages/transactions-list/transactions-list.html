@@ -12,5 +12,11 @@
     [total]="total"
     (onLazyLoad)="getAllTransactions($event, 10)"
     (onPageSize)="getAllTransactions(pageIndex, $event)"
+    (onActionClick)="openModel($event)"
   ></app-qr-table>
 </div>
+<app-qr-modal
+  [modalComponent]="view"
+  [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ transactionId: transactionId }"
+></app-qr-modal>

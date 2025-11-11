@@ -15,4 +15,8 @@ export class TransactionsService {
       `/transactions?PageNumber=${pageIndex}&PageSize=${pageSize}`;
     return this.http.get(url);
   }
+  getTransaction(transactionId: string) {
+    let url = this.baseUrl + `/transactions/${transactionId}`;
+    return this.http.get(url);
+  }
 }
