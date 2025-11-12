@@ -18,6 +18,7 @@ export class LogsService {
     this.hubConnection.start();
 
     this.hubConnection.on(walletId, (log) => {
+      console.log(log, 'wwww');
       const current = this.logEvents.value;
       this.logEvents.next([...current, log]);
     });

@@ -14,6 +14,7 @@ export class WalletWindow implements OnInit {
   activeRoute = inject(ActivatedRoute);
   logs: any[] = [];
   visibleLogs: string[] = [];
+  pendingLogs: string[] = [];
   isTyping = false;
   walletName = '';
   walletId = '';
@@ -27,29 +28,35 @@ export class WalletWindow implements OnInit {
       if (value.length > this.logs.length) {
         const newLog = value[value.length - 1];
         this.logs = value;
-        this.visibleLogs.push('');
-        await this.animateLog(newLog);
+        this.pendingLogs.push(newLog);
+        this.processLogsSequentially();
       }
     });
-
-    // Simulate new logs every second (for demo)
-    // setInterval(() => {
-    //   const current = this.logsServ.logEvents.value;
-    //   this.logsServ.logEvents.next([...current, 'New backend log message...']);
-    // }, 2000);
   }
 
-  async animateLog(text: string) {
+  async processLogsSequentially() {
+    // Prevent overlapping animations
+    if (this.isTyping) return;
     this.isTyping = true;
-    let visible = '';
 
-    // type each character gradually
-    for (let i = 0; i < text.length; i++) {
-      visible += text[i];
-      this.visibleLogs[this.visibleLogs.length - 1] = visible;
-      await new Promise((r) => setTimeout(r, 30)); // typing speed
+    while (this.pendingLogs.length > 0) {
+      const nextLog = this.pendingLogs.shift()!;
+      this.visibleLogs.push(''); // add new empty line
+      await this.animateLog(nextLog);
     }
 
     this.isTyping = false;
+  }
+
+  async animateLog(text: string) {
+    let visible = '';
+
+    for (let i = 0; i < text.length; i++) {
+      visible += text[i];
+      this.visibleLogs[this.visibleLogs.length - 1] = visible;
+      // trigger UI update
+      this.visibleLogs = [...this.visibleLogs];
+      await new Promise((r) => setTimeout(r, 30)); // typing speed
+    }
   }
 }
