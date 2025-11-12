@@ -10,7 +10,7 @@
     [paginator]="true"
     [rows]="10"
     [total]="total"
-    (onLazyLoad)="getAllTransactions($event, 10)"
+    (onLazyLoad)="getAllTransactions($event, pageSize)"
     (onPageSize)="getAllTransactions(pageIndex, $event)"
     (onActionClick)="openModel($event)"
   ></app-qr-table>

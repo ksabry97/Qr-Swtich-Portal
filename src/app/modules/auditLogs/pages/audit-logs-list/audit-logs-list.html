@@ -10,7 +10,7 @@
     [paginator]="true"
     [rows]="10"
     [total]="total"
-    (onLazyLoad)="getAllAudits($event, 10)"
+    (onLazyLoad)="getAllAudits($event, pageSize)"
     (onPageSize)="getAllAudits(pageIndex, $event)"
     (onActionClick)="viewAudit($event)"
     [isAudit]="true"

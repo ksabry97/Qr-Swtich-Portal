@@ -11,7 +11,7 @@
     [paginator]="true"
     [rows]="10"
     [total]="total"
-    (onLazyLoad)="getAllUsers($event, 10)"
+    (onLazyLoad)="getAllUsers($event, pageSize)"
     (onPageSize)="getAllUsers(pageIndex, $event)"
     (onActionClick)="callAction($event)"
     (isConfirmed)="activateUser($event)"

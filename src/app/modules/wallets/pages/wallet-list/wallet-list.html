@@ -12,7 +12,7 @@
     [rows]="10"
     [total]="total"
     (onActionClick)="callAction($event)"
-    (onLazyLoad)="getAllWallets($event, 10)"
+    (onLazyLoad)="getAllWallets($event, pageSize)"
     (onPageSize)="getAllWallets(pageIndex, $event)"
   ></app-qr-table>
 </div>
