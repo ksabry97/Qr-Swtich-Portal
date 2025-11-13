@@ -39,7 +39,7 @@ export class WalletsSimulator implements OnInit {
     window.open(
       `${baseUrl}/walletWindow?name=${walletName}&id=${walletId}`,
       '_blank',
-      'width=800,height=600,scrollbars=yes,resizable=no'
+      'width=900,height=600,scrollbars=yes,resizable=no'
     );
   }
 }

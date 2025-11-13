@@ -1,0 +1,11 @@
+<div class="window-container bg-black p-8">
+  <p *ngFor="let log of visibleLogs" class="mt-2">
+    {{ log }}
+
+    <span
+      *ngIf="isTyping && log === visibleLogs[visibleLogs.length - 1]"
+      class="cursor"
+      >|</span
+    >
+  </p>
+</div>
