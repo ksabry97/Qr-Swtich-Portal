@@ -19,6 +19,7 @@ export class QrLogsService {
     this.hubConnection.start();
 
     this.hubConnection.on('ReceiveLog', (log) => {
+      console.log(log, 'wwwwwwwww');
       const current = this.logEvents.value;
       this.logEvents.next([...current, log]);
     });

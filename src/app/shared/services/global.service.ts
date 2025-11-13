@@ -60,6 +60,16 @@ export class GlobalService {
     return this.http.get(url);
   }
 
+  getAllActiveWallets(pageNumber: number, pageSize: number) {
+    let reqBody = { pageNumber, pageSize };
+    let url = this.baseUrl + '/wallets/get-wallets-for-simulator';
+    return this.http.post(url, reqBody);
+  }
+
+  getWalletsLookup() {
+    let url = this.baseUrl + '/wallets/lookup';
+    return this.http.post(url, '');
+  }
   getTenantsCount() {
     let url = this.baseUrl + '/api/Tenant/Count';
     return this.http.get(url);

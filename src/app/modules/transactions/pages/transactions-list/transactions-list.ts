@@ -92,8 +92,8 @@ export class TransactionsList implements OnInit {
       .getAllTransactions(this.pageIndex, this.pageSize)
       .subscribe({
         next: (data: any) => {
-          this.transactions = data.data;
-          this.total = data?.totalCount;
+          this.transactions = data?.data?.transactions;
+          this.total = data?.data?.totalCount;
         },
         error: () => {
           this.globalServ.setLoading(false);

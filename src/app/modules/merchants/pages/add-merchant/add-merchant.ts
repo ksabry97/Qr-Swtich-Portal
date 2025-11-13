@@ -107,6 +107,7 @@ export class AddMerchant implements OnInit, OnChanges {
   countries = [];
   mccs = [];
   feesProfiles = [];
+  wallets = [];
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -125,7 +126,7 @@ export class AddMerchant implements OnInit, OnChanges {
       serviceLicenseNumber: [''],
       mccId: ['', Validators.required],
       canPerformRegistration: [false],
-
+      walletId: ['', Validators.required],
       countryId: ['', Validators.required],
       cityId: ['', Validators.required],
       contactEmail: ['', Validators.email],
@@ -143,11 +144,13 @@ export class AddMerchant implements OnInit, OnChanges {
       countries: this.globalServ.getAllCountries(),
       mccs: this.globalServ.getMccs(),
       fees: this.globalServ.getAllfeesLookups(),
+      wallets: this.globalServ.getWalletsLookup(),
     }).subscribe({
       next: (data: any) => {
         this.countries = data.countries?.data;
         this.mccs = data.mccs?.data;
         this.feesProfiles = data.fees?.data;
+        this.wallets = data.wallets.data;
       },
     });
   }

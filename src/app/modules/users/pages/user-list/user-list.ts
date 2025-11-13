@@ -100,8 +100,8 @@ export class UserList implements OnInit {
     this.globalServ.isSubmitted.set(false);
     this.userServ.getAllUsers(pageIndex, pageSize).subscribe({
       next: (data: any) => {
-        this.users = data.data;
-        this.total = data?.pagination?.size;
+        this.users = data.data.users;
+        this.total = data?.data?.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);

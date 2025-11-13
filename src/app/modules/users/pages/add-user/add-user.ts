@@ -88,6 +88,7 @@ export class AddUser implements OnInit, OnChanges {
         this.userServ.getUserById(this.userId).subscribe({
           next: (data: any) => {
             this.userForm.patchValue(data);
+            this.userForm.patchValue({ assignRoleById: data.roles });
           },
         });
       }

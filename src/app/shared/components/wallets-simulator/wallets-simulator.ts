@@ -20,7 +20,7 @@ export class WalletsSimulator implements OnInit {
   getAllWallets(pageNumber: number, pageSize: number) {
     this.globalServ.setLoading(true);
 
-    this.walletServ.getAllWallets(pageNumber, pageSize).subscribe({
+    this.globalServ.getAllActiveWallets(pageNumber, pageSize).subscribe({
       next: (data: any) => {
         this.wallets = data.data.items;
       },

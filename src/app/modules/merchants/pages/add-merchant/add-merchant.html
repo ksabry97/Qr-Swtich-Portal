@@ -22,16 +22,15 @@
           [disabled]="viewMode"
         ></app-qr-input>
         <app-qr-select
-          formControlName="countryId"
-          [controlName]="'countryId'"
+          formControlName="walletId"
+          [controlName]="'walletId'"
           [parentGroup]="merchantForm"
-          [options]="countries"
-          [label]="'merchants.addMerchant.country' | translate"
-          [placeholder]="'merchants.addMerchant.selectCountry' | translate"
+          [options]="wallets"
+          [label]="'wallets.title' | translate"
+          [placeholder]="'wallets.title' | translate"
           [required]="true"
           class="w-1/2"
-          (ngModelChange)="getCity($event)"
-          [disabled]="viewMode"
+          [disabled]="viewMode || editMode"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
@@ -62,17 +61,18 @@
         ></app-qr-select>
       </div>
       <div class="flex gap-3">
-        <app-qr-input
-          class="w-1/2"
-          [label]="'merchants.addMerchant.merchantId' | translate"
-          [placeholder]="'merchants.addMerchant.enterMerchantId' | translate"
-          formControlName="merchantId"
-          [controlName]="'merchantId'"
+        <app-qr-select
+          formControlName="countryId"
+          [controlName]="'countryId'"
           [parentGroup]="merchantForm"
+          [options]="countries"
+          [label]="'merchants.addMerchant.country' | translate"
+          [placeholder]="'merchants.addMerchant.selectCountry' | translate"
           [required]="true"
-          [disabled]="viewMode || editMode"
-          *ngIf="viewMode || editMode"
-        ></app-qr-input>
+          class="w-1/2"
+          (ngModelChange)="getCity($event)"
+          [disabled]="viewMode"
+        ></app-qr-select>
         <app-qr-select
           formControlName="cityId"
           [controlName]="'cityId'"
@@ -226,6 +226,17 @@
           class="w-1/2"
         ></app-qr-select>
       </div>
+      <app-qr-input
+        class="w-1/2"
+        [label]="'merchants.addMerchant.merchantId' | translate"
+        [placeholder]="'merchants.addMerchant.enterMerchantId' | translate"
+        formControlName="merchantId"
+        [controlName]="'merchantId'"
+        [parentGroup]="merchantForm"
+        [required]="true"
+        [disabled]="viewMode || editMode"
+        *ngIf="viewMode || editMode"
+      ></app-qr-input>
 
       <div class="flex gap-3">
         <div class="flex items-center justify-between w-1/2">

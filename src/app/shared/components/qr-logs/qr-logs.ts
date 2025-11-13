@@ -16,6 +16,7 @@ export class QrLogs implements OnInit {
   isTyping = false;
 
   ngOnInit(): void {
+    this.logsServ.startConnection();
     this.logsServ.logs$.subscribe(async (value) => {
       if (value.length > this.logs.length) {
         const newLog = value[value.length - 1];
