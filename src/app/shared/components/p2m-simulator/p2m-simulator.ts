@@ -44,7 +44,7 @@ export class P2mSimulator implements OnInit {
   hasAmount = false;
   constructor(private fb: FormBuilder) {
     this.simulatorForm = this.fb.group({
-      walletId: [],
+      walletAcqID: [],
       msisdn: [],
       amount: [],
       description: [],
@@ -72,7 +72,7 @@ export class P2mSimulator implements OnInit {
       purpose: simulateBody.description,
     };
 
-    this.globalServ.generateQr(reqBody).subscribe({
+    this.globalServ.generateMerchantQr(reqBody).subscribe({
       next: (data: any) => {
         this.loading = false;
         this.qrValue = data.qrString;
@@ -108,7 +108,7 @@ export class P2mSimulator implements OnInit {
 
   payQr() {
     this.loading = true;
-    this.globalServ.payQr(this.payForm.value).subscribe({
+    this.globalServ.payMerchantQr(this.payForm.value).subscribe({
       next: (data: any) => {
         if (data?.body.responseCode === '00000') {
           this.message.success(data?.body?.responseDescription);
