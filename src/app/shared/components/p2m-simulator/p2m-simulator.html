@@ -1,0 +1,122 @@
+<div
+  class="p-8 w-full flex justify-between items-center custom-container gap-8"
+>
+  <div
+    *ngIf="!openPayForm"
+    class="form-container w-[95vw] bg-white min-h-[95vh] rounded-3xl relative p-6 flex justify-between items-center"
+  >
+    <form class="w-1/2 flex flex-col gap-6" [formGroup]="simulatorForm">
+      <app-qr-input-number
+        [placeholder]="'enter number'"
+        formControlName="msisdn"
+        [label]="'Reciever Number'"
+        [disabled]="true"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter wallet acquiring number'"
+        formControlName="walletId"
+        [label]="'Wallet Acquiring ID'"
+        [disabled]="true"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter amount'"
+        formControlName="amount"
+        [label]="'Amount'"
+        [disabled]="qrValue ? true : false"
+      ></app-qr-input-number>
+      <div class="flex gap-2 flex-col w-full">
+        <label>{{ "wallets.addWallet.description" | translate }}</label>
+        <textarea
+          class="p-3"
+          [placeholder]="'wallets.addWallet.writeDescription' | translate"
+          formControlName="description"
+          [attr.disabled]="qrValue ? true : false"
+        ></textarea>
+      </div>
+      <button
+        *ngIf="!qrValue"
+        class="submit-btn rounded-md p-2"
+        (click)="generateQr()"
+        [disabled]="loading"
+      >
+        <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
+        {{ loading ? "" : "Generate QR" }}
+      </button>
+      <button
+        *ngIf="qrValue"
+        class="submit-btn rounded-md p-2"
+        (click)="scanQr()"
+        [disabled]="loading"
+      >
+        <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
+        {{ loading ? "" : "Scan QR" }}
+      </button>
+    </form>
+    <div class="flex flex-col gap-8 justify-center items-center w-1/2 h-100">
+      <div class="imag-contain" *ngIf="!qrValue">
+        <img src="assets/cash.jpg" />
+      </div>
+      <div
+        class="w-50 flex-col justify-center items-center gap-6 flex"
+        *ngIf="qrValue"
+      >
+        <qrcode
+          [qrdata]="qrValue"
+          [errorCorrectionLevel]="errorCorrectionLevel"
+          [elementType]="elementType"
+          [width]="300"
+        >
+        </qrcode>
+      </div>
+
+      <p class="flex items-center gap-1 foot">
+        {{ "app.powered_by" | translate }}
+        <img src="assets/sm-logo.svg" />
+        {{ "app.inc" | translate }}
+        <span>{{ "app.enabled_by" | translate }}</span>
+        <img src="assets/GIM.svg" />
+      </p>
+    </div>
+  </div>
+
+  <div
+    *ngIf="openPayForm"
+    class="form-container w-[95vw] bg-white min-h-[95vh] rounded-3xl relative p-6 flex justify-between items-center"
+  >
+    <form class="w-1/2 flex flex-col gap-6" [formGroup]="payForm">
+      <app-qr-input-number
+        [placeholder]="'enter number'"
+        formControlName="senderMsisdn"
+        [label]="'Sender Number'"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter amount'"
+        formControlName="amount"
+        [label]="'Amount'"
+        [disabled]="hasAmount"
+      ></app-qr-input-number>
+
+      <button
+        class="submit-btn rounded-md p-2"
+        (click)="payQr()"
+        [disabled]="loading"
+      >
+        <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
+        {{ loading ? "" : "Pay" }}
+      </button>
+    </form>
+    <div class="flex flex-col gap-8 justify-center items-center w-1/2 h-100">
+      <div class="imag-contain">
+        <img src="assets/cash.jpg" />
+      </div>
+
+      <p class="flex items-center gap-1 foot">
+        {{ "app.powered_by" | translate }}
+        <img src="assets/sm-logo.svg" />
+        {{ "app.inc" | translate }}
+        <span>{{ "app.enabled_by" | translate }}</span>
+        <img src="assets/GIM.svg" />
+      </p>
+    </div>
+  </div>
+</div>

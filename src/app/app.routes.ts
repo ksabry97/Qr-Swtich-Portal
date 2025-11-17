@@ -19,6 +19,7 @@ import { UnAuthorized } from './shared/components/un-authorized/un-authorized';
 import { WalletsSimulator } from './shared/components/wallets-simulator/wallets-simulator';
 import { WalletWindow } from './shared/components/wallet-window/wallet-window';
 import { QrLogs } from './shared/components/qr-logs/qr-logs';
+import { P2mSimulator } from './shared/components/p2m-simulator/p2m-simulator';
 
 export const routes: Routes = [
   {
@@ -111,5 +112,9 @@ export const routes: Routes = [
   {
     path: 'qr-logs',
     component: QrLogs,
+  },
+  {
+    path: 'p2m-simulator',
+    component: P2mSimulator,
   },
 ];

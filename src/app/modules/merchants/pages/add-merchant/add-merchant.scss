@@ -22,3 +22,10 @@ section {
     padding-bottom: 0;
   }
 }
+.icon {
+  border-radius: 14px;
+  border: 1px solid var(--border-primary, #cbd5e1);
+  background: #fff;
+  width: 25px;
+  height: 25px;
+}

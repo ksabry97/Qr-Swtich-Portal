@@ -130,12 +130,12 @@ export class MerchantList implements OnInit {
       case 'info':
         this.globalServ.setModal(true);
         this.viewMode = true;
-        this.merchantId = action.rowData.merchantId;
+        this.merchantId = action.rowData.id;
         return;
       case 'warn':
         this.globalServ.setModal(true);
         this.editMode = true;
-        this.merchantId = action.rowData.merchantId;
+        this.merchantId = action.rowData.id;
         return;
     }
   }

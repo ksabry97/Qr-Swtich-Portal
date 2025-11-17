@@ -1,0 +1,132 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+  FormBuilder,
+} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { QRCodeComponent } from 'angularx-qrcode';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { QrRes } from '../../core/interfaces';
+import { GlobalService } from '../../services/global.service';
+import { QrInputNumber } from '../qr-input-number/qr-input-number';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-p2m-simulator',
+  imports: [
+    CommonModule,
+    FormsModule,
+    QrInputNumber,
+    ReactiveFormsModule,
+    TranslateModule,
+    NzIconModule,
+    QRCodeComponent,
+  ],
+  templateUrl: './p2m-simulator.html',
+  styleUrl: './p2m-simulator.scss',
+})
+export class P2mSimulator implements OnInit {
+  mssidn: number | null = null;
+  loading = false;
+  simulatorForm!: FormGroup;
+  payForm!: FormGroup;
+  globalServ = inject(GlobalService);
+  message = inject(NzMessageService);
+  activeRoute = inject(ActivatedRoute);
+  elementType: 'url' | 'img' | 'canvas' | 'svg' = 'svg';
+  errorCorrectionLevel: 'L' | 'M' | 'Q' | 'H' = 'M';
+  qrValue = '';
+  openPayForm = false;
+  hasAmount = false;
+  constructor(private fb: FormBuilder) {
+    this.simulatorForm = this.fb.group({
+      walletId: [],
+      msisdn: [],
+      amount: [],
+      description: [],
+    });
+    this.payForm = this.fb.group({
+      senderMsisdn: [],
+      qrString: [],
+      amount: [],
+    });
+  }
+
+  ngOnInit(): void {
+    this.activeRoute.queryParams.subscribe((value) => {
+      this.simulatorForm.patchValue({ walletId: value['walletId'] });
+      this.simulatorForm.patchValue({ msisdn: value['mssidn'] });
+    });
+  }
+  generateQr() {
+    this.loading = true;
+    let simulateBody = this.simulatorForm.value;
+    let reqBody: QrRes = {
+      msisdn: simulateBody.msisdn,
+      amount: simulateBody.amount,
+      isStatic: true,
+      purpose: simulateBody.description,
+    };
+
+    this.globalServ.generateQr(reqBody).subscribe({
+      next: (data: any) => {
+        this.loading = false;
+        this.qrValue = data.qrString;
+        this.payForm.patchValue({ qrString: this.qrValue });
+      },
+      error: (err) => {
+        this.message.error(err.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  scanQr() {
+    this.loading = true;
+    this.globalServ.scanQr(this.qrValue).subscribe({
+      next: (data: any) => {
+        this.openPayForm = true;
+        data.amount ? (this.hasAmount = true) : (this.hasAmount = false);
+        this.payForm.patchValue({ amount: data.amount });
+      },
+      error: (err) => {
+        this.message.error(err.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  payQr() {
+    this.loading = true;
+    this.globalServ.payQr(this.payForm.value).subscribe({
+      next: (data: any) => {
+        if (data?.body.responseCode === '00000') {
+          this.message.success(data?.body?.responseDescription);
+        } else {
+          this.message.error(data?.body?.responseDescription);
+        }
+      },
+      error: (err) => {
+        this.message.error(err.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  get amount() {
+    return this.payForm.controls['amount']?.value;
+  }
+}

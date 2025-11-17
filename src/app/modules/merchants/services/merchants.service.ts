@@ -25,8 +25,8 @@ export class MerchantService {
     return this.http.post(url, reqBody);
   }
 
-  getMerchantByMerchantId(merchantId: string) {
-    let reqBody = { merchantId };
+  getMerchantByMerchantId(Id: string) {
+    let reqBody = { Id };
     let url = this.baseUrl + '/merchants/getByMerchantId';
     return this.http.post(url, reqBody);
   }

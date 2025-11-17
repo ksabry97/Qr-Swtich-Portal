@@ -9,6 +9,12 @@
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="merchantForm" class="flex flex-col gap-3">
+    <div class="flex gap-4 items-center w-full justify-center" *ngIf="viewMode">
+      <a (click)="navigateToSimulator()"> Generate QR</a>
+      <div class="icon flex items-center justify-center">
+        <img src="assets/qr-code-bold.svg" loading="lazy" alt="'logo'" />
+      </div>
+    </div>
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">
       <div class="flex gap-3">
         <app-qr-input
