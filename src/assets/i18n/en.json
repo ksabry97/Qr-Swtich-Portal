@@ -220,7 +220,7 @@
       "enterScheme": "enter Scheme",
       "msisdn": "MSISDN",
       "enterMsisdn": "enter msisdn",
-      "mcc": "MCC",
+      "mcc": "Merchant Category Code",
       "selectMcc": "select mcc",
       "address": "Address",
       "enterAddress": "enter address",

@@ -220,7 +220,7 @@
       "enterScheme": "entrez le schéma",
       "msisdn": "MSISDN",
       "enterMsisdn": "entrez le msisdn",
-      "mcc": "MCC",
+      "mcc": "Code de catégorie marchand",
       "selectMcc": "sélectionner le mcc",
       "address": "Adresse",
       "enterAddress": "entrez l'adresse",

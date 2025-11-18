@@ -55,7 +55,6 @@ export class AddUser implements OnInit, OnChanges {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      password: ['', PasswordValidators.passwordStrength()],
       assignRoleById: [[]],
     });
   }
