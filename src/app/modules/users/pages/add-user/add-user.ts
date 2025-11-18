@@ -17,12 +17,10 @@ import { ModalFooter } from '../../../../shared/components/modal-footer/modal-fo
 import { ModalHeader } from '../../../../shared/components/modal-header/modal-header';
 import { QrInput } from '../../../../shared/components/qr-input/qr-input';
 import { QrSelect } from '../../../../shared/components/qr-select/qr-select';
-import { QrPassword } from '../../../../shared/components/qr-password/qr-password';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { UserService } from '../../services/users.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
-import { PasswordValidators } from '../../services/password-validator';
 
 @Component({
   selector: 'app-add-user',
@@ -33,7 +31,6 @@ import { PasswordValidators } from '../../services/password-validator';
     ReactiveFormsModule,
     QrInput,
     QrSelect,
-    QrPassword,
     TranslateModule,
   ],
   templateUrl: './add-user.html',
