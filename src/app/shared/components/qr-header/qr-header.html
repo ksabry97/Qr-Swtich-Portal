@@ -1,4 +1,13 @@
 <header class="flex justify-end p-4 items-center gap-2">
   <app-language-switcher></app-language-switcher>
-  <p (click)="logOut()">{{ 'common.logout' | translate }}</p>
+  <div class="flex gap-2 items-center">
+    <nz-avatar nzSize="small" nzIcon="user"></nz-avatar>
+    <p>{{ username }}</p>
+    <nz-icon
+      nzType="logout"
+      nzTheme="outline"
+      style="color: #fff; font-size: 16px"
+      (click)="logOut()"
+    />
+  </div>
 </header>

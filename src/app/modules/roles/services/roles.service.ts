@@ -26,4 +26,9 @@ export class RolesService {
     let reqBody = { description, assignRoleById };
     return this.http.put(url, reqBody);
   }
+
+  deleteRole(id: string) {
+    let url = this.baseUrl + `/management/roles/${id}`;
+    return this.http.delete(url);
+  }
 }

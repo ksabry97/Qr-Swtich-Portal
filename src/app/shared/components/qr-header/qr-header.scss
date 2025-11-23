@@ -4,15 +4,17 @@ header {
   background-color: var(--primary);
   p {
     color: #fff;
-    &:hover {
-      color: red;
-      cursor: pointer;
-    }
   }
 
   button {
     color: #fff;
     background-color: transparent;
     border: none;
+  }
+  nz-icon {
+    &:hover {
+      color: red !important;
+      cursor: pointer;
+    }
   }
 }

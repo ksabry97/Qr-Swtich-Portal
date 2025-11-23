@@ -9,6 +9,7 @@ import { LineChart } from '../../../../shared/components/line-chart/line-chart';
 import { PieChart } from '../../../../shared/components/pie-chart/pie-chart';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,13 +58,22 @@ export class Dashboard implements OnInit {
   }
 
   ngOnInit(): void {
-    this.globalServ.PermissionsPerModule.subscribe((value) => {
+    this.globalServ.PermissionsPerModule.pipe(
+      distinctUntilChanged(
+        (prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)
+      )
+    ).subscribe((value) => {
       this.Tenants = value.Tenants?.permissions;
       this.Roles = value.Roles?.permissions;
       this.Users = value.Users?.permissions;
 
-      this.isAllowed(this.Users?.ViewUser) ? this.getUsersCount() : '';
-      this.isAllowed(this.Tenants?.ViewTenant) ? this.getTenantsCount() : '';
+      if (this.isAllowed(this.Users?.ViewUser)) {
+        this.getUsersCount();
+      }
+
+      if (this.isAllowed(this.Tenants?.ViewTenant)) {
+        this.getTenantsCount();
+      }
     });
   }
 

@@ -9,12 +9,14 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { GlobalService } from '../../services/global.service';
 import { ResourcesObject } from '../../../modules/roles/interfaces/role';
 import { jwtDecode } from 'jwt-decode';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 interface JwtPayload {
   sub: string;
   name?: string;
   email?: string;
   realm_access?: { roles?: string[] }; // adjust key based on your token structure
   [key: string]: any;
+  preferred_username: string;
 }
 @Component({
   selector: 'app-qr-header',
@@ -25,6 +27,7 @@ interface JwtPayload {
     NzIconModule,
     LanguageSwitcher,
     TranslateModule,
+    NzAvatarModule,
   ],
   providers: [TranslateService],
   templateUrl: './qr-header.html',
@@ -33,6 +36,7 @@ interface JwtPayload {
 export class QrHeader implements OnInit {
   router = inject(Router);
   globalServ = inject(GlobalService);
+  username = '';
   logOut() {
     this.router.navigateByUrl('/login');
     localStorage.clear();
@@ -40,6 +44,7 @@ export class QrHeader implements OnInit {
 
   ngOnInit(): void {
     this.getAllPermissions();
+    this.username = localStorage.getItem('username') ?? '';
   }
   getAllPermissions() {
     this.globalServ.getAllPermissions().subscribe({
@@ -67,7 +72,7 @@ export class QrHeader implements OnInit {
         const token = localStorage.getItem('token') || '';
 
         const decoded = jwtDecode<JwtPayload>(token);
-
+        localStorage.setItem('username', decoded?.preferred_username);
         let roles = decoded.realm_access?.roles || decoded['role'] || [];
 
         roles = Array.isArray(roles) ? roles : [roles];

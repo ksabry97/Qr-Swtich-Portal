@@ -73,6 +73,12 @@ export class RolesList implements OnInit {
           severity: 'warn',
           disabled: !this.isAllowed(this.Roles?.EditRole),
         },
+        {
+          label: 'users.actions.delete',
+          icon: 'delete',
+          severity: 'danger',
+          disabled: !this.isAllowed(this.Roles?.DeleteRole),
+        },
       ];
     });
   }
@@ -115,5 +121,18 @@ export class RolesList implements OnInit {
   }
   isAllowed(permission: string) {
     return this.authServ.hasPermission(permission);
+  }
+
+  deleteRole(event: any) {
+    console.log(event, 'wwwwwww');
+    this.roleServ.deleteRole(event.id).subscribe({
+      next: (data: any) => {
+        this.message.success(data?.message);
+        this.getAllRoles();
+      },
+      error: (err) => {
+        this.message.success(err?.error?.message);
+      },
+    });
   }
 }
