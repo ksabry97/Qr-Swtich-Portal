@@ -84,7 +84,7 @@ export class AddMerchant implements OnInit, OnChanges {
       value: 3,
     },
   ];
-  cities = [];
+  cities: { text: any; value: any }[] = [];
   identificationTypes = [
     {
       text: 'Commercial Registration',
@@ -176,7 +176,6 @@ export class AddMerchant implements OnInit, OnChanges {
           this.lat = position.coords.latitude;
           this.lang = position.coords.longitude;
           this.merchantForm.patchValue({ lang: this.lang, lat: this.lat });
-          console.log(`Latitude: ${this.lat}, Longitude: ${this.lang}`);
         },
         (error) => {
           switch (error.code) {
@@ -322,6 +321,11 @@ export class AddMerchant implements OnInit, OnChanges {
       queryParams: {
         mssidn: this.merchantForm.get('msisdn')?.value,
         walletId: this.merchantForm.get('walletId')?.value,
+        merchantName: this.merchantForm.get('name')?.value,
+        merchantScheme: this.merchantForm.get('scheme')?.value,
+        merchantCity: this.cities.find((val: any) => {
+          return val.value === this.merchantForm.get('cityId')?.value;
+        })?.text,
       },
     });
   }

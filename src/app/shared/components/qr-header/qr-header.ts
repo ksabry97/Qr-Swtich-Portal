@@ -73,6 +73,7 @@ export class QrHeader implements OnInit {
 
         const decoded = jwtDecode<JwtPayload>(token);
         localStorage.setItem('username', decoded?.preferred_username);
+        this.username = decoded?.preferred_username;
         let roles = decoded.realm_access?.roles || decoded['role'] || [];
 
         roles = Array.isArray(roles) ? roles : [roles];

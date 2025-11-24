@@ -17,6 +17,7 @@ interface JwtPayload {
   email?: string;
   realm_access?: { roles?: string[] }; // adjust key based on your token structure
   [key: string]: any;
+  preferred_username: string;
 }
 @Component({
   selector: 'app-otp-modal',
