@@ -65,6 +65,19 @@
           class="w-1/2"
           [mode]="'multiple'"
           [disabled]="viewMode"
+          (ngModelChange)="checkMerchantRole($event)"
+        ></app-qr-select>
+        <app-qr-select
+          formControlName="merchantId"
+          [controlName]="'merchantId'"
+          [parentGroup]="userForm"
+          [options]="merchants"
+          (searchChange)="getAllMerchants($event)"
+          [label]="'merchants.title' | translate"
+          [placeholder]="'merchants.title' | translate"
+          class="w-1/2"
+          [disabled]="viewMode"
+          *ngIf="hasMerchant"
         ></app-qr-select>
       </div>
     </section>

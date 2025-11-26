@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +17,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ErrorMessages } from '../../services/error-messages.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 export interface ValidationRule {
   type: 'required' | 'minLength' | 'maxLength' | 'pattern' | 'email' | 'custom';
   value?: any;
@@ -61,11 +68,20 @@ export class QrSelect {
   @Input() allowClear: boolean = false;
   @Input() parentGroup!: FormGroup;
   @Input() controlName!: string;
+  private search$ = new Subject<string>();
+
+  @Output() searchChange = new EventEmitter<string>();
   public value: any = null;
   public changed = (value: any) => {};
   public touched = () => {};
   public isDisabled: boolean = false;
-  constructor(private readonly errorMessagesServ: ErrorMessages) {}
+  constructor(private readonly errorMessagesServ: ErrorMessages) {
+    this.search$
+      .pipe(debounceTime(600), distinctUntilChanged())
+      .subscribe((text) => {
+        this.searchChange.emit(text); // Emit to parent
+      });
+  }
   get control() {
     return this.parentGroup.get(this.controlName) as FormControl;
   }
@@ -92,5 +108,8 @@ export class QrSelect {
         this.label
       );
     } else return '';
+  }
+  onSearch(text: string) {
+    this.search$.next(text);
   }
 }

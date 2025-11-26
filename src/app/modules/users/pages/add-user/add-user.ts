@@ -12,6 +12,7 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
+  FormControl,
 } from '@angular/forms';
 import { ModalFooter } from '../../../../shared/components/modal-footer/modal-footer';
 import { ModalHeader } from '../../../../shared/components/modal-header/modal-header';
@@ -21,6 +22,7 @@ import { GlobalService } from '../../../../shared/services/global.service';
 import { UserService } from '../../services/users.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
+import { MerchantService } from '../../../merchants/services/merchants.service';
 
 @Component({
   selector: 'app-add-user',
@@ -40,9 +42,12 @@ export class AddUser implements OnInit, OnChanges {
   userForm!: FormGroup;
   globalServ = inject(GlobalService);
   userServ = inject(UserService);
+  merchantServ = inject(MerchantService);
+  merchants = [];
   tenants = [];
   assignedRoles = [];
   errorMessages: string[] = [];
+  hasMerchant: boolean = false;
   @Input() userId = '';
   @Input() viewMode = false;
   @Input() editMode = false;
@@ -144,5 +149,40 @@ export class AddUser implements OnInit, OnChanges {
       let error = `${key}: ${value}` || '';
       this.errorMessages.push(error);
     }
+  }
+
+  checkMerchantRole(event: string[]) {
+    let chosenRole: { text: string; value: string } | undefined | any =
+      this.assignedRoles.find((val: { text: string; value: string }) => {
+        return event.includes(val.value);
+      });
+
+    // check if the chosenRole is merchant Admin
+    if (chosenRole && chosenRole?.text === 'MerchantAdmin') {
+      if (!this.merchants.length) this.getAllMerchants();
+      this.userForm.addControl(
+        'merchantId',
+        new FormControl('', Validators.required)
+      );
+      this.hasMerchant = true;
+    } else {
+      this.hasMerchant = false;
+      this.userForm.removeControl('merchantId');
+    }
+  }
+
+  getAllMerchants(searchQuery: string = '') {
+    this.merchantServ.getMerchantsLookups(searchQuery).subscribe({
+      next: (data: any) => {
+        this.merchants = data.data.items.map((item: any) => {
+          return {
+            text: item.merchantName,
+            value: item.merchantId,
+          };
+        });
+      },
+      error: () => {},
+      complete: () => {},
+    });
   }
 }

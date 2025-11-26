@@ -35,4 +35,9 @@ export class MerchantService {
     let url = this.baseUrl + '/merchants/update';
     return this.http.post(url, merchant);
   }
+  getMerchantsLookups(searchQuery: string) {
+    let reqBody = { searchQuery };
+    let url = this.baseUrl + '/merchants/lookups';
+    return this.http.post(url, reqBody);
+  }
 }

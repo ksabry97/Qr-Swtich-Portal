@@ -48,6 +48,12 @@ export class P2mSimulator implements OnInit {
       msisdn: [],
       amount: [],
       description: [],
+      merchantName: [],
+      merchantCity: [],
+      merchantScheme: [],
+      countryCode: [],
+      currencyCode: [],
+      mcc: [],
     });
     this.payForm = this.fb.group({
       senderMsisdn: [],

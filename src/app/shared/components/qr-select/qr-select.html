@@ -14,6 +14,7 @@
     (nzBlur)="touched()"
     class="mb-2"
     [nzShowSearch]="true"
+    (nzOnSearch)="onSearch($event)"
   >
     @for (option of options; track $index) {
     <nz-option
