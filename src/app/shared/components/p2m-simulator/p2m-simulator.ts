@@ -52,7 +52,7 @@ export class P2mSimulator implements OnInit {
       merchantCity: [],
       merchantScheme: [],
       countryCode: [],
-      currencyCode: [],
+      currencyCode: ['952'],
       mcc: [],
     });
     this.payForm = this.fb.group({
@@ -66,6 +66,13 @@ export class P2mSimulator implements OnInit {
     this.activeRoute.queryParams.subscribe((value) => {
       this.simulatorForm.patchValue({ walletAcqID: value['walletId'] });
       this.simulatorForm.patchValue({ msisdn: value['mssidn'] });
+      this.simulatorForm.patchValue({ merchantName: value['merchantName'] });
+      this.simulatorForm.patchValue({ merchantCity: value['merchantCity'] });
+      this.simulatorForm.patchValue({
+        merchantScheme: value['merchantScheme'],
+      });
+      this.simulatorForm.patchValue({ countryCode: value['countryCode'] });
+      this.simulatorForm.patchValue({ mcc: value['mcc'] });
     });
   }
   generateQr() {
@@ -77,6 +84,12 @@ export class P2mSimulator implements OnInit {
       walletAcqID: simulateBody.walletAcqID,
       isStatic: true,
       purpose: simulateBody.description,
+      merchantName: simulateBody.merchantName,
+      merchantCity: simulateBody.merchantCity,
+      merchantScheme: simulateBody.merchantScheme,
+      countryCode: simulateBody.countryCode,
+      currencyCode: simulateBody.currencyCode,
+      mcc: simulateBody.mcc,
     };
 
     this.globalServ.generateMerchantQr(reqBody).subscribe({

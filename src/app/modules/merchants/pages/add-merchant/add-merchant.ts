@@ -106,8 +106,8 @@ export class AddMerchant implements OnInit, OnChanges {
 
   lang: number | null = null;
   lat: number | null = null;
-  countries: { text: any; value: any }[] = [];
-  mccs: { text: any; value: any }[] = [];
+  countries: { text: any; value: any; code: any }[] = [];
+  mccs: { text: any; value: any; code: any }[] = [];
   feesProfiles = [];
   wallets = [];
   constructor(
@@ -328,10 +328,10 @@ export class AddMerchant implements OnInit, OnChanges {
         })?.text,
         countryCode: this.countries.find((val: any) => {
           return val.value === this.merchantForm.get('countryId')?.value;
-        })?.text,
+        })?.code,
         mcc: this.mccs.find((val: any) => {
           return val.value === this.merchantForm.get('mccId')?.value;
-        })?.text,
+        })?.code,
       },
     });
   }
