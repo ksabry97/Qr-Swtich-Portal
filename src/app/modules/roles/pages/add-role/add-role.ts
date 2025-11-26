@@ -117,14 +117,19 @@ export class AddRole implements OnInit, OnChanges {
   createRole() {
     this.rolesServ.createRole(this.roleGroup.value).subscribe({
       next: (data: any) => {
-        this.globalServ.setModal(false);
+        if (data.status == 200 || data.status == 201) {
+          this.globalServ.setModal(false);
+          this.globalServ.isSubmitted.set(true);
+
+          this.message.success(data?.Message);
+        } else {
+          this.message.error(data?.Message);
+        }
         this.globalServ.requestLoading.set(false);
-        this.globalServ.isSubmitted.set(true);
-        this.message.success(data?.message);
       },
       error: (err) => {
         this.globalServ.requestLoading.set(false);
-        this.message.error(err?.error?.message);
+        this.message.error(err?.error?.Message);
       },
     });
   }
@@ -138,11 +143,11 @@ export class AddRole implements OnInit, OnChanges {
           this.globalServ.setModal(false);
           this.globalServ.requestLoading.set(false);
           this.globalServ.isSubmitted.set(true);
-          this.message.success(data?.message);
+          this.message.success(data?.Message);
         },
         error: (err) => {
           this.globalServ.requestLoading.set(false);
-          this.message.error(err?.error?.message);
+          this.message.error(err?.error?.Message);
         },
       });
   }
