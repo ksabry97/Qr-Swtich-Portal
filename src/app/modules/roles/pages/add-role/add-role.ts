@@ -107,7 +107,7 @@ export class AddRole implements OnInit, OnChanges {
   getRoleById() {
     this.rolesServ.getRoleById(this.roleId).subscribe({
       next: (data: any) => {
-        this.roleGroup.patchValue(data.data.role);
+        this.roleGroup.patchValue(data.data);
         setTimeout(() => {
           this.updatePermissions(data);
         }, 500);
@@ -153,7 +153,7 @@ export class AddRole implements OnInit, OnChanges {
   }
   updatePermissions(data: any) {
     let permissionIds: any[] = [];
-    data.data.role.groupedPermissions.forEach((perm: any) => {
+    data.data.groupedPermissions.forEach((perm: any) => {
       this.roles.forEach((role: Roles) => {
         role.resource == perm.resource
           ? this.roleGroup.get(role.resource)?.patchValue(true)
