@@ -13,7 +13,7 @@ export class RolesService {
 
   createRole(role: Role) {
     let url = this.baseUrl + '/management/roles';
-    return this.http.post(url, role);
+    return this.http.post(url, role, { responseType: 'text' });
   }
 
   getRoleById(id: string) {

@@ -81,7 +81,8 @@ export class AddRole implements OnInit, OnChanges {
   getAllPermissions() {
     this.globalServ.getAllPermissions().subscribe({
       next: (data: any) => {
-        this.roles = data?.data;
+        const value = typeof data === 'string' ? JSON.parse(data) : data;
+        this.roles = value?.data;
         this.roles.map((role: Roles) => {
           role.permissions.map((perm: Permission) => {
             perm.isAllowed = false;
@@ -117,13 +118,14 @@ export class AddRole implements OnInit, OnChanges {
   createRole() {
     this.rolesServ.createRole(this.roleGroup.value).subscribe({
       next: (data: any) => {
-        if (data.status == 200 || data.status == 201) {
+        const value = typeof data === 'string' ? JSON.parse(data) : data;
+        if (value.status == 200 || value.status == 201) {
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
 
-          this.message.success(data?.Message);
+          this.message.success(value?.Message);
         } else {
-          this.message.error(data?.Message);
+          this.message.error(value?.Message);
         }
         this.globalServ.requestLoading.set(false);
       },

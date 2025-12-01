@@ -43,7 +43,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return from(applyEncryption(authReq)).pipe(
     switchMap((securedReq) =>
       next(securedReq).pipe(
-        switchMap((event) => decryptResponse(event)),
+        switchMap((event) => decryptResponse(event, securedReq)),
         catchError((error) => {
           if ((error.status === 401 || error.status === 403) && token) {
             router.navigateByUrl('/login');
@@ -80,7 +80,7 @@ async function applyEncryption(
   }
 }
 
-function decryptResponse(event: any) {
+function decryptResponse(event: any, req: HttpRequest<any>) {
   if (!(event instanceof HttpResponse) || !rsaPrivateKey) {
     return of(event);
   }
@@ -90,8 +90,14 @@ function decryptResponse(event: any) {
     return of(event);
   }
 
+  const isTextResponse = req.responseType === 'text';
+
   return from(rsaDecryptWithPrivateKey(cipherPayload, rsaPrivateKey)).pipe(
-    map((decrypted) => event.clone({ body: decrypted })),
+    map((decrypted) => {
+      // If responseType is 'text', Angular expects a string, so stringify the decrypted object
+      const body = isTextResponse ? JSON.stringify(decrypted) : decrypted;
+      return event.clone({ body });
+    }),
     catchError(() => of(event))
   );
 }

@@ -46,11 +46,16 @@ export class QrHeader implements OnInit {
     this.getAllPermissions();
     this.username = localStorage.getItem('username') ?? '';
   }
+
   getAllPermissions() {
     this.globalServ.getAllPermissions().subscribe({
       next: (data: any) => {
-        let permissions = Object.fromEntries(
-          data.data.map(
+        // Interceptor decrypts and returns as JSON string for text responses, so parse it
+        const value = typeof data === 'string' ? JSON.parse(data) : data;
+        console.log(value, 'permissions decrypted');
+
+        const permissions = Object.fromEntries(
+          value.data.map(
             ({
               resource,
               permissions,
@@ -69,12 +74,13 @@ export class QrHeader implements OnInit {
         ) as Partial<ResourcesObject>;
 
         this.globalServ.PermissionsPerModule.next(permissions);
-        const token = localStorage.getItem('token') || '';
 
+        const token = localStorage.getItem('token') || '';
         const decoded = jwtDecode<JwtPayload>(token);
         localStorage.setItem('username', decoded?.preferred_username);
         this.username = decoded?.preferred_username;
-        let roles = decoded.realm_access?.roles || decoded['role'] || [];
+        let roles =
+          decoded.realm_access?.roles || (decoded as any)['role'] || [];
 
         roles = Array.isArray(roles) ? roles : [roles];
         this.globalServ.usersPermission.next(roles);
