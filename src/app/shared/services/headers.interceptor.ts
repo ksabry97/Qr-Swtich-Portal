@@ -11,10 +11,6 @@ import {
   rsaDecryptWithPrivateKey,
   rsaEncryptWithPublicKey,
 } from '../../utils/rsa-crypto';
-import {
-  decryptBackendResponse,
-  encryptBackendRequest,
-} from '../../utils/aes-decryptor';
 import { environment } from '../../../environments/environment';
 
 const { rsaPublicKey, rsaPrivateKey } = environment;
@@ -24,11 +20,25 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const lang = localStorage.getItem('lang') ?? '';
   const router = inject(Router);
   const globalServ = inject(GlobalService);
+  const isIdentityLoginEndpoint =
+    req.url.includes('/identity/PreLoginEndpointEncyrption') ||
+    req.url.includes('/identity/VerifyOtpEndpointEncyrption');
+
   const authReq = token
     ? req.clone({
-        setHeaders: { Authorization: `Bearer ${token}`, acceptLanguage: lang },
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+          acceptLanguage: lang,
+          'Content-Type': 'text/plain',
+          ...(isIdentityLoginEndpoint ? {} : { 'x-encrypted': 'true' }),
+        },
       })
-    : req;
+    : req.clone({
+        setHeaders: {
+          acceptLanguage: lang,
+          ...(isIdentityLoginEndpoint ? {} : { 'x-encrypted': 'true' }),
+        },
+      });
 
   return from(applyEncryption(authReq)).pipe(
     switchMap((securedReq) =>
@@ -60,9 +70,9 @@ async function applyEncryption(
   if (bypassEncryption) return req;
 
   try {
-    const { cipherText, encryptedKey } = await buildHybridPayload(req.body);
+    const cipherText = await rsaEncryptWithPublicKey(req.body, rsaPublicKey);
     return req.clone({
-      body: { cipherText, encryptedKey },
+      body: cipherText,
     });
   } catch (error) {
     console.warn('Failed to encrypt request payload, sending raw body', error);
@@ -75,15 +85,22 @@ function decryptResponse(event: any) {
     return of(event);
   }
 
-  const hybridPayload = extractHybridPayload(event.body);
-  if (!hybridPayload) {
+  const cipherPayload = extractCipherText(event.body);
+  if (!cipherPayload) {
     return of(event);
   }
 
-  return from(decryptHybridPayload(hybridPayload)).pipe(
+  return from(rsaDecryptWithPrivateKey(cipherPayload, rsaPrivateKey)).pipe(
     map((decrypted) => event.clone({ body: decrypted })),
     catchError(() => of(event))
   );
+}
+
+function extractCipherText(body: any): string | null {
+  if (!body) return null;
+  if (typeof body === 'string') return body;
+  if (typeof body?.cipherText === 'string') return body.cipherText;
+  return null;
 }
 
 function isEncryptableBody(body: any): boolean {
@@ -93,57 +110,4 @@ function isEncryptableBody(body: any): boolean {
   if (ArrayBuffer.isView(body)) return false;
   if (body instanceof Blob) return false;
   return true;
-}
-
-type HybridPayload = { cipherText: string; encryptedKey: string };
-
-async function buildHybridPayload(body: any): Promise<HybridPayload> {
-  const aesKey = await crypto.subtle.generateKey(
-    { name: 'AES-GCM', length: 256 },
-    true,
-    ['encrypt', 'decrypt']
-  );
-  const rawKey = await crypto.subtle.exportKey('raw', aesKey);
-  const aesKeyBase64 = arrayBufferToBase64(rawKey);
-
-  const cipherText = await encryptBackendRequest(body, aesKeyBase64);
-  const encryptedKey = await rsaEncryptWithPublicKey(aesKeyBase64, rsaPublicKey);
-
-  return { cipherText, encryptedKey };
-}
-
-function extractHybridPayload(body: any): HybridPayload | null {
-  if (
-    body &&
-    typeof body === 'object' &&
-    typeof body.cipherText === 'string' &&
-    typeof body.encryptedKey === 'string'
-  ) {
-    return {
-      cipherText: body.cipherText,
-      encryptedKey: body.encryptedKey,
-    };
-  }
-  return null;
-}
-
-async function decryptHybridPayload(payload: HybridPayload): Promise<any> {
-  const aesKeyBase64 = await rsaDecryptWithPrivateKey(
-    payload.encryptedKey,
-    rsaPrivateKey
-  );
-  if (typeof aesKeyBase64 !== 'string') {
-    throw new Error('Invalid AES key returned from RSA decrypt');
-  }
-
-  return decryptBackendResponse(payload.cipherText, aesKeyBase64);
-}
-
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  const bytes = new Uint8Array(buffer);
-  let binary = '';
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
 }
