@@ -125,21 +125,21 @@ export class TenantList implements OnInit {
     if (event.isActive) {
       this.tenantServ.deactivateTenant(event.id).subscribe({
         next: (data: any) => {
-          this.message.success(data.message);
+          this.message.success(data?.Message);
           this.getAllTenants();
         },
         error: (err) => {
-          this.message.error(err.error.message);
+          this.message.error(err?.error?.Message);
         },
       });
     } else {
       this.tenantServ.activateTenant(event.id).subscribe({
         next: (data: any) => {
-          this.message.success(data.message);
+          this.message.success(data?.Message);
           this.getAllTenants();
         },
         error: (err) => {
-          this.message.error(err.error.message);
+          this.message.error(err?.error?.Message);
         },
       });
     }

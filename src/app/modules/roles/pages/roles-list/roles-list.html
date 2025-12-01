@@ -12,6 +12,8 @@
     [rows]="10"
     [frontPagination]="true"
     (onActionClick)="callAction($event)"
+    (isConfirmed)="deleteRole($event)"
+    [tenantTable]="false"
   ></app-qr-table>
 </div>
 <app-qr-modal

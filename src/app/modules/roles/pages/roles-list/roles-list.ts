@@ -124,14 +124,13 @@ export class RolesList implements OnInit {
   }
 
   deleteRole(event: any) {
-    console.log(event, 'wwwwwww');
     this.roleServ.deleteRole(event.id).subscribe({
       next: (data: any) => {
-        this.message.success(data?.message);
+        this.message.success(data?.Message);
         this.getAllRoles();
       },
       error: (err) => {
-        this.message.success(err?.error?.message);
+        this.message.success(err?.error?.Message);
       },
     });
   }
