@@ -9,10 +9,24 @@
 ></app-modal-header>
 <div class="content">
   <form [formGroup]="merchantForm" class="flex flex-col gap-3">
-    <div class="flex gap-4 items-center w-full justify-center" *ngIf="viewMode">
-      <a (click)="navigateToSimulator()"> Generate QR</a>
-      <div class="icon flex items-center justify-center">
-        <img src="assets/qr-code-bold.svg" loading="lazy" alt="'logo'" />
+    <div class="flex gap-8 items-center">
+      <div
+        class="flex gap-4 items-center w-full justify-center"
+        *ngIf="viewMode && isSimulatorEnabled"
+      >
+        <a (click)="navigateToSimulator(false)"> Generate QR (P2M)</a>
+        <div class="icon flex items-center justify-center">
+          <img src="assets/qr-code-bold.svg" loading="lazy" alt="'logo'" />
+        </div>
+      </div>
+      <div
+        class="flex gap-4 items-center w-full justify-center"
+        *ngIf="viewMode && isSimulatorEnabled"
+      >
+        <a (click)="navigateToSimulator(true)"> Generate QR (M2M)</a>
+        <div class="icon flex items-center justify-center">
+          <img src="assets/qr-code-bold.svg" loading="lazy" alt="'logo'" />
+        </div>
       </div>
     </div>
     <section class="flex w-full flex-col gap-3 p-2 rounded-md">

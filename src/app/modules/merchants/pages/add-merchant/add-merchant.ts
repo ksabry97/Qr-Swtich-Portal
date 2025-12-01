@@ -26,6 +26,7 @@ import { forkJoin } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { PhoneInput } from '../../../../shared/components/phone-input/phone-input';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-add-merchant',
@@ -47,6 +48,7 @@ import { Router } from '@angular/router';
 export class AddMerchant implements OnInit, OnChanges {
   globalServ = inject(GlobalService);
   merchantForm!: FormGroup;
+  isSimulatorEnabled = environment.isSimulatorEnabled;
   router = inject(Router);
   @Input() viewMode = false;
   @Input() editMode = false;
@@ -316,10 +318,12 @@ export class AddMerchant implements OnInit, OnChanges {
     });
   }
 
-  navigateToSimulator() {
-    this.router.navigate(['p2m-simulator'], {
+  navigateToSimulator(isM2M: boolean) {
+    this.router.navigate([isM2M ? 'm2m-simulator' : 'p2m-simulator'], {
       queryParams: {
-        mssidn: this.merchantForm.get('msisdn')?.value,
+        mssidn: isM2M
+          ? this.merchantForm.get('merchantId')?.value
+          : this.merchantForm.get('msisdn')?.value,
         walletId: this.merchantForm.get('walletId')?.value,
         merchantName: this.merchantForm.get('name')?.value,
         merchantScheme: this.merchantForm.get('scheme')?.value,

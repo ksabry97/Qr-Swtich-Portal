@@ -20,6 +20,7 @@ import { WalletsSimulator } from './shared/components/wallets-simulator/wallets-
 import { WalletWindow } from './shared/components/wallet-window/wallet-window';
 import { QrLogs } from './shared/components/qr-logs/qr-logs';
 import { P2mSimulator } from './shared/components/p2m-simulator/p2m-simulator';
+import { M2mSimulator } from './shared/components/m2m-simulator/m2m-simulator';
 
 export const routes: Routes = [
   {
@@ -116,5 +117,9 @@ export const routes: Routes = [
   {
     path: 'p2m-simulator',
     component: P2mSimulator,
+  },
+  {
+    path: 'm2m-simulator',
+    component: M2mSimulator,
   },
 ];

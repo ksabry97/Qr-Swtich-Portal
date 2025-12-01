@@ -15,7 +15,7 @@ import { QrInputNumber } from '../qr-input-number/qr-input-number';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-p2m-simulator',
+  selector: 'app-m2m-simulator',
   imports: [
     CommonModule,
     FormsModule,
@@ -25,10 +25,10 @@ import { ActivatedRoute } from '@angular/router';
     NzIconModule,
     QRCodeComponent,
   ],
-  templateUrl: './p2m-simulator.html',
-  styleUrl: './p2m-simulator.scss',
+  templateUrl: './m2m-simulator.html',
+  styleUrl: './m2m-simulator.scss',
 })
-export class P2mSimulator implements OnInit {
+export class M2mSimulator {
   mssidn: number | null = null;
   loading = false;
   simulatorForm!: FormGroup;

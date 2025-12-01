@@ -1,0 +1,47 @@
+.custom-container {
+  width: 100dvw;
+  height: 100dvh;
+  background-color: #004d9c;
+}
+textarea {
+  resize: none;
+  border-radius: 8px;
+  height: 80px;
+  border: 1px solid #e5e7eb;
+  &:hover {
+    border-color: #40a9ff;
+  }
+  &:focus,
+  :focus-visible {
+    border-color: #40a9ff;
+    outline: none;
+  }
+  &:read-only {
+    background: #f5f5f5;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+    color: #b6b6b6;
+  }
+}
+label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.submit-btn {
+  background-color: #004d9c !important;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+.imag-contain {
+  width: 75%;
+  border-radius: 16px;
+  overflow: hidden;
+  img {
+    object-fit: contain;
+  }
+}
