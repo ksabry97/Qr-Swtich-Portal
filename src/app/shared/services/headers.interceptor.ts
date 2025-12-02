@@ -28,15 +28,15 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     ? req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
-          acceptLanguage: lang,
+          'Accept-Language': lang,
           'Content-Type': 'text/plain',
-          ...(isIdentityLoginEndpoint ? {} : { 'x-encrypted': 'true' }),
+          ...(isIdentityLoginEndpoint ? {} : { 'X-HyperText': 'true' }),
         },
       })
     : req.clone({
         setHeaders: {
-          acceptLanguage: lang,
-          ...(isIdentityLoginEndpoint ? {} : { 'x-encrypted': 'true' }),
+          'Accept-Language': lang,
+          ...(isIdentityLoginEndpoint ? {} : { 'X-HyperText': 'true' }),
         },
       });
 
@@ -65,14 +65,15 @@ async function applyEncryption(
     req.headers.has('x-bypass-encryption') ||
     req.params.has('skipEncryption') ||
     !isEncryptableBody(req.body) ||
-    req.body?.cipherText ||
+    req.body?.body ||
+    !environment.hyperText ||
     !rsaPublicKey;
   if (bypassEncryption) return req;
 
   try {
-    const cipherText = await rsaEncryptWithPublicKey(req.body, rsaPublicKey);
+    const body = await rsaEncryptWithPublicKey(req.body, rsaPublicKey);
     return req.clone({
-      body: cipherText,
+      body: { body },
     });
   } catch (error) {
     console.warn('Failed to encrypt request payload, sending raw body', error);
@@ -81,11 +82,16 @@ async function applyEncryption(
 }
 
 function decryptResponse(event: any, req: HttpRequest<any>) {
-  if (!(event instanceof HttpResponse) || !rsaPrivateKey) {
+  if (
+    !(event instanceof HttpResponse) ||
+    !rsaPrivateKey ||
+    !environment.hyperText
+  ) {
     return of(event);
   }
 
   const cipherPayload = extractCipherText(event.body);
+
   if (!cipherPayload) {
     return of(event);
   }
@@ -104,8 +110,8 @@ function decryptResponse(event: any, req: HttpRequest<any>) {
 
 function extractCipherText(body: any): string | null {
   if (!body) return null;
-  if (typeof body === 'string') return body;
-  if (typeof body?.cipherText === 'string') return body.cipherText;
+  // if (typeof body === 'string') return body;
+  if (typeof body?.body === 'string') return body.body;
   return null;
 }
 

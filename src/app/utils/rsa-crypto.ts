@@ -190,7 +190,6 @@ export async function rsaDecryptWithPrivateKey(
   const decoded = new TextDecoder().decode(combinedBytes);
 
   try {
-    console.log(JSON.parse(decoded));
     return JSON.parse(decoded);
   } catch {
     return decoded;

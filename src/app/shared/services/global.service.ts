@@ -57,7 +57,7 @@ export class GlobalService {
   }
   getAllPermissions() {
     let url = this.baseUrl + '/management/Permission';
-    return this.http.get(url, { responseType: 'text' });
+    return this.http.get(url);
   }
 
   getAllActiveWallets(pageNumber: number, pageSize: number) {

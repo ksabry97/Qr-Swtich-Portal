@@ -52,7 +52,6 @@ export class QrHeader implements OnInit {
       next: (data: any) => {
         // Interceptor decrypts and returns as JSON string for text responses, so parse it
         const value = typeof data === 'string' ? JSON.parse(data) : data;
-        console.log(value, 'permissions decrypted');
 
         const permissions = Object.fromEntries(
           value.data.map(

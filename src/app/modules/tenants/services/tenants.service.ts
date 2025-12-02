@@ -16,7 +16,7 @@ export class TenantService {
 
   getAllTenants() {
     let url = this.baseUrl + '/api/Tenant';
-    return this.http.get(url, { responseType: 'text' });
+    return this.http.get(url);
   }
 
   approveTenant(tenantId: string) {
