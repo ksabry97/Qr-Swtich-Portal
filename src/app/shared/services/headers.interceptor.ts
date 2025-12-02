@@ -22,7 +22,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const globalServ = inject(GlobalService);
   const isIdentityLoginEndpoint =
     req.url.includes('/identity/PreLoginEndpointEncyrption') ||
-    req.url.includes('/identity/VerifyOtpEndpointEncyrption');
+    req.url.includes('/identity/VerifyOtpEndpointEncyrption') ||
+    req.url.includes('https://gimuat.gimpay.org:6033');
 
   const authReq = token
     ? req.clone({
@@ -62,7 +63,7 @@ async function applyEncryption(
   req: HttpRequest<any>
 ): Promise<HttpRequest<any>> {
   const bypassEncryption =
-    req.headers.has('x-bypass-encryption') ||
+    !req.headers.has('X-HyperText') ||
     req.params.has('skipEncryption') ||
     !isEncryptableBody(req.body) ||
     req.body?.body ||
