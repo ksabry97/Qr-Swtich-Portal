@@ -1,0 +1,87 @@
+<div class="dynamic-filter-container">
+  <div class="flex flex-col gap-3">
+    <!-- Select Filters -->
+    <div
+      class="filter-item"
+      *ngFor="let config of filterConfigs"
+      [ngSwitch]="config.type"
+    >
+      <!-- Select Filter -->
+      <div *ngSwitchCase="'select'" class="filter-select">
+        <label class="filter-label" *ngIf="config.label">
+          {{ config.label | translate }}
+        </label>
+        <nz-select
+          [(ngModel)]="filters[config.key]"
+          (ngModelChange)="onFilterChange(config.key, $event)"
+          [nzPlaceHolder]="config.placeholder | translate"
+          [nzAllowClear]="true"
+          class="filter-select-control"
+        >
+          <nz-option
+            *ngFor="let option of config.options"
+            [nzValue]="option.value"
+            [nzLabel]="option.text | translate"
+          ></nz-option>
+        </nz-select>
+      </div>
+
+      <!-- Switch Filter -->
+      <div *ngSwitchCase="'switch'" class="filter-switch">
+        <label class="filter-label" *ngIf="config.label">
+          {{ config.label | translate }}
+        </label>
+        <nz-switch
+          [(ngModel)]="filters[config.key]"
+          (ngModelChange)="onSwitchChange(config.key, $event)"
+          class="filter-switch-control"
+        ></nz-switch>
+      </div>
+
+      <!-- Date Filter -->
+      <div *ngSwitchCase="'date'" class="filter-date">
+        <label class="filter-label" *ngIf="config.label">
+          {{ config.label | translate }}
+        </label>
+        <nz-date-picker
+          [(ngModel)]="filters[config.key]"
+          (ngModelChange)="onDateChange(config.key, $event)"
+          [nzPlaceHolder]="config.placeholder | translate"
+          [nzAllowClear]="true"
+          nzShowTime
+          nzFormat="yyyy-MM-dd HH:mm:ss"
+          class="filter-date-control"
+        ></nz-date-picker>
+      </div>
+
+      <!-- Date Range Filter -->
+      <div *ngSwitchCase="'date-range'" class="filter-date-range">
+        <label class="filter-label" *ngIf="config.label">
+          {{ config.label | translate }}
+        </label>
+        <nz-range-picker
+          [(ngModel)]="filters[config.key]"
+          (ngModelChange)="onDateRangeChange(config.key, $event)"
+          [nzPlaceHolder]="getPlaceholderArray(config)"
+          [nzAllowClear]="true"
+          nzShowTime
+          nzFormat="yyyy-MM-dd HH:mm:ss"
+          class="filter-date-range-control"
+        ></nz-range-picker>
+      </div>
+    </div>
+
+    <!-- Clear Filters Button -->
+    <div class="filter-actions">
+      <button
+        nz-button
+        nzType="default"
+        (click)="clearAllFilters()"
+        class="clear-filters-btn"
+      >
+        <i nz-icon nzType="clear" nzTheme="outline"></i>
+        {{ "common.clear_filters" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

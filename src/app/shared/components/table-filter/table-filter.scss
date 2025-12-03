@@ -1,0 +1,41 @@
+.table-filter {
+  height: 32px;
+  position: relative;
+  button {
+    height: 32px !important;
+    font-size: 12px !important;
+  }
+  .delete {
+    border-radius: var(--md, 4px);
+    border: var(--xxs, 2px) solid var(--border-disabled, #cbd5e1);
+    background: var(--bg-disabled, #e2e8f0);
+    color: #94a3b8;
+  }
+  .search-bar {
+    border-radius: var(--lg, 8px);
+    border: var(--2xs, 1px) solid var(--border-primary, #cbd5e1);
+    background: var(--bg-primary, #fff);
+    width: 220px;
+    height: 32px;
+    input {
+      border: none;
+      outline: none;
+      height: 100%;
+      padding: 8px;
+      border-radius: var(--lg, 8px);
+      width: calc(100% - 28px);
+    }
+    .icon {
+      border-radius: 0 8px 8px 0;
+      background: var(--bg-tertiary, #f1f5f9);
+      width: 28px;
+      cursor: pointer;
+    }
+  }
+}
+app-dynamic-filter {
+  position: absolute;
+  top: 116%;
+  inset-inline-end: 0%;
+  z-index: 2;
+}

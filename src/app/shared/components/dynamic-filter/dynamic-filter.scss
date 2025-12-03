@@ -1,0 +1,156 @@
+.dynamic-filter-container {
+  width: 100%;
+  padding: 16px;
+  background: var(--bg-primary, #fff);
+  border-radius: var(--lg, 8px);
+  border: 1px solid var(--border-primary, #cbd5e1);
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #1e293b);
+  margin-bottom: 4px;
+}
+
+// Select Filter Styles
+.filter-select {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  ::ng-deep .filter-select-control {
+    width: 100%;
+
+    .ant-select-selector {
+      border-radius: var(--lg, 8px);
+      border: 1px solid var(--border-primary, #cbd5e1);
+      height: 36px;
+
+      &:hover {
+        border-color: var(--primary, #3b82f6);
+      }
+    }
+
+    &.ant-select-focused .ant-select-selector {
+      border-color: var(--primary, #3b82f6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+}
+
+// Switch Filter Styles
+.filter-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .filter-switch-control {
+    align-self: flex-start;
+  }
+}
+
+// Date Filter Styles
+.filter-date {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  ::ng-deep .filter-date-control {
+    width: 100%;
+
+    .ant-picker {
+      width: 100%;
+      border-radius: var(--lg, 8px);
+      border: 1px solid var(--border-primary, #cbd5e1);
+      height: 36px;
+
+      &:hover {
+        border-color: var(--primary, #3b82f6);
+      }
+    }
+
+    &.ant-picker-focused {
+      border-color: var(--primary, #3b82f6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+}
+
+// Date Range Filter Styles
+.filter-date-range {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  ::ng-deep .filter-date-range-control {
+    width: 100%;
+
+    .ant-picker {
+      width: 100%;
+      border-radius: var(--lg, 8px);
+      border: 1px solid var(--border-primary, #cbd5e1);
+      height: 36px;
+
+      &:hover {
+        border-color: var(--primary, #3b82f6);
+      }
+    }
+
+    &.ant-picker-focused {
+      border-color: var(--primary, #3b82f6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+}
+
+// Filter Actions
+.filter-actions {
+  display: flex;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.clear-filters-btn {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-primary, #cbd5e1);
+  background: var(--bg-primary, #fff);
+  color: var(--text-secondary, #64748b);
+  border-radius: var(--lg, 8px);
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+
+  &:hover {
+    background: var(--bg-tertiary, #f1f5f9);
+    border-color: var(--border-primary, #cbd5e1);
+    color: var(--text-primary, #1e293b);
+  }
+
+  i {
+    font-size: 16px;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

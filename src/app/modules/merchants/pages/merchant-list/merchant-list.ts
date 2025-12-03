@@ -11,10 +11,11 @@ import { AddMerchant } from '../add-merchant/add-merchant';
 import { MerchantService } from '../../services/merchants.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
   selector: 'app-merchant-list',
-  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule, TableFilter],
   templateUrl: './merchant-list.html',
   styleUrl: './merchant-list.scss',
 })

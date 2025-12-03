@@ -1,0 +1,73 @@
+<!-- 
+  EXAMPLE USAGE OF DYNAMIC FILTER COMPONENT
+  
+  This file demonstrates how to integrate the DynamicFilter component
+  into your list pages alongside the existing QrTable and TableFilter components.
+-->
+
+<div class="flex flex-col gap-4">
+  <!-- Entity Header (existing component) -->
+  <app-entity-header
+    [title]="'users.list.title'"
+    [description]="'users.list.description'"
+    (isCreateClicked)="openModel()"
+    (exportClicked)="export()"
+    [showButton]="isAllowed(Users?.CreateUsers)"
+  ></app-entity-header>
+
+  <!-- OPTION 1: Replace existing TableFilter with DynamicFilter -->
+  <!-- 
+  <app-dynamic-filter
+    [filterConfigs]="filterConfigs"
+    (filterChange)="onFilterChange($event)"
+    (clearFilters)="onClearFilters()"
+  ></app-dynamic-filter>
+  -->
+
+  <!-- OPTION 2: Use both components together -->
+  <div class="flex flex-col gap-4">
+    <!-- Existing search filter -->
+    <app-table-filter
+      (search)="getAllUsers(pageIndex, pageSize, $event)"
+      [isSelected]="slectedRows.length ? true : false"
+      (deleteIsClicked)="deleteBulk()"
+      [showDeleteButton]="isAllowed(Users?.DeleteUsers)"
+    ></app-table-filter>
+    
+    <!-- New dynamic filters -->
+    <app-dynamic-filter
+      [filterConfigs]="filterConfigs"
+      (filterChange)="onFilterChange($event)"
+      (clearFilters)="onClearFilters()"
+    ></app-dynamic-filter>
+  </div>
+
+  <!-- Table Component -->
+  <div class="table-wrapper rounded-md">
+    <app-qr-table
+      [columns]="columns"
+      [data]="users"
+      [actions]="actions"
+      [paginator]="true"
+      [rows]="10"
+      (onLazyLoad)="getAllUsers($event, 10)"
+      (onPageSize)="getAllUsers(pageIndex, $event)"
+      [total]="total"
+      (onActionClick)="callAction($event)"
+      (selectionChange)="getSelected($event)"
+      [showSelection]="isAllowed(Users?.DeleteUsers)"
+    ></app-qr-table>
+  </div>
+</div>
+
+<!-- Modals -->
+<app-qr-modal
+  [modalComponent]="createUser"
+  [isVisible]="globalServ.isModalOpened()"
+  [inputs]="{ viewMode: viewMode, userId: userId, editMode: editMode }"
+></app-qr-modal>
+<app-qr-modal
+  [modalComponent]="deleteConfirm"
+  [isVisible]="globalServ.isDeleteConfirmationOpened()"
+></app-qr-modal>
+

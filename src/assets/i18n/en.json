@@ -55,7 +55,9 @@
       "sun": "Sun"
     },
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "search_placeholder": "Search...",
+    "clear_filters": "Clear Filters"
   },
   "auth": {
     "login": {

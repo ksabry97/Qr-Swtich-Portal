@@ -1,0 +1,42 @@
+<div
+  class="table-filter flex items-center w-full"
+  [ngClass]="{
+    'justify-end': !showDeleteButton,
+    'justify-between': showDeleteButton
+  }"
+>
+  <button
+    class="flex p-2 items-center justify-center submit-btn rounded-md"
+    [disabled]="!isSelected"
+    (click)="delete()"
+    *ngIf="showDeleteButton"
+  >
+    {{ "common.delete" | translate }}
+  </button>
+  <div class="flex items-center gap-3">
+    <div class="search-bar flex">
+      <input
+        [(ngModel)]="searchQuery"
+        [placeholder]="'common.search_placeholder' | translate"
+      />
+      <div class="icon flex items-center justify-center" (click)="emitSearch()">
+        <img src="assets/search.svg" />
+      </div>
+    </div>
+    <button
+      class="submit-btn rounded-md p-2 flex gap-2"
+      (click)="toggleFilter()"
+    >
+      <img src="assets/filter.svg" />
+      {{ "common.filter" | translate }}
+    </button>
+  </div>
+
+  <app-dynamic-filter
+    #filterBox
+    [filterConfigs]="filterConfigs"
+    class="w-1/6"
+    (filterChange)="emitFilters($event)"
+    *ngIf="showFilter"
+  ></app-dynamic-filter>
+</div>

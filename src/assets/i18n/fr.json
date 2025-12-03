@@ -55,7 +55,9 @@
       "sun": "Dim"
     },
     "active": "actif",
-    "inactive": "inactif"
+    "inactive": "inactif",
+    "search_placeholder": "Rechercher...",
+    "clear_filters": "Effacer les filtres"
   },
   "auth": {
     "login": {
