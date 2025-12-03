@@ -22,7 +22,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MerchantService } from '../../services/merchants.service';
 import { GlobalService } from '../../../../shared/services/global.service';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { PhoneInput } from '../../../../shared/components/phone-input/phone-input';
 import { Router } from '@angular/router';
@@ -145,10 +145,26 @@ export class AddMerchant implements OnInit, OnChanges {
   }
   ngOnInit(): void {
     forkJoin({
-      countries: this.globalServ.getAllCountries(),
-      mccs: this.globalServ.getMccs(),
-      fees: this.globalServ.getAllfeesLookups(),
-      wallets: this.globalServ.getWalletsLookup(),
+      countries: this.globalServ.getAllCountries().pipe(
+        catchError((err) => {
+          return of([]);
+        })
+      ),
+      mccs: this.globalServ.getMccs().pipe(
+        catchError((err) => {
+          return of([]);
+        })
+      ),
+      fees: this.globalServ.getAllfeesLookups().pipe(
+        catchError((err) => {
+          return of([]);
+        })
+      ),
+      wallets: this.globalServ.getWalletsLookup().pipe(
+        catchError((err) => {
+          return of([]);
+        })
+      ),
     }).subscribe({
       next: (data: any) => {
         this.countries = data.countries?.data;
