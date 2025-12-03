@@ -182,3 +182,18 @@
 :host ::ng-deep .ant-table {
   height: calc(100dvh - 260px);
 }
+:host ::ng-deep .ant-empty {
+  height: calc(100dvh - 350px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+:host ::ng-deep .ant-table-header {
+  overflow: hidden !important;
+}
+/* Hide scroll track unless actually needed */
+:host ::ng-deep .ant-table-body {
+  overflow-y: auto !important;
+  scrollbar-gutter: stable; /* avoids layout shift */
+}

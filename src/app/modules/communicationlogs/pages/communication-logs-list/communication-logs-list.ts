@@ -1,25 +1,25 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {
+  TableColumn,
+  TableAction,
+  QrTable,
+} from '../../../../shared/components/qr-table/qr-table';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { ViewTransaction } from '../../../transactions/pages/view-transaction/view-transaction';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
-import {
-  QrTable,
-  TableAction,
-  TableColumn,
-} from '../../../../shared/components/qr-table/qr-table';
-import { TransactionsService } from '../../services/transactions.service';
-import { GlobalService } from '../../../../shared/services/global.service';
-import { ViewTransaction } from '../view-transaction/view-transaction';
-import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { CommunicationLogsService } from '../../services/commlogs.service';
 import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
-  selector: 'app-transactions-list',
-  imports: [EntityHeader, QrTable, TranslateModule, QrModal, TableFilter],
-  templateUrl: './transactions-list.html',
-  styleUrl: './transactions-list.scss',
+  selector: 'app-communication-logs-list',
+  imports: [EntityHeader, QrTable, TranslateModule, TableFilter],
+  templateUrl: './communication-logs-list.html',
+  styleUrl: './communication-logs-list.scss',
 })
-export class TransactionsList implements OnInit {
-  transactionServ = inject(TransactionsService);
+export class CommunicationLogsList {
+  CommLogsServ = inject(CommunicationLogsService);
   globalServ = inject(GlobalService);
   view = ViewTransaction;
   columns: TableColumn[] = [
@@ -69,43 +69,30 @@ export class TransactionsList implements OnInit {
     },
   ];
 
-  actions: TableAction[] = [
-    {
-      label: 'transactions.actions.viewDetails',
-      icon: 'eye',
-      severity: 'info',
-    },
-  ];
-  transactionId = '';
-  transactions = [];
+  actions: TableAction[] = [];
+  commLogs = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
 
   ngOnInit(): void {
-    this.getAllTransactions(this.pageIndex, this.pageSize);
+    this.getAllcommLogs(this.pageIndex, this.pageSize);
   }
-  getAllTransactions(pageIndex: number, pageSize: number) {
+  getAllcommLogs(pageIndex: number, pageSize: number) {
     this.globalServ.setLoading(true);
     this.pageIndex = pageIndex;
     this.pageSize = pageSize;
-    this.transactionServ
-      .getAllTransactions(this.pageIndex, this.pageSize)
-      .subscribe({
-        next: (data: any) => {
-          this.transactions = data?.data?.transactions;
-          this.total = data?.data?.totalCount;
-        },
-        error: () => {
-          this.globalServ.setLoading(false);
-        },
-        complete: () => {
-          this.globalServ.setLoading(false);
-        },
-      });
-  }
-  openModel(action: any) {
-    this.globalServ.setModal(true);
-    this.transactionId = action.rowData.transactionId;
+    this.CommLogsServ.getAllCommLogs(this.pageIndex, this.pageSize).subscribe({
+      next: (data: any) => {
+        this.commLogs = data?.data?.transactions;
+        this.total = data?.data?.totalCount;
+      },
+      error: () => {
+        this.globalServ.setLoading(false);
+      },
+      complete: () => {
+        this.globalServ.setLoading(false);
+      },
+    });
   }
 }

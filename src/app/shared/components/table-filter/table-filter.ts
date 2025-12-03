@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   Output,
 } from '@angular/core';
@@ -21,7 +20,7 @@ export class TableFilter {
   searchQuery: string = '';
   showFilter = false;
   @Input() isSelected = false;
-  @Input() showDeleteButton = true;
+  @Input() showDeleteButton = false;
   @Input() filterConfigs: FilterConfig[] = [];
   @Output() search = new EventEmitter<string>();
   @Output() deleteIsClicked = new EventEmitter<boolean>();

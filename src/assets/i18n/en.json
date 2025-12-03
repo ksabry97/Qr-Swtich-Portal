@@ -3,7 +3,9 @@
     "powered_by": "Powered by",
     "enabled_by": "Enabled by",
     "inc": "Inc.",
-    "terms_and_conditions": "Terms and conditions"
+    "terms_and_conditions": "Terms and conditions",
+    "total": "Total",
+    "items": "Items"
   },
   "common": {
     "email": "Email",
@@ -90,7 +92,9 @@
     "fees": "Fees",
     "transactions": "Transactions",
     "auditLogs": "Audit Logs",
-    "loginAudits": "Login Audits"
+    "loginAudits": "Login Audits",
+    "commlogs": "Communication Logs",
+    "excplogs": "Exception Logs"
   },
   "dashboard": {
     "addTenant": "add Tenant",

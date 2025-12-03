@@ -1,25 +1,25 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {
+  TableColumn,
+  TableAction,
+  QrTable,
+} from '../../../../shared/components/qr-table/qr-table';
+import { GlobalService } from '../../../../shared/services/global.service';
+import { ViewTransaction } from '../../../transactions/pages/view-transaction/view-transaction';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
-import {
-  QrTable,
-  TableAction,
-  TableColumn,
-} from '../../../../shared/components/qr-table/qr-table';
-import { TransactionsService } from '../../services/transactions.service';
-import { GlobalService } from '../../../../shared/services/global.service';
-import { ViewTransaction } from '../view-transaction/view-transaction';
-import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
+import { ExceptionLogsService } from '../../services/exceplogs.service';
 import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
-  selector: 'app-transactions-list',
-  imports: [EntityHeader, QrTable, TranslateModule, QrModal, TableFilter],
-  templateUrl: './transactions-list.html',
-  styleUrl: './transactions-list.scss',
+  selector: 'app-exception-logs-list',
+  imports: [EntityHeader, QrTable, TranslateModule, TableFilter],
+  templateUrl: './exception-logs-list.html',
+  styleUrl: './exception-logs-list.scss',
 })
-export class TransactionsList implements OnInit {
-  transactionServ = inject(TransactionsService);
+export class ExceptionLogsList {
+  excepLogsServ = inject(ExceptionLogsService);
   globalServ = inject(GlobalService);
   view = ViewTransaction;
   columns: TableColumn[] = [
@@ -69,31 +69,24 @@ export class TransactionsList implements OnInit {
     },
   ];
 
-  actions: TableAction[] = [
-    {
-      label: 'transactions.actions.viewDetails',
-      icon: 'eye',
-      severity: 'info',
-    },
-  ];
-  transactionId = '';
-  transactions = [];
+  actions: TableAction[] = [];
+  excepLogs = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
 
   ngOnInit(): void {
-    this.getAllTransactions(this.pageIndex, this.pageSize);
+    this.getAllExcepLogs(this.pageIndex, this.pageSize);
   }
-  getAllTransactions(pageIndex: number, pageSize: number) {
+  getAllExcepLogs(pageIndex: number, pageSize: number) {
     this.globalServ.setLoading(true);
     this.pageIndex = pageIndex;
     this.pageSize = pageSize;
-    this.transactionServ
-      .getAllTransactions(this.pageIndex, this.pageSize)
+    this.excepLogsServ
+      .getAllExcepLogs(this.pageIndex, this.pageSize)
       .subscribe({
         next: (data: any) => {
-          this.transactions = data?.data?.transactions;
+          this.excepLogs = data?.data?.transactions;
           this.total = data?.data?.totalCount;
         },
         error: () => {
@@ -103,9 +96,5 @@ export class TransactionsList implements OnInit {
           this.globalServ.setLoading(false);
         },
       });
-  }
-  openModel(action: any) {
-    this.globalServ.setModal(true);
-    this.transactionId = action.rowData.transactionId;
   }
 }

@@ -3,7 +3,9 @@
     "powered_by": "Propulsé par",
     "enabled_by": "Activé par",
     "inc": "Inc.",
-    "terms_and_conditions": "Termes et conditions"
+    "terms_and_conditions": "Termes et conditions",
+    "total": "Totale",
+    "items": "Articles"
   },
   "common": {
     "email": "Email",
@@ -90,7 +92,9 @@
     "fees": "Frais",
     "transactions": "Transactions",
     "auditLogs": "Journaux d'audit",
-    "loginAudits": "Audits de connexion"
+    "loginAudits": "Audits de connexion",
+    "commlogs": "Journaux de communication",
+    "excplogs": "Journaux d'exceptions"
   },
   "dashboard": {
     "addTenant": "ajouter Locataire",

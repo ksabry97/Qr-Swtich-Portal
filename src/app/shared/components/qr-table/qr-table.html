@@ -8,13 +8,14 @@
     [nzPageSizeOptions]="rowsPerPageOptions"
     [nzShowSizeChanger]="true"
     [nzShowQuickJumper]="true"
-    [nzScroll]="{ x: '50rem', y: 'calc(100dvh - 260px)' }"
+    [nzScroll]="data.length ? { y: 'calc(100dvh - 345px)' } : {}"
     [nzSize]="'small'"
     (nzCurrentPageDataChange)="onRowSelect.emit($event)"
     (nzPageIndexChange)="onLazyLoad.emit($event)"
     (nzPageSizeChange)="onPageSize.emit($event)"
     [nzTotal]="total"
     [nzFrontPagination]="frontPagination"
+    [nzShowTotal]="rangeTemplate"
   >
     <!-- Dynamic columns -->
     <thead>
@@ -122,3 +123,6 @@
     </ng-template>
   </nz-table>
 </div>
+<ng-template #rangeTemplate let-total>
+  {{ "app.total" | translate }} {{ total }} {{ "app.items" | translate }}
+</ng-template>

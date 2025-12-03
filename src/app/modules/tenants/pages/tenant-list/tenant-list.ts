@@ -12,10 +12,11 @@ import { TenantService } from '../../services/tenants.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
   selector: 'app-tenant-list',
-  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule, TableFilter],
   templateUrl: './tenant-list.html',
   styleUrl: './tenant-list.scss',
 })

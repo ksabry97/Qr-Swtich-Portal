@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-4">
+  <app-entity-header
+    [title]="'navigation.excplogs' | translate"
+    [showButton]="false"
+  ></app-entity-header>
+  <app-table-filter></app-table-filter>
+  <app-qr-table
+    [columns]="columns"
+    [data]="excepLogs"
+    [actions]="actions"
+    [paginator]="true"
+    [rows]="10"
+    [total]="total"
+    (onLazyLoad)="getAllExcepLogs($event, pageSize)"
+    (onPageSize)="getAllExcepLogs(pageIndex, $event)"
+  ></app-qr-table>
+</div>

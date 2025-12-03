@@ -1,9 +1,10 @@
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-4">
   <app-entity-header
     [title]="'roles.title' | translate"
     (isCreateClicked)="openModel()"
     [showButton]="isAllowed(Roles?.CreateRole)"
   ></app-entity-header>
+  <app-table-filter></app-table-filter>
   <app-qr-table
     [columns]="columns"
     [data]="roles"

@@ -2,10 +2,12 @@
   <h1>{{ "auth.login.sidebarTitle" | translate }}</h1>
   <ul class="p-2 list-none flex flex-col gap-4 w-full">
     <li
-      *ngFor="let item of routes"
+      *ngFor="let item of routes; let i = index"
       class="h-10 w-full rounded-md p-2"
       [routerLink]="item.route"
       [hidden]="item.isDisabled"
+      [ngClass]="{ active: isActive == i }"
+      (click)="setActive(i)"
     >
       {{ item.label | translate }}
     </li>

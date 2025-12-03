@@ -16,8 +16,9 @@ export class QrSidebar implements OnInit {
   globalServ = inject(GlobalService);
   authServ = inject(AuthService);
   routes: any[] = [];
-
+  isActive = 0;
   ngOnInit(): void {
+    this.isActive = Number(localStorage.getItem('activeTab') ?? 0);
     this.globalServ.PermissionsPerModule.pipe(
       filter((value) => Object.keys(value || {}).length > 0)
     ).subscribe((value) => {
@@ -73,11 +74,29 @@ export class QrSidebar implements OnInit {
             value?.AuditLogs?.permissions?.ViewAllLogs
           ),
         },
+        {
+          label: 'navigation.commlogs',
+          route: 'communication-logs',
+          isDisabled: !this.isAllowed(
+            value?.AuditLogs?.permissions?.ViewAllLogs
+          ),
+        },
+        {
+          label: 'navigation.excplogs',
+          route: 'exception-logs',
+          isDisabled: !this.isAllowed(
+            value?.AuditLogs?.permissions?.ViewAllLogs
+          ),
+        },
       ];
     });
   }
 
   isAllowed(permission: string) {
     return this.authServ.hasPermission(permission);
+  }
+  setActive(i: number) {
+    localStorage.setItem('activeTab', String(i));
+    this.isActive = i;
   }
 }

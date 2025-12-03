@@ -1,8 +1,9 @@
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-4">
   <app-entity-header
     [title]="'Transactions'"
     [showButton]="false"
   ></app-entity-header>
+  <app-table-filter></app-table-filter>
   <app-qr-table
     [columns]="columns"
     [data]="transactions"

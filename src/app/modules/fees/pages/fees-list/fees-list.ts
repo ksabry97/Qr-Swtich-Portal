@@ -12,10 +12,11 @@ import { FeesService } from '../../services/fees.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { SimulateFee } from '../simulate-fee/simulate-fee';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
   selector: 'app-fees-list',
-  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule, TableFilter],
   templateUrl: './fees-list.html',
   styleUrl: './fees-list.scss',
 })

@@ -11,9 +11,10 @@ import { AddWallet } from '../add-wallet/add-wallet';
 import { WalletsService } from '../../services/wallets.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 @Component({
   selector: 'app-wallet-list',
-  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule, TableFilter],
   templateUrl: './wallet-list.html',
   styleUrl: './wallet-list.scss',
 })

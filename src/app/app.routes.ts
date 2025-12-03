@@ -21,6 +21,8 @@ import { WalletWindow } from './shared/components/wallet-window/wallet-window';
 import { QrLogs } from './shared/components/qr-logs/qr-logs';
 import { P2mSimulator } from './shared/components/p2m-simulator/p2m-simulator';
 import { M2mSimulator } from './shared/components/m2m-simulator/m2m-simulator';
+import { CommunicationLogsList } from './modules/communicationlogs/pages/communication-logs-list/communication-logs-list';
+import { ExceptionLogsList } from './modules/exceptionlogs/pages/exception-logs-list/exception-logs-list';
 
 export const routes: Routes = [
   {
@@ -83,6 +85,14 @@ export const routes: Routes = [
       {
         path: 'login-audits',
         component: LoginAuditsList,
+      },
+      {
+        path: 'communication-logs',
+        component: CommunicationLogsList,
+      },
+      {
+        path: 'exception-logs',
+        component: ExceptionLogsList,
       },
     ],
   },

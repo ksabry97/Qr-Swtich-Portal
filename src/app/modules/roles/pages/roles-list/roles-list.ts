@@ -12,10 +12,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
   selector: 'app-roles-list',
-  imports: [EntityHeader, QrTable, QrModal, TranslateModule],
+  imports: [EntityHeader, QrTable, QrModal, TranslateModule, TableFilter],
   templateUrl: './roles-list.html',
   styleUrl: './roles-list.scss',
 })

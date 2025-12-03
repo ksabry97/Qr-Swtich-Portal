@@ -12,10 +12,18 @@ import { CommonModule } from '@angular/common';
 import { ViewAudit } from '../view-audit/view-audit';
 import { QrModal } from '../../../../shared/components/qr-modal/qr-modal';
 import { AdditionalData } from '../../interfaces/audit';
+import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
 
 @Component({
   selector: 'app-audit-logs-list',
-  imports: [EntityHeader, QrTable, TranslateModule, CommonModule, QrModal],
+  imports: [
+    EntityHeader,
+    QrTable,
+    TranslateModule,
+    CommonModule,
+    QrModal,
+    TableFilter,
+  ],
   templateUrl: './audit-logs-list.html',
   styleUrl: './audit-logs-list.scss',
 })
