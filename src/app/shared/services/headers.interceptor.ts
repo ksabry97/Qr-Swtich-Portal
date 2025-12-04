@@ -30,7 +30,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         setHeaders: {
           Authorization: `Bearer ${token}`,
           'Accept-Language': lang,
-          'Content-Type': 'text/plain',
+
           ...(isIdentityLoginEndpoint ? {} : { 'X-HyperText': 'true' }),
         },
       })
