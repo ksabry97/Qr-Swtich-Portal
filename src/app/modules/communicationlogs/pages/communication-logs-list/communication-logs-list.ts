@@ -24,47 +24,34 @@ export class CommunicationLogsList {
   view = ViewTransaction;
   columns: TableColumn[] = [
     {
-      field: 'transactionDate',
-      header: 'auditLogs.table.dateOfOccurance',
+      field: 'occurredOnUtc',
+      header: 'Occurred On UTC',
       sortable: false,
       template: 'date',
     },
     {
-      field: 'transactionId',
-      header: 'transactions.table.transactionId',
-
+      field: 'serviceName',
+      header: 'Service Name',
       sortable: false,
     },
     {
-      field: 'senderName',
-      header: 'transactions.table.senderName',
+      field: 'internalRequest',
+      header: 'Internal Request',
       sortable: false,
     },
     {
-      field: 'senderMsisdn',
-      header: 'transactions.table.senderMsisdn',
-      sortable: false,
-    },
-    { field: 'amount', header: 'transactions.table.amount', sortable: false },
-    {
-      field: 'currency',
-      header: 'transactions.table.currency',
+      field: 'internalResponse',
+      header: 'Internal Response',
       sortable: false,
     },
     {
-      field: 'transactionType',
-      header: 'transactions.table.transactionType',
-      sortable: false,
-    },
-    { field: 'status', header: 'transactions.table.status', sortable: false },
-    {
-      field: 'receiverName',
-      header: 'transactions.table.receiverName',
+      field: 'externalRequest',
+      header: 'External Request',
       sortable: false,
     },
     {
-      field: 'receiverMsisdn',
-      header: 'transactions.table.receiverMsisdn',
+      field: 'externalResponse',
+      header: 'External Response',
       sortable: false,
     },
   ];
@@ -84,8 +71,9 @@ export class CommunicationLogsList {
     this.pageSize = pageSize;
     this.CommLogsServ.getAllCommLogs(this.pageIndex, this.pageSize).subscribe({
       next: (data: any) => {
-        this.commLogs = data?.data?.transactions;
-        this.total = data?.data?.totalCount;
+        console.log(data);
+        this.commLogs = data?.items;
+        this.total = data?.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);

@@ -113,8 +113,8 @@ export class MerchantList implements OnInit {
     this.pageSize = pageSize;
     this.merchantServ.getAllMerchants(pageNumber, pageSize).subscribe({
       next: (data: any) => {
-        this.merchants = data.data.items;
-        this.total = data.data.totalCount;
+        this.merchants = data?.data?.items[0]?.merchants;
+        this.total = data?.data?.totalCount;
       },
       error: () => {
         this.globalServ.setLoading(false);

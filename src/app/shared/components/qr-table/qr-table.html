@@ -8,7 +8,7 @@
     [nzPageSizeOptions]="rowsPerPageOptions"
     [nzShowSizeChanger]="true"
     [nzShowQuickJumper]="true"
-    [nzScroll]="data.length ? { y: 'calc(100dvh - 345px)' } : {}"
+    [nzScroll]="data && data.length ? { y: 'calc(100dvh - 323px)' } : {}"
     [nzSize]="'small'"
     (nzCurrentPageDataChange)="onRowSelect.emit($event)"
     (nzPageIndexChange)="onLazyLoad.emit($event)"

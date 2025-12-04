@@ -6,7 +6,6 @@ import {
 } from '../../../../shared/components/qr-table/qr-table';
 import { GlobalService } from '../../../../shared/services/global.service';
 import { ViewTransaction } from '../../../transactions/pages/view-transaction/view-transaction';
-
 import { TranslateModule } from '@ngx-translate/core';
 import { EntityHeader } from '../../../../shared/components/entity-header/entity-header';
 import { ExceptionLogsService } from '../../services/exceplogs.service';
@@ -24,47 +23,24 @@ export class ExceptionLogsList {
   view = ViewTransaction;
   columns: TableColumn[] = [
     {
-      field: 'transactionDate',
+      field: 'occurredOnUtc',
       header: 'auditLogs.table.dateOfOccurance',
       sortable: false,
       template: 'date',
     },
     {
-      field: 'transactionId',
+      field: 'exceptionSource',
       header: 'transactions.table.transactionId',
-
       sortable: false,
     },
     {
-      field: 'senderName',
+      field: 'exceptionMessage',
       header: 'transactions.table.senderName',
       sortable: false,
     },
     {
-      field: 'senderMsisdn',
+      field: 'stackTrace',
       header: 'transactions.table.senderMsisdn',
-      sortable: false,
-    },
-    { field: 'amount', header: 'transactions.table.amount', sortable: false },
-    {
-      field: 'currency',
-      header: 'transactions.table.currency',
-      sortable: false,
-    },
-    {
-      field: 'transactionType',
-      header: 'transactions.table.transactionType',
-      sortable: false,
-    },
-    { field: 'status', header: 'transactions.table.status', sortable: false },
-    {
-      field: 'receiverName',
-      header: 'transactions.table.receiverName',
-      sortable: false,
-    },
-    {
-      field: 'receiverMsisdn',
-      header: 'transactions.table.receiverMsisdn',
       sortable: false,
     },
   ];
@@ -86,8 +62,9 @@ export class ExceptionLogsList {
       .getAllExcepLogs(this.pageIndex, this.pageSize)
       .subscribe({
         next: (data: any) => {
-          this.excepLogs = data?.data?.transactions;
-          this.total = data?.data?.totalCount;
+          console.log(data);
+          this.excepLogs = data?.items;
+          this.total = data?.totalCount;
         },
         error: () => {
           this.globalServ.setLoading(false);
