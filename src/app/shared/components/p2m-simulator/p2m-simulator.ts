@@ -33,6 +33,7 @@ export class P2mSimulator implements OnInit {
   loading = false;
   simulatorForm!: FormGroup;
   payForm!: FormGroup;
+  payMForm!: FormGroup;
   globalServ = inject(GlobalService);
   message = inject(NzMessageService);
   activeRoute = inject(ActivatedRoute);
@@ -41,6 +42,7 @@ export class P2mSimulator implements OnInit {
   qrValue = '';
   openPayForm = false;
   hasAmount = false;
+  isM2m = false;
   constructor(private fb: FormBuilder) {
     this.simulatorForm = this.fb.group({
       walletAcqID: [],
@@ -59,6 +61,12 @@ export class P2mSimulator implements OnInit {
       qrString: [],
       amount: [],
     });
+    this.payMForm = this.fb.group({
+      senderMerchantId: [''],
+      senderWalletAcqId: [null],
+      qrString: [],
+      amount: [],
+    });
   }
 
   ngOnInit(): void {
@@ -74,8 +82,9 @@ export class P2mSimulator implements OnInit {
       this.simulatorForm.patchValue({ mcc: value['mcc'] });
     });
   }
-  generateQr() {
+  generateQr(value: boolean) {
     this.loading = true;
+    this.isM2m = value;
     let simulateBody = this.simulatorForm.value;
     let reqBody: any = {
       msisdn: simulateBody.msisdn,

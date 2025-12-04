@@ -95,7 +95,7 @@ export class GlobalService {
     return this.http.post(url, qrBody);
   }
   generateMerchantQr(res: any) {
-    let url = 'https://gimuat.gimpay.org:6033/schemeB/generate-P2Mqr';
+    let url = 'https://gimuat.gimpay.org:6033/schemeB/generate-merchant-qr';
     return this.http.post(url, res);
   }
   payMerchantQr(qrBody: any) {

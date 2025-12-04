@@ -36,11 +36,28 @@
       <button
         *ngIf="!qrValue"
         class="submit-btn rounded-md p-2"
-        (click)="generateQr()"
-        [disabled]="loading"
+        (click)="generateQr(false)"
+        [disabled]="loading && !isM2m"
       >
-        <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
-        {{ loading ? "" : "Generate QR" }}
+        <nz-icon
+          nzType="loading"
+          *ngIf="loading && !isM2m"
+          style="font-size: 20px"
+        />
+        {{ loading && !isM2m ? "" : "Generate QR (P2M)" }}
+      </button>
+      <button
+        *ngIf="!qrValue"
+        class="submit-btn rounded-md p-2"
+        (click)="generateQr(true)"
+        [disabled]="loading && isM2m"
+      >
+        <nz-icon
+          nzType="loading"
+          *ngIf="loading && isM2m"
+          style="font-size: 20px"
+        />
+        {{ loading && isM2m ? "" : "Generate QR (M2M)" }}
       </button>
       <button
         *ngIf="qrValue"
@@ -80,7 +97,7 @@
   </div>
 
   <div
-    *ngIf="openPayForm"
+    *ngIf="openPayForm && !isM2m"
     class="form-container w-[95vw] bg-white min-h-[95vh] rounded-3xl relative p-6 flex justify-between items-center"
   >
     <form class="w-1/2 flex flex-col gap-6" [formGroup]="payForm">
@@ -88,6 +105,51 @@
         [placeholder]="'enter number'"
         formControlName="senderMsisdn"
         [label]="'Sender Number'"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter amount'"
+        formControlName="amount"
+        [label]="'Amount'"
+        [disabled]="hasAmount"
+      ></app-qr-input-number>
+
+      <button
+        class="submit-btn rounded-md p-2"
+        (click)="payQr()"
+        [disabled]="loading"
+      >
+        <nz-icon nzType="loading" *ngIf="loading" style="font-size: 20px" />
+        {{ loading ? "" : "Pay" }}
+      </button>
+    </form>
+    <div class="flex flex-col gap-8 justify-center items-center w-1/2 h-100">
+      <div class="imag-contain">
+        <img src="assets/cash.jpg" />
+      </div>
+
+      <p class="flex items-center gap-1 foot">
+        {{ "app.powered_by" | translate }}
+        <img src="assets/sm-logo.svg" />
+        {{ "app.inc" | translate }}
+        <span>{{ "app.enabled_by" | translate }}</span>
+        <img src="assets/GIM.svg" />
+      </p>
+    </div>
+  </div>
+  <div
+    *ngIf="openPayForm && isM2m"
+    class="form-container w-[95vw] bg-white min-h-[95vh] rounded-3xl relative p-6 flex justify-between items-center"
+  >
+    <form class="w-1/2 flex flex-col gap-6" [formGroup]="payMForm">
+      <app-qr-input-number
+        [placeholder]="'enter number'"
+        formControlName="senderMerchantId"
+        [label]="'Sender Merchant Id'"
+      ></app-qr-input-number>
+      <app-qr-input-number
+        [placeholder]="'enter number'"
+        formControlName="senderWalletAcqId"
+        [label]="'Sender Wallet AcquringId'"
       ></app-qr-input-number>
       <app-qr-input-number
         [placeholder]="'enter amount'"
