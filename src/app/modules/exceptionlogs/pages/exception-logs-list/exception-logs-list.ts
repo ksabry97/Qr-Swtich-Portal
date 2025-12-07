@@ -20,6 +20,7 @@ import { TableFilter } from '../../../../shared/components/table-filter/table-fi
 export class ExceptionLogsList {
   excepLogsServ = inject(ExceptionLogsService);
   globalServ = inject(GlobalService);
+
   view = ViewTransaction;
   columns: TableColumn[] = [
     {

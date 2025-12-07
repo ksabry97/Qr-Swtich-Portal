@@ -14,6 +14,7 @@ import {
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { authInterceptor } from './shared/services/headers.interceptor';
@@ -50,7 +51,8 @@ export const appConfig: ApplicationConfig = {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient],
         },
-      })
+      }),
+      NzModalModule
     ),
     {
       provide: TRANSLATE_HTTP_LOADER_CONFIG,

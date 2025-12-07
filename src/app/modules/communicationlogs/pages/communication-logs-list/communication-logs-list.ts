@@ -21,6 +21,7 @@ import { TableFilter } from '../../../../shared/components/table-filter/table-fi
 export class CommunicationLogsList {
   CommLogsServ = inject(CommunicationLogsService);
   globalServ = inject(GlobalService);
+
   view = ViewTransaction;
   columns: TableColumn[] = [
     {
