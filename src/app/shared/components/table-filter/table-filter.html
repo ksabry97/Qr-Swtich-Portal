@@ -17,12 +17,4 @@
       {{ "common.filter" | translate }}
     </button>
   </div>
-
-  <app-dynamic-filter
-    #filterBox
-    [filterConfigs]="filterConfigs"
-    class="w-100"
-    (filterChange)="emitFilters($event)"
-    [hidden]="showFilter"
-  ></app-dynamic-filter>
 </div>

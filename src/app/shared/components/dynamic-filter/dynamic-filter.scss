@@ -4,6 +4,17 @@
   background: var(--bg-primary, #fff);
   border-radius: var(--lg, 8px);
   border: 1px solid var(--border-primary, #cbd5e1);
+
+  &.modal-mode {
+    padding: 24px;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+  }
+
+  .grid {
+    padding: 0;
+  }
 }
 
 .filter-item {
@@ -124,8 +135,19 @@
   }
 }
 
-// Calendar Popup/Dropdown Styles (matching select dropdown)
+// Modal Styles
 ::ng-deep {
+  .ant-modal {
+    .ant-modal-content {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .ant-modal-body {
+      padding: 24px;
+    }
+  }
+
   .ant-picker-dropdown {
     .ant-picker-panel-container {
       border-radius: var(--lg, 8px);

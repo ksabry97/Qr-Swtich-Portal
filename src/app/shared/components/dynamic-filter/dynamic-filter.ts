@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, Optional, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzModalModule, NzModalService, NzModalRef, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 export interface FilterOption {
   text: string;
@@ -35,26 +36,109 @@ export interface FilterConfig {
     NzButtonModule,
     NzIconModule,
     NzInputModule,
+    NzModalModule,
   ],
   templateUrl: './dynamic-filter.html',
   styleUrl: './dynamic-filter.scss',
 })
 export class DynamicFilter implements OnInit {
   @Input() filterConfigs: FilterConfig[] = [];
+  @Input() isModal: boolean = false;
   @Output() filterChange = new EventEmitter<Record<string, any>>();
   @Output() clearFilters = new EventEmitter<void>();
 
   filters: Record<string, any> = {};
 
-  constructor() {
+  constructor(
+    @Optional() private modalRef?: NzModalRef,
+    @Optional() @Inject(NZ_MODAL_DATA) private modalData?: any
+  ) {
     // Initialize filters with default values if provided
     this.filters = {};
+    
+    // If opened in modal, get data from modal
+    if (modalData) {
+      this.filterConfigs = modalData.filterConfigs || [];
+      this.isModal = true;
+      // Restore previous filter values if provided
+      if (modalData.initialValues) {
+        // Deep copy and convert date strings back to Date objects
+        this.filters = this.restoreFilterValues(modalData.initialValues, modalData.filterConfigs || []);
+      }
+    }
+  }
+
+  private restoreFilterValues(values: Record<string, any>, configs: FilterConfig[]): Record<string, any> {
+    const restored: Record<string, any> = {};
+    
+    Object.keys(values).forEach((key) => {
+      const config = configs.find((c) => c.key === key);
+      const value = values[key];
+      
+      if (config?.type === 'date' && typeof value === 'string') {
+        // Convert ISO string back to Date
+        restored[key] = new Date(value);
+      } else if (config?.type === 'date-range' && Array.isArray(value) && value.length === 2) {
+        // Convert date range ISO strings back to Date objects
+        restored[key] = [
+          typeof value[0] === 'string' ? new Date(value[0]) : value[0],
+          typeof value[1] === 'string' ? new Date(value[1]) : value[1],
+        ];
+      } else {
+        restored[key] = value;
+      }
+    });
+    
+    return restored;
+  }
+
+  static openInModal(
+    modalService: NzModalService,
+    filterConfigs: FilterConfig[],
+    initialValues: Record<string, any> = {},
+    onFilterChange: (filters: Record<string, any>) => void,
+    onClearFilters?: () => void
+  ): NzModalRef {
+    const modal = modalService.create({
+      nzTitle: 'Filters',
+      nzContent: DynamicFilter,
+      nzFooter: null,
+      nzWidth: '1200px',
+      nzBodyStyle: {
+        padding: '24px',
+      },
+      nzData: {
+        filterConfigs: filterConfigs,
+        isModal: true,
+        initialValues: initialValues,
+      },
+    });
+
+    // Wait for component to be initialized
+    modal.afterOpen.subscribe(() => {
+      const componentInstance = modal.getContentComponent() as DynamicFilter;
+      if (componentInstance) {
+        componentInstance.filterChange.subscribe((filters) => {
+          onFilterChange(filters);
+          modal.close();
+        });
+
+        if (onClearFilters) {
+          componentInstance.clearFilters.subscribe(() => {
+            onClearFilters();
+            modal.close();
+          });
+        }
+      }
+    });
+
+    return modal;
   }
 
   ngOnInit() {
-    // Set default values from config
+    // Set default values from config only if not already set (from initialValues)
     this.filterConfigs.forEach((config) => {
-      if (config.defaultValue !== undefined) {
+      if (config.defaultValue !== undefined && this.filters[config.key] === undefined) {
         this.filters[config.key] = config.defaultValue;
       }
     });
@@ -110,12 +194,24 @@ export class DynamicFilter implements OnInit {
 
   applyFilters(): void {
     this.emitFilters();
+    if (this.isModal && this.modalRef) {
+      this.modalRef.close();
+    }
   }
 
   clearAllFilters(): void {
     this.filters = {};
     this.emitFilters();
     this.clearFilters.emit();
+    if (this.isModal && this.modalRef) {
+      this.modalRef.close();
+    }
+  }
+
+  closeModal(): void {
+    if (this.isModal && this.modalRef) {
+      this.modalRef.close();
+    }
   }
 
   private emitFilters(): void {
