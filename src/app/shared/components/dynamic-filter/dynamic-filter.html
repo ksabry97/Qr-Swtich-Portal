@@ -1,5 +1,5 @@
 <div class="dynamic-filter-container">
-  <div class="flex flex-col gap-3">
+  <div class="grid grid-cols-4 gap-3">
     <!-- Select Filters -->
     <div
       class="filter-item"
@@ -69,10 +69,49 @@
           class="filter-date-range-control"
         ></nz-range-picker>
       </div>
+
+      <!-- String Input Filter -->
+      <div *ngSwitchCase="'string'" class="filter-select">
+        <label class="filter-label" *ngIf="config.label">
+          {{ config.label | translate }}
+        </label>
+        <input
+          nz-input
+          type="text"
+          [(ngModel)]="filters[config.key]"
+          (ngModelChange)="onInputChange(config.key, $event)"
+          [placeholder]="getInputPlaceholder(config) | translate"
+          class="filter-select-control"
+        />
+      </div>
+
+      <!-- Number Input Filter -->
+      <div *ngSwitchCase="'number'" class="filter-select">
+        <label class="filter-label" *ngIf="config.label">
+          {{ config.label | translate }}
+        </label>
+        <input
+          nz-input
+          type="number"
+          [(ngModel)]="filters[config.key]"
+          (ngModelChange)="onInputChange(config.key, $event)"
+          [placeholder]="getInputPlaceholder(config) | translate"
+          class="filter-select-control"
+        />
+      </div>
     </div>
 
-    <!-- Clear Filters Button -->
+    <!-- Filter Actions -->
     <div class="filter-actions">
+      <button
+        nz-button
+        nzType="primary"
+        (click)="applyFilters()"
+        class="apply-filters-btn"
+      >
+        <i nz-icon nzType="check" nzTheme="outline"></i>
+        {{ "common.apply_filters" | translate }}
+      </button>
       <button
         nz-button
         nzType="default"

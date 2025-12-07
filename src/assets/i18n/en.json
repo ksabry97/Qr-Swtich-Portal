@@ -59,7 +59,8 @@
     "active": "Active",
     "inactive": "Inactive",
     "search_placeholder": "Search...",
-    "clear_filters": "Clear Filters"
+    "clear_filters": "Clear Filters",
+    "apply_filters": "Apply Filters"
   },
   "auth": {
     "login": {

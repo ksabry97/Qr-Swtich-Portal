@@ -16,11 +16,12 @@ export class MerchantService {
     return this.http.post(url, merchant);
   }
 
-  getAllMerchants(pageNumber: number, pageSize: number) {
+  getAllMerchants(pageNumber: number, pageSize: number, filters: any = {}) {
     let url = this.baseUrl + '/merchants';
     let reqBody = {
       pageNumber,
       pageSize,
+      filters,
     };
     return this.http.post(url, reqBody);
   }

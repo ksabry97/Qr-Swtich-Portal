@@ -1,5 +1,6 @@
 .table-filter {
-  height: 32px;
+  min-height: 32px;
+  height: fit-content;
   position: relative;
   button {
     height: 32px !important;
@@ -34,8 +35,5 @@
   }
 }
 app-dynamic-filter {
-  position: absolute;
-  top: 116%;
-  inset-inline-end: 0%;
-  z-index: 2;
+  width: 100%;
 }

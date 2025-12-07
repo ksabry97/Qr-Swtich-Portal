@@ -43,6 +43,34 @@
       box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
     }
   }
+
+  // Input styles (for string and number inputs)
+  .filter-select-control[type="text"],
+  .filter-select-control[type="number"] {
+    width: 100%;
+    border-radius: var(--lg, 8px);
+    border: 1px solid var(--border-primary, #cbd5e1);
+    height: 36px;
+    padding: 4px 11px;
+    font-size: 14px;
+    color: var(--text-primary, #1e293b);
+    background: var(--bg-primary, #fff);
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--primary, #3b82f6);
+    }
+
+    &:focus {
+      border-color: var(--primary, #3b82f6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--text-tertiary, #94a3b8);
+    }
+  }
 }
 
 // Switch Filter Styles
@@ -70,15 +98,150 @@
       border-radius: var(--lg, 8px);
       border: 1px solid var(--border-primary, #cbd5e1);
       height: 36px;
+      font-size: 14px;
+      color: var(--text-primary, #1e293b);
+      background: var(--bg-primary, #fff);
+      transition: all 0.2s ease;
 
       &:hover {
         border-color: var(--primary, #3b82f6);
       }
+
+      .ant-picker-input > input {
+        font-size: 14px;
+        color: var(--text-primary, #1e293b);
+      }
+
+      .ant-picker-input > input::placeholder {
+        color: var(--text-tertiary, #94a3b8);
+      }
     }
 
-    &.ant-picker-focused {
+    &.ant-picker-focused .ant-picker {
       border-color: var(--primary, #3b82f6);
       box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+}
+
+// Calendar Popup/Dropdown Styles (matching select dropdown)
+::ng-deep {
+  .ant-picker-dropdown {
+    .ant-picker-panel-container {
+      border-radius: var(--lg, 8px);
+      border: 1px solid var(--border-primary, #cbd5e1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      background: var(--bg-primary, #fff);
+      padding: 8px;
+
+      .ant-picker-panel {
+        border: none;
+        background: transparent;
+
+        .ant-picker-header {
+          border-bottom: 1px solid var(--border-primary, #cbd5e1);
+          padding: 8px 0;
+          margin-bottom: 8px;
+
+          button {
+            color: var(--text-primary, #1e293b);
+            font-size: 14px;
+            border-radius: var(--lg, 8px);
+            transition: all 0.2s ease;
+
+            &:hover {
+              background: var(--bg-tertiary, #f1f5f9);
+              color: var(--primary, #3b82f6);
+            }
+          }
+
+          .ant-picker-header-view {
+            button {
+              font-weight: 500;
+              color: var(--text-primary, #1e293b);
+
+              &:hover {
+                color: var(--primary, #3b82f6);
+              }
+            }
+          }
+        }
+
+        .ant-picker-body {
+          .ant-picker-content {
+            th {
+              color: var(--text-secondary, #64748b);
+              font-size: 12px;
+              font-weight: 500;
+              padding: 8px 0;
+            }
+
+            td {
+              .ant-picker-cell {
+                .ant-picker-cell-inner {
+                  border-radius: var(--lg, 8px);
+                  font-size: 14px;
+                  color: var(--text-primary, #1e293b);
+                  transition: all 0.2s ease;
+
+                  &:hover {
+                    background: var(--bg-tertiary, #f1f5f9);
+                    color: var(--primary, #3b82f6);
+                  }
+                }
+
+                &.ant-picker-cell-selected .ant-picker-cell-inner {
+                  background: var(--primary, #3b82f6);
+                  color: #fff;
+                  border-color: var(--primary, #3b82f6);
+
+                  &:hover {
+                    background: var(--primary, #3b82f6);
+                    color: #fff;
+                  }
+                }
+
+                &.ant-picker-cell-today .ant-picker-cell-inner {
+                  border-color: var(--primary, #3b82f6);
+                  font-weight: 500;
+                }
+
+                &.ant-picker-cell-disabled .ant-picker-cell-inner {
+                  color: var(--text-tertiary, #94a3b8);
+                  cursor: not-allowed;
+                }
+              }
+            }
+          }
+        }
+
+        .ant-picker-footer {
+          border-top: 1px solid var(--border-primary, #cbd5e1);
+          padding-top: 8px;
+          margin-top: 8px;
+        }
+
+        .ant-picker-time-panel {
+          .ant-picker-time-panel-column {
+            > li {
+              padding: 4px 0;
+              font-size: 14px;
+              color: var(--text-primary, #1e293b);
+
+              &:hover {
+                background: var(--bg-tertiary, #f1f5f9);
+                color: var(--primary, #3b82f6);
+              }
+
+              &.ant-picker-time-panel-cell-selected {
+                background: var(--primary, #3b82f6);
+                color: #fff;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -97,13 +260,26 @@
       border-radius: var(--lg, 8px);
       border: 1px solid var(--border-primary, #cbd5e1);
       height: 36px;
+      font-size: 14px;
+      color: var(--text-primary, #1e293b);
+      background: var(--bg-primary, #fff);
+      transition: all 0.2s ease;
 
       &:hover {
         border-color: var(--primary, #3b82f6);
       }
+
+      .ant-picker-input > input {
+        font-size: 14px;
+        color: var(--text-primary, #1e293b);
+      }
+
+      .ant-picker-input > input::placeholder {
+        color: var(--text-tertiary, #94a3b8);
+      }
     }
 
-    &.ant-picker-focused {
+    &.ant-picker-focused .ant-picker {
       border-color: var(--primary, #3b82f6);
       box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
     }
@@ -114,7 +290,24 @@
 .filter-actions {
   display: flex;
   align-items: flex-end;
+  gap: 8px;
   margin-left: auto;
+}
+
+.apply-filters-btn {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--lg, 8px);
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+
+  i {
+    font-size: 16px;
+  }
 }
 
 .clear-filters-btn {

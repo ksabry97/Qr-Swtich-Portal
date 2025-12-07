@@ -7,6 +7,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 export interface FilterOption {
   text: string;
@@ -16,7 +17,7 @@ export interface FilterOption {
 export interface FilterConfig {
   key: string;
   label: string;
-  type: 'select' | 'switch' | 'date' | 'date-range';
+  type: 'select' | 'switch' | 'date' | 'date-range' | 'string' | 'number';
   options?: FilterOption[];
   placeholder?: string | string[] | any;
   defaultValue?: any;
@@ -33,6 +34,7 @@ export interface FilterConfig {
     NzDatePickerModule,
     NzButtonModule,
     NzIconModule,
+    NzInputModule,
   ],
   templateUrl: './dynamic-filter.html',
   styleUrl: './dynamic-filter.scss',
@@ -63,7 +65,6 @@ export class DynamicFilter implements OnInit {
 
   onFilterChange(key: string, value: any): void {
     this.filters[key] = value;
-    this.emitFilters();
   }
 
   onDateChange(key: string, date: Date | null): void {
@@ -72,7 +73,6 @@ export class DynamicFilter implements OnInit {
     } else {
       delete this.filters[key];
     }
-    this.emitFilters();
   }
 
   onDateRangeChange(key: string, dates: [Date, Date] | null): void {
@@ -81,11 +81,34 @@ export class DynamicFilter implements OnInit {
     } else {
       delete this.filters[key];
     }
-    this.emitFilters();
   }
 
   onSwitchChange(key: string, value: boolean): void {
     this.filters[key] = value;
+  }
+
+  onInputChange(key: string, value: string | number): void {
+    const config = this.filterConfigs.find((c) => c.key === key);
+    
+    if (config?.type === 'number') {
+      // Convert to number, or remove if empty
+      if (value === '' || value === null || value === undefined) {
+        delete this.filters[key];
+      } else {
+        const numValue = typeof value === 'string' ? parseFloat(value) : value;
+        this.filters[key] = isNaN(numValue) ? undefined : numValue;
+      }
+    } else {
+      // String input
+      if (value === '' || value === null || value === undefined) {
+        delete this.filters[key];
+      } else {
+        this.filters[key] = value;
+      }
+    }
+  }
+
+  applyFilters(): void {
     this.emitFilters();
   }
 
@@ -154,5 +177,18 @@ export class DynamicFilter implements OnInit {
     }
     // Default placeholders for date range if not provided
     return config.placeholder || ['Start Date', 'End Date'];
+  }
+
+  getInputPlaceholder(config: FilterConfig): string {
+    if (config.placeholder) {
+      return config.placeholder;
+    }
+    // Default placeholders based on input type
+    if (config.type === 'string') {
+      return 'Enter text';
+    } else if (config.type === 'number') {
+      return 'Enter number';
+    }
+    return '';
   }
 }
