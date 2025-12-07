@@ -207,7 +207,6 @@ export class MerchantList implements OnInit {
             };
           }
         );
-        console.log(this.filterConfigs);
       },
       error: () => {
         this.globalServ.setLoading(false);

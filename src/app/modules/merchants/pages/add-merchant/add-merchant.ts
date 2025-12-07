@@ -141,6 +141,7 @@ export class AddMerchant implements OnInit, OnChanges {
       feeProfileId: [null],
       type: [, Validators.required],
       identificationType: [, Validators.required],
+      walletAcqId: [],
     });
   }
   ngOnInit(): void {
@@ -292,6 +293,7 @@ export class AddMerchant implements OnInit, OnChanges {
       .getMerchantByMerchantId(String(this.merchantId))
       .subscribe({
         next: (data: any) => {
+          console.log(data.data);
           this.merchantForm.patchValue(data.data);
         },
       });
@@ -338,7 +340,7 @@ export class AddMerchant implements OnInit, OnChanges {
     this.router.navigate(['p2m-simulator'], {
       queryParams: {
         mssidn: this.merchantForm.get('merchantId')?.value,
-        walletId: this.merchantForm.get('walletId')?.value,
+        walletId: this.merchantForm.get('walletAcqId')?.value,
         merchantName: this.merchantForm.get('name')?.value,
         merchantScheme: this.merchantForm.get('scheme')?.value,
         merchantCity: this.cities.find((val: any) => {

@@ -18,7 +18,7 @@ import { DynamicFilter, FilterConfig } from '../dynamic-filter/dynamic-filter';
 })
 export class TableFilter {
   searchQuery: string = '';
-  showFilter = false;
+  showFilter = true;
   @Input() isSelected = false;
   @Input() showDeleteButton = false;
   @Input() filterConfigs: FilterConfig[] = [];
