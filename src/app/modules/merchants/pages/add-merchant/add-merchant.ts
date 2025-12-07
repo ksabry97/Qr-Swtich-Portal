@@ -293,7 +293,6 @@ export class AddMerchant implements OnInit, OnChanges {
       .getMerchantByMerchantId(String(this.merchantId))
       .subscribe({
         next: (data: any) => {
-          console.log(data.data);
           this.merchantForm.patchValue(data.data);
         },
       });

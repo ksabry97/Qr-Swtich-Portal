@@ -154,15 +154,23 @@ export class MerchantList implements OnInit {
           return of([]);
         })
       ),
+      tenants: this.globalServ.getAllTenantLookups().pipe(
+        catchError((err) => {
+          return of([]);
+        })
+      ),
     }).subscribe({
       next: (data: any) => {
         this.lookups[LookupType.Country] = data.countries?.data;
         this.lookups[LookupType.MerchantCategoryCode] = data.mccs?.data;
         this.lookups[LookupType.FeeProfile] = data.fees?.data;
-        this.lookups[LookupType.Wallet] = data.wallets.data;
+        this.lookups[LookupType.Wallet] = data.wallets?.data;
+        this.lookups[LookupType.Tenant] = data.tenants?.data;
       },
     });
-    this.getAllMerchants(this.pageIndex, this.pageSize);
+    setTimeout(() => {
+      this.getAllMerchants(this.pageIndex, this.pageSize);
+    }, 100);
 
     this.globalServ.PermissionsPerModule.subscribe((value) => {
       this.Merchants = value.Merchants?.permissions;
