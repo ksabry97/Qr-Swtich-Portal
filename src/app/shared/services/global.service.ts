@@ -102,4 +102,8 @@ export class GlobalService {
     let url = 'https://gimuat.gimpay.org:6033/schemeA/pay-from-qr-p2m';
     return this.http.post(url, qrBody);
   }
+  payAsMerchant(qrBody: any) {
+    let url = 'https://gimuat.gimpay.org:6033/schemeA/pay-from-qr-m2m';
+    return this.http.post(url, qrBody);
+  }
 }

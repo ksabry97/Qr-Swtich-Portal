@@ -107,7 +107,9 @@ export class P2mSimulator implements OnInit {
       next: (data: any) => {
         this.loading = false;
         this.qrValue = data.qrString;
-        this.payForm.patchValue({ qrString: this.qrValue });
+        this.isM2m
+          ? this.payMForm.patchValue({ qrString: this.qrValue })
+          : this.payForm.patchValue({ qrString: this.qrValue });
       },
       error: (err) => {
         this.message.error(err.error.message);
@@ -126,6 +128,7 @@ export class P2mSimulator implements OnInit {
         this.openPayForm = true;
         data.amount ? (this.hasAmount = true) : (this.hasAmount = false);
         this.payForm.patchValue({ amount: data.amount });
+        this.payMForm.patchValue({ amount: data.amount });
       },
       error: (err) => {
         this.message.error(err.error.message);
@@ -156,7 +159,27 @@ export class P2mSimulator implements OnInit {
       },
     });
   }
-
+  payAsMerchant() {
+    this.loading = true;
+    this.globalServ.payAsMerchant(this.payMForm.value).subscribe({
+      next: (data: any) => {
+        if (data?.body?.responseCode === '00000') {
+          this.message.success(data?.body?.responseDescription);
+        } else if (data.responseCode == 400) {
+          this.message.error(data?.message);
+        } else {
+          this.message.error(data?.body?.responseDescription);
+        }
+      },
+      error: (err) => {
+        this.message.error(err.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
   get amount() {
     return this.payForm.controls['amount']?.value;
   }
