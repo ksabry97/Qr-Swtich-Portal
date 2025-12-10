@@ -75,7 +75,7 @@ export class AddUser implements OnInit, OnChanges {
   getAllRoles() {
     this.globalServ.getAllRoles().subscribe({
       next: (data: any) => {
-        const mappedData = data.data.map((value: any) => {
+        const mappedData = data.data.roles.map((value: any) => {
           return { text: value.name, value: value.id };
         });
         this.assignedRoles = mappedData;

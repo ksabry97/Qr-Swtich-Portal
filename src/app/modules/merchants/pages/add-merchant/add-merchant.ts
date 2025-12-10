@@ -338,7 +338,8 @@ export class AddMerchant implements OnInit, OnChanges {
   navigateToSimulator(isM2M: boolean) {
     this.router.navigate(['p2m-simulator'], {
       queryParams: {
-        mssidn: this.merchantForm.get('merchantId')?.value,
+        merId: this.merchantForm.get('merchantId')?.value,
+        mssidn: this.merchantForm.get('msisdn')?.value,
         walletId: this.merchantForm.get('walletAcqId')?.value,
         merchantName: this.merchantForm.get('name')?.value,
         merchantScheme: this.merchantForm.get('scheme')?.value,

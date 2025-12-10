@@ -23,6 +23,7 @@ import { P2mSimulator } from './shared/components/p2m-simulator/p2m-simulator';
 import { M2mSimulator } from './shared/components/m2m-simulator/m2m-simulator';
 import { CommunicationLogsList } from './modules/communicationlogs/pages/communication-logs-list/communication-logs-list';
 import { ExceptionLogsList } from './modules/exceptionlogs/pages/exception-logs-list/exception-logs-list';
+import { ChangePassword } from './modules/authentication/pages/change-password/change-password';
 
 export const routes: Routes = [
   {
@@ -103,6 +104,10 @@ export const routes: Routes = [
   {
     path: 'forget-password',
     component: ForgetPassword,
+  },
+  {
+    path: 'change-password',
+    component: ChangePassword,
   },
   {
     path: 'simulator',

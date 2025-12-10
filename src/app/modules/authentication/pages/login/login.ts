@@ -64,7 +64,9 @@ export class Login {
             decryptBackendResponse(data, this.encryptionKey).then((value) => {
               if (value.Success) {
                 localStorage.setItem('sessiontoken', value?.SessionToken);
-                this.globalServ.setModal(true);
+                value.FirstLogin
+                  ? this.router.navigateByUrl('change-password')
+                  : this.globalServ.setModal(true);
               } else {
                 this.errorMessage = value?.ErrorMessage;
               }

@@ -60,7 +60,15 @@
     "inactive": "Inactive",
     "search_placeholder": "Search...",
     "clear_filters": "Clear Filters",
-    "apply_filters": "Apply Filters"
+    "apply_filters": "Apply Filters",
+    "enter_email": "enter your email",
+    "enter_password": "enter your password",
+    "enter_old_password": "enter your old password",
+    "enter_password_label": "Your password",
+    "confirm_password": "confirm password",
+    "retype_password": "Re-type your password",
+    "password_mismatch": "The password mismatched",
+    "back_to_login": "Back to login"
   },
   "auth": {
     "login": {
@@ -81,7 +89,9 @@
       "description": "One time OTP has been sent your registered email, please enter the OTP to continue:",
       "resend": "Resend",
       "login": "Login"
-    }
+    },
+    "change_password": "Change Password",
+    "old_password": "Old Password"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -398,5 +408,12 @@
   "language": {
     "en": "En",
     "fr": "Fr"
+  },
+  "validation": {
+    "min_length": "At least 8 characters in length",
+    "uppercase": "Upper case letter (A-Z)",
+    "lowercase": "Lower case letter (a-z)",
+    "number": "At least one number (0-9)",
+    "special": "Special character"
   }
 }

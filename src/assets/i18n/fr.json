@@ -60,7 +60,15 @@
     "inactive": "inactif",
     "search_placeholder": "Rechercher...",
     "clear_filters": "Effacer les filtres",
-    "apply_filters": "Appliquer les filtres"
+    "apply_filters": "Appliquer les filtres",
+    "enter_email": "entrez votre e-mail",
+    "enter_password": "entrez votre mot de passe",
+    "enter_old_password": "entrez votre ancien mot de passe",
+    "enter_password_label": "Votre mot de passe",
+    "confirm_password": "confirmer le mot de passe",
+    "retype_password": "Retapez votre mot de passe",
+    "password_mismatch": "Le mot de passe ne correspond pas",
+    "back_to_login": "Retour à la connexion"
   },
   "auth": {
     "login": {
@@ -81,7 +89,9 @@
       "description": "Un OTP unique a été envoyé à votre email enregistré, veuillez entrer l'OTP pour continuer:",
       "resend": "Renvoyer",
       "login": "Connexion"
-    }
+    },
+    "change_password": "Changer le mot de passe",
+    "old_password": "Ancien mot de passe"
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -398,5 +408,12 @@
   "language": {
     "en": "En",
     "fr": "Fr"
+  },
+  "validation": {
+    "min_length": "Au moins 8 caractères",
+    "uppercase": "Lettre majuscule (A-Z)",
+    "lowercase": "Lettre minuscule (a-z)",
+    "number": "Au moins un chiffre (0-9)",
+    "special": "Caractère spécial"
   }
 }

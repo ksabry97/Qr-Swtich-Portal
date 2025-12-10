@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, inject, OnChanges, OnDestroy, signal, SimpleChanges } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,8 +7,10 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { Subject, takeUntil } from 'rxjs';
 import { ErrorMessages } from '../../services/error-messages.service';
 export interface ValidationRule {
   type: 'required' | 'minLength' | 'maxLength' | 'pattern' | 'email' | 'custom';
@@ -24,6 +26,7 @@ export interface ValidationRule {
     NzInputModule,
     NzIconModule,
     FormsModule,
+    TranslateModule,
   ],
   providers: [
     {
@@ -35,7 +38,7 @@ export interface ValidationRule {
   templateUrl: './qr-password.html',
   styleUrl: './qr-password.scss',
 })
-export class QrPassword {
+export class QrPassword implements OnChanges, OnDestroy {
   passwordVisible = false;
   @Input() label: string = '';
   @Input() placeholder: string = '';
@@ -57,7 +60,37 @@ export class QrPassword {
   public changed = (value: string) => {};
   public touched = () => {};
   public isDisabled: boolean = false;
-  constructor(private readonly errorMessagesServ: ErrorMessages) {}
+  private translate = inject(TranslateService);
+  private destroy$ = new Subject<void>();
+  translatedPlaceholder = signal<string>('');
+  
+  constructor(private readonly errorMessagesServ: ErrorMessages) {
+    this.updatePlaceholder();
+    this.translate.onLangChange
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.updatePlaceholder();
+      });
+  }
+  
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['placeholder']) {
+      this.updatePlaceholder();
+    }
+  }
+  
+  private updatePlaceholder(): void {
+    if (!this.placeholder) {
+      this.translatedPlaceholder.set('');
+      return;
+    }
+    this.translatedPlaceholder.set(this.translate.instant(this.placeholder));
+  }
   get control() {
     return this.parentGroup.get(this.controlName) as FormControl;
   }

@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, from, map, of, switchMap, throwError } from 'rxjs';
+import { catchError, from, map, mergeMap, of, switchMap, throwError } from 'rxjs';
 import { GlobalService } from './global.service';
 import {
   rsaDecryptWithPrivateKey,
@@ -44,7 +44,20 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return from(applyEncryption(authReq)).pipe(
     switchMap((securedReq) =>
       next(securedReq).pipe(
-        switchMap((event) => decryptResponse(event, securedReq)),
+        mergeMap((event) => {
+          // Use duck typing to check if it's an HttpResponse (instanceof can fail due to serialization/zone.js)
+          const hasStatus = event && typeof event === 'object' && 'status' in event;
+          const hasBody = event && typeof event === 'object' && 'body' in event;
+          const hasHeaders = event && typeof event === 'object' && 'headers' in event;
+          
+          const isHttpResponse = event instanceof HttpResponse || 
+            (hasStatus && hasBody && hasHeaders);
+          
+          if (isHttpResponse) {
+            return decryptResponse(event as HttpResponse<any>, securedReq);
+          }
+          return of(event);
+        }),
         catchError((error) => {
           if ((error.status === 401 || error.status === 403) && token) {
             router.navigateByUrl('/login');
@@ -82,15 +95,10 @@ async function applyEncryption(
   }
 }
 
-function decryptResponse(event: any, req: HttpRequest<any>) {
-  if (
-    !(event instanceof HttpResponse) ||
-    !rsaPrivateKey ||
-    !environment.hyperText
-  ) {
+function decryptResponse(event: HttpResponse<any>, req: HttpRequest<any>) {
+  if (!rsaPrivateKey || !environment.hyperText) {
     return of(event);
   }
-
   const cipherPayload = extractCipherText(event.body);
 
   if (!cipherPayload) {

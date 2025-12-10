@@ -29,4 +29,15 @@ export class LoginServ {
       this.http.post(url, { cipherText }, { responseType: 'text' })
     );
   }
+
+  forgetPassword(formValue: { email: string }) {
+    let url = this.baseUrl + '/identity/forgot-password';
+    let reqBody = { usernameOrEmail: formValue.email };
+    return this.http.post(url, reqBody);
+  }
+  changePassword(formValue: any) {
+    let url = this.baseUrl + '/identity/change-password';
+    let reqBody = formValue;
+    return this.http.post(url, reqBody);
+  }
 }

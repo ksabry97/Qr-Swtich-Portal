@@ -47,6 +47,7 @@ export class P2mSimulator implements OnInit {
     this.simulatorForm = this.fb.group({
       walletAcqID: [],
       msisdn: [],
+      merID: [],
       amount: [],
       description: [],
       merchantName: [],
@@ -72,6 +73,7 @@ export class P2mSimulator implements OnInit {
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe((value) => {
       this.simulatorForm.patchValue({ walletAcqID: value['walletId'] });
+      this.simulatorForm.patchValue({ merID: value['merId'] });
       this.simulatorForm.patchValue({ msisdn: value['mssidn'] });
       this.simulatorForm.patchValue({ merchantName: value['merchantName'] });
       this.simulatorForm.patchValue({ merchantCity: value['merchantCity'] });
@@ -87,6 +89,7 @@ export class P2mSimulator implements OnInit {
     this.isM2m = value;
     let simulateBody = this.simulatorForm.value;
     let reqBody: any = {
+      merID: simulateBody.merID,
       msisdn: simulateBody.msisdn,
       amount: simulateBody.amount,
       walletAcqID: simulateBody.walletAcqID,
