@@ -42,7 +42,7 @@ export class UserList implements OnInit {
       sortable: false,
     },
     {
-      field: 'enabled',
+      field: 'isActive',
       header: 'tenants.table.status',
       sortable: false,
       template: 'boolean',
@@ -101,7 +101,7 @@ export class UserList implements OnInit {
     this.globalServ.isSubmitted.set(false);
     this.userServ.getAllUsers(pageIndex, pageSize).subscribe({
       next: (data: any) => {
-        this.users = data.data.users;
+        this.users = data?.data?.users;
         this.total = data?.data?.totalCount;
       },
       error: () => {

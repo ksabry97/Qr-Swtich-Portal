@@ -94,7 +94,7 @@ export class RolesList implements OnInit {
     this.globalServ.isSubmitted.set(false);
     this.globalServ.getAllRoles().subscribe({
       next: (data: any) => {
-        this.roles = data.data;
+        this.roles = data?.data?.roles;
       },
       error: () => {
         this.globalServ.setLoading(false);

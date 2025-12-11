@@ -85,7 +85,7 @@ export class WalletList implements OnInit {
     this.pageIndex = pageNumber;
     this.walletServ.getAllWallets(pageNumber, pageSize).subscribe({
       next: (data: any) => {
-        this.wallets = data.data.items;
+        this.wallets = data?.data?.items[0]?.wallets;
         this.total = data.data.totalCount;
       },
       error: () => {

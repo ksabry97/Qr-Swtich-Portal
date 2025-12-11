@@ -22,7 +22,7 @@ export class WalletsSimulator implements OnInit {
 
     this.globalServ.getAllActiveWallets(pageNumber, pageSize).subscribe({
       next: (data: any) => {
-        this.wallets = data.data.items;
+        this.wallets = data?.data?.items[0]?.wallets;
       },
       error: () => {
         this.globalServ.setLoading(false);

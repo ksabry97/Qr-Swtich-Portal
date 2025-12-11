@@ -95,7 +95,8 @@ export class FeesList implements OnInit {
     this.pageSize = pageSize;
     this.feeServ.getAllFees(pageNumber, pageSize).subscribe({
       next: (data: any) => {
-        this.fees = data?.data?.items;
+        console.log(data?.data?.items[0]);
+        this.fees = data?.data?.items[0]?.feeProfiles;
         this.total = data?.data?.totalCount;
       },
       error: () => {
