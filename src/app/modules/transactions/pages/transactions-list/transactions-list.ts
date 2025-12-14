@@ -30,12 +30,6 @@ export class TransactionsList implements OnInit {
       template: 'date',
     },
     {
-      field: 'transactionId',
-      header: 'transactions.table.transactionId',
-
-      sortable: false,
-    },
-    {
       field: 'senderName',
       header: 'transactions.table.senderName',
       sortable: false,

@@ -70,7 +70,6 @@ export class ViewTransaction {
   getTransaction() {
     this.transactionServ.getTransaction(this.transactionId).subscribe({
       next: (data: any) => {
-        this.transactionNo = data?.data?.transactionId;
         this.data[0].value = data?.data?.transactionDate;
         this.data[1].value = data?.data?.senderName;
         this.data[2].value = data?.data?.senderMsisdn;
