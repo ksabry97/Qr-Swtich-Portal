@@ -69,19 +69,26 @@ export class P2mSimulator implements OnInit {
       amount: [],
     });
   }
-
+  hasSenderMssidn = false;
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe((value) => {
       this.simulatorForm.patchValue({ walletAcqID: value['walletId'] });
       this.simulatorForm.patchValue({ merID: value['merId'] });
       this.simulatorForm.patchValue({ msisdn: value['mssidn'] });
+      this.payForm.patchValue({ senderMsisdn: value['senderMssidn'] });
+      this.hasSenderMssidn = value['senderMssidn'];
       this.simulatorForm.patchValue({ merchantName: value['merchantName'] });
       this.simulatorForm.patchValue({ merchantCity: value['merchantCity'] });
       this.simulatorForm.patchValue({
         merchantScheme: value['merchantScheme'],
       });
+
       this.simulatorForm.patchValue({ countryCode: value['countryCode'] });
       this.simulatorForm.patchValue({ mcc: value['mcc'] });
+      value['amount'] ? (this.hasAmount = true) : (this.hasAmount = false);
+      value['amount']
+        ? this.simulatorForm.patchValue({ amount: value['amount'] })
+        : '';
     });
   }
   generateQr(value: boolean) {
