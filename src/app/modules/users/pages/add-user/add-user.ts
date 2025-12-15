@@ -176,7 +176,7 @@ export class AddUser implements OnInit, OnChanges {
       next: (data: any) => {
         this.merchants = data.data.items.map((item: any) => {
           return {
-            text: item.merchantName,
+            text: `${item.merchantName}  #${item.merchantId}`,
             value: item.merchantId,
           };
         });

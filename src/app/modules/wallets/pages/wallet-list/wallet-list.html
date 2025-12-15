@@ -4,7 +4,10 @@
     (isCreateClicked)="openModel()"
     [showButton]="isAllowed(Wallets.CreateWallet)"
   ></app-entity-header>
-  <app-table-filter></app-table-filter>
+  <app-table-filter
+    [filterConfigs]="filterConfigs"
+    (filters)="filterTable($event)"
+  ></app-table-filter>
   <app-qr-table
     [columns]="columns"
     [data]="wallets"

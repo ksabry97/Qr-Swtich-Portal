@@ -16,11 +16,12 @@ export class FeesService {
     return this.http.post(url, fee);
   }
 
-  getAllFees(pageNumber: number, pageSize: number) {
+  getAllFees(pageNumber: number, pageSize: number, filters: any = {}) {
     let url = this.baseUrl + '/fees';
     let reqBody = {
       pageNumber,
       pageSize,
+      filters,
     };
     return this.http.post(url, reqBody);
   }

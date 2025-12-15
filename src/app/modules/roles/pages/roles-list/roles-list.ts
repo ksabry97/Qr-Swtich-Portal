@@ -13,6 +13,8 @@ import { RolesService } from '../../services/roles.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
+import { FilterConfig } from '../../../../shared/components/dynamic-filter/dynamic-filter';
+import { LookupData, LookupType } from '../../../../shared/core/interfaces';
 
 @Component({
   selector: 'app-roles-list',
@@ -52,6 +54,56 @@ export class RolesList implements OnInit {
 
   roles = [];
   Roles: any;
+  lookups: LookupData = {
+    [LookupType.Unknown]: [],
+    [LookupType.Country]: [],
+    [LookupType.City]: [],
+    [LookupType.Currency]: [],
+    [LookupType.MerchantCategoryCode]: [],
+    [LookupType.Merchant]: [],
+    [LookupType.MerchantType]: [
+      {
+        text: 'Merchant',
+        value: 0,
+      },
+      {
+        text: 'Agent',
+        value: 1,
+      },
+      {
+        text: 'Biller',
+        value: 2,
+      },
+      {
+        text: 'Aggregator',
+        value: 3,
+      },
+    ],
+    [LookupType.IdentificationType]: [
+      {
+        text: 'Commercial Registration',
+        value: 0,
+      },
+      {
+        text: 'Service License Number',
+        value: 1,
+      },
+      {
+        text: 'Sole Proprietorship License',
+        value: 2,
+      },
+      {
+        text: 'National ID',
+        value: 3,
+      },
+    ],
+    [LookupType.FeeProfile]: [],
+    [LookupType.Wallet]: [],
+    [LookupType.Tenant]: [],
+    [LookupType.Role]: [],
+    [LookupType.Permission]: [],
+  };
+  filterConfigs: FilterConfig[] = [];
   constructor(private readonly message: NzMessageService) {
     effect(() => {
       this.globalServ.isSubmitted() ? this.getAllRoles() : '';
@@ -89,12 +141,22 @@ export class RolesList implements OnInit {
     this.globalServ.setModal(true);
   }
 
-  getAllRoles() {
+  getAllRoles(filters?: any) {
     this.globalServ.setLoading(true);
     this.globalServ.isSubmitted.set(false);
-    this.globalServ.getAllRoles().subscribe({
+    this.globalServ.getAllRoles(filters).subscribe({
       next: (data: any) => {
         this.roles = data?.data?.roles;
+        this.filterConfigs = data?.data?.stringProperties.map(
+          (el: { name: string; type: string; lookUpEnum: LookupType }) => {
+            return {
+              key: el.name,
+              type: el.type,
+              label: el.name,
+              options: this.lookups[el.lookUpEnum],
+            };
+          }
+        );
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -134,5 +196,8 @@ export class RolesList implements OnInit {
         this.message.success(err?.error?.Message);
       },
     });
+  }
+  filterTable(event: any) {
+    this.getAllRoles(event);
   }
 }

@@ -15,10 +15,16 @@ export class UserService {
     return this.http.post(url, user);
   }
 
-  getAllUsers(PageNumber: number, PageSize: number) {
+  getAllUsers(PageNumber: number, PageSize: number, filters: any = {}) {
     let url =
       this.baseUrl +
       `/management/users?PageNumber=${PageNumber}&PageSize=${PageSize}`;
+    Object.keys(filters).forEach((key) => {
+      const value = filters[key];
+      if (value !== null && value !== undefined && value !== '') {
+        url += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+      }
+    });
     return this.http.get(url);
   }
   getUserById(userId: string) {

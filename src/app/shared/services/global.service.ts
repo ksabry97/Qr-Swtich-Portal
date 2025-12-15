@@ -43,8 +43,14 @@ export class GlobalService {
     return this.http.post(url, reqBody);
   }
 
-  getAllRoles() {
+  getAllRoles(filters: any = {}) {
     let url = this.baseUrl + '/management/roles';
+    Object.keys(filters).forEach((key) => {
+      const value = filters[key];
+      if (value !== null && value !== undefined && value !== '') {
+        url += `?&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+      }
+    });
     return this.http.get(url);
   }
   getAllTenantLookups() {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Wallet } from '../interfaces/wallet';
+import { filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,9 @@ export class WalletsService {
     return this.http.post(url, wallet);
   }
 
-  getAllWallets(pageNumber: number, pageSize: number) {
+  getAllWallets(pageNumber: number, pageSize: number, filters: any = {}) {
     let url = this.baseUrl + '/wallets';
-    let reqBody = { pageNumber, pageSize };
+    let reqBody = { pageNumber, pageSize, filters };
     return this.http.post(url, reqBody);
   }
 

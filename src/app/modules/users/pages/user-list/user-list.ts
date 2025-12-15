@@ -13,6 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
+import { LookupData, LookupType } from '../../../../shared/core/interfaces';
+import { FilterConfig } from '../../../../shared/components/dynamic-filter/dynamic-filter';
 
 @Component({
   selector: 'app-user-list',
@@ -55,6 +57,22 @@ export class UserList implements OnInit {
   total = 0;
   pageIndex = 1;
   pageSize = 10;
+  filterConfigs: FilterConfig[] = [];
+  lookups: LookupData = {
+    [LookupType.Unknown]: [],
+    [LookupType.Country]: [],
+    [LookupType.City]: [],
+    [LookupType.Currency]: [],
+    [LookupType.MerchantCategoryCode]: [],
+    [LookupType.Merchant]: [],
+    [LookupType.MerchantType]: [],
+    [LookupType.IdentificationType]: [],
+    [LookupType.FeeProfile]: [],
+    [LookupType.Wallet]: [],
+    [LookupType.Tenant]: [],
+    [LookupType.Role]: [],
+    [LookupType.Permission]: [],
+  };
   openModel() {
     this.viewMode = false;
     this.editMode = false;
@@ -94,15 +112,25 @@ export class UserList implements OnInit {
       ];
     });
   }
-  getAllUsers(pageIndex: number, pageSize: number) {
+  getAllUsers(pageIndex: number, pageSize: number, filters?: any) {
     this.globalServ.setLoading(true);
     this.pageIndex = pageIndex;
     this.pageSize = pageSize;
     this.globalServ.isSubmitted.set(false);
-    this.userServ.getAllUsers(pageIndex, pageSize).subscribe({
+    this.userServ.getAllUsers(pageIndex, pageSize, filters).subscribe({
       next: (data: any) => {
         this.users = data?.data?.users;
         this.total = data?.data?.totalCount;
+        this.filterConfigs = data?.data?.stringProperties.map(
+          (el: { name: string; type: string; lookUpEnum: LookupType }) => {
+            return {
+              key: el.name,
+              type: el.type,
+              label: el.name,
+              options: this.lookups[el.lookUpEnum],
+            };
+          }
+        );
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -143,5 +171,8 @@ export class UserList implements OnInit {
 
   isAllowed(permission: string) {
     return this.authServ.hasPermission(permission);
+  }
+  filterTable(event: any) {
+    this.getAllUsers(this.pageIndex, this.pageSize, event);
   }
 }

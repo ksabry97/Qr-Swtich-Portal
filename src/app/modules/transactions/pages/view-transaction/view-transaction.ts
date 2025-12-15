@@ -25,18 +25,12 @@ export class ViewTransaction {
       value: 0,
       type: 'date',
     },
-    {
-      label: 'transactions.table.senderName',
-      value: 0,
-    },
+
     {
       label: 'transactions.table.senderMsisdn',
       value: 0,
     },
-    {
-      label: 'transactions.table.receiverName',
-      value: 0,
-    },
+
     {
       label: 'transactions.table.receiverMsisdn',
       value: 0,
@@ -71,15 +65,13 @@ export class ViewTransaction {
     this.transactionServ.getTransaction(this.transactionId).subscribe({
       next: (data: any) => {
         this.data[0].value = data?.data?.transactionDate;
-        this.data[1].value = data?.data?.senderName;
-        this.data[2].value = data?.data?.senderMsisdn;
-        this.data[3].value = data?.data?.receiverName;
-        this.data[4].value = data?.data?.receiverMsisdn;
-        this.data[5].value = data?.data?.amount;
-        this.data[6].value = data?.data?.currency;
-        this.data[7].value = data?.data?.status;
-        this.data[8].value = data?.data?.transactionType;
-        this.data[9].value = data?.data?.transactionReference;
+        this.data[1].value = data?.data?.senderMsisdn;
+        this.data[2].value = data?.data?.receiverMsisdn;
+        this.data[3].value = data?.data?.amount;
+        this.data[4].value = data?.data?.currency;
+        this.data[5].value = data?.data?.status;
+        this.data[6].value = data?.data?.transactionType;
+        this.data[7].value = data?.data?.transactionReference;
       },
     });
   }

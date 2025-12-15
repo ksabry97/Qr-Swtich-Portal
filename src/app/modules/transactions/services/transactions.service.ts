@@ -9,10 +9,16 @@ export class TransactionsService {
   http = inject(HttpClient);
   baseUrl = environment.baseApiUrl;
 
-  getAllTransactions(pageIndex: number, pageSize: number) {
+  getAllTransactions(pageIndex: number, pageSize: number, filters: any = {}) {
     let url =
       this.baseUrl +
       `/transactions?PageNumber=${pageIndex}&PageSize=${pageSize}`;
+    Object.keys(filters).forEach((key) => {
+      const value = filters[key];
+      if (value !== null && value !== undefined && value !== '') {
+        url += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+      }
+    });
     return this.http.get(url);
   }
   getTransaction(transactionId: string) {
