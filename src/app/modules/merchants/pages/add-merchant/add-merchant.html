@@ -236,18 +236,29 @@
           class="w-1/2"
         ></app-qr-select>
       </div>
-      <app-qr-input
-        class="w-1/2"
-        [label]="'merchants.addMerchant.merchantId' | translate"
-        [placeholder]="'merchants.addMerchant.enterMerchantId' | translate"
-        formControlName="merchantId"
-        [controlName]="'merchantId'"
-        [parentGroup]="merchantForm"
-        [required]="true"
-        [disabled]="viewMode || editMode"
-        *ngIf="viewMode || editMode"
-      ></app-qr-input>
-
+      <div class="flex gap-3">
+        <app-qr-input
+          class="w-1/2"
+          [label]="'merchants.addMerchant.merchantId' | translate"
+          [placeholder]="'merchants.addMerchant.enterMerchantId' | translate"
+          formControlName="merchantId"
+          [controlName]="'merchantId'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+          [disabled]="viewMode || editMode"
+          *ngIf="viewMode || editMode"
+        ></app-qr-input>
+        <app-qr-input
+          class="w-1/2"
+          [label]="'Merchant Acquirer Id'"
+          [placeholder]="'enter  merchant acquirer Id'"
+          formControlName="merchantAcquirerId"
+          [controlName]="'merchantAcquirerId'"
+          [parentGroup]="merchantForm"
+          [required]="true"
+          [disabled]="viewMode || editMode"
+        ></app-qr-input>
+      </div>
       <div class="flex gap-3">
         <div class="flex items-center justify-between w-1/2">
           <label>{{

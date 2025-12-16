@@ -165,6 +165,11 @@ export class AddUser implements OnInit, OnChanges {
         new FormControl('', Validators.required)
       );
       this.hasMerchant = true;
+    } else if (chosenRole && chosenRole?.text === 'WalletAdminister') {
+      this.userForm.addControl(
+        'walletId',
+        new FormControl('', Validators.required)
+      );
     } else {
       this.hasMerchant = false;
       this.userForm.removeControl('merchantId');

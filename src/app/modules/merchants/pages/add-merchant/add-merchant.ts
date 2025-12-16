@@ -123,6 +123,7 @@ export class AddMerchant implements OnInit, OnChanges {
       scheme: [''],
       msisdn: ['', [Validators.minLength(12), Validators.maxLength(12)]],
       merchantId: [''],
+      merchantAcquirerId: ['', Validators.required],
       commercialRegNo: [''],
       issuancePlaceCode: ['', Validators.maxLength(4)],
       nationalId: [''],
@@ -338,7 +339,7 @@ export class AddMerchant implements OnInit, OnChanges {
   navigateToSimulator(isM2M: boolean) {
     this.router.navigate(['p2m-simulator'], {
       queryParams: {
-        merId: this.merchantForm.get('merchantId')?.value,
+        merId: this.merchantForm.get('merchantAcquirerId')?.value,
         mssidn: this.merchantForm.get('msisdn')?.value,
         walletId: this.merchantForm.get('walletAcqId')?.value,
         merchantName: this.merchantForm.get('name')?.value,

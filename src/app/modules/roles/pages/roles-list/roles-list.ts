@@ -149,6 +149,7 @@ export class RolesList implements OnInit {
         this.roles = data?.data?.roles;
         this.filterConfigs = data?.data?.stringProperties.map(
           (el: { name: string; type: string; lookUpEnum: LookupType }) => {
+            el.lookUpEnum === LookupType.Tenant ? this.getAlltenants() : '';
             return {
               key: el.name,
               type: el.type,
@@ -199,5 +200,12 @@ export class RolesList implements OnInit {
   }
   filterTable(event: any) {
     this.getAllRoles(event);
+  }
+  getAlltenants() {
+    this.globalServ.getAllTenantLookups().subscribe({
+      next: (data: any) => {
+        this.lookups[LookupType.Tenant] = data?.data;
+      },
+    });
   }
 }
