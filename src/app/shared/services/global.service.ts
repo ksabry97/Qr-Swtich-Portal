@@ -51,7 +51,7 @@ export class GlobalService {
         url += `?&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
       }
     });
-    return this.http.get(url);
+    return this.http.post(url, '');
   }
   getAllTenantLookups() {
     let url = this.baseUrl + '/api/Tenant/Lookups';

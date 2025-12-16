@@ -17,6 +17,7 @@ interface JwtPayload {
   realm_access?: { roles?: string[] }; // adjust key based on your token structure
   [key: string]: any;
   preferred_username: string;
+  walletId?: string;
 }
 @Component({
   selector: 'app-qr-header',
@@ -77,6 +78,7 @@ export class QrHeader implements OnInit {
         const token = localStorage.getItem('token') || '';
         const decoded = jwtDecode<JwtPayload>(token);
         localStorage.setItem('username', decoded?.preferred_username);
+        localStorage.setItem('walletId', decoded?.walletId ?? '');
         this.username = decoded?.preferred_username;
         let roles =
           decoded.realm_access?.roles || (decoded as any)['role'] || [];

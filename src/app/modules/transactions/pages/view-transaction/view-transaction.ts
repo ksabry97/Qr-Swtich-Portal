@@ -64,6 +64,7 @@ export class ViewTransaction {
   getTransaction() {
     this.transactionServ.getTransaction(this.transactionId).subscribe({
       next: (data: any) => {
+        console.log(data, 'wwwwwwwwww');
         this.data[0].value = data?.data?.transactionDate;
         this.data[1].value = data?.data?.senderMsisdn;
         this.data[2].value = data?.data?.receiverMsisdn;

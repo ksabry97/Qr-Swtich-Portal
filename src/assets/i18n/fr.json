@@ -392,7 +392,8 @@
       "receiverName": "Nom du destinataire",
       "receiverMsisdn": "MSISDN du destinataire",
       "transactionDate": "Date de transaction",
-      "transactionReference": "Référence de transaction"
+      "transactionReference": "Référence de transaction",
+      "transactionSource": "Source de transaction"
     },
     "actions": {
       "viewDetails": "Voir les détails"
@@ -400,6 +401,13 @@
     "viewTransaction": {
       "title": "Détails de la transaction",
       "transactionId": "ID de transaction"
+    },
+    "success": {
+      "title": "Transaction réussie",
+      "message": "Votre transaction a été complétée avec succès",
+      "description": "Merci pour votre transaction. Tous les détails ont été traités et confirmés.",
+      "goToDashboard": "Aller au tableau de bord",
+      "goBack": "Retour"
     }
   },
   "unauthorized": {

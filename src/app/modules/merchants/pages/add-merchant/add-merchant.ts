@@ -112,6 +112,7 @@ export class AddMerchant implements OnInit, OnChanges {
   mccs: { text: any; value: any; code: any }[] = [];
   feesProfiles = [];
   wallets = [];
+  walletId = '';
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -146,6 +147,7 @@ export class AddMerchant implements OnInit, OnChanges {
     });
   }
   ngOnInit(): void {
+    this.walletId = localStorage.getItem('walletId') ?? '';
     forkJoin({
       countries: this.globalServ.getAllCountries().pipe(
         catchError((err) => {
@@ -173,6 +175,7 @@ export class AddMerchant implements OnInit, OnChanges {
         this.mccs = data.mccs?.data;
         this.feesProfiles = data.fees?.data;
         this.wallets = data.wallets.data;
+        this.merchantForm.patchValue({ walletId: Number(this.walletId) });
       },
     });
   }

@@ -1,0 +1,172 @@
+.custom-container {
+  width: 100dvw;
+  height: 100dvh;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #020617;
+  flex-direction: column;
+  gap: 10px;
+
+  .box {
+    width: 25%;
+    height: fit-content;
+    background-color: #fff;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+    border-radius: 16px;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h1 {
+      font-size: 32px;
+      color: #10b981;
+      font-weight: 700;
+      margin: 24px 0 12px 0;
+    }
+
+    h2 {
+      font-weight: 600;
+      color: #020807;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+  }
+
+  .icon-box {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    margin-bottom: 8px;
+
+    .checkmark {
+      width: 60px;
+      height: 60px;
+      color: #fff;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 8px;
+
+    button {
+      flex: 1;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      outline: none;
+
+      &.primary-button {
+        background-color: #10b981;
+        color: #fff;
+
+        &:hover {
+          background-color: #059669;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      &.secondary-button {
+        background-color: transparent;
+        color: #64748b;
+        border: 2px solid #e2e8f0;
+
+        &:hover {
+          color: #2563eb;
+          border-color: #2563eb;
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .custom-container {
+    .box {
+      width: 90%;
+      padding: 32px 24px;
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .icon-box {
+        width: 100px;
+        height: 100px;
+
+        .checkmark {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .button-group {
+        flex-direction: column;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1025px) {
+  .custom-container {
+    .box {
+      width: 50%;
+    }
+  }
+}
+
+// Pulse animation for the icon box
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.icon-box {
+  animation: pulse 2s ease-in-out infinite;
+}
+

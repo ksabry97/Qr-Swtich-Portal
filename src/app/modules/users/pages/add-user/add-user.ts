@@ -56,15 +56,16 @@ export class AddUser implements OnInit, OnChanges {
   constructor(private fb: FormBuilder, private message: NzMessageService) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      assignRoleById: [[]],
+      assignRoleById: [''],
     });
   }
   submit() {
     if (this.userForm.valid) {
       this.globalServ.requestLoading.set(true);
+      console.log(this.userForm.value);
       this.editMode ? this.updateUser() : this.createUser();
     } else {
       this.userForm.markAllAsTouched();
@@ -90,6 +91,7 @@ export class AddUser implements OnInit, OnChanges {
       if (this.viewMode) {
         this.userServ.getUserById(this.userId).subscribe({
           next: (data: any) => {
+            console.log(data.data);
             this.userForm.patchValue(data.data);
             this.userForm.patchValue({ assignRoleById: data.data.roles });
           },
@@ -111,6 +113,7 @@ export class AddUser implements OnInit, OnChanges {
   createUser() {
     this.userServ.createUser(this.userForm.value).subscribe({
       next: (data: any) => {
+        console.log(data, 'wwwwww');
         if (data.status == 200 || data.status == 201) {
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
@@ -122,6 +125,7 @@ export class AddUser implements OnInit, OnChanges {
         this.globalServ.requestLoading.set(false);
       },
       error: (err) => {
+        console.log(err);
         this.globalServ.requestLoading.set(false);
         this.message.error(err?.error?.Message);
       },
@@ -167,14 +171,19 @@ export class AddUser implements OnInit, OnChanges {
         new FormControl('', Validators.required)
       );
       this.hasMerchant = true;
+      this.hasWallet = false;
     } else if (chosenRole && chosenRole?.text === 'WalletAdminister') {
       if (!this.wallets.length) this.getAllWallets();
       this.userForm.addControl(
         'walletId',
         new FormControl('', Validators.required)
       );
+      this.hasMerchant = false;
+      this.hasWallet = true;
     } else {
       this.hasMerchant = false;
+      this.hasWallet = false;
+      this.userForm.removeControl('walletId');
       this.userForm.removeControl('merchantId');
     }
   }
@@ -197,7 +206,10 @@ export class AddUser implements OnInit, OnChanges {
   getAllWallets() {
     this.globalServ.getWalletsLookup().subscribe({
       next: (data: any) => {
-        this.wallets = data.data;
+        const mappedData = data.data.map((value: any) => {
+          return { text: value.text, value: String(value.value) };
+        });
+        this.wallets = mappedData;
       },
     });
   }

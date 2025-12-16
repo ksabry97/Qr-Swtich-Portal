@@ -80,7 +80,6 @@ export class OtpModal implements OnInit, OnDestroy {
         localStorage.setItem('token', value?.AccessToken);
         this.router.navigateByUrl('/dashboard');
         this.globalServ.setModal(false);
-        // this.getAllPermissions();
       } else {
         this.errorMessage = value?.ErrorMessage;
       }

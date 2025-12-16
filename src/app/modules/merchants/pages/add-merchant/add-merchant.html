@@ -43,7 +43,7 @@
           [placeholder]="'wallets.title' | translate"
           [required]="true"
           class="w-1/2"
-          [disabled]="viewMode || editMode"
+          [disabled]="viewMode || editMode || (walletId ? true : false)"
         ></app-qr-select>
       </div>
       <div class="flex gap-3">

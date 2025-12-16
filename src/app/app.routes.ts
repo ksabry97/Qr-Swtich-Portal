@@ -24,6 +24,7 @@ import { M2mSimulator } from './shared/components/m2m-simulator/m2m-simulator';
 import { CommunicationLogsList } from './modules/communicationlogs/pages/communication-logs-list/communication-logs-list';
 import { ExceptionLogsList } from './modules/exceptionlogs/pages/exception-logs-list/exception-logs-list';
 import { ChangePassword } from './modules/authentication/pages/change-password/change-password';
+import { TransactionSuccess } from './shared/components/transaction-success/transaction-success';
 
 export const routes: Routes = [
   {
@@ -136,5 +137,9 @@ export const routes: Routes = [
   {
     path: 'm2m-simulator',
     component: M2mSimulator,
+  },
+  {
+    path: 'transaction-success',
+    component: TransactionSuccess,
   },
 ];

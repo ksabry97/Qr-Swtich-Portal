@@ -5,7 +5,15 @@ import {
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, from, map, mergeMap, of, switchMap, throwError } from 'rxjs';
+import {
+  catchError,
+  from,
+  map,
+  mergeMap,
+  of,
+  switchMap,
+  throwError,
+} from 'rxjs';
 import { GlobalService } from './global.service';
 import {
   rsaDecryptWithPrivateKey,
@@ -46,20 +54,23 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       next(securedReq).pipe(
         mergeMap((event) => {
           // Use duck typing to check if it's an HttpResponse (instanceof can fail due to serialization/zone.js)
-          const hasStatus = event && typeof event === 'object' && 'status' in event;
+          const hasStatus =
+            event && typeof event === 'object' && 'status' in event;
           const hasBody = event && typeof event === 'object' && 'body' in event;
-          const hasHeaders = event && typeof event === 'object' && 'headers' in event;
-          
-          const isHttpResponse = event instanceof HttpResponse || 
+          const hasHeaders =
+            event && typeof event === 'object' && 'headers' in event;
+
+          const isHttpResponse =
+            event instanceof HttpResponse ||
             (hasStatus && hasBody && hasHeaders);
-          
+
           if (isHttpResponse) {
             return decryptResponse(event as HttpResponse<any>, securedReq);
           }
           return of(event);
         }),
         catchError((error) => {
-          if ((error.status === 401 || error.status === 403) && token) {
+          if (error.status === 401 && token) {
             router.navigateByUrl('/login');
             localStorage.clear();
             globalServ.setModal(false);

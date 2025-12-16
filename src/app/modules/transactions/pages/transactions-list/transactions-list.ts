@@ -50,7 +50,11 @@ export class TransactionsList implements OnInit {
       sortable: false,
     },
     { field: 'status', header: 'transactions.table.status', sortable: false },
-
+    {
+      field: 'transactionSource',
+      header: 'transactions.table.transactionSource',
+      sortable: false,
+    },
     {
       field: 'receiverMsisdn',
       header: 'transactions.table.receiverMsisdn',
@@ -118,7 +122,7 @@ export class TransactionsList implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.transactions = data?.data?.transactions;
-
+          console.log(data, this.transactions, 'wwwwwwwww');
           this.filterConfigs = data?.data?.stringProperties.map(
             (el: { name: string; type: string; lookUpEnum: LookupType }) => {
               return {

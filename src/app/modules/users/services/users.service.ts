@@ -11,21 +11,15 @@ export class UserService {
   baseUrl = environment.baseApiUrl;
 
   createUser(user: User) {
-    let url = this.baseUrl + '/management/users';
+    let url = this.baseUrl + '/management/user';
     return this.http.post(url, user);
   }
 
   getAllUsers(PageNumber: number, PageSize: number, filters: any = {}) {
-    let url =
-      this.baseUrl +
-      `/management/users?PageNumber=${PageNumber}&PageSize=${PageSize}`;
-    Object.keys(filters).forEach((key) => {
-      const value = filters[key];
-      if (value !== null && value !== undefined && value !== '') {
-        url += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-      }
-    });
-    return this.http.get(url);
+    let reqBody = { PageNumber, PageSize, filters };
+    let url = this.baseUrl + `/management/users`;
+
+    return this.http.post(url, reqBody);
   }
   getUserById(userId: string) {
     let url = this.baseUrl + `/management/users/${userId}`;

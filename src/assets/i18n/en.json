@@ -388,6 +388,13 @@
       "title": "Transaction Details",
       "transactionId": "Transaction ID"
     },
+    "success": {
+      "title": "Transaction Successful",
+      "message": "Your transaction has been completed successfully",
+      "description": "Thank you for your transaction. All details have been processed and confirmed.",
+      "goToDashboard": "Go to Dashboard",
+      "goBack": "Go Back"
+    },
     "table": {
       "transactionId": "Transaction ID",
       "senderName": "Sender Name",
@@ -399,7 +406,8 @@
       "receiverName": "Receiver Name",
       "receiverMsisdn": "Receiver MSISDN",
       "transactionDate": "Transaction Date",
-      "transactionReference": "Transaction Reference"
+      "transactionReference": "Transaction Reference",
+      "transactionSource": "Transaction Source"
     }
   },
   "unauthorized": {

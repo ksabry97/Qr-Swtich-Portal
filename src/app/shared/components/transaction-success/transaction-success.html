@@ -1,0 +1,40 @@
+<div class="custom-container" @fadeIn>
+  <div class="box" @scaleIn>
+    <div class="icon-box">
+      <svg
+        class="checkmark"
+        @checkmark
+        xmlns="http://www.w3.org/2000/svg"
+        width="80"
+        height="80"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M20 6L9 17l-5-5"
+          stroke-dasharray="100"
+          stroke-dashoffset="0"
+        ></path>
+      </svg>
+    </div>
+    <h1>{{ 'transactions.success.title' | translate }}</h1>
+    <h2>{{ 'transactions.success.message' | translate }}</h2>
+    <p>
+      {{ 'transactions.success.description' | translate }}
+    </p>
+
+    <div class="button-group">
+      <button class="primary-button" (click)="goToDashboard()">
+        {{ 'transactions.success.goToDashboard' | translate }}
+      </button>
+      <button class="secondary-button" (click)="goBack()">
+        {{ 'transactions.success.goBack' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
