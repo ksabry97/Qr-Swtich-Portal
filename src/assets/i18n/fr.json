@@ -262,7 +262,10 @@
       "selectMerchantType": "sélectionner le type de marchand",
       "canPerformRegistration": "Peut effectuer l'enregistrement",
       "viewMerchant": "Voir le marchand",
-      "editMerchant": "Modifier le marchand"
+      "editMerchant": "Modifier le marchand",
+      "merchantAcquirerId": "ID de l'acquéreur du marchand",
+      "enterMerchantAcquirerId": "entrez l'ID de l'acquéreur du marchand",
+      "generateQr": "Générer un QR"
     },
     "table": {
       "name": "Nom",

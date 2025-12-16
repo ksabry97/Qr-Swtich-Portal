@@ -118,6 +118,7 @@ export class TransactionsList implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.transactions = data?.data?.transactions;
+
           this.filterConfigs = data?.data?.stringProperties.map(
             (el: { name: string; type: string; lookUpEnum: LookupType }) => {
               return {

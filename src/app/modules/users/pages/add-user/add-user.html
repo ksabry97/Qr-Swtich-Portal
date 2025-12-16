@@ -79,6 +79,17 @@
           [disabled]="viewMode"
           *ngIf="hasMerchant"
         ></app-qr-select>
+        <app-qr-select
+          formControlName="walletId"
+          [controlName]="'walletId'"
+          [parentGroup]="userForm"
+          [options]="wallets"
+          [label]="'wallets.title' | translate"
+          [placeholder]="'wallets.title' | translate"
+          class="w-1/2"
+          [disabled]="viewMode"
+          *ngIf="hasWallet"
+        ></app-qr-select>
       </div>
     </section>
   </form>

@@ -14,7 +14,9 @@
         class="flex gap-4 items-center w-full justify-center"
         *ngIf="viewMode && isSimulatorEnabled"
       >
-        <a (click)="navigateToSimulator(false)"> Generate QR</a>
+        <a (click)="navigateToSimulator(false)">
+          {{ "merchants.addMerchant.generateQr" | translate }}
+        </a>
         <div class="icon flex items-center justify-center">
           <img src="assets/qr-code-bold.svg" loading="lazy" alt="'logo'" />
         </div>
@@ -250,8 +252,10 @@
         ></app-qr-input>
         <app-qr-input
           class="w-1/2"
-          [label]="'Merchant Acquirer Id'"
-          [placeholder]="'enter  merchant acquirer Id'"
+          [label]="'merchants.addMerchant.merchantAcquirerId' | translate"
+          [placeholder]="
+            'merchants.addMerchant.enterMerchantAcquirerId' | translate
+          "
           formControlName="merchantAcquirerId"
           [controlName]="'merchantAcquirerId'"
           [parentGroup]="merchantForm"

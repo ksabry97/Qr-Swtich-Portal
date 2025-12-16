@@ -262,7 +262,10 @@
       "selectMerchantType": "select merchant type",
       "canPerformRegistration": "Can Perform Registration",
       "viewMerchant": "View merchant",
-      "editMerchant": "Edit merchant"
+      "editMerchant": "Edit merchant",
+      "merchantAcquirerId": "Merchant Acquirer Id",
+      "enterMerchantAcquirerId": "enter merchant acquirer Id",
+      "generateQr": "Generate QR"
     },
     "table": {
       "name": "Name",

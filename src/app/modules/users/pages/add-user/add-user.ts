@@ -45,9 +45,11 @@ export class AddUser implements OnInit, OnChanges {
   merchantServ = inject(MerchantService);
   merchants = [];
   tenants = [];
+  wallets = [];
   assignedRoles = [];
   errorMessages: string[] = [];
   hasMerchant: boolean = false;
+  hasWallet: boolean = false;
   @Input() userId = '';
   @Input() viewMode = false;
   @Input() editMode = false;
@@ -166,6 +168,7 @@ export class AddUser implements OnInit, OnChanges {
       );
       this.hasMerchant = true;
     } else if (chosenRole && chosenRole?.text === 'WalletAdminister') {
+      if (!this.wallets.length) this.getAllWallets();
       this.userForm.addControl(
         'walletId',
         new FormControl('', Validators.required)
@@ -188,6 +191,14 @@ export class AddUser implements OnInit, OnChanges {
       },
       error: () => {},
       complete: () => {},
+    });
+  }
+
+  getAllWallets() {
+    this.globalServ.getWalletsLookup().subscribe({
+      next: (data: any) => {
+        this.wallets = data.data;
+      },
     });
   }
 }
