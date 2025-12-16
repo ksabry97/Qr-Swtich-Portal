@@ -12,7 +12,7 @@ export class RolesService {
   baseUrl = environment.baseApiUrl;
 
   createRole(role: Role) {
-    let url = this.baseUrl + '/management/roles';
+    let url = this.baseUrl + '/management/role';
     return this.http.post(url, role);
   }
 

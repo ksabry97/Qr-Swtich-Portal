@@ -116,6 +116,7 @@ export class AddRole implements OnInit, OnChanges {
     });
   }
   createRole() {
+    console.log(this.roleGroup.value, 'ssssssssss');
     this.rolesServ.createRole(this.roleGroup.value).subscribe({
       next: (data: any) => {
         const value = typeof data === 'string' ? JSON.parse(data) : data;
