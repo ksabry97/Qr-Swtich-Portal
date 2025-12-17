@@ -124,7 +124,14 @@ export class AddMerchant implements OnInit, OnChanges {
       scheme: [''],
       msisdn: ['', [Validators.minLength(12), Validators.maxLength(12)]],
       merchantId: [''],
-      merchantAcquirerId: ['', Validators.required],
+      merchantAcquirerId: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(9),
+          Validators.maxLength(12),
+        ],
+      ],
       commercialRegNo: [''],
       issuancePlaceCode: ['', Validators.maxLength(4)],
       nationalId: [''],

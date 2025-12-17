@@ -113,7 +113,6 @@ export class AddUser implements OnInit, OnChanges {
   createUser() {
     this.userServ.createUser(this.userForm.value).subscribe({
       next: (data: any) => {
-        console.log(data, 'wwwwww');
         if (data.status == 200 || data.status == 201) {
           this.globalServ.setModal(false);
           this.globalServ.isSubmitted.set(true);
@@ -125,7 +124,6 @@ export class AddUser implements OnInit, OnChanges {
         this.globalServ.requestLoading.set(false);
       },
       error: (err) => {
-        console.log(err);
         this.globalServ.requestLoading.set(false);
         this.message.error(err?.error?.Message);
       },
