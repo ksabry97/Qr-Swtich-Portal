@@ -23,6 +23,8 @@
         formControlName="amount"
         [label]="'Amount'"
         [disabled]="qrValue || hasAmount ? true : false"
+        [controlName]="'amount'"
+        [parentGroup]="simulatorForm"
       ></app-qr-input-number>
       <div class="flex gap-2 flex-col w-full">
         <label>{{ "wallets.addWallet.description" | translate }}</label>
@@ -112,6 +114,8 @@
         formControlName="amount"
         [label]="'Amount'"
         [disabled]="hasAmount"
+        [controlName]="'amount'"
+        [parentGroup]="payForm"
       ></app-qr-input-number>
 
       <button
@@ -157,6 +161,8 @@
         formControlName="amount"
         [label]="'Amount'"
         [disabled]="hasAmount"
+        [controlName]="'amount'"
+        [parentGroup]="payMForm"
       ></app-qr-input-number>
 
       <button

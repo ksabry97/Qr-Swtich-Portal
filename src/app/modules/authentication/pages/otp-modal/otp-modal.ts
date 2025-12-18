@@ -83,9 +83,9 @@ export class OtpModal implements OnInit, OnDestroy {
       } else {
         this.errorMessage = value?.ErrorMessage;
       }
-    } catch (err) {
-      console.error('Login error:', err);
-      this.errorMessage = 'Something went wrong';
+    } catch (err: any) {
+      console.log('Login error:', err.error);
+      this.errorMessage = 'wrong OTP';
     } finally {
       this.loading = false;
     }

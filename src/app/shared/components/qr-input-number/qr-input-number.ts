@@ -99,7 +99,9 @@ export class QrInputNumber implements Validator {
   }
   get errorMessage() {
     const control = this.control;
+
     if (control && control.invalid && control.touched) {
+      console.log('ssssssssss');
       return this.errorMessagesServ.getErrorMessages(
         this.parentGroup,
         this.controlName,
@@ -111,8 +113,11 @@ export class QrInputNumber implements Validator {
 
   validate(control: AbstractControl): ValidationErrors | null {
     const value = control?.value;
-    
-    if (this.required && (value === null || value === undefined || value === '')) {
+
+    if (
+      this.required &&
+      (value === null || value === undefined || value === '')
+    ) {
       return { required: true };
     }
 
@@ -124,11 +129,21 @@ export class QrInputNumber implements Validator {
     const stringValue = value.toString().trim();
 
     if (this.minLength !== undefined && stringValue.length < this.minLength) {
-      return { minlength: { requiredLength: this.minLength, actualLength: stringValue.length } };
+      return {
+        minlength: {
+          requiredLength: this.minLength,
+          actualLength: stringValue.length,
+        },
+      };
     }
 
     if (this.maxLength !== undefined && stringValue.length > this.maxLength) {
-      return { maxlength: { requiredLength: this.maxLength, actualLength: stringValue.length } };
+      return {
+        maxlength: {
+          requiredLength: this.maxLength,
+          actualLength: stringValue.length,
+        },
+      };
     }
 
     // Validate as number
@@ -155,11 +170,18 @@ export class QrInputNumber implements Validator {
     // Custom validation rules
     if (this.validationRules && this.validationRules.length > 0) {
       for (const rule of this.validationRules) {
-        if (rule.type === 'required' && (!value || value.toString().trim() === '')) {
+        if (
+          rule.type === 'required' &&
+          (!value || value.toString().trim() === '')
+        ) {
           return { required: true };
         }
-        
-        if (rule.type === 'custom' && rule.customValidator && !rule.customValidator(value)) {
+
+        if (
+          rule.type === 'custom' &&
+          rule.customValidator &&
+          !rule.customValidator(value)
+        ) {
           return { custom: { message: rule.message } };
         }
       }

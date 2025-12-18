@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { QrInputNumber } from '../qr-input-number/qr-input-number';
 import { TranslateModule } from '@ngx-translate/core';
@@ -43,13 +44,13 @@ export class Simulator {
   constructor(private fb: FormBuilder) {
     this.simulatorForm = this.fb.group({
       msisdn: [],
-      amount: [],
+      amount: ['', [Validators.min(0)]],
       description: [],
     });
     this.payForm = this.fb.group({
       senderMsisdn: [],
       qrString: [],
-      amount: [],
+      amount: ['', Validators.min(0)],
     });
   }
 

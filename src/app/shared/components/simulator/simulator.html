@@ -15,7 +15,9 @@
       <app-qr-input-number
         [placeholder]="'enter amount'"
         formControlName="amount"
+        [controlName]="'amount'"
         [label]="'Amount'"
+        [parentGroup]="simulatorForm"
         [disabled]="qrValue ? true : false"
       ></app-qr-input-number>
       <div class="flex gap-2 flex-col w-full">
@@ -88,6 +90,8 @@
         formControlName="amount"
         [label]="'Amount'"
         [disabled]="hasAmount"
+        [controlName]="'amount'"
+        [parentGroup]="payForm"
       ></app-qr-input-number>
 
       <button

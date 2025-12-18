@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   FormGroup,
   FormBuilder,
+  Validators,
 } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { QRCodeComponent } from 'angularx-qrcode';
@@ -48,7 +49,7 @@ export class P2mSimulator implements OnInit {
       walletAcqID: [],
       msisdn: [],
       merID: [],
-      amount: [],
+      amount: ['', Validators.min(0)],
       description: [],
       merchantName: [],
       merchantCity: [],
@@ -60,13 +61,13 @@ export class P2mSimulator implements OnInit {
     this.payForm = this.fb.group({
       senderMsisdn: [],
       qrString: [],
-      amount: [],
+      amount: ['', Validators.min(0)],
     });
     this.payMForm = this.fb.group({
       senderMerchantId: [''],
       senderWalletAcqId: [null],
       qrString: [],
-      amount: [],
+      amount: ['', Validators.min(0)],
     });
   }
   hasSenderMssidn = false;
