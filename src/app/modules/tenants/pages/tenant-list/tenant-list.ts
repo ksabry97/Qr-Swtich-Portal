@@ -13,6 +13,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { TableFilter } from '../../../../shared/components/table-filter/table-filter';
+import { FilterConfig } from '../../../../shared/components/dynamic-filter/dynamic-filter';
+import { LookupData, LookupType } from '../../../../shared/core/interfaces';
 
 @Component({
   selector: 'app-tenant-list',
@@ -26,6 +28,9 @@ export class TenantList implements OnInit {
   createTenant = AddTenant;
   viewMode = false;
   tenantId = '';
+  total = 0;
+  pageIndex = 1;
+  pageSize = 10;
   columns: TableColumn[] = [
     { field: 'tenantName', header: 'tenants.table.name', sortable: false },
     {
@@ -60,6 +65,22 @@ export class TenantList implements OnInit {
 
   tenants = [];
   Tenants: any;
+  lookups: LookupData = {
+    [LookupType.Unknown]: [],
+    [LookupType.Country]: [],
+    [LookupType.City]: [],
+    [LookupType.Currency]: [],
+    [LookupType.MerchantCategoryCode]: [],
+    [LookupType.Merchant]: [],
+    [LookupType.MerchantType]: [],
+    [LookupType.IdentificationType]: [],
+    [LookupType.FeeProfile]: [],
+    [LookupType.Wallet]: [],
+    [LookupType.Tenant]: [],
+    [LookupType.Role]: [],
+    [LookupType.Permission]: [],
+  };
+  filterConfigs: FilterConfig[] = [];
   openModel() {
     this.viewMode = false;
     this.globalServ.setModal(true);
@@ -70,12 +91,15 @@ export class TenantList implements OnInit {
     private message: NzMessageService
   ) {
     effect(() => {
-      this.globalServ.isSubmitted() ? this.getAllTenants() : '';
+      this.globalServ.isSubmitted()
+        ? this.getAllTenants(this.pageIndex, this.pageSize)
+        : '';
     });
   }
 
   ngOnInit(): void {
-    this.getAllTenants();
+    this.getAllCountries();
+    this.getAllTenants(this.pageIndex, this.pageSize);
     this.globalServ.PermissionsPerModule.subscribe((value) => {
       this.Tenants = value.Tenants?.permissions;
       this.actions = [
@@ -95,12 +119,25 @@ export class TenantList implements OnInit {
     });
   }
 
-  getAllTenants() {
+  getAllTenants(pageNumber: number, pageSize: number, filters?: any) {
     this.globalServ.setLoading(true);
     this.globalServ.isSubmitted.set(false);
-    this.tenantServ.getAllTenants().subscribe({
+    this.pageIndex = pageNumber;
+    this.pageSize = pageSize;
+    this.tenantServ.getAllTenants(pageNumber, pageSize, filters).subscribe({
       next: (data: any) => {
-        this.tenants = data.data;
+        this.tenants = data?.data?.items[0]?.tenants;
+        this.total = data?.data?.totalCount;
+        this.filterConfigs = data?.data?.items[0]?.stringProperties.map(
+          (el: { name: string; type: string; lookUpEnum: LookupType }) => {
+            return {
+              key: el.name,
+              type: el.type,
+              label: el.name,
+              options: this.lookups[el.lookUpEnum],
+            };
+          }
+        );
       },
       error: () => {
         this.globalServ.setLoading(false);
@@ -127,7 +164,7 @@ export class TenantList implements OnInit {
       this.tenantServ.deactivateTenant(event.id).subscribe({
         next: (data: any) => {
           this.message.success(data?.Message);
-          this.getAllTenants();
+          this.getAllTenants(this.pageIndex, this.pageSize);
         },
         error: (err) => {
           this.message.error(err?.error?.Message);
@@ -137,12 +174,24 @@ export class TenantList implements OnInit {
       this.tenantServ.activateTenant(event.id).subscribe({
         next: (data: any) => {
           this.message.success(data?.Message);
-          this.getAllTenants();
+          this.getAllTenants(this.pageIndex, this.pageSize);
         },
         error: (err) => {
           this.message.error(err?.error?.Message);
         },
       });
     }
+  }
+
+  filterTable(event: any) {
+    this.getAllTenants(this.pageIndex, this.pageSize, event);
+  }
+
+  getAllCountries() {
+    this.globalServ.getAllCountries().subscribe({
+      next: (data: any) => {
+        this.lookups[LookupType.Country] = data?.data;
+      },
+    });
   }
 }

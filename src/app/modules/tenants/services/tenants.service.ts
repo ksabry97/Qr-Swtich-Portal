@@ -14,9 +14,14 @@ export class TenantService {
     return this.http.post(url, tenant);
   }
 
-  getAllTenants() {
-    let url = this.baseUrl + '/api/Tenant';
-    return this.http.get(url);
+  getAllTenants(pageNumber: number, pageSize: number, filters: any = {}) {
+    let url = this.baseUrl + '/api/Tenant/list';
+    let reqBody = {
+      pageNumber,
+      pageSize,
+      filters,
+    };
+    return this.http.post(url, reqBody);
   }
 
   approveTenant(tenantId: string) {
